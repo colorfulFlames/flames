@@ -1,0 +1,30 @@
+com/severalcircles/flames/commands/TestCommand.java
+ com.severalcircles.flames.commands.TestCommand
+com/severalcircles/flames/data/user/FlamesUser.java
+ com.severalcircles.flames.data.user.FlamesUser
+com/severalcircles/flames/errors/PermissionsException.java
+ com.severalcircles.flames.errors.PermissionsException
+com/severalcircles/flames/data/user/UserStats.java
+ com.severalcircles.flames.data.user.UserStats
+com/severalcircles/flames/commands/Command.java
+ com.severalcircles.flames.commands.Command
+com/severalcircles/flames/data/base/FlamesDatabase.java
+ com.severalcircles.flames.data.base.FlamesDatabase
+com/severalcircles/flames/commands/CommandType.java
+ com.severalcircles.flames.commands.CommandType
+com/severalcircles/flames/Main.java
+ com.severalcircles.flames.Main
+com/severalcircles/flames/data/global/GlobalData.java
+ com.severalcircles.flames.data.global.GlobalData
+com/severalcircles/flames/errors/FlamesException.java
+ com.severalcircles.flames.errors.FlamesException
+com/severalcircles/flames/features/Analysis.java
+ com.severalcircles.flames.features.Analysis
+com/severalcircles/flames/commands/CommandRegistry.java
+ com.severalcircles.flames.commands.CommandRegistry
+com/severalcircles/flames/data/guild/FlamesGuild.java
+ com.severalcircles.flames.data.guild.FlamesGuild
+com/severalcircles/flames/features/WelcomeBack.java
+ com.severalcircles.flames.features.WelcomeBack
+com/severalcircles/flames/events/MessageEvent.java
+ com.severalcircles.flames.events.MessageEvent
