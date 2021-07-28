@@ -20,7 +20,7 @@ public class FlamesDatabase {
             e.printStackTrace();
         }
 
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3036/flames", "flames", "lightitup");
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:33036/flames", "flames", "lightitup");
     }
     public void write(FlamesUser user) throws SQLException {
         Statement statement = connection.createStatement();
