@@ -26,7 +26,7 @@ public class FlamesDatabase {
         Statement statement = connection.createStatement();
         ResultSet rs;
         if (!(user instanceof FlamesUser) || user.equals(new FlamesUser())) rs = statement.executeQuery("insert into users (score, firstSeen, emotion, multiplier, lastSeen, streak, discordId) values (" + user.getScore() + ", " + user.getFirstSeen() + ", " + user.getEmotion() + ", " + user.getLastSeen() + ", " + user.getStreak() + ", " + user.getDiscordId() + ");");
-        else rs = statement.executeQuery("update users\nSET score=" + user.getScore() + ", firstSeen=" + user.getFirstSeen() + ", emotion=" + user.getEmotion() + ", multiplier=" + user.getMultiplier() + ", lastSeen=" + user.getLastSeen() + ", streak=" + user.getStreak() + ", discordId=" + user.getDiscordId() + ", locale=" + user.getLocale() + ", stats=" + user.getStats() + "\nwhere discordId=" + user.getDiscordId());
+        else rs = statement.executeQuery("update users\nSET score=" + user.getScore() + ", firstSeen=" + user.getFirstSeen() + ", emotion=" + user.getEmotion() + ", lastSeen=" + user.getLastSeen() + ", streak=" + user.getStreak() + ", discordId=" + user.getDiscordId() + ", locale=" + user.getLocale() + ", exp=" + user.getStats().getExp() + ", level=" + user.getStats().getLevel() + ", POW=" + user.getStats().getPOW() + ", RES=" + user.getStats().getRES() + ", LUCK=" + user.getStats().getLUCK() + ", RISE=" + user.getStats().getRISE() + ", PTY=" + user.getStats().getPTY() + ", SEN=" + user.getStats().getSEN() + ", CAR=" + user.getStats().getCAR() +"\nwhere discordId=" + user.getDiscordId());
     }
     public void write(FlamesGuild guild) {
         //TODO
@@ -36,7 +36,8 @@ public class FlamesDatabase {
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery("select * from users where discordId = " + discordId);
         while(rs.next()) {
-            return new FlamesUser(rs.getInt("score"), rs.getString("firstSeen"), rs.getInt("emotion"), rs.getFloat("multiplier"), rs.getDate("lastSeen"), rs.getInt("streak"), rs.getString("discordId"), rs.getString("locale"), rs.getObject("stats", UserStats.class));
+            UserStats stats = new UserStats(rs.getInt("exp"), rs.getInt("level"), rs.getInt("POW"), rs.getInt("RES"), rs.getInt("LUCK"), rs.getInt("RISE"), rs.getInt("PTY"), rs.getInt("SEN"), rs.getInt("CAR"));
+            return new FlamesUser(rs.getInt("score"), rs.getString("firstSeen"), rs.getInt("emotion"), rs.getDate("lastSeen"), rs.getInt("streak"), rs.getString("discordId"), rs.getString("locale"), stats);
         }
         return new FlamesUser();
     }

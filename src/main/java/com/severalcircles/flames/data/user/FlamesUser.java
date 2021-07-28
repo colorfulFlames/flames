@@ -10,7 +10,6 @@ public class FlamesUser {
     private int score;
     private String firstSeen;
     private int emotion;
-    private float multiplier;
     private Date lastSeen;
     private int streak;
     private String discordId;
@@ -18,11 +17,11 @@ public class FlamesUser {
     private UserStats stats;
 //    private int level;
 //    private int exp;
-    public FlamesUser(int score, String firstSeen, int emotion, float multiplier, Date lastSeen, int streak, String discordId, String locale, UserStats stats) {
+    public FlamesUser(int score, String firstSeen, int emotion, Date lastSeen, int streak, String discordId, String locale, UserStats stats) {
         this.score = score;
         this.firstSeen = firstSeen;
         this.emotion = emotion;
-        this.multiplier = multiplier;
+//        this.multiplier = multiplier;
         this.lastSeen = lastSeen;
         this.streak = streak;
         this.discordId = discordId;
@@ -66,14 +65,6 @@ public class FlamesUser {
 
     public void setEmotion(int emotion) {
         this.emotion = emotion;
-    }
-
-    public float getMultiplier() {
-        return multiplier;
-    }
-
-    public void setMultiplier(float multiplier) {
-        this.multiplier = multiplier;
     }
 
     public Date getLastSeen() {
