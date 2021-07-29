@@ -1,92 +1,91 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="Flames:jar">
+  <artifact name="Flames:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/Flames_jar</output-path>
-    <root id="archive" name="Flames.jar">
-      <element id="module-output" name="Flames.main" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/failureaccess/1.0.1/1dcf1de382a0bf95a3d8b0849546c88bac1292c9/failureaccess-1.0.1.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-commons/1.6.0/b0a75795cf03841d4f9cc54099557baffc11c727/junit-platform-commons-1.6.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.projectreactor.addons/reactor-extra/3.3.5.RELEASE/2de06dfd9b61d8afe4e5b1fa5bd704e14b54a211/reactor-extra-3.3.5.RELEASE.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.threeten/threetenbp/1.5.1/4307ad2fdd4ba8b5ecd3fdb88b932aa49fa25920/threetenbp-1.5.1.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.discord4j/simple-fsm/1.0.1/58cc3d3c4d25823eecb174a8e4807ba83299f36a/simple-fsm-1.0.1.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-common/4.1.60.Final/44540113f7148f1014be879663501db8da1c37b0/netty-common-4.1.60.Final.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.opencensus/opencensus-contrib-http-util/0.28.0/f6cb276330197d51dd65327fc305a3df7e622705/opencensus-contrib-http-util-0.28.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.opencensus/opencensus-api/0.28.0/fc0d06a9d975a38c581dff59b99cf31db78bd99/opencensus-api-0.28.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.15/49d94806b6e3dc933dacbd8acb0fdbab8ebd1e5d/commons-codec-1.15.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-handler-proxy/4.1.60.Final/2352f12826400e5db64b36fd951508ce9a61c196/netty-handler-proxy-4.1.60.Final.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.4.14/9dd1a631c082d92ecd4bd8fd4cf55026c720a8c1/httpcore-4.4.14.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.reactivestreams/reactive-streams/1.0.3/d9fb7a7926ffa635b3dcaa5049fb2bfa25b3e7d0/reactive-streams-1.0.3.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.opentest4j/opentest4j/1.2.0/28c11eb91f9b6d8e200631d46e20a7f407f2a046/opentest4j-1.2.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java-util/3.17.3/4340f06a346f46eab1b38feb066e4a2d30aed3b7/protobuf-java-util-3.17.3.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-resolver/4.1.60.Final/caba5004618d27386ee9d5ee8b23b09b6548fb0b/netty-resolver-4.1.60.Final.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.errorprone/error_prone_annotations/2.7.1/458d9042f7aa6fa9a634df902b37f544e15aacac/error_prone_annotations-2.7.1.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.api/gax-grpc/1.66.0/dc54aae593908e3765457950333ce586a229f322/gax-grpc-1.66.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.discord4j/discord-json-api/1.5.10/35d020e02af7df78f535f10d42695a82d6bdd035/discord-json-api-1.5.10.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-buffer/4.1.60.Final/9d213d090deeca2541ad6827eb3345bcd6e1e701/netty-buffer-4.1.60.Final.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.11.4/5d9f3d441f99d721b957e3497f0a6465c764fad4/jackson-databind-2.11.4.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.http-client/google-http-client-gson/1.39.2/43c1d0500c31ee31ff5918ac4bbe95711cd744a9/google-http-client-gson-1.39.2.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport-native-epoll/4.1.60.Final/48bd240fa29a4410e22b64b6d4c26429577d6f4/netty-transport-native-epoll-4.1.60.Final-linux-x86_64.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.auth/google-auth-library-credentials/0.26.0/da0919aae28fd57fb98057e3125040e31b582f5f/google-auth-library-credentials-0.26.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.austinv11.servicer/Servicer/1.0.3/ca77a233f82981cd9267fbce26bb0eb94e0e8414/Servicer-1.0.3.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.11.4/593f7b18bab07a76767f181e2a2336135ce82cc4/jackson-core-2.11.4.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-protobuf-lite/1.39.0/64ccdfc8a5a7c545247381f0ac42a5b8fc936e56/grpc-protobuf-lite-1.39.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.discord4j/discord-json/1.5.10/152f47cd1d2f24626cf172a089a0b1e45a5a1edc/discord-json-1.5.10.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java/3.17.3/313b1861fa9312dd71e1033a77c2e64fb1a94dd3/protobuf-java-3.17.3.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-api/5.6.0/f29e6318333d2303ce4965c9819cfad08de7d1e5/junit-jupiter-api-5.6.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-auth/1.39.0/b13aa8f9177d09f8188936f9c1b85e9b2f04ee8b/grpc-auth-1.39.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec-http/4.1.60.Final/354ca712f909fcd9d8a22e16bf84afcfdc44ec8d/netty-codec-http-4.1.60.Final.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.discord4j/stores-api/3.1.6/22511e64151e42a7cb218db4e1b83136a732db2/stores-api-3.1.6.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.7/69d9503ea0a40ee16f0bcdac7e3eaf83d0fa914a/gson-2.8.7.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec-http2/4.1.60.Final/23b13e78d704f337b12000d1ad27dbdb2aa07ba1/netty-codec-http2-4.1.60.Final.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.discord4j/discord4j-core/3.1.5/44cf818feeaf9f223129794e3cab5e4f89c5fc7b/discord4j-core-3.1.5.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.j2objc/j2objc-annotations/1.3/ba035118bc8bac37d7eff77700720999acd9986d/j2objc-annotations-1.3.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/30.1.1-android/5963ed171d561cca6f14659f3439b46a1633ab13/guava-30.1.1-android.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.mojo/animal-sniffer-annotations/1.20/d98c2b001fcb9031859ec9d21914c2ce78912a5/animal-sniffer-annotations-1.20.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport-native-unix-common/4.1.60.Final/fad098b98df67e50135c67e4a26af56c7800daf4/netty-transport-native-unix-common-4.1.60.Final.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/4bfc12adfe4842bf07b657f0369c4cb522955686/commons-logging-1.2.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-grpclb/1.39.0/ee9e9d6ff0d4ec8df3cb1fc317c03d00dfad5729/grpc-grpclb-1.39.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.discord4j/discord4j-gateway/3.1.5/506826ccc1599a34c9f429ff4ae3d9712e9b68a4/discord4j-gateway-3.1.5.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.discord4j/discord4j-common/3.1.5/aa6c58ade83559d4fabef3a74277a3cc583d8ea3/discord4j-common-3.1.5.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-handler/4.1.60.Final/14e28bab0173be10c9631a85069636a0d0221dfe/netty-handler-4.1.60.Final.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport/4.1.60.Final/94350c81cc7a78212fb0f52a500f22d1aa9c44d8/netty-transport-4.1.60.Final.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-alts/1.39.0/7cfb9a940b68812e5449f867e27728668130bedb/grpc-alts-1.39.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.perfmark/perfmark-api/0.23.0/b813b7539fae6550541da8caafd6add86d4e22f/perfmark-api-0.23.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.api/gax/1.66.0/8320f0ee0dd4200ffd8abdf9f16a21f2b64ce9b2/gax-1.66.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.api/api-common/1.10.4/650904f378415673cfc581fe5720ea9026dfd62d/api-common-1.10.4.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-api/1.39.0/706f68087b8fae59f8949b4302ac9807131c0112/grpc-api-1.39.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.conscrypt/conscrypt-openjdk-uber/2.5.1/3658b276ab54bd600f754b3c8cf4b7cd77fc61e6/conscrypt-openjdk-uber-2.5.1.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-engine/1.6.0/a3a6ec96c010875444b3ca31828108093758ec00/junit-platform-engine-1.6.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android/annotations/4.1.1.4/a1678ba907bf92691d879fef34e1a187038f9259/annotations-4.1.1.4.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-core/1.39.0/df5bbb97602a059eee86e22e09f6524901a62cfa/grpc-core-1.39.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.projectreactor/reactor-core/3.3.15.RELEASE/55dc75b77da87b5fd7a101074e24e205e2f8f56f/reactor-core-3.3.15.RELEASE.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec-socks/4.1.60.Final/6f4573281df659265bd709fd10471c3e00ef6c70/netty-codec-socks-4.1.60.Final.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-netty-shaded/1.39.0/de29a0879a702fc527e3dd8c9af2f4f92b5a7738/grpc-netty-shaded-1.39.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.5.13/e5f6cae5ca7ecaac1ec2827a9e2d65ae2869cada/httpclient-4.5.13.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.discord4j/discord4j-voice/3.1.5/be967ba36864b6f4a903547f6d2884d86e8c0b3/discord4j-voice-3.1.5.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-stub/1.39.0/598232e1142fb0d09067e1fd1fc524580ee9425/grpc-stub-1.39.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.auth/google-auth-library-oauth2-http/0.26.0/ea3e6869046df1e99abbf89b3417aac12f596743/google-auth-library-oauth2-http-0.26.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.discord4j/stores-jdk/3.1.6/4b953e6837b0d1dd96e4ab2e6ec0f97cebe8e791/stores-jdk-3.1.6.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.api.grpc/proto-google-cloud-language-v1beta2/0.86.2/6a58053d3f7d5adc1d020e6dd9c220f5187b83c0/proto-google-cloud-language-v1beta2-0.86.2.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.projectreactor.netty/reactor-netty/0.9.18.RELEASE/df7c7ea43a0123b2a68639831610aac39b6bcddc/reactor-netty-0.9.18.RELEASE.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.datatype/jackson-datatype-jdk8/2.11.4/e1540dea3c6c681ea4e335a960f730861ee3bedb/jackson-datatype-jdk8-2.11.4.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.11.4/2c3f5c079330f3a01726686a078979420f547ae4/jackson-annotations-2.11.4.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-context/1.39.0/637f453f3654aa29bf085ae7ddc86f9f80c937dd/grpc-context-1.39.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.api.grpc/proto-google-common-protos/2.3.2/a35fd6ed973f752604fce97a21eb1e09d6afc467/proto-google-common-protos-2.3.2.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec/4.1.60.Final/b740d51babe3312a33b505cd8b62c02f3731b2e3/netty-codec-4.1.60.Final.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.annotation/javax.annotation-api/1.3.2/934c04d3cfef185a8008e7bf34331b79730a9d43/javax.annotation-api-1.3.2.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.2/25ea2e8b0c338a877313bd4672d3fe056ea78f0d/jsr305-3.0.2.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-protobuf/1.39.0/b7789ed9dd819a4fb9f5e3cf44d02f16fa49031e/grpc-protobuf-1.39.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker-compat-qual/2.5.5/435dc33e3019c9f019e15f01aa111de9d6b2b79c/checker-compat-qual-2.5.5.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.api.grpc/proto-google-cloud-language-v1/1.85.2/32e1a3805cc93276cc0002208d6faae78b219d9a/proto-google-cloud-language-v1-1.85.2.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.cloud/google-cloud-language/1.103.2/b2664de50318e089285b5e71a728177596c9b359/google-cloud-language-1.103.2.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.http-client/google-http-client/1.39.2/5aafc3ff51693febf4214bb2a21baf577ce2fb25/google-http-client-1.39.2.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/b421526c5f297295adef1c886e5246c39d4ac629/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.auto.value/auto-value-annotations/1.8.1/174878f9cc9cbacb8b464d774afb2ccf938f257b/auto-value-annotations-1.8.1.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apiguardian/apiguardian-api/1.1.0/fc9dff4bb36d627bdc553de77e1f17efd790876c/apiguardian-api-1.1.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-engine/5.6.0/83c9e737f6015d9e00029b9b1d51e952a884b8f9/junit-jupiter-engine-5.6.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.discord4j/discord4j-rest/3.1.5/626d0f9baec990a86a6558ffc8cbb05830058de0/discord4j-rest-3.1.5.jar" path-in-jar="/" />
-      <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" />
+    <root id="root">
+      <element id="archive" name="Flames.jar">
+        <element id="module-output" name="Flames.main" />
       </element>
+      <element id="library" level="project" name="Gradle: com.google.guava:failureaccess:1.0.1" />
+      <element id="library" level="project" name="Gradle: org.junit.platform:junit-platform-commons:1.6.0" />
+      <element id="library" level="project" name="Gradle: io.projectreactor.addons:reactor-extra:3.3.5.RELEASE" />
+      <element id="library" level="project" name="Gradle: org.threeten:threetenbp:1.5.1" />
+      <element id="library" level="project" name="Gradle: com.discord4j:simple-fsm:1.0.1" />
+      <element id="library" level="project" name="Gradle: io.netty:netty-common:4.1.60.Final" />
+      <element id="library" level="project" name="Gradle: io.opencensus:opencensus-contrib-http-util:0.28.0" />
+      <element id="library" level="project" name="Gradle: io.opencensus:opencensus-api:0.28.0" />
+      <element id="library" level="project" name="Gradle: commons-codec:commons-codec:1.15" />
+      <element id="library" level="project" name="Gradle: io.netty:netty-handler-proxy:4.1.60.Final" />
+      <element id="library" level="project" name="Gradle: org.apache.httpcomponents:httpcore:4.4.14" />
+      <element id="library" level="project" name="Gradle: org.reactivestreams:reactive-streams:1.0.3" />
+      <element id="library" level="project" name="Gradle: org.opentest4j:opentest4j:1.2.0" />
+      <element id="library" level="project" name="Gradle: com.google.protobuf:protobuf-java-util:3.17.3" />
+      <element id="library" level="project" name="Gradle: io.netty:netty-resolver:4.1.60.Final" />
+      <element id="library" level="project" name="Gradle: com.google.errorprone:error_prone_annotations:2.7.1" />
+      <element id="library" level="project" name="Gradle: com.google.api:gax-grpc:1.66.0" />
+      <element id="library" level="project" name="Gradle: com.discord4j:discord-json-api:1.5.10" />
+      <element id="library" level="project" name="Gradle: io.netty:netty-buffer:4.1.60.Final" />
+      <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.11.4" />
+      <element id="library" level="project" name="Gradle: com.google.http-client:google-http-client-gson:1.39.2" />
+      <element id="library" level="project" name="Gradle: io.netty:netty-transport-native-epoll:linux-x86_64:4.1.60.Final" />
+      <element id="library" level="project" name="Gradle: com.google.auth:google-auth-library-credentials:0.26.0" />
+      <element id="library" level="project" name="Gradle: com.austinv11.servicer:Servicer:1.0.3" />
+      <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.11.4" />
+      <element id="library" level="project" name="Gradle: io.grpc:grpc-protobuf-lite:1.39.0" />
+      <element id="library" level="project" name="Gradle: com.discord4j:discord-json:1.5.10" />
+      <element id="library" level="project" name="Gradle: com.google.protobuf:protobuf-java:3.17.3" />
+      <element id="library" level="project" name="Gradle: org.junit.jupiter:junit-jupiter-api:5.6.0" />
+      <element id="library" level="project" name="Gradle: io.grpc:grpc-auth:1.39.0" />
+      <element id="library" level="project" name="Gradle: io.netty:netty-codec-http:4.1.60.Final" />
+      <element id="library" level="project" name="Gradle: com.discord4j:stores-api:3.1.6" />
+      <element id="library" level="project" name="Gradle: com.google.code.gson:gson:2.8.7" />
+      <element id="library" level="project" name="Gradle: io.netty:netty-codec-http2:4.1.60.Final" />
+      <element id="library" level="project" name="Gradle: com.discord4j:discord4j-core:3.1.5" />
+      <element id="library" level="project" name="Gradle: com.google.j2objc:j2objc-annotations:1.3" />
+      <element id="library" level="project" name="Gradle: com.google.guava:guava:30.1.1-android" />
+      <element id="library" level="project" name="Gradle: org.codehaus.mojo:animal-sniffer-annotations:1.20" />
+      <element id="library" level="project" name="Gradle: io.netty:netty-transport-native-unix-common:4.1.60.Final" />
+      <element id="library" level="project" name="Gradle: commons-logging:commons-logging:1.2" />
+      <element id="library" level="project" name="Gradle: io.grpc:grpc-grpclb:1.39.0" />
+      <element id="library" level="project" name="Gradle: com.discord4j:discord4j-gateway:3.1.5" />
+      <element id="library" level="project" name="Gradle: com.discord4j:discord4j-common:3.1.5" />
+      <element id="library" level="project" name="Gradle: io.netty:netty-handler:4.1.60.Final" />
+      <element id="library" level="project" name="Gradle: io.netty:netty-transport:4.1.60.Final" />
+      <element id="library" level="project" name="Gradle: io.grpc:grpc-alts:1.39.0" />
+      <element id="library" level="project" name="Gradle: io.perfmark:perfmark-api:0.23.0" />
+      <element id="library" level="project" name="Gradle: com.google.api:gax:1.66.0" />
+      <element id="library" level="project" name="Gradle: com.google.api:api-common:1.10.4" />
+      <element id="library" level="project" name="Gradle: io.grpc:grpc-api:1.39.0" />
+      <element id="library" level="project" name="Gradle: org.conscrypt:conscrypt-openjdk-uber:2.5.1" />
+      <element id="library" level="project" name="Gradle: org.junit.platform:junit-platform-engine:1.6.0" />
+      <element id="library" level="project" name="Gradle: com.google.android:annotations:4.1.1.4" />
+      <element id="library" level="project" name="Gradle: io.grpc:grpc-core:1.39.0" />
+      <element id="library" level="project" name="Gradle: io.projectreactor:reactor-core:3.3.15.RELEASE" />
+      <element id="library" level="project" name="Gradle: io.netty:netty-codec-socks:4.1.60.Final" />
+      <element id="library" level="project" name="Gradle: io.grpc:grpc-netty-shaded:1.39.0" />
+      <element id="library" level="project" name="Gradle: com.discord4j:discord4j-rest:3.1.5" />
+      <element id="library" level="project" name="Gradle: org.apache.httpcomponents:httpclient:4.5.13" />
+      <element id="library" level="project" name="Gradle: com.discord4j:discord4j-voice:3.1.5" />
+      <element id="library" level="project" name="Gradle: io.grpc:grpc-stub:1.39.0" />
+      <element id="library" level="project" name="Gradle: com.google.auth:google-auth-library-oauth2-http:0.26.0" />
+      <element id="library" level="project" name="Gradle: com.discord4j:stores-jdk:3.1.6" />
+      <element id="library" level="project" name="Gradle: com.google.api.grpc:proto-google-cloud-language-v1beta2:0.86.2" />
+      <element id="library" level="project" name="Gradle: io.projectreactor.netty:reactor-netty:0.9.18.RELEASE" />
+      <element id="library" level="project" name="Gradle: com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.11.4" />
+      <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.11.4" />
+      <element id="library" level="project" name="Gradle: io.grpc:grpc-context:1.39.0" />
+      <element id="library" level="project" name="Gradle: com.google.api.grpc:proto-google-common-protos:2.3.2" />
+      <element id="library" level="project" name="Gradle: io.netty:netty-codec:4.1.60.Final" />
+      <element id="library" level="project" name="Gradle: javax.annotation:javax.annotation-api:1.3.2" />
+      <element id="library" level="project" name="Gradle: com.google.code.findbugs:jsr305:3.0.2" />
+      <element id="library" level="project" name="Gradle: io.grpc:grpc-protobuf:1.39.0" />
+      <element id="library" level="project" name="Gradle: org.checkerframework:checker-compat-qual:2.5.5" />
+      <element id="library" level="project" name="Gradle: com.google.api.grpc:proto-google-cloud-language-v1:1.85.2" />
+      <element id="library" level="project" name="Gradle: com.google.cloud:google-cloud-language:1.103.2" />
+      <element id="library" level="project" name="Gradle: com.google.http-client:google-http-client:1.39.2" />
+      <element id="library" level="project" name="Gradle: com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava" />
+      <element id="library" level="project" name="Gradle: com.google.auto.value:auto-value-annotations:1.8.1" />
+      <element id="library" level="project" name="Gradle: org.apiguardian:apiguardian-api:1.1.0" />
+      <element id="library" level="project" name="Gradle: org.junit.jupiter:junit-jupiter-engine:5.6.0" />
     </root>
   </artifact>
 </component>
