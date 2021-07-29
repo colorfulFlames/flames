@@ -1,37 +1,3 @@
 Manifest-Version: 1.0
 Main-Class: com.severalcircles.flames.Main
-Class-Path: failureaccess-1.0.1.jar junit-platform-commons-1.6.0.jar rea
- ctor-extra-3.3.5.RELEASE.jar threetenbp-1.5.1.jar simple-fsm-1.0.1.jar 
- netty-common-4.1.60.Final.jar opencensus-contrib-http-util-0.28.0.jar o
- pencensus-api-0.28.0.jar commons-codec-1.15.jar netty-handler-proxy-4.1
- .60.Final.jar httpcore-4.4.14.jar reactive-streams-1.0.3.jar opentest4j
- -1.2.0.jar protobuf-java-util-3.17.3.jar netty-resolver-4.1.60.Final.ja
- r error_prone_annotations-2.7.1.jar gax-grpc-1.66.0.jar discord-json-ap
- i-1.5.10.jar netty-buffer-4.1.60.Final.jar jackson-databind-2.11.4.jar 
- google-http-client-gson-1.39.2.jar netty-transport-native-epoll-4.1.60.
- Final-linux-x86_64.jar google-auth-library-credentials-0.26.0.jar Servi
- cer-1.0.3.jar jackson-core-2.11.4.jar grpc-protobuf-lite-1.39.0.jar dis
- cord-json-1.5.10.jar protobuf-java-3.17.3.jar junit-jupiter-api-5.6.0.j
- ar grpc-auth-1.39.0.jar netty-codec-http-4.1.60.Final.jar stores-api-3.
- 1.6.jar gson-2.8.7.jar netty-codec-http2-4.1.60.Final.jar discord4j-cor
- e-3.1.5.jar j2objc-annotations-1.3.jar guava-30.1.1-android.jar animal-
- sniffer-annotations-1.20.jar netty-transport-native-unix-common-4.1.60.
- Final.jar commons-logging-1.2.jar grpc-grpclb-1.39.0.jar discord4j-gate
- way-3.1.5.jar discord4j-common-3.1.5.jar netty-handler-4.1.60.Final.jar
-  netty-transport-4.1.60.Final.jar grpc-alts-1.39.0.jar perfmark-api-0.2
- 3.0.jar gax-1.66.0.jar api-common-1.10.4.jar grpc-api-1.39.0.jar conscr
- ypt-openjdk-uber-2.5.1.jar junit-platform-engine-1.6.0.jar annotations-
- 4.1.1.4.jar grpc-core-1.39.0.jar reactor-core-3.3.15.RELEASE.jar netty-
- codec-socks-4.1.60.Final.jar grpc-netty-shaded-1.39.0.jar discord4j-res
- t-3.1.5.jar httpclient-4.5.13.jar discord4j-voice-3.1.5.jar grpc-stub-1
- .39.0.jar google-auth-library-oauth2-http-0.26.0.jar stores-jdk-3.1.6.j
- ar proto-google-cloud-language-v1beta2-0.86.2.jar reactor-netty-0.9.18.
- RELEASE.jar jackson-datatype-jdk8-2.11.4.jar jackson-annotations-2.11.4
- .jar grpc-context-1.39.0.jar proto-google-common-protos-2.3.2.jar netty
- -codec-4.1.60.Final.jar javax.annotation-api-1.3.2.jar jsr305-3.0.2.jar
-  grpc-protobuf-1.39.0.jar checker-compat-qual-2.5.5.jar proto-google-cl
- oud-language-v1-1.85.2.jar google-cloud-language-1.103.2.jar google-htt
- p-client-1.39.2.jar listenablefuture-9999.0-empty-to-avoid-conflict-wit
- h-guava.jar auto-value-annotations-1.8.1.jar apiguardian-api-1.1.0.jar 
- junit-jupiter-engine-5.6.0.jar
 

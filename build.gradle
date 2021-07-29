@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'org.example'
+group 'com.severalcircles.flames'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -14,7 +14,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     implementation 'com.discord4j:discord4j-core:3.1.5'
     implementation platform('com.google.cloud:libraries-bom:20.8.0')
-    compile 'com.google.cloud:google-cloud-language'
+    implementation 'com.google.cloud:google-cloud-language'
 }
 
 test {
