@@ -15,6 +15,7 @@ dependencies {
     implementation 'com.discord4j:discord4j-core:3.1.5'
     implementation platform('com.google.cloud:libraries-bom:20.8.0')
     implementation 'com.google.cloud:google-cloud-language'
+
 }
 
 test {

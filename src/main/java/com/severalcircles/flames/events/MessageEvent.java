@@ -1,43 +1,42 @@
 package com.severalcircles.flames.events;
 
-import com.severalcircles.flames.commands.CommandRegistry;
+import com.severalcircles.flames.command.Command;
 import com.severalcircles.flames.data.base.FlamesDatabase;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.UserStats;
 import com.severalcircles.flames.features.Analysis;
 import com.severalcircles.flames.features.WelcomeBack;
+import com.severalcircles.flames.system.Flames;
+import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.Message;
 
 import java.sql.SQLException;
+import java.util.Map;
 
 public class MessageEvent {
-    private Message message;
-    public MessageEvent(Message message) {
-        this.message = message;
+    private final MessageCreateEvent event;
+    public MessageEvent(MessageCreateEvent event) {
+        this.event = event;
     }
     private int score;
     public void run() throws SQLException {
-        String content = message.getContent();
-        // Check if user is running a Flames command
-        if (content.startsWith("\\")) {
-            content = content.replace("\\", "");
-            content = content.toLowerCase();
-            System.out.println(content);
-            String[] args = content.split(" ");
-            for (String arg : args) {
-                System.out.println(arg);
+        Message message = event.getMessage();
+        String content = event.getMessage().getContent();
+        // First, check if it's a command.
+        for (Map.Entry<String, Command> entry: Flames.commands.entrySet()) {
+            if (content.startsWith("\\" + entry.getKey())) {
+                entry.getValue().execute(event);
+                return;
             }
-            System.out.println(CommandRegistry.commandMap.containsKey((args[0])));
-            if (CommandRegistry.commandMap.containsKey(args[0])) {
-                CommandRegistry.commandMap.get(args[0]).run(message);
-            }
-        } else {
+        }
+            // If not, process it.
             FlamesDatabase database = new FlamesDatabase();
             FlamesUser user = database.readUser(message.getAuthorAsMember().block().getId());
             UserStats stats = user.getStats();
-            try {
+        try {
                 score = Analysis.analyze(message.getContent());
-                stats.addExp(score);
+                stats.addExp(Math.abs(score));
+                float emotion = (user.getEmotion() / 2) + score;
                 score *= stats.getPOW();
                 if (score < 0) score /= stats.getRES();
             } catch (Exception e) {
@@ -50,4 +49,3 @@ public class MessageEvent {
             database.close();
         }
     }
-}

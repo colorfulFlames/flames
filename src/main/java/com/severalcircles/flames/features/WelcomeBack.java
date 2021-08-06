@@ -15,6 +15,7 @@ public class WelcomeBack {
         Date now = new Date();
         int dailyBonus = 1000 + (flamesUser.getStreak() * 100);
         flamesUser.addScore(dailyBonus);
+        //noinspection deprecation,deprecation,deprecation,deprecation
         if (flamesUser.getLastSeen().getDay() < now.getDay() || (flamesUser.getLastSeen().getDay() == 6 && now.getDay() == 0)) {
             discordUser.getPrivateChannel().block().createEmbed(spec ->
                     spec.setColor(Color.CINNABAR)

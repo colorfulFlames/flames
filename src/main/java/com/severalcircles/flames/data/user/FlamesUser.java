@@ -9,15 +9,13 @@ import java.util.Date;
 public class FlamesUser {
     private int score;
     private String firstSeen;
-    private int emotion;
+    private float emotion;
     private Date lastSeen;
     private int streak;
     private String discordId;
     private String locale;
     private UserStats stats;
-//    private int level;
-//    private int exp;
-    public FlamesUser(int score, String firstSeen, int emotion, Date lastSeen, int streak, String discordId, String locale, UserStats stats) {
+public FlamesUser(int score, String firstSeen, int emotion, Date lastSeen, int streak, String discordId, String locale, UserStats stats) {
         this.score = score;
         this.firstSeen = firstSeen;
         this.emotion = emotion;
@@ -32,7 +30,8 @@ public class FlamesUser {
     public String getLocale() {
         return locale;
     }
-    public UserStats getStats() {return stats;};
+    public UserStats getStats() {return stats;}
+
     public void setStats(UserStats stats) {this.stats = stats;}
     public void setLocale(String locale) {
         this.locale = locale;
@@ -59,11 +58,11 @@ public class FlamesUser {
         this.firstSeen = firstSeen;
     }
 
-    public int getEmotion() {
+    public float getEmotion() {
         return emotion;
     }
 
-    public void setEmotion(int emotion) {
+    public void setEmotion(float emotion) {
         this.emotion = emotion;
     }
 
