@@ -23,7 +23,7 @@ public class UserStats {
     private int PTY = 1;
     private int SEN = 1;
     private int CAR = 1;
-
+    public UserStats() {}
     public UserStats(int exp, int level, int POW, int RES, int LUCK, int RISE, int PTY, int SEN, int CAR) {
         this.exp = exp;
         this.level = level;

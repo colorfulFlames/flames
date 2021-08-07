@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="Flames.main:jar">
+  <artifact type="jar" build-on-make="true" name="Flames.main:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/Flames_main_jar</output-path>
     <root id="archive" name="Flames.main.jar">
       <element id="module-output" name="Flames.main" />

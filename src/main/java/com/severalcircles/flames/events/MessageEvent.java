@@ -13,7 +13,7 @@ import discord4j.core.object.entity.Message;
 import java.sql.SQLException;
 import java.util.Map;
 
-public class MessageEvent {
+public class MessageEvent implements FlamesDiscordEvent {
     private final MessageCreateEvent event;
     public MessageEvent(MessageCreateEvent event) {
         this.event = event;
@@ -21,18 +21,18 @@ public class MessageEvent {
     private int score;
     public void run() throws SQLException {
         Message message = event.getMessage();
+        FlamesDatabase database = new FlamesDatabase();
+        FlamesUser user = database.readUser(message.getAuthorAsMember().block().getId());
         String content = event.getMessage().getContent();
+        UserStats stats = user.getStats();
         // First, check if it's a command.
         for (Map.Entry<String, Command> entry: Flames.commands.entrySet()) {
             if (content.startsWith("\\" + entry.getKey())) {
-                entry.getValue().execute(event);
+                entry.getValue().execute(event, user);
                 return;
             }
         }
             // If not, process it.
-            FlamesDatabase database = new FlamesDatabase();
-            FlamesUser user = database.readUser(message.getAuthorAsMember().block().getId());
-            UserStats stats = user.getStats();
         try {
                 score = Analysis.analyze(message.getContent());
                 stats.addExp(Math.abs(score));

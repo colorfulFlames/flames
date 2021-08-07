@@ -7,7 +7,6 @@ public class PermissionsException extends FlamesException{
     public PermissionsException(Message message) {
         super(message);
     }
-    @Override
     public void handle() {
         this.message.addReaction(ReactionEmoji.unicode("⛔"));
     }

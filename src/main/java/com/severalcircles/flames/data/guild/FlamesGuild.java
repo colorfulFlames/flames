@@ -2,29 +2,36 @@ package com.severalcircles.flames.data.guild;
 
 import discord4j.core.object.entity.Guild;
 import discord4j.rest.entity.RestGuild;
-import reactor.util.annotation.NonNull;
 import reactor.util.annotation.Nullable;
 
 public class FlamesGuild {
     private String name;
     private int favorites = 0;
     private String welcomeMessage;
-    private boolean debug = false;
+//    private boolean debug = false;
     private String discordID;
-    public FlamesGuild(String discordID, @Nullable String name, @Nullable int favorites, @Nullable String welcomeMessage, @Nullable boolean debug) {
+    public FlamesGuild(String discordID, @Nullable String name, @Nullable int favorites, @Nullable String welcomeMessage) {
         this.name = name;
         this.favorites = favorites;
         this.welcomeMessage = welcomeMessage;
-        this.debug = debug;
+//        this.debug = debug;
         this.discordID = discordID;
     }
+    public FlamesGuild(Guild guild) {
+        this.name = guild.getName();
+        this.favorites = 0;
+        this.welcomeMessage = "We're so happy you're here!";
+        this.discordID = guild.getId().toString();
+//        this.debug = false;
+    }
+
     public FlamesGuild(RestGuild guild) {
         this.name = guild.getData().block().name();
         this.favorites = 0;
         this.welcomeMessage = "We're so happy you're here!";
         this.discordID = guild.getId().toString();
-        this.debug = false;
     }
+
     public String getDiscordID() {
         return discordID;
     }
@@ -57,11 +64,11 @@ public class FlamesGuild {
         this.welcomeMessage = welcomeMessage;
     }
 
-    public boolean isDebug() {
-        return debug;
-    }
+//    public boolean isDebug() {
+//        return debug;
+//    }
 
-    public void setDebug(boolean debug) {
-        this.debug = debug;
-    }
+//    public void setDebug(boolean debug) {
+//        this.debug = debug;
+//    }
 }

@@ -6,6 +6,7 @@ import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.UserStats;
 import com.severalcircles.flames.system.OperationMode;
 import discord4j.common.util.Snowflake;
+import discord4j.core.object.entity.Guild;
 
 import java.sql.*;
 import java.util.*;
@@ -32,14 +33,18 @@ public class FlamesDatabase {
         Statement statement = fd.connection.createStatement();
         ResultSet rs;
         if (!(entry.getValue() instanceof FlamesUser) || entry.getValue().equals(new FlamesUser())) rs = statement.executeQuery("insert into users (score, firstSeen, emotion, multiplier, lastSeen, streak, discordId) values (" + entry.getValue().getScore() + ", " + entry.getValue().getFirstSeen() + ", " + entry.getValue().getEmotion() + ", " + entry.getValue().getLastSeen() + ", " + entry.getValue().getStreak() + ", " + entry.getValue().getDiscordId() + ");");
-        else rs = statement.executeQuery("update users\nSET score=" + entry.getValue().getScore() + ", firstSeen=" + entry.getValue().getFirstSeen() + ", emotion=" + entry.getValue().getEmotion() + ", lastSeen=" + entry.getValue().getLastSeen() + ", streak=" + entry.getValue().getStreak() + ", discordId=" + entry.getValue().getDiscordId() + ", locale=" + entry.getValue().getLocale() + ", exp=" + entry.getValue().getStats().getExp() + ", level=" + entry.getValue().getStats().getLevel() + ", POW=" + entry.getValue().getStats().getPOW() + ", RES=" + entry.getValue().getStats().getRES() + ", LUCK=" + entry.getValue().getStats().getLUCK() + ", RISE=" + entry.getValue().getStats().getRISE() + ", PTY=" + entry.getValue().getStats().getPTY() + ", SEN=" + entry.getValue().getStats().getSEN() + ", CAR=" + entry.getValue().getStats().getCAR() +"\nwhere discordId=" + entry.getValue().getDiscordId());
+        else rs = statement.executeQuery("update users\nSET score=" + entry.getValue().getScore() + ", firstSeen=" + entry.getValue().getFirstSeen() + ", emotion=" + entry.getValue().getEmotion() + ", lastSeen=" + entry.getValue().getLastSeen() + ", streak=" + entry.getValue().getStreak() + ", discordId=" + entry.getValue().getDiscordId() + ", locale=" + entry.getValue().getLocale() + ", exp=" + entry.getValue().getStats().getExp() + ", level=" + entry.getValue().getStats().getLevel() + ", POW=" + entry.getValue().getStats().getPOW() + ", RES=" + entry.getValue().getStats().getRES() + ", LUCK=" + entry.getValue().getStats().getLUCK() + ", RISE=" + entry.getValue().getStats().getRISE() + ", PTY=" + entry.getValue().getStats().getPTY() + ", SEN=" + entry.getValue().getStats().getSEN() + ", CAR=" + entry.getValue().getStats().getCAR() +"\nwhere discordId=" + entry.getValue().getDiscordId() + ";");
     }
         fd.close();
     }
-    public void write(FlamesGuild guild) {
-        //TODO
+    public void write(FlamesGuild guild) throws SQLException {
+        Statement statement = this.connection.createStatement();
+        ResultSet rs = statement.executeQuery("update guilds\nSET discordId=" + guild.getDiscordID() + ", favorites=" + guild.getDiscordID() + ", welcomeMessage=" + guild.getWelcomeMessage() + ", name=" + guild.getName() + "\nwhere discordId=" + guild.getDiscordID() + ";");
     }
-
+    public void addGuild(FlamesGuild guild) throws SQLException {
+        Statement statement = this.connection.createStatement();
+        ResultSet rs = statement.executeQuery("insert into guilds (discordId, favorites, welcomeMessage, name) values (" +  guild.getDiscordID() + ", " + guild.getFavorites() + ", " + guild.getWelcomeMessage() + ", " + guild.getName() + ");");
+    }
     public FlamesUser readUser(Snowflake discordId) throws SQLException {
         if (userCache.containsKey(discordId.asString())) return userCache.get(discordId);
         else {
@@ -57,7 +62,7 @@ public class FlamesDatabase {
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery("select * from users where discordId = " + discordId);
         while(rs.next()) {
-            return new FlamesGuild(rs.getString("discordId"), rs.getString("name"), rs.getInt("favorites"), rs.getString("welcomeMessage"), rs.getBoolean("debug"));
+            return new FlamesGuild(rs.getString("discordId"), rs.getString("name"), rs.getInt("favorites"), rs.getString("welcomeMessage"));
         }
         return new FlamesGuild(Flames.client.getGuildById(discordId));
     }

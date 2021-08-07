@@ -12,7 +12,8 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-    implementation 'com.discord4j:discord4j-core:3.1.5'
+    testCompile 'junit:junit:4.12'
+    implementation 'com.discord4j:discord4j-core:3.2.0-RC2'
     implementation platform('com.google.cloud:libraries-bom:20.8.0')
     implementation 'com.google.cloud:google-cloud-language'
 
