@@ -9,13 +9,14 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+@SuppressWarnings("ALL")
 public class WelcomeBack {
     static ResourceBundle resources = ResourceBundle.getBundle("features/WelcomeBack");
     public void welcomeUserBack(FlamesUser flamesUser, User discordUser) throws SQLException {
         Date now = new Date();
         int dailyBonus = 1000 + (flamesUser.getStreak() * 100);
         flamesUser.addScore(dailyBonus);
-        //noinspection deprecation,deprecation,deprecation,deprecation
+        // noinspection deprecation
         if (flamesUser.getLastSeen().getDay() < now.getDay() || (flamesUser.getLastSeen().getDay() == 6 && now.getDay() == 0)) {
             discordUser.getPrivateChannel().block().createEmbed(spec ->
                     spec.setColor(Color.CINNABAR)

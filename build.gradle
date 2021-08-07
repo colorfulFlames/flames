@@ -1,4 +1,5 @@
 plugins {
+    //noinspection GroovyAssignabilityCheck
     id 'java'
 }
 

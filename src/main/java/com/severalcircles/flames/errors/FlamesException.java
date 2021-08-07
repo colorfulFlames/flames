@@ -1,7 +1,6 @@
 package com.severalcircles.flames.errors;
 
 import discord4j.core.object.entity.Message;
-import org.apache.commons.logging.Log;
 
 import java.util.logging.Logger;
 

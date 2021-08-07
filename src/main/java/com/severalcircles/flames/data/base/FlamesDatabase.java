@@ -4,14 +4,12 @@ import com.severalcircles.flames.system.Flames;
 import com.severalcircles.flames.data.guild.FlamesGuild;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.UserStats;
-import com.severalcircles.flames.system.OperationMode;
 import discord4j.common.util.Snowflake;
-import discord4j.core.object.entity.Guild;
 
 import java.sql.*;
 import java.util.*;
-import java.util.Date;
 
+@SuppressWarnings("ALL")
 public class FlamesDatabase {
     private final Connection connection;
     private static final Map<String, FlamesUser> userCache = new HashMap<>();
@@ -24,7 +22,7 @@ public class FlamesDatabase {
 
         connection = DriverManager.getConnection("jdbc:mysql://localhost:33036/flames", "flames", "lightitup");
     }
-    public void write(FlamesUser user) throws SQLException {
+    public void write(FlamesUser user) {
         userCache.put(user.getDiscordId(), user);
     }
     public static void flushUserCache() throws SQLException {

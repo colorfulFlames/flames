@@ -64,11 +64,4 @@ public class FlamesGuild {
         this.welcomeMessage = welcomeMessage;
     }
 
-//    public boolean isDebug() {
-//        return debug;
-//    }
-
-//    public void setDebug(boolean debug) {
-//        this.debug = debug;
-//    }
 }

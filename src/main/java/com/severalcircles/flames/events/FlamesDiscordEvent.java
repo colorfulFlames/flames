@@ -4,5 +4,5 @@ import java.sql.SQLException;
 
 public interface FlamesDiscordEvent {
 
-    public void run() throws SQLException;
+    void run() throws SQLException;
 }

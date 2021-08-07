@@ -10,7 +10,7 @@ public class Analysis {
         try (LanguageServiceClient language = LanguageServiceClient.create()) {
 
             // The text to analyze
-            String text = "Hello, world!";
+            String text = message;
             Document doc = Document.newBuilder().setContent(text).setType(Type.PLAIN_TEXT).build();
 
             // Detects the sentiment of the text

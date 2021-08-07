@@ -11,8 +11,6 @@ public class UserStats {
     public static final double seniorityGrowth = 0.75;
     public static final double charismaGrowth = 0.5;
 
-    private double random = Math.random();
-
     private int exp = 0;
     private int level = 1;
 
@@ -79,7 +77,7 @@ public class UserStats {
     public boolean checkLevelUp() {
         if (this.exp / (GlobalData.averageScore * level) >= 1) {
             level++;
-            random = Math.random();
+            double random = Math.random();
             if (random <= powerGrowth) POW++;
             random = Math.random();
             if (random <= resistanceGrowth) RES++;

@@ -16,6 +16,7 @@ class UserStatsTest {
         assert stats.getLevel() == 1;
     }
 
+    @SuppressWarnings("AssertWithSideEffects")
     @Test
     void addExp() {
         assert stats.addExp(1);
