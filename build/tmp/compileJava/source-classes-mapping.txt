@@ -1,41 +1,73 @@
-com/severalcircles/flames/ux/embeds/errors/ErrorType.java
- com.severalcircles.flames.ux.embeds.errors.ErrorType
+com/severalcircles/flames/buttonaction/data/StatsButtonAction.java
+ com.severalcircles.flames.buttonaction.data.StatsButtonAction
+com/severalcircles/flames/command/connections/ArtistCommand.java
+ com.severalcircles.flames.command.connections.ArtistCommand
+com/severalcircles/flames/features/Consent.java
+ com.severalcircles.flames.features.Consent
+com/severalcircles/flames/buttonaction/data/deleteuserdata/DeleteUserDataButtonAction.java
+ com.severalcircles.flames.buttonaction.data.deleteuserdata.DeleteUserDataButtonAction
 com/severalcircles/flames/data/user/FlamesUser.java
  com.severalcircles.flames.data.user.FlamesUser
-com/severalcircles/flames/ux/E.java
- com.severalcircles.flames.ux.E
-com/severalcircles/flames/errors/PermissionsException.java
- com.severalcircles.flames.errors.PermissionsException
+com/severalcircles/flames/buttonaction/ConsentButtonAction.java
+ com.severalcircles.flames.buttonaction.ConsentButtonAction
+com/severalcircles/flames/command/HelpCommand.java
+ com.severalcircles.flames.command.HelpCommand
+com/severalcircles/flames/features/rank/Rank.java
+ com.severalcircles.flames.features.rank.Rank
+com/severalcircles/flames/buttonaction/ButtonAction.java
+ com.severalcircles.flames.buttonaction.ButtonAction
 com/severalcircles/flames/events/FlamesDiscordEvent.java
  com.severalcircles.flames.events.FlamesDiscordEvent
-com/severalcircles/flames/ux/embeds/errors/ErrorMessage.java
- com.severalcircles.flames.ux.embeds.errors.ErrorMessage
- com.severalcircles.flames.ux.embeds.errors.ErrorMessage$1
 com/severalcircles/flames/data/user/UserStats.java
  com.severalcircles.flames.data.user.UserStats
-com/severalcircles/flames/data/base/FlamesDatabase.java
- com.severalcircles.flames.data.base.FlamesDatabase
-com/severalcircles/flames/command/Command.java
- com.severalcircles.flames.command.Command
-com/severalcircles/flames/system/OperationMode.java
- com.severalcircles.flames.system.OperationMode
-com/severalcircles/flames/events/GuildAddEvent.java
- com.severalcircles.flames.events.GuildAddEvent
+com/severalcircles/flames/data/base/FlushRunnable.java
+ com.severalcircles.flames.data.base.FlushRunnable
+com/severalcircles/flames/buttonaction/data/FunFactsButtonAction.java
+ com.severalcircles.flames.buttonaction.data.FunFactsButtonAction
+ com.severalcircles.flames.buttonaction.data.FunFactsButtonAction$1
+com/severalcircles/flames/command/data/GlobalDataCommand.java
+ com.severalcircles.flames.command.data.GlobalDataCommand
+com/severalcircles/flames/command/FlamesCommand.java
+ com.severalcircles.flames.command.FlamesCommand
+com/severalcircles/flames/data/base/FlamesData.java
+ com.severalcircles.flames.data.base.FlamesData
+com/severalcircles/flames/data/user/UserFunFacts.java
+ com.severalcircles.flames.data.user.UserFunFacts
+com/severalcircles/flames/events/discord/MessageEvent.java
+ com.severalcircles.flames.events.discord.MessageEvent
+com/severalcircles/flames/buttonaction/data/MyDataButtonAction.java
+ com.severalcircles.flames.buttonaction.data.MyDataButtonAction
+ com.severalcircles.flames.buttonaction.data.MyDataButtonAction$1
 com/severalcircles/flames/data/global/GlobalData.java
  com.severalcircles.flames.data.global.GlobalData
-com/severalcircles/flames/errors/FlamesException.java
- com.severalcircles.flames.errors.FlamesException
-com/severalcircles/flames/events/MessageEvent.java
- com.severalcircles.flames.events.MessageEvent
 com/severalcircles/flames/features/Analysis.java
  com.severalcircles.flames.features.Analysis
-com/severalcircles/flames/data/guild/FlamesGuild.java
- com.severalcircles.flames.data.guild.FlamesGuild
-com/severalcircles/flames/ux/embeds/errors/ErrorLevel.java
- com.severalcircles.flames.ux.embeds.errors.ErrorLevel
-com/severalcircles/flames/features/WelcomeBack.java
- com.severalcircles.flames.features.WelcomeBack
-com/severalcircles/flames/system/Flames.java
- com.severalcircles.flames.system.Flames
+com/severalcircles/flames/system/WhatTheFuckException.java
+ com.severalcircles.flames.system.WhatTheFuckException
+com/severalcircles/flames/buttonaction/data/deleteuserdata/ReallyDeleteButtonAction.java
+ com.severalcircles.flames.buttonaction.data.deleteuserdata.ReallyDeleteButtonAction
+com/severalcircles/flames/events/discord/CommandEvent.java
+ com.severalcircles.flames.events.discord.CommandEvent
+com/severalcircles/flames/events/discord/FlamesDiscordEvent.java
+ com.severalcircles.flames.events.discord.FlamesDiscordEvent
+com/severalcircles/flames/events/discord/MemberAddEvent.java
+ com.severalcircles.flames.events.discord.MemberAddEvent
+com/severalcircles/flames/buttonaction/data/deleteuserdata/NoDontButtonAction.java
+ com.severalcircles.flames.buttonaction.data.deleteuserdata.NoDontButtonAction
+com/severalcircles/flames/buttonaction/data/ManageUserDataButtonAction.java
+ com.severalcircles.flames.buttonaction.data.ManageUserDataButtonAction
+com/severalcircles/flames/command/DebugCommand.java
+ com.severalcircles.flames.command.DebugCommand
+com/severalcircles/flames/command/data/MyDataCommand.java
+ com.severalcircles.flames.command.data.MyDataCommand
+ com.severalcircles.flames.command.data.MyDataCommand$1
+com/severalcircles/flames/events/flames/FlamesEvent.java
+ com.severalcircles.flames.events.flames.FlamesEvent
 com/severalcircles/flames/command/TestCommand.java
  com.severalcircles.flames.command.TestCommand
+com/severalcircles/flames/events/discord/ButtonEvent.java
+ com.severalcircles.flames.events.discord.ButtonEvent
+com/severalcircles/flames/buttonaction/data/deleteuserdata/FixUserDataButtonAction.java
+ com.severalcircles.flames.buttonaction.data.deleteuserdata.FixUserDataButtonAction
+com/severalcircles/flames/command/data/HiCommand.java
+ com.severalcircles.flames.command.data.HiCommand
