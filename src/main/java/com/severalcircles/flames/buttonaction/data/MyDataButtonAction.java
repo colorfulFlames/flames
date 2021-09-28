@@ -80,7 +80,7 @@ public class MyDataButtonAction implements ButtonAction {
                 .addField(resources.getString("emotion"), emotionString, true)
                 .setThumbnail(FlamesAssets.getRankIcon(Ranking.getRank(sender.getScore())))
                 .setFooter(resources.getString("footer"), Flames.api.getSelfUser().getAvatarUrl()).build();
-        event.replyEmbeds(embed).addActionRow(net.dv8tion.jda.api.interactions.components.Button.success("mydata", "My Data"), net.dv8tion.jda.api.interactions.components.Button.primary("stats", "Stats"), net.dv8tion.jda.api.interactions.components.Button.primary("funFacts", "Fun Facts"), Button.danger("manageData", "Manage User Data")).queue();
+        event.editMessageEmbeds(embed).setActionRow(net.dv8tion.jda.api.interactions.components.Button.success("mydata", "My Data"), net.dv8tion.jda.api.interactions.components.Button.primary("stats", "Stats"), net.dv8tion.jda.api.interactions.components.Button.primary("funFacts", "Fun Facts"), Button.danger("manageData", "Manage User Data")).queue();
 
     }
 }
