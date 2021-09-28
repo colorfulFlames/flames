@@ -13,8 +13,6 @@ description: 'View User Data, Global Data, and more'
 | Added in | Flames 1.0 |
 | Reference | `com.severalcircles.flames.command.data.MyDataCommand` |
 
-
-
 ## `/hi`
 
 {% hint style="info" %}
