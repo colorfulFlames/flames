@@ -70,28 +70,34 @@ public class UserStats {
         return CAR;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public boolean addExp(int amountToAdd) {
         this.exp += amountToAdd;
         return checkLevelUp();
     }
+    //TODO: Implement a Level Up DM
     public boolean checkLevelUp() {
-        if (this.exp / (GlobalData.averageScore * level) >= 1) {
-            level++;
-            double random = Math.random();
-            if (random <= powerGrowth) POW++;
-            random = Math.random();
-            if (random <= resistanceGrowth) RES++;
-            random = Math.random();
-            if (random <= luckGrowth) LUCK++;
-            random = Math.random();
-            if (random <= risingGrowth) RISE++;
-            random = Math.random();
-            if (random <= priorityGrowth) PTY++;
-            random = Math.random();
-            if (random <= seniorityGrowth) SEN++;
-            random = Math.random();
-            if (random <= charismaGrowth) CAR++;
-            return true;
-        } else return false;
+        try {
+            if ((this.exp + 1) / (GlobalData.averageScore * (level + 1)) >= 1) {
+                level++;
+                double random = Math.random();
+                if (random <= powerGrowth) POW++;
+                random = Math.random();
+                if (random <= resistanceGrowth) RES++;
+                random = Math.random();
+                if (random <= luckGrowth) LUCK++;
+                random = Math.random();
+                if (random <= risingGrowth) RISE++;
+                random = Math.random();
+                if (random <= priorityGrowth) PTY++;
+                random = Math.random();
+                if (random <= seniorityGrowth) SEN++;
+                random = Math.random();
+                if (random <= charismaGrowth) CAR++;
+                return true;
+            } else return false;
+        } catch (ArithmeticException e) {
+            return false;
+        }
     }
 }
