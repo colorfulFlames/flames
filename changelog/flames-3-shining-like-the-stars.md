@@ -64,3 +64,39 @@ Isn't the whole point of Flames to learn totally pointless facts about yourself?
 
 The new `/debug` and `/help` commands are great ways to get help regarding Flames. If you ever run into trouble, give them a shot!
 
+### Flames 3.3.1
+
+A new update will be made available shortly to Flames. See the table below for information.
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Type</th>
+      <th style="text-align:left">Changes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">Hotfix</td>
+      <td style="text-align:left">
+        <ul>
+          <li>The button actions under the <a href="../commands/help-and-general.md#help"><code>/help</code></a>command
+            now take you to the correct links</li>
+          <li>The &apos;Manage User Data&apos; and &apos;Stats&apos; embeds now show
+            your avatar next to the author field, consistent with the rest of Flames</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Documentation</td>
+      <td style="text-align:left">
+        <ul>
+          <li>Documentation has been brought up to date to this version of Flames</li>
+          <li>Future changelogs will now use this table format with more specific change
+            descriptions to enable easier navigation of the documentation.</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
