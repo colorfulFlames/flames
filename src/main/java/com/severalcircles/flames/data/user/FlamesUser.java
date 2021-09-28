@@ -1,28 +1,21 @@
 package com.severalcircles.flames.data.user;
 
+import com.severalcircles.flames.data.base.FlamesDatabase;
+import discord4j.common.util.Snowflake;
+
+import java.sql.SQLException;
+import java.util.Date;
+
 public class FlamesUser {
     private int score;
     private String firstSeen;
     private float emotion;
-    private int lastSeen;
+    private Date lastSeen;
     private int streak;
     private String discordId;
     private String locale;
     private UserStats stats;
-    private int consent;
-    private int guilds;
-    private UserFunFacts funFacts;
-
-    public UserFunFacts getFunFacts() {
-        return funFacts;
-    }
-
-    public void setFunFacts(UserFunFacts funFacts) {
-        this.funFacts = funFacts;
-    }
-
-    public boolean lowEmotionWarned = false;
-public FlamesUser(int score, String firstSeen, float emotion, int lastSeen, int streak, String discordId, String locale, UserStats stats, int consent, int guilds, UserFunFacts funFacts) {
+public FlamesUser(int score, String firstSeen, int emotion, Date lastSeen, int streak, String discordId, String locale, UserStats stats) {
         this.score = score;
         this.firstSeen = firstSeen;
         this.emotion = emotion;
@@ -33,10 +26,7 @@ public FlamesUser(int score, String firstSeen, float emotion, int lastSeen, int 
         this.locale = locale;
         this.stats = stats;
 //        this.exp = exp;
-        this.consent = consent;
-    this.guilds = guilds;
-    this.funFacts = funFacts;
-}
+    }
     public String getLocale() {
         return locale;
     }
@@ -46,25 +36,8 @@ public FlamesUser(int score, String firstSeen, float emotion, int lastSeen, int 
     public void setLocale(String locale) {
         this.locale = locale;
     }
-
-    public int getConsent() {
-        return consent;
-    }
-
-    public void setConsent(int consent) {
-        this.consent = consent;
-    }
-
     public FlamesUser() {
-        this.score = 0;
-        this.firstSeen = "ya mom"; //TODO
-        this.emotion = 0;
-//        this.multiplier = multiplier;
-        this.lastSeen = -1;
-        this.streak = 0;
-        this.locale = "en";
-        this.stats = new UserStats();
-        this.consent = 0;
+        //TODO: Remove this stub
     }
     public void addScore(int amount) {
         score += amount;
@@ -93,11 +66,11 @@ public FlamesUser(int score, String firstSeen, float emotion, int lastSeen, int 
         this.emotion = emotion;
     }
 
-    public int getLastSeen() {
+    public Date getLastSeen() {
         return lastSeen;
     }
 
-    public void setLastSeen(int lastSeen) {
+    public void setLastSeen(Date lastSeen) {
         this.lastSeen = lastSeen;
     }
 
@@ -117,11 +90,19 @@ public FlamesUser(int score, String firstSeen, float emotion, int lastSeen, int 
         this.discordId = discordId;
     }
 
-    public int getGuilds() {
-        return guilds;
+    public static FlamesUser get(Snowflake discordId) throws SQLException {
+        FlamesDatabase fd = new FlamesDatabase();
+        FlamesUser user = fd.readUser(discordId);
+        fd.close();
+        return user;
     }
-
-    public void setGuilds(int guilds) {
-        this.guilds = guilds;
+    public static void saveData(FlamesUser user) throws SQLException {
+        FlamesDatabase fd = new FlamesDatabase();
+        fd.write(user);
+    }
+    public void saveData() throws SQLException {
+        FlamesDatabase fd = new FlamesDatabase();
+        fd.write(this);
+        fd.close();
     }
 }

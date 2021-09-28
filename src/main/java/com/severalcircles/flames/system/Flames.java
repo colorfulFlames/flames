@@ -1,81 +1,72 @@
 package com.severalcircles.flames.system;
 
-import com.bugsnag.Bugsnag;
-import com.severalcircles.flames.command.DebugCommand;
-import com.severalcircles.flames.command.FlamesCommand;
-import com.severalcircles.flames.command.HelpCommand;
+import com.severalcircles.flames.command.Command;
 import com.severalcircles.flames.command.TestCommand;
-import com.severalcircles.flames.command.connections.ArtistCommand;
-import com.severalcircles.flames.command.data.GlobalDataCommand;
-import com.severalcircles.flames.command.data.HiCommand;
-import com.severalcircles.flames.command.data.MyDataCommand;
-import com.severalcircles.flames.data.base.FlamesData;
-import com.severalcircles.flames.data.base.FlushRunnable;
-import com.severalcircles.flames.events.discord.CommandEvent;
-import com.severalcircles.flames.events.discord.MemberAddEvent;
-import com.severalcircles.flames.events.discord.MessageEvent;
-import com.severalcircles.flames.events.discord.ButtonEvent;
-import com.severalcircles.flames.features.external.ExternalConnectionFailedException;
-import com.severalcircles.flames.features.external.spotify.ReconnectRunnable;
-import com.severalcircles.flames.features.external.spotify.SpotifyConnection;
-import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.JDABuilder;
+import com.severalcircles.flames.data.base.FlamesDatabase;
+import com.severalcircles.flames.events.GuildAddEvent;
+import com.severalcircles.flames.events.MessageEvent;
+//import com.severalcircles.flames.features.events.EventStartEventListener;
+import discord4j.core.DiscordClient;
+import discord4j.core.GatewayDiscordClient;
+import discord4j.core.event.domain.guild.GuildCreateEvent;
+import discord4j.core.event.domain.message.MessageCreateEvent;
+import discord4j.core.object.entity.Guild;
+import discord4j.core.object.entity.Message;
 
-import javax.security.auth.login.LoginException;
-import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
-/*
-Here we go again
-Same old stuff again
-Relighting the Flame
-Maybe with this we'll be through.
-*/
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Flames {
-    public static Map<String, FlamesCommand> commandMap = new HashMap<>();
-    public static JDA api;
-    public static SpotifyConnection spotifyConnection;
-    static {
+    public static final ResourceBundle commonResources = ResourceBundle.getBundle("Common");
+    public static DiscordClient client = null;
+    public static OperationMode operationMode = OperationMode.NORMAL;
+    public static final Map<String, Command> commands = new HashMap<>();
+    private static final Logger logger = Logger.getGlobal();
+//    public static GuildChannelChannel announcementsChannel;
+    public static GatewayDiscordClient gatewayDiscordClient;
+    public static void main(final String[] args) {
+        //Register commands (there has to be a better way to do this, right?)
+        logger.log(Level.FINE, "Enabling commands...");
+        commands.put("test", new TestCommand());
+        // ---------------------------------------------------------------------------------------------------
+
+        final String token = "ODQ5MzIwMjU5MTUyMTE3ODgy.YLZdIQ.keIWGep6_IjSQvbD4NMXQXwKYl4";
+        client = DiscordClient.create(token);
+        final GatewayDiscordClient gateway = client.login().block();
+        gatewayDiscordClient = gateway;
+        logger.log(Level.FINE, "Attempting to connect to Flames' Database...");
         try {
-            spotifyConnection = new SpotifyConnection();
-        } catch (IOException | ExternalConnectionFailedException e) {
-            e.printStackTrace();
+            FlamesDatabase fd = new FlamesDatabase();
+            fd.close();
+        } catch (SQLException throwables) {
+            logger.log(Level.SEVERE, "Failed to connect to Flames' Database. Please see logging info below.");
+            throwables.printStackTrace();
+            logger.log(Level.SEVERE, "Flames wasn't able to connect to it's database. Flames will continue in No Database mode. You'll still be able to test out Flames, but no information will be stored.");
+            operationMode = OperationMode.NO_DATABASE;
         }
-    }
-    public static void main(String args[]) {
-        // --- Initial Preparations ---
-        Bugsnag bugsnag = new Bugsnag("4db7c7d93598a437149f27b877cc6a93");
-        FlamesData.prepare();
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(new FlushRunnable(), 5, 5, TimeUnit.MINUTES);
-        scheduler.scheduleAtFixedRate(new ReconnectRunnable(), 1, 1, TimeUnit.HOURS);
-        // --- Connecting to the API and Logging in to Discord ---
-        try {
-            api = JDABuilder.createDefault(System.getenv("FlamesToken")).build();
-            api.awaitReady();
-        } catch (LoginException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        // --- Commands ---
-        commandMap.put("based", new TestCommand());
-        commandMap.put("mydata", new MyDataCommand());
-        commandMap.put("globaldata", new GlobalDataCommand());
-        commandMap.put("artist", new ArtistCommand());
-        commandMap.put("hi", new HiCommand());
-        commandMap.put("help", new HelpCommand());
-        commandMap.put("debug", new DebugCommand());
-        api.updateCommands();
-        // --- Events ---
-        new CommandEvent().register(api);
-        new MessageEvent().register(api);
-        new ButtonEvent().register(api);
-        new MemberAddEvent().register(api);
+        gateway.on(MessageCreateEvent.class).subscribe(event -> {
+            final Message message = event.getMessage();
+            try {
+                new MessageEvent(event).run();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+                logger.log(Level.SEVERE, "Error when processing message.");
+            }
+        });
+        gateway.on(GuildCreateEvent.class).subscribe(event -> {
+            final Guild g = event.getGuild();
+            try {
+                new GuildAddEvent(g).run();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+                g.getOwner().block().getPrivateChannel().block().createMessage("Hi! Looks like someone tried to add Flames to your server. Flames' Database is currently experiencing issues, so Flames can't join any servers right now. Flames has left your server for now, but we hope you'll add him again later when the database is working properly!");
+                g.leave();
+            }
+        });
+        gateway.onDisconnect().block();
     }
 }
