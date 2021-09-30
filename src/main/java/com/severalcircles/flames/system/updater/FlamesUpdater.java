@@ -17,6 +17,7 @@ public class FlamesUpdater {
     private Map<DataChange, Boolean> compatibilityMap = new HashMap<>();
     private Properties userData;
     public FlamesUpdater(Properties userData) {
+        Logger.getGlobal().log(Level.INFO, "Updating data for " + userData.get("discordId"));
         compatibilityMap.put(DataChange.THREE_ZERO, false);
         compatibilityMap.put(DataChange.THREE_ONE, false);
         compatibilityMap.put(DataChange.THREE_TWO, false);
@@ -25,10 +26,10 @@ public class FlamesUpdater {
         determineCompatibility();
     }
     private void determineCompatibility() {
-        if (!userData.get("score").equals(null)) {
+        try { if (!userData.get("score").equals(null)) {
             compatibilityMap.put(DataChange.THREE_ZERO, true);
             compatibilityMap.put(DataChange.THREE_ONE, true);
-        }
+        } } catch (NullPointerException e) {}
         try {if (!userData.get("guilds").equals(null)) compatibilityMap.put(DataChange.THREE_TWO, true);}
         catch (NullPointerException e){};
         try{if (!userData.get("funFacts.happyDay").equals(null)) compatibilityMap.put(DataChange.THREE_THREE, true);}
