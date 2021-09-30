@@ -16,7 +16,7 @@ public class ManageUserDataButtonAction implements ButtonAction {
     @Override
     public void execute(ButtonClickEvent event, FlamesUser user) throws IOException {
         MessageEmbed embed = new EmbedBuilder()
-                .setAuthor("User Data Management", event.getUser().getAvatarUrl())
+                .setAuthor("User Data Management",null, event.getUser().getAvatarUrl())
                 .setTitle(event.getUser().getName() + ", what can I help you with?")
                 .addField("Select an option below to continue.", "You may be prompted to continue in a DM.", true)
                 .setTimestamp(Instant.now())

@@ -57,38 +57,27 @@ public class FlamesData {
         if (userCache.containsKey(discordId)) return userCache.get(discordId);
         Properties data = new Properties();
         File file = new File(flamesDirectory + "/user/" + discordId + ".properties");
-
-        try {
-            //noinspection deprecation
-            inputStream = file.toURL().openStream();
-        } catch (FileNotFoundException e) {
-            //noinspection ResultOfMethodCallIgnored
-            file.createNewFile();
-            //noinspection deprecation
-            inputStream = file.toURL().openStream();
-            e.printStackTrace();
-        }
+        inputStream = file.toURL().openStream();
 
         data.load(inputStream);
         if (fixme) {
             new FlamesUpdater(data).update();
         }
+        user = new FlamesUser();
+        user.setDiscordId(discordId);
         try {
             //noinspection deprecation
             user = new FlamesUser(Integer.parseInt(data.get("score") + ""), "" + data.get("firstSeen"), Float.parseFloat(data.get("emotion") + ""), Integer.parseInt("" + data.get("lastSeen")), Integer.parseInt("" + data.get("streak")), "" + data.get("discordId"), "" + data.get("locale"), new UserStats(Integer.parseInt(data.get("exp") + ""), Integer.parseInt(data.get("level") + ""), Integer.parseInt(data.get("POW") + ""), Integer.parseInt(data.get("RES") + ""), Integer.parseInt(data.get("LUCK") + ""), Integer.parseInt(data.get("RISE") + ""), Integer.parseInt(data.get("PTY") + ""), Integer.parseInt(data.get("SEN") + ""), Integer.parseInt(data.get("CAR") + "")), Integer.parseInt(data.get("consent") + ""), Integer.parseInt(data.get("guilds") + ""), new UserFunFacts(Instant.parse(data.get("funFacts.sadDay") + ""), Float.parseFloat(data.get("funFacts.lowestEmotion") + ""), Instant.parse(data.get("funFacts.happyDay") + ""), Float.parseFloat(data.get("funFacts.highestEmotion") + ""), Integer.parseInt(data.get("funFacts.highestFlamesScore") + ""), Integer.parseInt(data.get("funFacts.lowestFlamesScore") + ""), Rank.valueOf(data.get("funFacts.bestRank") + ""), Integer.parseInt(data.get("funFacts.frenchToastMentioned") + "")));
-        } catch (Exception e) {
+        } catch (NullPointerException | NumberFormatException e) {
             try {
                 data = new FlamesUpdater(data).update();
             } catch (WhatTheFuckException whatTheFuckException) {
-                user = new FlamesUser();
-                user.setDiscordId(discordId);
+//                user = new FlamesUser();
+//                user.setDiscordId(discordId);
                 userCache.put(user.getDiscordId(), user);
                 e.printStackTrace();
                 flushCaches();
                 return user;
-            } finally {
-                System.out.println(data.toString());
-                user = new FlamesUser(Integer.parseInt(data.get("score") + ""), "" + data.get("firstSeen"), Float.parseFloat(data.get("emotion") + ""), Integer.parseInt("" + data.get("lastSeen")), Integer.parseInt("" + data.get("streak")), "" + data.get("discordId"), "" + data.get("locale"), new UserStats(Integer.parseInt(data.get("exp") + ""), Integer.parseInt(data.get("level") + ""), Integer.parseInt(data.get("POW") + ""), Integer.parseInt(data.get("RES") + ""), Integer.parseInt(data.get("LUCK") + ""), Integer.parseInt(data.get("RISE") + ""), Integer.parseInt(data.get("PTY") + ""), Integer.parseInt(data.get("SEN") + ""), Integer.parseInt(data.get("CAR") + "")), Integer.parseInt(data.get("consent") + ""), Integer.parseInt(data.get("guilds") + ""), new UserFunFacts(Instant.parse(data.get("funFacts.sadDay") + ""), Float.parseFloat(data.get("funFacts.lowestEmotion") + ""), Instant.parse(data.get("funFacts.happyDay") + ""), Float.parseFloat(data.get("funFacts.highestEmotion") + ""), Integer.parseInt(data.get("funFacts.highestFlamesScore") + ""), Integer.parseInt(data.get("funFacts.lowestFlamesScore") + ""), Rank.valueOf(data.get("funFacts.bestRank") + ""), Integer.parseInt(data.get("funFacts.frenchToastMentioned") + "")));
             }
         }
         if (!file.exists()) {
@@ -137,26 +126,44 @@ public class FlamesData {
     public static void flushCaches() throws IOException {
         Logger.getGlobal().log(Level.INFO, "Saving data");
         for (Map.Entry<String, FlamesUser> entry : userCache.entrySet()) {
-            FlamesUser user = entry.getValue();
-            Properties data = new Properties();
-            data.put("score", user.getScore() + "");
-            data.put("firstSeen", user.getFirstSeen() + "");
-            data.put("emotion", user.getEmotion() + "");
-            data.put("lastSeen", user.getLastSeen() + "");
-            data.put("streak", user.getStreak() + "");
-            data.put("discordId", user.getDiscordId() + "");
-            data.put("locale", user.getLocale() + "");
-            UserStats stats = user.getStats();
-            data.put("consent", user.getConsent() + "");
-            data.put("level", stats.getLevel() + "");
-            data.put("exp", stats.getExp() + "");
-            data.put("POW", stats.getPOW() + "");
-            data.put("RES", stats.getRES() + "");
-            data.put("LUCK", stats.getLUCK() + "");
-            data.put("RISE", stats.getRISE() + "");
-            data.put("PTY", stats.getPTY() + "");
-            data.put("SEN", stats.getSEN() + "");
-            data.put("CAR", stats.getCAR() + "");
+                FlamesUser user = entry.getValue();
+                Properties data = new Properties();
+                data.put("score", user.getScore() + "");
+                data.put("firstSeen", user.getFirstSeen() + "");
+                data.put("emotion", user.getEmotion() + "");
+                data.put("lastSeen", user.getLastSeen() + "");
+                data.put("streak", user.getStreak() + "");
+                data.put("discordId", user.getDiscordId() + "");
+                data.put("locale", user.getLocale() + "");
+                UserStats stats = user.getStats();
+                data.put("consent", user.getConsent() + "");
+                data.put("level", stats.getLevel() + "");
+                data.put("exp", stats.getExp() + "");
+                data.put("POW", stats.getPOW() + "");
+                data.put("RES", stats.getRES() + "");
+                data.put("LUCK", stats.getLUCK() + "");
+                data.put("RISE", stats.getRISE() + "");
+                data.put("PTY", stats.getPTY() + "");
+                data.put("SEN", stats.getSEN() + "");
+                data.put("CAR", stats.getCAR() + "");
+                UserFunFacts funFacts = user.getFunFacts();
+                try {
+                    data.put("funFacts.sadDay", funFacts.getSadDay().toString());
+                    data.put("funFacts.lowestEmotion", funFacts.getLowestEmotion());
+                    data.put("funFacts.happyDay", funFacts.getHappyDay().toString());
+                    data.put("funFacts.highestEmotion", funFacts.getHighestEmotion());
+                    data.put("funFacts.highestFlamesScore", funFacts.getHighestFlamesScore());
+                    data.put("funFacts.bestRank", funFacts.getBestRank().toString());
+                    data.put("funFacts.frenchToastMentioned", funFacts.getFrenchToastMentioned() + "");
+                } catch (NullPointerException e) {
+                    data.put("funFacts.sadDay", Instant.now().toString());
+                    data.put("funFacts.lowestEmotion", user.getEmotion() + "");
+                    data.put("funFacts.happyDay", Instant.now().toString());
+                    data.put("funFacts.highestEmotion", user.getEmotion() + "");
+                    data.put("funFacts.highestFlamesScore", user.getScore() + "");
+                    data.put("funFacts.bestRank", Ranking.getRank(user.getScore()).toString());
+                    data.put("funFacts.frenchToastMentioned", 0 + "");
+                }
             File file = new File(flamesDirectory + "/user/" + entry.getKey() + ".properties");
             if (file.createNewFile()) Logger.getGlobal().log(Level.INFO, "Adding new user: " + user.getDiscordId());
             OutputStream outputStream = new FileOutputStream(flamesDirectory + "/user/" + entry.getKey() + ".properties");

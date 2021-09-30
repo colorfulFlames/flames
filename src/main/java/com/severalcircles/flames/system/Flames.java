@@ -18,6 +18,7 @@ import com.severalcircles.flames.events.discord.ButtonEvent;
 import com.severalcircles.flames.features.external.ExternalConnectionFailedException;
 import com.severalcircles.flames.features.external.spotify.ReconnectRunnable;
 import com.severalcircles.flames.features.external.spotify.SpotifyConnection;
+import jdk.internal.jline.internal.Log;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 
@@ -28,6 +29,8 @@ import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
 Here we go again
@@ -59,7 +62,8 @@ public class Flames {
             api = JDABuilder.createDefault(System.getenv("FlamesToken")).build();
             api.awaitReady();
         } catch (LoginException e) {
-            e.printStackTrace();
+            Logger.getGlobal().log(Level.SEVERE, "Yeah that's not funny");
+            System.exit(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
