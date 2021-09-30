@@ -1,6 +1,7 @@
 package com.severalcircles.flames.data.user;
 
 import com.severalcircles.flames.features.rank.Rank;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;
 
@@ -16,7 +17,7 @@ public class UserFunFacts {
 
     private int frenchToastMentioned;
 
-    public UserFunFacts(Instant sadDay, float lowestEmotion, Instant happyDay, float highestEmotion, int highestFlamesScore, int lowestFlamesScore, Rank bestRank, int frenchToastMentioned) {
+    public UserFunFacts(@NotNull Instant sadDay, @NotNull float lowestEmotion, Instant happyDay, @NotNull float highestEmotion, @NotNull int highestFlamesScore, @NotNull int lowestFlamesScore, @NotNull Rank bestRank, @NotNull int frenchToastMentioned) {
         this.sadDay = sadDay;
         this.lowestEmotion = lowestEmotion;
         this.happyDay = happyDay;

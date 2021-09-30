@@ -7,9 +7,7 @@ import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.UserFunFacts;
 import com.severalcircles.flames.data.user.UserStats;
 import com.severalcircles.flames.features.Analysis;
-import com.severalcircles.flames.features.rank.Ranking;
 import com.severalcircles.flames.features.safety.Consent;
-import com.severalcircles.flames.features.WelcomeBack;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -75,20 +73,27 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         }
 //        new WelcomeBack().welcomeUserBack(user, message.getAuthor());
         UserFunFacts funFacts = user.getFunFacts();
-        if (user.getEmotion() > funFacts.getHighestEmotion()) {
-            funFacts.setHighestEmotion(user.getEmotion());
-            funFacts.setHappyDay(Instant.now());
+        try {
+            if (user.getEmotion() > funFacts.getHighestEmotion()) {
+                funFacts.setHighestEmotion(user.getEmotion());
+                funFacts.setHappyDay(Instant.now());
+            }
+            if (user.getEmotion() < funFacts.getLowestEmotion()) {
+                funFacts.setLowestEmotion(user.getEmotion());
+                funFacts.setSadDay(Instant.now());
+            }
+            if (user.getScore() > funFacts.getHighestFlamesScore()) funFacts.setHighestFlamesScore(user.getScore());
+            if (user.getScore() < funFacts.getLowestFlamesScore()) funFacts.setLowestFlamesScore(user.getScore());
+            if (Analysis.analyzeEntities(content))
+                funFacts.setFrenchToastMentioned(funFacts.getFrenchToastMentioned() + 1);
+            user.setFunFacts(funFacts);
+            GlobalData.write();
+            FlamesData.write(user);
+        } catch (NullPointerException e) {
+            user = FlamesData.readUser(user.getDiscordId(), true);
+            GlobalData.write();
+            FlamesData.write(user);
         }
-        if (user.getEmotion() < funFacts.getLowestEmotion()) {
-            funFacts.setLowestEmotion(user.getEmotion());
-            funFacts.setSadDay(Instant.now());
-        }
-        if (user.getScore() > funFacts.getHighestFlamesScore()) funFacts.setHighestFlamesScore(user.getScore());
-        if (user.getScore() < funFacts.getLowestFlamesScore()) funFacts.setLowestFlamesScore(user.getScore());
-        if (Analysis.analyzeEntities(content)) funFacts.setFrenchToastMentioned(funFacts.getFrenchToastMentioned() + 1);
-        user.setFunFacts(funFacts);
-        GlobalData.write();
-        FlamesData.write(user);
     }
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
