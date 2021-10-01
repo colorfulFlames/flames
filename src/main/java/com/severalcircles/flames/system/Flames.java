@@ -1,3 +1,8 @@
+
+/**
+ * Main class for Flames. Sets up everything you could ever hope for.
+ */
+
 package com.severalcircles.flames.system;
 
 import com.bugsnag.Bugsnag;
@@ -11,10 +16,10 @@ import com.severalcircles.flames.command.data.HiCommand;
 import com.severalcircles.flames.command.data.MyDataCommand;
 import com.severalcircles.flames.data.base.FlamesData;
 import com.severalcircles.flames.data.base.FlushRunnable;
+import com.severalcircles.flames.events.discord.ButtonEvent;
 import com.severalcircles.flames.events.discord.CommandEvent;
 import com.severalcircles.flames.events.discord.MemberAddEvent;
 import com.severalcircles.flames.events.discord.MessageEvent;
-import com.severalcircles.flames.events.discord.ButtonEvent;
 import com.severalcircles.flames.features.external.ExternalConnectionFailedException;
 import com.severalcircles.flames.features.external.spotify.ReconnectRunnable;
 import com.severalcircles.flames.features.external.spotify.SpotifyConnection;
@@ -28,6 +33,8 @@ import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
 Here we go again
@@ -47,7 +54,7 @@ public class Flames {
             e.printStackTrace();
         }
     }
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         // --- Initial Preparations ---
         Bugsnag bugsnag = new Bugsnag("4db7c7d93598a437149f27b877cc6a93");
         FlamesData.prepare();
@@ -59,7 +66,8 @@ public class Flames {
             api = JDABuilder.createDefault(System.getenv("FlamesToken")).build();
             api.awaitReady();
         } catch (LoginException e) {
-            e.printStackTrace();
+            Logger.getGlobal().log(Level.SEVERE, "Yeah that's not funny");
+            System.exit(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

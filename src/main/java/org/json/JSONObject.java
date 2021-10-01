@@ -2111,7 +2111,7 @@ public class JSONObject {
                 } else if (valueThis instanceof Number && valueOther instanceof Number) {
                     if (!isNumberSimilar((Number)valueThis, (Number)valueOther)) {
                     	return false;
-                    };
+                    }
                 } else if (!valueThis.equals(valueOther)) {
                     return false;
                 }
@@ -2165,10 +2165,7 @@ public class JSONObject {
     private static boolean numberIsFinite(Number n) {
         if (n instanceof Double && (((Double) n).isInfinite() || ((Double) n).isNaN())) {
             return false;
-        } else if (n instanceof Float && (((Float) n).isInfinite() || ((Float) n).isNaN())) {
-            return false;
-        }
-        return true;
+        } else return !(n instanceof Float) || (!((Float) n).isInfinite() && !((Float) n).isNaN());
     }
 
     /**

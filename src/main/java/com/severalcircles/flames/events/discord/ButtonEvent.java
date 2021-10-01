@@ -51,6 +51,8 @@ public class ButtonEvent extends ListenerAdapter implements FlamesDiscordEvent {
                     buttonActionMap.get(event.getComponentId()).execute(event, FlamesData.readUser(event.getUser().getId(), false));
                 } catch (IOException | WhatTheFuckException e) {
                     e.printStackTrace();
+                } catch (IllegalStateException e) {
+
                 }
             }
         }
