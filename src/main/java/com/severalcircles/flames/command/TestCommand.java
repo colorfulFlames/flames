@@ -10,6 +10,6 @@ import java.util.ResourceBundle;
 public class TestCommand implements FlamesCommand{
     @Override
     public void execute(SlashCommandEvent event, FlamesUser sender) {
-        event.reply("You're so based.");
+        event.reply("You're so based.").complete();
     }
 }
