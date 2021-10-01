@@ -22,7 +22,7 @@
                     # Write make command to generate html e.g.- "make html"
                     MAKE_COMMAND: "make html"
                     # Write the branch name for storing github pages source 
-                    PAGES_BRANCH: "pages"
+                    PAGES_BRANCH: "master"
                     # Write the branch name having source files for site/documentation
                     BUILD_FROM: "master"
                     # Write the name of the output folder where generated html is stored by makefile.
