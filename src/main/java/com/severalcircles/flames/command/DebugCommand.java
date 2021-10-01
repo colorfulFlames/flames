@@ -5,7 +5,6 @@ import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.events.discord.ButtonEvent;
 import com.severalcircles.flames.features.FlamesPrettyDate;
 import com.severalcircles.flames.system.Flames;
-import jdk.vm.ci.meta.Local;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;

@@ -14,8 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class FlamesUpdater {
-    private Map<DataChange, Boolean> compatibilityMap = new HashMap<>();
-    private Properties userData;
+    private final Map<DataChange, Boolean> compatibilityMap = new HashMap<>();
+    private final Properties userData;
     public FlamesUpdater(Properties userData) {
         Logger.getGlobal().log(Level.INFO, "Updating data for " + userData.get("discordId"));
         compatibilityMap.put(DataChange.THREE_ZERO, false);
@@ -31,9 +31,9 @@ public class FlamesUpdater {
             compatibilityMap.put(DataChange.THREE_ONE, true);
         } } catch (NullPointerException e) {}
         try {if (!userData.get("guilds").equals(null)) compatibilityMap.put(DataChange.THREE_TWO, true);}
-        catch (NullPointerException e){};
+        catch (NullPointerException e){}
         try{if (!userData.get("funFacts.happyDay").equals(null)) compatibilityMap.put(DataChange.THREE_THREE, true);}
-        catch (NullPointerException e){};
+        catch (NullPointerException e){}
     }
     public Properties update() throws WhatTheFuckException {
         if (!compatibilityMap.get(DataChange.THREE_ZERO) == true) throw new WhatTheFuckException();

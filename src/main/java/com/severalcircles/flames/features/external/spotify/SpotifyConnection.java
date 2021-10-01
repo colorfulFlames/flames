@@ -80,7 +80,7 @@ public class SpotifyConnection {
         in.close();
         int status = con.getResponseCode();
         con.disconnect();
-        System.out.println(content.toString());
+        System.out.println(content);
         JSONArray response = new JSONObject(content.toString()).getJSONObject("artists").getJSONArray("items");
         JSONObject artist = response.getJSONObject(0);
         System.out.println(artist);

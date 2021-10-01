@@ -56,6 +56,6 @@ public class HiCommand implements FlamesCommand {
             FlamesData.write(flamesUser);
         } else {
             event.reply("You've already collected your bonus for today. See you tomorrow!").queue();
-        };
+        }
     }
 }
