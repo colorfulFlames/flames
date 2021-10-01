@@ -12,7 +12,7 @@
             steps:
                 # Use avinal/github-pages-deploy-action@<latest-release-tag> for latest stable release
                 # Do not change the line below except the word main with tag number maybe
-                - uses: avinal/github-pages-deploy-action@main
+                - uses: SeveralCircles/github-pages-deploy-action@main
                   with:
                     # GitHub access token with Repo Access
                     GITHUB_TOKEN: ${{ github.token }}
