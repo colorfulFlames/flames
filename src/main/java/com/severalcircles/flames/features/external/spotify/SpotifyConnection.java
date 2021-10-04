@@ -1,9 +1,9 @@
 package com.severalcircles.flames.features.external.spotify;
 
-import com.google.gson.Gson;
+//import com.google.gson.Gson;
 import com.severalcircles.flames.features.external.ExternalConnectionFailedException;
 import com.severalcircles.flames.features.external.ParameterStringBuilder;
-import org.checkerframework.checker.units.qual.A;
+//import org.checkerframework.checker.units.qual.A;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
