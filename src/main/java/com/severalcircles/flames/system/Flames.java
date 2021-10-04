@@ -6,6 +6,7 @@
 package com.severalcircles.flames.system;
 
 import com.bugsnag.Bugsnag;
+import com.severalcircles.flames.api.FlamesAPI;
 import com.severalcircles.flames.command.DebugCommand;
 import com.severalcircles.flames.command.FlamesCommand;
 import com.severalcircles.flames.command.HelpCommand;
@@ -61,12 +62,14 @@ public class Flames {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(new FlushRunnable(), 5, 5, TimeUnit.MINUTES);
         scheduler.scheduleAtFixedRate(new ReconnectRunnable(), 1, 1, TimeUnit.HOURS);
+        FlamesAPI.start();
         // --- Connecting to the API and Logging in to Discord ---
         try {
             api = JDABuilder.createDefault(System.getenv("FlamesToken")).build();
             api.awaitReady();
         } catch (LoginException e) {
             Logger.getGlobal().log(Level.SEVERE, "Yeah that's not funny");
+            e.printStackTrace();
             System.exit(1);
         } catch (InterruptedException e) {
             e.printStackTrace();

@@ -5,6 +5,9 @@
       <module name="Flames.Flames_API" target="11" />
       <module name="Flames.Flames_API.main" target="11" />
       <module name="Flames.Flames_API.test" target="11" />
+      <module name="flames.main" target="11" />
+      <module name="flames.main~1" target="11" />
+      <module name="flames.test~1" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

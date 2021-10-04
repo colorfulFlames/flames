@@ -44,7 +44,47 @@ public class FlamesData {
             e.printStackTrace();
         }
     }
-
+    public static String getUserData(String id) throws WhatTheFuckException, IOException {
+        FlamesUser user = readUser(id, false);
+        Properties data = new Properties();
+        data.put("score", user.getScore() + "");
+        data.put("firstSeen", user.getFirstSeen() + "");
+        data.put("emotion", user.getEmotion() + "");
+        data.put("lastSeen", user.getLastSeen() + "");
+        data.put("streak", user.getStreak() + "");
+        data.put("discordId", user.getDiscordId() + "");
+        data.put("locale", user.getLocale() + "");
+        UserStats stats = user.getStats();
+        data.put("level", stats.getLevel() + "");
+        data.put("exp", stats.getExp() + "");
+        data.put("POW", stats.getPOW() + "");
+        data.put("RES", stats.getRES() + "");
+        data.put("LUCK", stats.getLUCK() + "");
+        data.put("RISE", stats.getRISE() + "");
+        data.put("PTY", stats.getPTY() + "");
+        data.put("SEN", stats.getSEN() + "");
+        data.put("CAR", stats.getCAR() + "");
+        data.put("guilds", user.getGuilds());
+        UserFunFacts funFacts = user.getFunFacts();
+        try {
+            data.put("funFacts.sadDay", funFacts.getSadDay().toString());
+            data.put("funFacts.lowestEmotion", funFacts.getLowestEmotion());
+            data.put("funFacts.happyDay", funFacts.getHappyDay().toString());
+            data.put("funFacts.highestEmotion", funFacts.getHighestEmotion());
+            data.put("funFacts.highestFlamesScore", funFacts.getHighestFlamesScore());
+            data.put("funFacts.bestRank", funFacts.getBestRank().toString());
+            data.put("funFacts.frenchToastMentioned", funFacts.getFrenchToastMentioned());
+        } catch (NullPointerException e) {
+            data.put("funFacts.sadDay", Instant.now().toString());
+            data.put("funFacts.lowestEmotion", user.getEmotion() + "");
+            data.put("funFacts.happyDay", Instant.now().toString());
+            data.put("funFacts.highestEmotion", user.getEmotion() + "");
+            data.put("funFacts.highestFlamesScore", user.getScore() + "");
+            data.put("funFacts.bestRank", Ranking.getRank(user.getScore()).toString());
+            data.put("funFacts.frenchToastMentioned", 0 + "");
+        }
+        return data.toString();
+    }
     public static void write(FlamesUser user) {
         userCache.put(user.getDiscordId(), user);
     }
