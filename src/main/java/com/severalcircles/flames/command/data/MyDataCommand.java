@@ -37,7 +37,7 @@ public class MyDataCommand implements FlamesCommand {
             e.printStackTrace();
         }
         @SuppressWarnings("OptionalGetWithoutIsPresent") User user = event.getUser();
-        ResourceBundle resources = ResourceBundle.getBundle("commands/MyDataCommand", Locale.forLanguageTag(sender.getLocale()));
+        ResourceBundle resources = ResourceBundle.getBundle("commands/MyDataCommand", Locale.ENGLISH);
         String rank;
         switch(Ranking.getRank(sender.getScore())) {
             case APPROACHING_BRONZE:

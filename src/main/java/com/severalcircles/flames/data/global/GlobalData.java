@@ -1,6 +1,6 @@
 package com.severalcircles.flames.data.global;
 
-import com.severalcircles.flames.data.base.FlamesData;
+import com.severalcircles.flames.data.base.FlamesDataManager;
 
 import java.io.*;
 import java.util.Properties;
@@ -19,14 +19,14 @@ public class GlobalData {
 //        properties.put("averageScore", averageScore + "");
         properties.put("globalScore", globalScore + "");
         properties.put("participants", participants + "");
-        File file = new File(FlamesData.flamesDirectory + "/global.properties");
+        File file = new File(FlamesDataManager.flamesDirectory.getAbsolutePath() + "/global.properties");
         file.createNewFile();
         OutputStream outputStream = new FileOutputStream(file);
         properties.store(outputStream, "Flames Global Data File");
     }
     @SuppressWarnings("deprecation")
     public static void read() throws IOException {
-        File file = new File(FlamesData.flamesDirectory + "/global.properties");
+        File file = new File(FlamesDataManager.flamesDirectory.getAbsolutePath() + "/global.properties");
         @SuppressWarnings("deprecation") InputStream inputStream = file.toURL().openStream();
         Properties properties = new Properties();
         properties.load(inputStream);

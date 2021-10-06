@@ -3,6 +3,7 @@ package com.severalcircles.flames.system.updater;
 import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.features.rank.Ranking;
+import com.severalcircles.flames.system.Flames;
 import com.severalcircles.flames.system.WhatTheFuckException;
 
 import javax.xml.crypto.Data;
@@ -14,44 +15,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class FlamesUpdater {
-    private final Map<DataChange, Boolean> compatibilityMap = new HashMap<>();
-    private final Properties userData;
-    public FlamesUpdater(Properties userData) {
-        Logger.getGlobal().log(Level.INFO, "Updating data for " + userData.get("discordId"));
-        compatibilityMap.put(DataChange.THREE_ZERO, false);
-        compatibilityMap.put(DataChange.THREE_ONE, false);
-        compatibilityMap.put(DataChange.THREE_TWO, false);
-        compatibilityMap.put(DataChange.THREE_THREE, false);
-        this.userData = userData;
-        determineCompatibility();
+    private Properties data;
+    double version;
+    String id;
+    public FlamesUpdater(Properties data) {
+        this.data = data;
+        this.version = Double.parseDouble(data.get("version") + "");
+        id = data.get("discordId") + "";
     }
-    private void determineCompatibility() {
-        try { if (!userData.get("score").equals(null)) {
-            compatibilityMap.put(DataChange.THREE_ZERO, true);
-            compatibilityMap.put(DataChange.THREE_ONE, true);
-        } } catch (NullPointerException e) {}
-        try {if (!userData.get("guilds").equals(null)) compatibilityMap.put(DataChange.THREE_TWO, true);}
-        catch (NullPointerException e){}
-        try{if (!userData.get("funFacts.happyDay").equals(null)) compatibilityMap.put(DataChange.THREE_THREE, true);}
-        catch (NullPointerException e){}
-    }
-    public Properties update() throws WhatTheFuckException {
-        if (!compatibilityMap.get(DataChange.THREE_ZERO) == true) throw new WhatTheFuckException();
-        if (!compatibilityMap.get(DataChange.THREE_TWO)) {
-            Logger.getGlobal().log(Level.FINE, "User Data for " + userData.get("discordId") + " is below version 3.2.0. Updating it now.");
-            userData.put("guilds", 0);
+    public void check() {
+        if (version < FlamesUser.latestVersion) {
+            // Out of Date
+            Logger.getGlobal().log(Level.INFO, "User Data for " + Flames.api.getUserById(id).getName() + " (" + id + ") is at version " + version + ", but the version of user data required by this version of Flames is " + FlamesUser.latestVersion + ". Attempting to update that user's data.");
+        } else if (version > FlamesUser.latestVersion) {
+            // Too New
+            Logger.getGlobal().log(Level.SEVERE, "User Data for " + Flames.api.getUserById(id).getName() + " (" + id + ") is too new! It's at " + version + " but this version of Flames is only at " + FlamesUser.latestVersion + ". You might experience issues unless you update your version of Flames or delete this user data file and allow Flames to create a new one.");
         }
-        if (!compatibilityMap.get(DataChange.THREE_THREE) == true) {
-            Logger.getGlobal().log(Level.FINE, "User Data for " + userData.get("discordId") + " is below version 3.3.0. Updating it now.");
-            userData.put("funFacts.sadDay", Instant.now());
-           userData.put("funFacts.lowestEmotion", userData.get("emotion"));
-           userData.put("funFacts.happyDay", Instant.now());
-           userData.put("funFacts.highestEmotion", userData.get("emotion"));
-           userData.put("funFacts.highestFlamesScore", userData.get("score"));
-           userData.put("funFacts.lowestFlamesScore", userData.get("score"));
-           userData.put("funFacts.bestRank", Ranking.getRank(Integer.parseInt(userData.get("score") + "")).toString());
-           userData.put("funFacts.frenchToastMentioned", 0);
-        }
-        return userData;
     }
 }

@@ -1,11 +1,10 @@
 package com.severalcircles.flames.buttonaction.data;
 
 import com.severalcircles.flames.buttonaction.ButtonAction;
-import com.severalcircles.flames.data.base.FlamesData;
-import com.severalcircles.flames.data.global.GlobalData;
+import com.severalcircles.flames.data.base.ConsentException;
+import com.severalcircles.flames.data.base.FlamesDataManager;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.UserFunFacts;
-import com.severalcircles.flames.data.user.UserStats;
 import com.severalcircles.flames.features.FlamesPrettyDate;
 import com.severalcircles.flames.features.rank.Ranking;
 import com.severalcircles.flames.system.Flames;
@@ -17,8 +16,6 @@ import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import java.awt.*;
 import java.io.IOException;
 import java.time.Instant;
-import java.time.temporal.ChronoField;
-import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -30,9 +27,9 @@ FunFactsButtonAction implements ButtonAction {
         UserFunFacts funFacts = user.getFunFacts();
         if (funFacts == null) {
             try {
-                user = FlamesData.readUser(user.getDiscordId(), true);
-            } catch (WhatTheFuckException e) {
-                e.printStackTrace();
+                user = FlamesDataManager.readUser(event.getUser());
+            } catch (ConsentException e) {
+
             }
             funFacts = user.getFunFacts();
             if (funFacts == null) {

@@ -15,8 +15,7 @@ import com.severalcircles.flames.command.connections.ArtistCommand;
 import com.severalcircles.flames.command.data.GlobalDataCommand;
 import com.severalcircles.flames.command.data.HiCommand;
 import com.severalcircles.flames.command.data.MyDataCommand;
-import com.severalcircles.flames.data.base.FlamesData;
-import com.severalcircles.flames.data.base.FlushRunnable;
+import com.severalcircles.flames.data.base.FlamesDataManager;
 import com.severalcircles.flames.events.discord.ButtonEvent;
 import com.severalcircles.flames.events.discord.CommandEvent;
 import com.severalcircles.flames.events.discord.MemberAddEvent;
@@ -48,6 +47,8 @@ public class Flames {
     public static Map<String, FlamesCommand> commandMap = new HashMap<>();
     public static JDA api;
     public static SpotifyConnection spotifyConnection;
+    public static Bugsnag bugsnag;
+    private static int fatalErrorCounter;
     static {
         try {
             spotifyConnection = new SpotifyConnection();
@@ -57,10 +58,10 @@ public class Flames {
     }
     public static void main(String[] args) {
         // --- Initial Preparations ---
-        Bugsnag bugsnag = new Bugsnag("4db7c7d93598a437149f27b877cc6a93");
-        FlamesData.prepare();
+        bugsnag = new Bugsnag("4db7c7d93598a437149f27b877cc6a93");
+        FlamesDataManager.prepare();
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(new FlushRunnable(), 5, 5, TimeUnit.MINUTES);
+//        scheduler.scheduleAtFixedRate(new FlushRunnable(), 5, 5, TimeUnit.MINUTES);
         scheduler.scheduleAtFixedRate(new ReconnectRunnable(), 1, 1, TimeUnit.HOURS);
         FlamesAPI.start();
         // --- Connecting to the API and Logging in to Discord ---
@@ -88,5 +89,13 @@ public class Flames {
         new MessageEvent().register(api);
         new ButtonEvent().register(api);
         new MemberAddEvent().register(api);
+    }
+    public static void incrementErrorCount() {
+        fatalErrorCounter++;
+        if (fatalErrorCounter > 5) {
+            Logger.getGlobal().log(Level.SEVERE, "Flames has detected a recurring fatal problem. To protect Flames' data, it will now exit. There may be stack traces above with more information.");
+            bugsnag.notify(new FlamesProtectException("Fatal error counter went over 5"));
+            System.exit(2);
+        }
     }
 }
