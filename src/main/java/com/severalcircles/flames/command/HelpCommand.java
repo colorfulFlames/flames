@@ -1,6 +1,5 @@
 package com.severalcircles.flames.command;
 
-import com.severalcircles.flames.data.base.FlamesData;
 import com.severalcircles.flames.data.user.FlamesUser;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.components.Button;

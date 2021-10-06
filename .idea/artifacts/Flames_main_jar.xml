@@ -2,7 +2,7 @@
   <artifact type="jar" build-on-make="true" name="Flames.main:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/Flames_main_jar</output-path>
     <root id="archive" name="Flames.main.jar">
-      <element id="module-output" name="Flames.main" />
+      <element id="module-output" name="flames.main" />
       <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/failureaccess/1.0.1/1dcf1de382a0bf95a3d8b0849546c88bac1292c9/failureaccess-1.0.1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.discord4j/discord-json-api/1.5.10/35d020e02af7df78f535f10d42695a82d6bdd035/discord-json-api-1.5.10.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.projectreactor.addons/reactor-extra/3.3.5.RELEASE/2de06dfd9b61d8afe4e5b1fa5bd704e14b54a211/reactor-extra-3.3.5.RELEASE.jar" path-in-jar="/" />

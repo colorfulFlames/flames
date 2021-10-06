@@ -1,12 +1,9 @@
 package com.severalcircles.flames.features;
 import com.google.cloud.language.v1.*;
 import com.google.cloud.language.v1.Document.Type;
-import com.severalcircles.flames.data.base.FlamesData;
 
 import java.io.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Analysis {
     public static Map<String, Integer> entityCache = new HashMap<>();
