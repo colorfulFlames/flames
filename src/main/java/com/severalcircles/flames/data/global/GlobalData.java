@@ -12,6 +12,7 @@ public class GlobalData {
     public static int averageScore;
     public static int globalScore;
     public static int participants;
+
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void write() throws IOException {
         Logger.getGlobal().log(Level.FINE, "Saving global data");

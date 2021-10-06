@@ -16,6 +16,7 @@ import com.severalcircles.flames.command.data.GlobalDataCommand;
 import com.severalcircles.flames.command.data.HiCommand;
 import com.severalcircles.flames.command.data.MyDataCommand;
 import com.severalcircles.flames.data.base.FlamesDataManager;
+import com.severalcircles.flames.data.global.FlushHistoricalData;
 import com.severalcircles.flames.events.discord.ButtonEvent;
 import com.severalcircles.flames.events.discord.CommandEvent;
 import com.severalcircles.flames.events.discord.MemberAddEvent;
@@ -53,7 +54,7 @@ public class Flames {
         try {
             spotifyConnection = new SpotifyConnection();
         } catch (IOException | ExternalConnectionFailedException e) {
-            e.printStackTrace();
+            Logger.getGlobal().log(Level.SEVERE, "Failed to connect to Spotify.");
         }
     }
     public static void main(String[] args) {
@@ -63,6 +64,7 @@ public class Flames {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 //        scheduler.scheduleAtFixedRate(new FlushRunnable(), 5, 5, TimeUnit.MINUTES);
         scheduler.scheduleAtFixedRate(new ReconnectRunnable(), 1, 1, TimeUnit.HOURS);
+        scheduler.scheduleAtFixedRate(new FlushHistoricalData(), 1, 1, TimeUnit.HOURS);
         FlamesAPI.start();
         // --- Connecting to the API and Logging in to Discord ---
         try {
