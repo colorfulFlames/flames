@@ -4,8 +4,10 @@
 
 package com.severalcircles.flames.api;
 
-import com.severalcircles.flames.data.base.FlamesData;
+import com.severalcircles.flames.data.base.ConsentException;
+import com.severalcircles.flames.data.base.FlamesDataManager;
 import com.severalcircles.flames.data.global.GlobalData;
+import com.severalcircles.flames.system.Flames;
 import com.severalcircles.flames.system.WhatTheFuckException;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,13 +21,15 @@ public class DataController {
     @GetMapping("/user/{id}")
     public String user(@PathVariable String id) {
         try {
-            return FlamesData.getUserData(id);
-        } catch (WhatTheFuckException e) {
-            e.printStackTrace();
+            return FlamesDataManager.readUser(Flames.api.getUserById(id)).createData().toString();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (ConsentException e) {
+            return "looks like somebody forgot to ask for consent and got punished 🙈";
+        } catch (NullPointerException e) {
+            return "no that's not real";
         }
-        return "fuck";
+        return "whoops";
     }
     @GetMapping("/global")
     public String global() {

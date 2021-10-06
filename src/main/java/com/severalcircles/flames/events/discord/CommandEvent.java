@@ -1,7 +1,8 @@
 package com.severalcircles.flames.events.discord;
 
 import com.severalcircles.flames.command.FlamesCommand;
-import com.severalcircles.flames.data.base.FlamesData;
+import com.severalcircles.flames.data.base.ConsentException;
+import com.severalcircles.flames.data.base.FlamesDataManager;
 import com.severalcircles.flames.system.Flames;
 import com.severalcircles.flames.system.WhatTheFuckException;
 import net.dv8tion.jda.api.JDA;
@@ -30,11 +31,14 @@ public class CommandEvent extends ListenerAdapter implements FlamesDiscordEvent 
             if (entry.getKey().contains(event.getName())) {
                 try {
                     System.out.println(Flames.commandMap.get(entry.getKey()));
-                    Flames.commandMap.get(entry.getKey()).execute(event, FlamesData.readUser(event.getUser().getId(), false));
-                } catch (IOException | WhatTheFuckException e) {
+                    Flames.commandMap.get(entry.getKey()).execute(event, FlamesDataManager.readUser(event.getUser()));
+                } catch (IOException e) {
                     e.printStackTrace();
+                    Flames.incrementErrorCount();
                 } catch (IllegalStateException e) {
                     Logger.getGlobal().log(Level.INFO, "Somebody pressed a button :3");
+                } catch (ConsentException e) {
+                    event.reply("Hey bestie, looks like you opted not to have your data collected by Flames. You can't have your cake but then not eat it, so would you mind eating the cake first? Thanks!");
                 }
             }
         }

@@ -1,8 +1,8 @@
 package com.severalcircles.flames.events.discord;
 
-import com.severalcircles.flames.data.base.FlamesData;
+import com.severalcircles.flames.data.base.ConsentException;
+import com.severalcircles.flames.data.base.FlamesDataManager;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.events.flames.FlamesEvent;
 import com.severalcircles.flames.features.NowEnteringGuild;
 import com.severalcircles.flames.system.WhatTheFuckException;
 import net.dv8tion.jda.api.JDA;
@@ -23,11 +23,13 @@ public class MemberAddEvent extends ListenerAdapter implements FlamesDiscordEven
 //        super.onGuildMemberJoin(event);
         FlamesUser user;
         try {
-            user = FlamesData.readUser(event.getUser().getId(), false);
-        } catch (IOException | WhatTheFuckException e) {
+            user = FlamesDataManager.readUser(event.getUser());
+        } catch (IOException e) {
             e.printStackTrace();
             return;
+        } catch (ConsentException e) {
+
         }
-    NowEnteringGuild.welcomeUser(user, event.getUser(), event.getGuild());
+//    NowEnteringGuild.welcomeUser(user, event.getUser(), event.getGuild());
     }
 }
