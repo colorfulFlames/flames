@@ -54,7 +54,7 @@ public class FlamesDataManager {
             flamesUser.createData().store(os1, "User Data for " + name);
             flamesUser.getStats().createData().store(os2, "User Stats for " + name);
             flamesUser.getFunFacts().createData().store(os3, "Fun Facts for " + name);
-            Consent.getConsent(user);
+//            Consent.getConsent(user);
             return true;
         } else {
             return false;
@@ -89,7 +89,7 @@ public class FlamesDataManager {
         UserStats stats = new UserStats();
         UserFunFacts funFacts = new UserFunFacts();
         if (newUser(user)) {
-            throw new ConsentException(0);
+            throw new ConsentException(0, user);
         }
         File udir = new File(userDirectory.getAbsolutePath() + "/" + user.getId());
         File userfl = new File(udir.getAbsolutePath() + "/user.fl");
@@ -126,7 +126,7 @@ public class FlamesDataManager {
 
         fluser.setStats(stats);
         fluser.setFunFacts(funFacts);
-        if (fluser.getConsent() != 1) throw new ConsentException(fluser.getConsent());
+        if (fluser.getConsent() != 1) throw new ConsentException(fluser.getConsent(), user);
         return fluser;
     }
     public static FlamesUser readUser(User user, boolean skipConsent) throws IOException, ConsentException {
@@ -134,7 +134,7 @@ public class FlamesDataManager {
         UserStats stats = new UserStats();
         UserFunFacts funFacts = new UserFunFacts();
         if (newUser(user)) {
-            throw new ConsentException(0);
+            throw new ConsentException(0, user);
         }
         File udir = new File(userDirectory.getAbsolutePath() + "/" + user.getId());
         File userfl = new File(udir.getAbsolutePath() + "/user.fl");
@@ -171,7 +171,7 @@ public class FlamesDataManager {
 
         fluser.setStats(stats);
         fluser.setFunFacts(funFacts);
-        if (fluser.getConsent() != 1 && !skipConsent) throw new ConsentException(fluser.getConsent());
+        if (fluser.getConsent() != 1 && !skipConsent) throw new ConsentException(fluser.getConsent(), user);
         return fluser;
     }
 
