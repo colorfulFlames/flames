@@ -1,7 +1,7 @@
 package com.severalcircles.flames.command.data;
 
 import com.severalcircles.flames.command.FlamesCommand;
-import com.severalcircles.flames.data.base.FlamesData;
+import com.severalcircles.flames.data.base.FlamesDataManager;
 import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.features.external.severalcircles.FlamesAssets;
@@ -14,18 +14,24 @@ import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import java.awt.*;
 import java.io.IOException;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 public class HiCommand implements FlamesCommand {
+    final static int baseBonus = 1000;
+    final static int riseBonus = 100;
+    final static int streakBonus = 100;
+    final static int randomBonus = 25;
+
+    @SuppressWarnings("deprecation")
     @Override
     public void execute(SlashCommandEvent event, FlamesUser flamesUser) {
         Date now = Date.from(Instant.now());
         User discordUser = event.getUser();
-        int dailyBonus = 100 + (flamesUser.getStreak() * 100) * flamesUser.getStats().getRISE();
-        // noinspection deprecation
-        System.out.println("Last Seen (" + flamesUser.getLastSeen() + ") < Today (" + now.getDay() + ") (" + (flamesUser.getLastSeen() < now.getDay()) + ")");
-        System.out.println("Last Seen == 6 (" + (flamesUser.getLastSeen() == 6) + ") && Today !=6 0 (" + (now.getDay() != 6) + ")");
-        if (flamesUser.getLastSeen() < now.getDay() | (flamesUser.getLastSeen() == 6 && now.getDay() != 6)) {
+        int dailyBonus;
+        if (Instant.now().truncatedTo(ChronoUnit.DAYS).isAfter(flamesUser.getLastSeen().truncatedTo(ChronoUnit.DAYS))) {
+            if (Instant.now().truncatedTo(ChronoUnit.DAYS).compareTo(flamesUser.getLastSeen().truncatedTo(ChronoUnit.DAYS)) == 1) flamesUser.setStreak(flamesUser.getStreak() + 1); else flamesUser.setStreak(0);
+            dailyBonus = baseBonus + (riseBonus * flamesUser.getStats().getRISE()) + (streakBonus * flamesUser.getStreak()) + (int) Math.round(Math.random() * randomBonus);
             flamesUser.addScore(dailyBonus);
             GlobalData.globalScore += dailyBonus;
             try {
@@ -34,11 +40,11 @@ public class HiCommand implements FlamesCommand {
                 e.printStackTrace();
             }
             String timeMessage = "Hi, %s";
-            if (now.getHours() < 6) timeMessage = "Thought it was the sunrise, turns out it was just %s";
+            if (now.getHours() < 6) timeMessage = "A sunrise as pretty as %s";
             else if (now.getHours() < 9) timeMessage = "Good Morning, %s";
             else if (now.getHours() < 12) timeMessage = "Hi, %s";
             else if (now.getHours() < 15) timeMessage = "Good Afternoon, %s";
-            else if (now.getHours() < 18) timeMessage = "All done for today, %s?";
+            else if (now.getHours() < 18) timeMessage = "Nice work today, %s!";
             else if (now.getHours() < 21) timeMessage = "Good Evening, %s";
             else if (now.getHours() >= 21) timeMessage = "Have a good night, %s";
             MessageEmbed embed = new EmbedBuilder()
@@ -52,8 +58,13 @@ public class HiCommand implements FlamesCommand {
                     .addField("Your Flames Score", "" + flamesUser.getScore() + " FP", true)
                     .setTimestamp(Instant.now()).build();
             event.replyEmbeds(embed).queue();
-            flamesUser.setLastSeen(now.getDay());
-            FlamesData.write(flamesUser);
+            flamesUser.setLastSeen(Instant.now());
+            try {
+                FlamesDataManager.save(flamesUser);
+            } catch (IOException e) {
+                e.printStackTrace();
+                Flames.incrementErrorCount();
+            }
         } else {
             event.reply("You've already collected your bonus for today. See you tomorrow!").queue();
         }

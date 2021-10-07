@@ -1,14 +1,15 @@
 package com.severalcircles.flames.data.user;
 
+import com.severalcircles.flames.data.FlamesData;
 import com.severalcircles.flames.data.global.GlobalData;
 
-public class UserStats {
+import java.util.Properties;
+
+public class UserStats implements FlamesData {
     public static final double powerGrowth = 0.75;
     public static final double resistanceGrowth = 0.5;
     public static final double luckGrowth = 0.25;
     public static final double risingGrowth = 0.25;
-    public static final double priorityGrowth = 0.15;
-    public static final double seniorityGrowth = 0.75;
     public static final double charismaGrowth = 0.5;
 
     private int exp = 0;
@@ -18,22 +19,17 @@ public class UserStats {
     private int RES = 1;
     private int LUCK = 1;
     private int RISE = 1;
-    private int PTY = 1;
-    private int SEN = 1;
     private int CAR = 1;
     public UserStats() {}
-    public UserStats(int exp, int level, int POW, int RES, int LUCK, int RISE, int PTY, int SEN, int CAR) {
+    public UserStats(int exp, int level, int POW, int RES, int LUCK, int RISE, int CAR) {
         this.exp = exp;
         this.level = level;
         this.POW = POW;
         this.RES = RES;
         this.LUCK = LUCK;
         this.RISE = RISE;
-        this.PTY = PTY;
-        this.SEN = SEN;
         this.CAR = CAR;
     }
-
     public int getExp() {
         return exp;
     }
@@ -58,24 +54,16 @@ public class UserStats {
         return RISE;
     }
 
-    public int getPTY() {
-        return PTY;
-    }
-
-    public int getSEN() {
-        return SEN;
-    }
-
     public int getCAR() {
         return CAR;
     }
 
-    public boolean addExp(int amountToAdd) {
+    public void addExp(int amountToAdd) {
         this.exp += amountToAdd;
-        return checkLevelUp();
+        checkLevelUp();
     }
-    public boolean checkLevelUp() {
-        if (this.exp / (GlobalData.averageScore * level) >= 1) {
+    public void checkLevelUp() {
+        if (this.exp / (GlobalData.averageScore * level + 1000) >= 1) {
             level++;
             double random = Math.random();
             if (random <= powerGrowth) POW++;
@@ -86,12 +74,19 @@ public class UserStats {
             random = Math.random();
             if (random <= risingGrowth) RISE++;
             random = Math.random();
-            if (random <= priorityGrowth) PTY++;
-            random = Math.random();
-            if (random <= seniorityGrowth) SEN++;
-            random = Math.random();
             if (random <= charismaGrowth) CAR++;
-            return true;
-        } else return false;
+        }
+    }
+
+    public Properties createData() {
+        Properties data = new Properties();
+        data.put("exp", exp + "");
+        data.put("level", level + "");
+        data.put("POW", POW + "");
+        data.put("RES", RES + "");
+        data.put("LUCK", LUCK + "");
+        data.put("RISE", RISE + "");
+        data.put("CAR", CAR + "");
+        return data;
     }
 }

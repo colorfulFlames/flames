@@ -1,9 +1,8 @@
 package com.severalcircles.flames.features.external.spotify;
 
-import com.google.gson.Gson;
-import com.severalcircles.flames.features.external.ExternalConnectionFailedException;
+//import com.google.gson.Gson;
 import com.severalcircles.flames.features.external.ParameterStringBuilder;
-import org.checkerframework.checker.units.qual.A;
+//import org.checkerframework.checker.units.qual.A;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,8 +15,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class SpotifyConnection {
     String token;
@@ -33,7 +30,7 @@ public class SpotifyConnection {
             e.printStackTrace();
         }
     }
-    public SpotifyConnection() throws IOException, ExternalConnectionFailedException {
+    public SpotifyConnection() throws IOException {
         HttpURLConnection con = (HttpURLConnection) authUrl.openConnection();
         con.setRequestMethod("POST");
         String auth = clientId + ":" + secret;
@@ -50,7 +47,7 @@ public class SpotifyConnection {
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(con.getInputStream()));
         String inputLine;
-        StringBuffer content = new StringBuffer();
+        StringBuilder content = new StringBuilder();
         while ((inputLine = in.readLine()) != null) {
             content.append(inputLine);
         }
@@ -65,11 +62,6 @@ public class SpotifyConnection {
         con.setRequestMethod("GET");
         con.setRequestProperty("Authorization", "Bearer " + token);
         con.setRequestProperty("Content-Length", "" + (13 + query.length()));
-//        con.setDoOutput(true);
-//        DataOutputStream out = new DataOutputStream(con.getOutputStream());
-//        out.writeBytes(ParameterStringBuilder.getParamsString(parameters));
-//        out.flush();
-//        out.close();
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(con.getInputStream()));
         String inputLine;

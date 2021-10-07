@@ -1,7 +1,5 @@
 package com.severalcircles.flames.features.external.spotify;
 
-import java.util.Map;
-
 public class SpotifyArtist {
 //    String url;
     int followers;
@@ -30,16 +28,9 @@ public class SpotifyArtist {
     public SpotifyArtist() {
 
     }
-//    public String getUrl() {
-//        return url;
-//    }
 
     public String getGenre() {
         return genre;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getImage() {

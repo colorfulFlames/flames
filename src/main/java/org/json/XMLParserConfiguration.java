@@ -32,7 +32,7 @@ import java.util.Map;
  * Configuration object for the XML parser. The configuration is immutable.
  * @author AylwardJ
  */
-@SuppressWarnings({""})
+@SuppressWarnings("ALL")
 public class XMLParserConfiguration {
     /** Original Configuration of the XML Parser. */
     public static final XMLParserConfiguration ORIGINAL

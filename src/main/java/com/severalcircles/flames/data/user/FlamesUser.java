@@ -1,50 +1,71 @@
 package com.severalcircles.flames.data.user;
 
-public class FlamesUser {
+import com.severalcircles.flames.data.FlamesData;
+
+import java.time.Instant;
+import java.util.Properties;
+
+public class FlamesUser implements FlamesData {
+
+    public static final double latestVersion = 2.0;
+
     private int score;
-    private String firstSeen;
     private float emotion;
-    private int lastSeen;
+    private Instant lastSeen;
     private int streak;
     private String discordId;
     private String locale;
     private UserStats stats;
     private int consent;
-    private int guilds;
     private UserFunFacts funFacts;
+    private double dataVersion = 2.0;
 
     public UserFunFacts getFunFacts() {
         return funFacts;
+    }
+
+    public Properties createData() {
+        Properties data = new Properties();
+        data.put("score", score + "");
+        data.put("emotion", emotion + "");
+        data.put("lastSeen", lastSeen.toString());
+        data.put("streak", streak + "");
+        data.put("discordId", discordId);
+        data.put("consent", consent + "");
+        data.put("version", dataVersion + "");
+        return data;
     }
 
     public void setFunFacts(UserFunFacts funFacts) {
         this.funFacts = funFacts;
     }
 
-    public boolean lowEmotionWarned = false;
-    public FlamesUser(int score, String firstSeen, float emotion, int lastSeen, int streak, String discordId, String locale, UserStats stats, int consent, int guilds, UserFunFacts funFacts) {
+    public void setDataVersion(double dataVersion) {
+        this.dataVersion = dataVersion;
+    }
+
+    public FlamesUser(int score, float emotion, Instant lastSeen, int streak, String discordId, UserStats stats, int consent, UserFunFacts funFacts, double dataVersion) {
         this.score = score;
-        this.firstSeen = firstSeen;
         this.emotion = emotion;
-//        this.multiplier = multiplier;
-        this.lastSeen = lastSeen;
         this.streak = streak;
         this.discordId = discordId;
-        this.locale = locale;
         this.stats = stats;
-//        this.exp = exp;
         this.consent = consent;
-        this.guilds = guilds;
         this.funFacts = funFacts;
+        this.dataVersion = dataVersion;
+        this.lastSeen = lastSeen;
     }
+
     public String getLocale() {
         return locale;
     }
-    public UserStats getStats() {return stats;}
 
-    public void setStats(UserStats stats) {this.stats = stats;}
-    public void setLocale(String locale) {
-        this.locale = locale;
+    public UserStats getStats() {
+        return stats;
+    }
+
+    public void setStats(UserStats stats) {
+        this.stats = stats;
     }
 
     public int getConsent() {
@@ -57,32 +78,24 @@ public class FlamesUser {
 
     public FlamesUser() {
         this.score = 0;
-        this.firstSeen = "ya mom"; //TODO
         this.emotion = 0;
-//        this.multiplier = multiplier;
-        this.lastSeen = -1;
+        this.lastSeen = Instant.now();
         this.streak = 0;
-        this.locale = "en";
         this.stats = new UserStats();
         this.consent = 0;
+        this.funFacts = new UserFunFacts();
     }
+
     public void addScore(int amount) {
         score += amount;
     }
+
     public int getScore() {
         return score;
     }
 
     public void setScore(int score) {
         this.score = score;
-    }
-
-    public String getFirstSeen() {
-        return firstSeen;
-    }
-
-    public void setFirstSeen(String firstSeen) {
-        this.firstSeen = firstSeen;
     }
 
     public float getEmotion() {
@@ -93,20 +106,20 @@ public class FlamesUser {
         this.emotion = emotion;
     }
 
-    public int getLastSeen() {
-        return lastSeen;
-    }
-
-    public void setLastSeen(int lastSeen) {
-        this.lastSeen = lastSeen;
-    }
-
     public int getStreak() {
         return streak;
     }
 
     public void setStreak(int streak) {
         this.streak = streak;
+    }
+
+    public Instant getLastSeen() {
+        return lastSeen;
+    }
+
+    public void setLastSeen(Instant lastSeen) {
+        this.lastSeen = lastSeen;
     }
 
     public String getDiscordId() {
@@ -117,11 +130,4 @@ public class FlamesUser {
         this.discordId = discordId;
     }
 
-    public int getGuilds() {
-        return guilds;
-    }
-
-    public void setGuilds(int guilds) {
-        this.guilds = guilds;
-    }
 }

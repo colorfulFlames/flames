@@ -9,12 +9,11 @@ import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.interactions.components.Button;
 
 import java.awt.*;
-import java.io.IOException;
 import java.time.Instant;
 
 public class ManageUserDataButtonAction implements ButtonAction {
     @Override
-    public void execute(ButtonClickEvent event, FlamesUser user) throws IOException {
+    public void execute(ButtonClickEvent event, FlamesUser user) {
         MessageEmbed embed = new EmbedBuilder()
                 .setAuthor("User Data Management",null, event.getUser().getAvatarUrl())
                 .setTitle(event.getUser().getName() + ", what can I help you with?")

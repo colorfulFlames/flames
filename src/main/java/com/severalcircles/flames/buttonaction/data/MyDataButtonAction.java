@@ -20,14 +20,14 @@ import java.util.logging.Logger;
 
 public class MyDataButtonAction implements ButtonAction {
     @Override
-    public void execute(ButtonClickEvent event, FlamesUser sender) throws IOException {
+    public void execute(ButtonClickEvent event, FlamesUser sender) {
         Logger.getGlobal().log(Level.FINE, "mydata");
         try {
             Ranking.updateThresholds();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        @SuppressWarnings("OptionalGetWithoutIsPresent") User user = event.getUser();
+        User user = event.getUser();
         ResourceBundle resources = ResourceBundle.getBundle("commands/MyDataCommand", Locale.forLanguageTag(sender.getLocale()));
         String rank;
         switch(Ranking.getRank(sender.getScore())) {
