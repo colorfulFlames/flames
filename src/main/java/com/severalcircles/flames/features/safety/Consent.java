@@ -1,22 +1,13 @@
 package com.severalcircles.flames.features.safety;
 
-//import discord4j.core.object.entity.Message;
-//import discord4j.core.object.entity.User;
-//import discord4j.rest.util.Color;
-
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.MessageBuilder;
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.Button;
-import org.apache.commons.collections4.bag.CollectionBag;
 
 import java.awt.*;
 import java.time.Instant;
 import java.util.*;
-import java.util.List;
 
 public class Consent {
 //    public static final List<String> awaitingConsent = new LinkedList<>();
@@ -36,13 +27,4 @@ public class Consent {
 //        awaitingConsent.add(user.getId());
 
     }
-//    public static void welcomeToFlames(User user) {
-//        MessageEmbed embed = new EmbedBuilder()
-//                .setColor(Color.ORANGE)
-//                .setAuthor("Thank You", user.getAvatarUrl())
-//                .setTitle("Welcome to Flames, " + user.getName())
-//                .setDescription("We're so happy you finally made it.")
-//                .setFooter("Flames").build();
-//        user.openPrivateChannel().complete().sendMessage(embed);
-//    }
 }

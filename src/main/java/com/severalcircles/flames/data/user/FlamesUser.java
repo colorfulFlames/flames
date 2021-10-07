@@ -1,14 +1,13 @@
 package com.severalcircles.flames.data.user;
 
 import com.severalcircles.flames.data.FlamesData;
-import com.severalcircles.flames.system.Flames;
 
 import java.time.Instant;
 import java.util.Properties;
 
 public class FlamesUser implements FlamesData {
 
-    public static double latestVersion = 2.0;
+    public static final double latestVersion = 2.0;
 
     private int score;
     private float emotion;
@@ -41,12 +40,6 @@ public class FlamesUser implements FlamesData {
         this.funFacts = funFacts;
     }
 
-    public boolean lowEmotionWarned = false;
-
-    public double getDataVersion() {
-        return dataVersion;
-    }
-
     public void setDataVersion(double dataVersion) {
         this.dataVersion = dataVersion;
     }
@@ -73,10 +66,6 @@ public class FlamesUser implements FlamesData {
 
     public void setStats(UserStats stats) {
         this.stats = stats;
-    }
-
-    public void setLocale(String locale) {
-        this.locale = locale;
     }
 
     public int getConsent() {
@@ -109,14 +98,6 @@ public class FlamesUser implements FlamesData {
         this.score = score;
     }
 
-//    public String getFirstSeen() {
-//        return firstSeen;
-//    }
-
-//    public void setFirstSeen(String firstSeen) {
-//        this.firstSeen = firstSeen;
-//    }
-
     public float getEmotion() {
         return emotion;
     }
@@ -124,14 +105,6 @@ public class FlamesUser implements FlamesData {
     public void setEmotion(float emotion) {
         this.emotion = emotion;
     }
-
-//    public int getLastSeen() {
-//        return lastSeen;
-//    }
-
-//    public void setLastSeen(int lastSeen) {
-//        this.lastSeen = lastSeen;
-//    }
 
     public int getStreak() {
         return streak;
@@ -157,11 +130,4 @@ public class FlamesUser implements FlamesData {
         this.discordId = discordId;
     }
 
-//    public int getGuilds() {
-//        return guilds;
-//    }
-
-//    public void setGuilds(int guilds) {
-//        this.guilds = guilds;
-//    }
 }

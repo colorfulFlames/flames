@@ -1,6 +1,5 @@
 package com.severalcircles.flames.data.user;
 
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import com.severalcircles.flames.data.FlamesData;
 import com.severalcircles.flames.features.rank.Rank;
 import org.jetbrains.annotations.NotNull;
@@ -97,10 +96,6 @@ public class UserFunFacts implements FlamesData {
 
     public void setLowestFlamesScore(int lowestFlamesScore) {
         this.lowestFlamesScore = lowestFlamesScore;
-    }
-
-    public Rank getBestRank() {
-        return bestRank;
     }
 
     public void setBestRank(Rank bestRank) {

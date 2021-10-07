@@ -4,8 +4,5 @@
 
 package com.severalcircles.flames.data;
 
-import java.util.Properties;
-
 public interface FlamesData {
-    Properties createData();
 }

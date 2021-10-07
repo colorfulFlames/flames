@@ -4,7 +4,6 @@
 
 package com.severalcircles.flames.api;
 
-import net.dv8tion.jda.api.entities.MessageActivity;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
