@@ -3,7 +3,6 @@ package com.severalcircles.flames.buttonaction;
 import com.severalcircles.flames.data.base.FlamesDataManager;
 import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.features.safety.Consent;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;

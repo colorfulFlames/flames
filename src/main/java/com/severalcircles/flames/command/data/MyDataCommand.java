@@ -36,7 +36,7 @@ public class MyDataCommand implements FlamesCommand {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        @SuppressWarnings("OptionalGetWithoutIsPresent") User user = event.getUser();
+        User user = event.getUser();
         ResourceBundle resources = ResourceBundle.getBundle("commands/MyDataCommand", Locale.ENGLISH);
         String rank;
         switch(Ranking.getRank(sender.getScore())) {

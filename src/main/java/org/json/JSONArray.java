@@ -649,9 +649,6 @@ public class JSONArray implements Iterable<Object> {
             return defaultValue;
         }
         final double doubleValue = val.doubleValue();
-        // if (Double.isNaN(doubleValue) || Double.isInfinite(doubleValue)) {
-        // return defaultValue;
-        // }
         return doubleValue;
     }
 
@@ -685,9 +682,6 @@ public class JSONArray implements Iterable<Object> {
             return defaultValue;
         }
         final float floatValue = val.floatValue();
-        // if (Float.isNaN(floatValue) || Float.isInfinite(floatValue)) {
-        // return floatValue;
-        // }
         return floatValue;
     }
 

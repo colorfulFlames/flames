@@ -8,7 +8,6 @@ import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.UserFunFacts;
 import com.severalcircles.flames.data.user.UserStats;
 import com.severalcircles.flames.features.rank.Rank;
-import com.severalcircles.flames.features.safety.Consent;
 import com.severalcircles.flames.system.Flames;
 import net.dv8tion.jda.api.entities.User;
 
@@ -22,7 +21,6 @@ public class FlamesDataManager {
     public static final File flamesDirectory = new File(System.getProperty("user.dir") + "/Flames");
     static final File userDirectory = new File(flamesDirectory.getAbsolutePath() + "/user");
     static final File guildDirectory = new File(flamesDirectory.getAbsolutePath() + "/guild");
-    static final File globalData = new File(flamesDirectory.getAbsolutePath() + "/global.fl");
 
     //    static List<File> openFiles = new LinkedList<>();
     public static void prepare() {

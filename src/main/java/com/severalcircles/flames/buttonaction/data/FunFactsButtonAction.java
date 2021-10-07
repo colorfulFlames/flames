@@ -8,7 +8,6 @@ import com.severalcircles.flames.data.user.UserFunFacts;
 import com.severalcircles.flames.features.FlamesPrettyDate;
 import com.severalcircles.flames.features.rank.Ranking;
 import com.severalcircles.flames.system.Flames;
-import com.severalcircles.flames.system.WhatTheFuckException;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
@@ -28,7 +27,7 @@ FunFactsButtonAction implements ButtonAction {
         if (funFacts == null) {
             try {
                 user = FlamesDataManager.readUser(event.getUser());
-            } catch (ConsentException e) {
+            } catch (ConsentException ignored) {
 
             }
             funFacts = user.getFunFacts();

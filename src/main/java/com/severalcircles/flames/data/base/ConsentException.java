@@ -8,8 +8,8 @@ import com.severalcircles.flames.features.safety.Consent;
 import net.dv8tion.jda.api.entities.User;
 
 public class ConsentException extends Exception {
-    public int consentLevel;
-    public User user;
+    public final int consentLevel;
+
     public ConsentException(int consentLevel, User user) {
         this.consentLevel = consentLevel;
         if (consentLevel == 0) {

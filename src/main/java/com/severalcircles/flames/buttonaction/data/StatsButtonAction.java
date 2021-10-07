@@ -10,12 +10,11 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 
 import java.awt.*;
-import java.io.IOException;
 import java.time.Instant;
 
 public class StatsButtonAction implements ButtonAction {
     @Override
-    public void execute(ButtonClickEvent event, FlamesUser user) throws IOException {
+    public void execute(ButtonClickEvent event, FlamesUser user) {
         UserStats stats = user.getStats();
         MessageEmbed embed = new EmbedBuilder()
                 .setColor(new Color(153, 85,187))
