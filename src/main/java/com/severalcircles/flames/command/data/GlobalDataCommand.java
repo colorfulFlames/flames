@@ -26,7 +26,7 @@ public class GlobalDataCommand implements FlamesCommand {
     public void execute(SlashCommandEvent event, FlamesUser sender) {
 //        Message message = event.getMessage();
         User user = event.getUser();
-        ResourceBundle resources = ResourceBundle.getBundle("commands/GlobalDataCommand", Locale.forLanguageTag(sender.getLocale()));
+        ResourceBundle resources = ResourceBundle.getBundle("commands/GlobalDataCommand", Locale.ENGLISH);
 //        System.out.println("based");
 //        final String trending = trendingEntity;
         MessageEmbed embed = new EmbedBuilder()
