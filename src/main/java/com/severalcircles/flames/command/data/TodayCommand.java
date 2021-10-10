@@ -40,10 +40,10 @@ public class TodayCommand implements FlamesCommand {
 //        ResourceBundle resources = ResourceBundle.getBundle("commands/MyDataCommand", Locale.ENGLISH);
         String emotionString;
         float emotion = Today.emotion;
-        if (emotion > 10) emotionString = "Joyous";
-        else if (emotion > 5) emotionString = "Happy";
+        if (emotion > 100) emotionString = "Joyous";
+        else if (emotion > 50) emotionString = "Happy";
         else if (emotion >= 0) emotionString = "Mixed";
-        else if (emotion > -3) emotionString = "A little sad";
+        else if (emotion > -50) emotionString = "A little sad";
         else emotionString = "Pretty upset";
         MessageEmbed today = new EmbedBuilder()
                 .setAuthor("Today for " + day + ", " + FlamesPrettyDate.prettifyDate(now),null,  event.getUser().getAvatarUrl())

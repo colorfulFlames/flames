@@ -7,7 +7,10 @@ package com.severalcircles.flames.api;
 import com.severalcircles.flames.data.base.ConsentException;
 import com.severalcircles.flames.data.base.FlamesDataManager;
 import com.severalcircles.flames.system.Flames;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -15,13 +18,14 @@ import java.io.IOException;
 @RestController
 public class DataController {
     @GetMapping("/user/{id}")
-    public String getUser(String id) {
+    public ResponseEntity getUser(@PathVariable String id) {
         try {
-            return FlamesDataManager.readUser(Flames.api.getUserById(id)).createData().toString();
+            return new ResponseEntity(FlamesDataManager.readUser(id).createData(), HttpStatus.OK);
         } catch (IOException e) {
-            return e.toString();
-        } catch (ConsentException e) {
-            return "Lol that user really said no";
-        }
+            return new ResponseEntity(e.toString(), HttpStatus.I_AM_A_TEAPOT);
+    }}
+    @GetMapping("/error")
+    public String getError() {
+        return "Something went wrong. Whoops.";
     }
 }
