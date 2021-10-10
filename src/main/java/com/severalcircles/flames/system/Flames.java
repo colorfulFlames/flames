@@ -14,10 +14,10 @@ import com.severalcircles.flames.command.data.MyDataCommand;
 import com.severalcircles.flames.command.data.TodayCommand;
 import com.severalcircles.flames.data.base.FlamesDataManager;
 import com.severalcircles.flames.data.global.FlushHistoricalData;
-import com.severalcircles.flames.events.discord.ButtonEvent;
-import com.severalcircles.flames.events.discord.CommandEvent;
-import com.severalcircles.flames.events.discord.MemberAddEvent;
-import com.severalcircles.flames.events.discord.MessageEvent;
+import com.severalcircles.flames.events.ButtonEvent;
+import com.severalcircles.flames.events.CommandEvent;
+import com.severalcircles.flames.events.MemberAddEvent;
+import com.severalcircles.flames.events.MessageEvent;
 import com.severalcircles.flames.features.external.spotify.ReconnectRunnable;
 import com.severalcircles.flames.features.external.spotify.SpotifyConnection;
 import com.severalcircles.flames.features.today.ResetTodayRunnable;
@@ -29,7 +29,6 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executors;
@@ -71,6 +70,7 @@ public class Flames {
         FlamesAPI.start();
         // --- Connecting to the API and Logging in to Discord ---
         try {
+            Logger.getGlobal().log(Level.FINEST, "Token is " + System.getenv("FlamesToken"));
             api = JDABuilder.createDefault(System.getenv("FlamesToken")).build();
             api.awaitReady();
         } catch (LoginException e) {

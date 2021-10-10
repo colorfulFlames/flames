@@ -1,4 +1,8 @@
-package com.severalcircles.flames.events.discord;
+/*
+ * Copyright (c) 2021 Several Circles.
+ */
+
+package com.severalcircles.flames.events;
 
 import com.severalcircles.flames.buttonaction.*;
 import com.severalcircles.flames.buttonaction.data.FunFactsButtonAction;

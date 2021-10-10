@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2021.
+ * Copyright (c) 2021-2021 Several Circles.
  */
 
-package com.severalcircles.flames.events.discord;
+package com.severalcircles.flames.events;
 
 import com.google.cloud.language.v1.Sentiment;
 import com.severalcircles.flames.data.base.ConsentException;
@@ -70,9 +70,9 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             Today.highScore = user.getScore();
             Today.highUser = event.getAuthor().getName();
         }
-        int quoteChance = (int) Math.round(Math.random() * 10);
+        int quoteChance = (int) Math.round(Math.random() * 2);
         System.out.println(quoteChance);
-        if (Today.quote[0] == "We're still waiting for somebody to say something epic." && sentiment.getMagnitude() >= 0.9 && quoteChance == 6) {
+        if (Today.quote[0] == "We're still waiting for somebody to say something epic." && sentiment.getMagnitude() >= 0.9 && quoteChance == 1) {
             Today.quote = new String[]{content, event.getAuthor().getName()};
             MessageEmbed congrats = new EmbedBuilder()
                     .setAuthor("Flames", null, event.getAuthor().getAvatarUrl())
