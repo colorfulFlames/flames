@@ -90,6 +90,6 @@ public class MyDataCommand implements FlamesCommand {
                 .addField(resources.getString("emotion"), emotionString, true)
                 .setThumbnail(FlamesAssets.getRankIcon(Ranking.getRank(sender.getScore())))
                 .setFooter(resources.getString("footer"), Flames.api.getSelfUser().getAvatarUrl()).build();
-        event.replyEmbeds(embed).addActionRow(Button.success("mydata", "My Data"), Button.primary("stats", "Stats"), Button.primary("funFacts", "Fun Facts"), Button.danger("manageData", "Manage User Data")).queue();
+        event.replyEmbeds(embed).addActionRow(Button.success("mydata", "My Data"), Button.primary("stats", "Stats"), Button.primary("funFacts", "Fun Facts")).queue();
 
 }}
