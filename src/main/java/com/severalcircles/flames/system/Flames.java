@@ -70,7 +70,7 @@ public class Flames {
         FlamesAPI.start();
         // --- Connecting to the API and Logging in to Discord ---
         try {
-            Logger.getGlobal().log(Level.FINEST, "Token is " + System.getenv("FlamesToken"));
+            Logger.getGlobal().log(Level.INFO, "Token is " + System.getenv("FlamesToken"));
             api = JDABuilder.createDefault(System.getenv("FlamesToken")).build();
             api.awaitReady();
         } catch (LoginException e) {
