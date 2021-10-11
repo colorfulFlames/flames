@@ -14,7 +14,7 @@ public class BadWordFilter {
 
   private static int largestWordLength = 0;
 
-  private static Map<String, String[]> allBadWords = new HashMap<String, String[]>();
+  private static final Map<String, String[]> allBadWords = new HashMap<String, String[]>();
 
   /**
    * Iterates over a String input and checks whether any cuss word was found - and for any/all cuss word found, 
