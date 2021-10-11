@@ -1,8 +1,9 @@
+/*
+ * Copyright (c) 2021 Several Circles.
+ */
+
 package com.severalcircles.flames.events;
 
-import java.sql.SQLException;
-
 public interface FlamesDiscordEvent {
-
-    void run() throws SQLException;
+    //    void run() throws IOException;
 }

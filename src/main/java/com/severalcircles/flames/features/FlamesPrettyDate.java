@@ -1,9 +1,9 @@
 package com.severalcircles.flames.features;
 
 import java.time.Instant;
-import java.time.temporal.ChronoField;
 import java.util.Date;
 
+@SuppressWarnings("deprecation")
 public class FlamesPrettyDate {
     public static String prettifyDate(Instant instant) {
         String prettyDate = "";

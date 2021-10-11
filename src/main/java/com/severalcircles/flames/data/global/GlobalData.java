@@ -1,5 +1,6 @@
 package com.severalcircles.flames.data.global;
 
+import ch.qos.logback.core.util.FileUtil;
 import com.severalcircles.flames.data.base.FlamesDataManager;
 
 import java.io.*;
@@ -12,6 +13,7 @@ public class GlobalData {
     public static int averageScore;
     public static int globalScore;
     public static int participants;
+
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void write() throws IOException {
         Logger.getGlobal().log(Level.FINE, "Saving global data");

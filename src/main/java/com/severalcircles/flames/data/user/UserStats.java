@@ -10,8 +10,6 @@ public class UserStats implements FlamesData {
     public static final double resistanceGrowth = 0.5;
     public static final double luckGrowth = 0.25;
     public static final double risingGrowth = 0.25;
-    public static final double priorityGrowth = 0.15;
-    public static final double seniorityGrowth = 0.75;
     public static final double charismaGrowth = 0.5;
 
     private int exp = 0;
@@ -60,11 +58,11 @@ public class UserStats implements FlamesData {
         return CAR;
     }
 
-    public boolean addExp(int amountToAdd) {
+    public void addExp(int amountToAdd) {
         this.exp += amountToAdd;
-        return checkLevelUp();
+        checkLevelUp();
     }
-    public boolean checkLevelUp() {
+    public void checkLevelUp() {
         if (this.exp / (GlobalData.averageScore * level + 1000) >= 1) {
             level++;
             double random = Math.random();
@@ -77,11 +75,9 @@ public class UserStats implements FlamesData {
             if (random <= risingGrowth) RISE++;
             random = Math.random();
             if (random <= charismaGrowth) CAR++;
-            return true;
-        } else return false;
+        }
     }
 
-    @Override
     public Properties createData() {
         Properties data = new Properties();
         data.put("exp", exp + "");

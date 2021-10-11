@@ -25,22 +25,14 @@ public class GlobalDataCommand implements FlamesCommand {
     @Override
     public void execute(SlashCommandEvent event, FlamesUser sender) {
 //        Message message = event.getMessage();
-        @SuppressWarnings("OptionalGetWithoutIsPresent") User user = event.getUser();
-        ResourceBundle resources = ResourceBundle.getBundle("commands/GlobalDataCommand", Locale.forLanguageTag(sender.getLocale()));
+        User user = event.getUser();
+        ResourceBundle resources = ResourceBundle.getBundle("commands/GlobalDataCommand", Locale.ENGLISH);
 //        System.out.println("based");
-        String trendingEntity = "";
-        int times = 0;
-        for (Map.Entry<String, Integer> entry: Analysis.entityCache.entrySet()) {
-            if (entry.getKey() != trendingEntity && entry.getValue() > times) {
-                trendingEntity = entry.getKey();
-                times = entry.getValue();
-            }
-        }
-        final String trending = trendingEntity;
+//        final String trending = trendingEntity;
         MessageEmbed embed = new EmbedBuilder()
                 .setColor(new Color(15, 131, 217))
                 .setAuthor(resources.getString("author"), null, user.getAvatarUrl())
-                .setTitle(resources.getString("trendingTopic") + ": " + trending)
+                .setTitle(Flames.api.getSelfUser().getName())
 //                .setUrl("https://en.wikipedia.org/wiki/" + trending.replace(" ", "_"))
                 .addField(resources.getString("totalScore"), GlobalData.globalScore + "", true)
                 .addField(resources.getString("averageScore"), GlobalData.averageScore + "", true)

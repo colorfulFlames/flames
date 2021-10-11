@@ -2,7 +2,7 @@ package com.severalcircles.flames.command;
 
 import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.events.discord.ButtonEvent;
+import com.severalcircles.flames.events.ButtonEvent;
 import com.severalcircles.flames.features.FlamesPrettyDate;
 import com.severalcircles.flames.system.Flames;
 import net.dv8tion.jda.api.EmbedBuilder;

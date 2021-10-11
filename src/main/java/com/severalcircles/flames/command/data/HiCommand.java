@@ -14,9 +14,7 @@ import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import java.awt.*;
 import java.io.IOException;
 import java.time.Instant;
-import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.Date;
 
 public class HiCommand implements FlamesCommand {
@@ -25,6 +23,7 @@ public class HiCommand implements FlamesCommand {
     final static int streakBonus = 100;
     final static int randomBonus = 25;
 
+    @SuppressWarnings("deprecation")
     @Override
     public void execute(SlashCommandEvent event, FlamesUser flamesUser) {
         Date now = Date.from(Instant.now());

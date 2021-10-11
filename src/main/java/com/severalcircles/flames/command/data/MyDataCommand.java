@@ -1,5 +1,6 @@
 package com.severalcircles.flames.command.data;
 
+import com.severalcircles.flames.api.FlamesAPI;
 import com.severalcircles.flames.command.FlamesCommand;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.features.external.severalcircles.FlamesAssets;
@@ -36,7 +37,7 @@ public class MyDataCommand implements FlamesCommand {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        @SuppressWarnings("OptionalGetWithoutIsPresent") User user = event.getUser();
+        User user = event.getUser();
         ResourceBundle resources = ResourceBundle.getBundle("commands/MyDataCommand", Locale.ENGLISH);
         String rank;
         switch(Ranking.getRank(sender.getScore())) {
@@ -81,7 +82,7 @@ public class MyDataCommand implements FlamesCommand {
         MessageEmbed embed = new EmbedBuilder()
                 .setColor(new Color(153, 85,187))
                 .setAuthor(resources.getString("author"), null, user.getAvatarUrl())
-                .setTitle(String.format(resources.getString("title"), user.getName()))
+                .setTitle(String.format(resources.getString("title"), user.getName()), FlamesAPI.getUserDataLink(user))
                 .setDescription(String.format(resources.getString("description"), sender.getStats().getLevel()))
                 .addField(resources.getString("flamesScore"), sender.getScore() + "", true)
                 .addField(resources.getString("rank"), rank, true)
