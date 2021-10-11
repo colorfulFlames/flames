@@ -65,12 +65,12 @@ public class Flames {
         FlamesDataManager.prepare();
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(new ReconnectRunnable(), 1, 1, TimeUnit.HOURS);
-        scheduler.scheduleAtFixedRate(new FlushHistoricalData(), 1, 1, TimeUnit.HOURS);
+//        scheduler.scheduleAtFixedRate(new FlushHistoricalData(), 1, 1, TimeUnit.HOURS);
         scheduler.scheduleAtFixedRate(new ResetTodayRunnable(), initalDelay, TimeUnit.DAYS.toSeconds(1), TimeUnit.SECONDS);
         FlamesAPI.start();
         // --- Connecting to the API and Logging in to Discord ---
         try {
-            Logger.getGlobal().log(Level.FINEST, "Token is " + System.getenv("FlamesToken"));
+            Logger.getGlobal().log(Level.INFO, "Token is " + System.getenv("FlamesToken"));
             api = JDABuilder.createDefault(System.getenv("FlamesToken")).build();
             api.awaitReady();
         } catch (LoginException e) {
@@ -98,7 +98,7 @@ public class Flames {
     }
     public static void incrementErrorCount() {
         fatalErrorCounter++;
-        if (fatalErrorCounter > 5) {
+        if (fatalErrorCounter > 10) {
             Logger.getGlobal().log(Level.SEVERE, "Flames has detected a recurring fatal problem. To protect Flames' data, it will now exit. There may be stack traces above with more information.");
             bugsnag.notify(new FlamesProtectException("Fatal error counter went over 5"));
             System.exit(2);
