@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea for this project
+about: Something that should be here isn't
 title: 'Feature Request: [title]'
 labels: enhancement
 assignees: SeveralCircles

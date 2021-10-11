@@ -1,6 +1,6 @@
 ---
 name: Quality of Life Issue
-about: Describe this issue template's purpose here.
+about: Something works as intended, but the way it's intended doesn't make sense.
 title: Quality of Life Issue in (feature)
 labels: ''
 assignees: SeveralCircles
