@@ -62,7 +62,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         if (score >= 0) score *= user.getStats().getPOW();
         else score /= user.getStats().getRES();
         user.setEmotion(user.getEmotion() + sentiment.getScore());
-        user.getStats().addExp(score);
+        user.getStats().addExp(Math.max(0, score));
         user.setScore(user.getScore() + score);
 
         Today.emotion += score;
