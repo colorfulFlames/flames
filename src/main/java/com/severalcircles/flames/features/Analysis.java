@@ -42,7 +42,7 @@ public class Analysis {
                 System.out.printf("Entity: %s", entity.getName());
                 System.out.printf("Salience: %.3f\n", entity.getSalience());
                 System.out.println("Metadata: ");
-                if (entity.getName().contains("french toast")) toast = true;
+                if (entity.getName().toLowerCase().contains("french toast")) toast = true;
 //                Logger.getGlobal().log(Level.FINE, "Reading guild: " + discordId);
                 if (entityCache.containsKey(entity.getName())) entityCache.put(entity.getName(), entityCache.get(entity.getName()) + 1);
                 else entityCache.put(entity.getName(), 1);
