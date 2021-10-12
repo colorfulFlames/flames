@@ -4,6 +4,9 @@ import com.severalcircles.flames.system.Flames;
 
 import java.io.IOException;
 
+/**
+ * Runnable that destroys the previous SpotifyConnection and creates a new one
+ */
 public class ReconnectRunnable implements Runnable {
 
     @Override

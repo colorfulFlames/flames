@@ -3,7 +3,6 @@ package com.severalcircles.flames.command.data;
 import com.severalcircles.flames.command.FlamesCommand;
 import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.features.Analysis;
 import com.severalcircles.flames.features.external.severalcircles.FlamesAssets;
 import com.severalcircles.flames.system.Flames;
 //import discord4j.core.event.domain.message.MessageCreateEvent;
@@ -18,7 +17,6 @@ import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import java.awt.*;
 import java.time.Instant;
 import java.util.Locale;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class GlobalDataCommand implements FlamesCommand {
@@ -27,8 +25,6 @@ public class GlobalDataCommand implements FlamesCommand {
 //        Message message = event.getMessage();
         User user = event.getUser();
         ResourceBundle resources = ResourceBundle.getBundle("commands/GlobalDataCommand", Locale.ENGLISH);
-//        System.out.println("based");
-//        final String trending = trendingEntity;
         MessageEmbed embed = new EmbedBuilder()
                 .setColor(new Color(15, 131, 217))
                 .setAuthor(resources.getString("author"), null, user.getAvatarUrl())

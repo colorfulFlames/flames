@@ -5,6 +5,9 @@ import java.util.Date;
 
 @SuppressWarnings("deprecation")
 public class FlamesPrettyDate {
+    /**
+     * @return String with Instant formatted as a nice, human-readable date string.
+     */
     public static String prettifyDate(Instant instant) {
         String prettyDate = "";
         switch (Date.from(instant).getMonth()) {

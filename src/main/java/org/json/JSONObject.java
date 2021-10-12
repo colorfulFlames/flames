@@ -100,6 +100,7 @@ import java.util.regex.Pattern;
  * @author JSON.org
  * @version 2016-08-15
  */
+@SuppressWarnings("ALL")
 public class JSONObject {
     /**
      * JSONObject.NULL is equivalent to the value that JavaScript calls null,
@@ -2076,6 +2077,7 @@ public class JSONObject {
      * @param other The other JSONObject
      * @return true if they are equal
      */
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean similar(Object other) {
         try {
             if (!(other instanceof JSONObject)) {
@@ -2131,6 +2133,7 @@ public class JSONObject {
      * @param r the right value to compare. Can not be <code>null</code>.
      * @return true if the numbers are similar, false otherwise.
      */
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     static boolean isNumberSimilar(Number l, Number r) {
         if (!numberIsFinite(l) || !numberIsFinite(r)) {
             // non-finite numbers are never similar
@@ -2156,6 +2159,7 @@ public class JSONObject {
         return lBigDecimal.compareTo(rBigDecimal) == 0;
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private static boolean numberIsFinite(Number n) {
         if (n instanceof Double && (((Double) n).isInfinite() || ((Double) n).isNaN())) {
             return false;
