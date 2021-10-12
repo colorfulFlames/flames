@@ -1,6 +1,0 @@
-package com.severalcircles.flames.features.rank;
-
-public enum Rank {
-    UNRANKED, APPROACHING_BRONZE, BRONZE, SILVER, SHINING_SILVER, GOLD, BEYOND_GOLD, PLATINUM, SPARKLING_PLATINUM, PLATINUM_SUMMIT
-
-}
