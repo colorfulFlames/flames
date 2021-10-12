@@ -7,6 +7,9 @@ import org.jetbrains.annotations.NotNull;
 import java.time.Instant;
 import java.util.Properties;
 
+/**
+ * Represents Fun Facts data for a FlamesUser
+ */
 public class UserFunFacts implements FlamesData {
     private Instant sadDay;
     private float lowestEmotion;
@@ -18,6 +21,11 @@ public class UserFunFacts implements FlamesData {
     private Rank bestRank;
 
     private int frenchToastMentioned;
+
+    /**
+     *
+     * @return Properties object which can be written to a file or returned by the Flames API
+     */
     public Properties createData() {
         Properties data = new Properties();
         data.put("sadDay", sadDay.toString());
