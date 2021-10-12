@@ -5,6 +5,9 @@ import com.google.cloud.language.v1.Document.Type;
 import java.io.*;
 import java.util.*;
 
+/**
+ * Handles most of the 'black box' components of Flames, namely the sentiment and entity analysis.
+ */
 public class Analysis {
     public static Map<String, Integer> entityCache = new HashMap<>();
     //    public static Map<String, String> knowledgeBase = new HashMap<>();
@@ -24,6 +27,10 @@ public class Analysis {
             return sentiment;
         }
     }
+
+    /**
+     * @return true if message mentions french toast, else false.
+     */
     public static boolean analyzeEntities(String message) {
         boolean toast = false;
         // Instantiate the Language client com.google.cloud.language.v1.LanguageServiceClient
