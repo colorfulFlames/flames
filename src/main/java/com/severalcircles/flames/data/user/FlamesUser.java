@@ -5,6 +5,9 @@ import com.severalcircles.flames.data.FlamesData;
 import java.time.Instant;
 import java.util.Properties;
 
+/**
+ * Object used to represent a user in reference to their Flames Data
+ */
 public class FlamesUser implements FlamesData {
 
     public static final double latestVersion = 2.0;
@@ -14,7 +17,6 @@ public class FlamesUser implements FlamesData {
     private Instant lastSeen;
     private int streak;
     private String discordId;
-    private String locale;
     private UserStats stats;
     private int consent;
     private UserFunFacts funFacts;
@@ -24,6 +26,10 @@ public class FlamesUser implements FlamesData {
         return funFacts;
     }
 
+    /**
+     *
+     * @return Properties data that can then be written to a file or returned by the Flams API
+     */
     public Properties createData() {
         Properties data = new Properties();
         data.put("score", score + "");
@@ -55,11 +61,6 @@ public class FlamesUser implements FlamesData {
         this.dataVersion = dataVersion;
         this.lastSeen = lastSeen;
     }
-
-    public String getLocale() {
-        return locale;
-    }
-
     public UserStats getStats() {
         return stats;
     }
