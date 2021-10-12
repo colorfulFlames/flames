@@ -40,7 +40,7 @@ jobs:
         git config --local user.name "github-actions[bot]"
         git checkout -b gh-pages
         git rm . -r -f
-        git add ./docs -r
+        git add ./docs
         git commit -m "Add changes" -a
         
     - name: Push changes
