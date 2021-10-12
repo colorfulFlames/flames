@@ -33,5 +33,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           cd $GITHUB_WORKSPACE
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
           chmod 777 ./makedocs.sh
           ./makedocs.sh
