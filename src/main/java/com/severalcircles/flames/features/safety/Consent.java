@@ -3,6 +3,7 @@ package com.severalcircles.flames.features.safety;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.exceptions.InsufficientPermissionException;
 import net.dv8tion.jda.api.interactions.components.Button;
 
 import java.awt.*;
@@ -12,7 +13,7 @@ import java.util.*;
 public class Consent {
 //    public static final List<String> awaitingConsent = new LinkedList<>();
     @SuppressWarnings("SameReturnValue")
-    public static void getConsent(User user) {
+    public static void getConsent(User user) throws InsufficientPermissionException {
         ResourceBundle resources = ResourceBundle.getBundle("features/Consent", Locale.ENGLISH);
         MessageEmbed embed = new EmbedBuilder()
                 .setColor(Color.PINK)

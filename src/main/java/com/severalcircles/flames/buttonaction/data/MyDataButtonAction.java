@@ -28,7 +28,7 @@ public class MyDataButtonAction implements ButtonAction {
             e.printStackTrace();
         }
         User user = event.getUser();
-        ResourceBundle resources = ResourceBundle.getBundle("commands/MyDataCommand", Locale.forLanguageTag(sender.getLocale()));
+        ResourceBundle resources = ResourceBundle.getBundle("commands/MyDataCommand", Locale.ENGLISH);
         String rank;
         switch(Ranking.getRank(sender.getScore())) {
             case APPROACHING_BRONZE:
@@ -80,7 +80,7 @@ public class MyDataButtonAction implements ButtonAction {
                 .addField(resources.getString("emotion"), emotionString, true)
                 .setThumbnail(FlamesAssets.getRankIcon(Ranking.getRank(sender.getScore())))
                 .setFooter(resources.getString("footer"), Flames.api.getSelfUser().getAvatarUrl()).build();
-        event.editMessageEmbeds(embed).setActionRow(net.dv8tion.jda.api.interactions.components.Button.success("mydata", "My Data"), net.dv8tion.jda.api.interactions.components.Button.primary("stats", "Stats"), net.dv8tion.jda.api.interactions.components.Button.primary("funFacts", "Fun Facts"), Button.danger("manageData", "Manage User Data")).queue();
+        event.editMessageEmbeds(embed).setActionRow(net.dv8tion.jda.api.interactions.components.Button.success("mydata", "My Data"), net.dv8tion.jda.api.interactions.components.Button.primary("stats", "Stats"), net.dv8tion.jda.api.interactions.components.Button.primary("funFacts", "Fun Facts")).complete();
 
     }
 }
