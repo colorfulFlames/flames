@@ -33,7 +33,7 @@ jobs:
     - name: Build Javadoc
       run: gradle javadoc
     - name: Copy Javadoc to Pages
-      run: cp -R ./build/docs/javadocs .
+      run: cp -R ./build/docs/javadoc .
     - name: Commit files
       run: |
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
