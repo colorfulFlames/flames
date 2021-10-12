@@ -30,7 +30,7 @@ public class UserFunFacts implements FlamesData {
         data.put("bestRank", bestRank.toString());
         return data;
     }
-    public UserFunFacts(@NotNull Instant sadDay, @NotNull float lowestEmotion, Instant happyDay, @NotNull float highestEmotion, @NotNull int highestFlamesScore, @NotNull int lowestFlamesScore, @NotNull Rank bestRank, @NotNull int frenchToastMentioned) {
+    public UserFunFacts(@NotNull Instant sadDay, float lowestEmotion, Instant happyDay, float highestEmotion, int highestFlamesScore, int lowestFlamesScore, @NotNull Rank bestRank, int frenchToastMentioned) {
         this.sadDay = sadDay;
         this.lowestEmotion = lowestEmotion;
         this.happyDay = happyDay;

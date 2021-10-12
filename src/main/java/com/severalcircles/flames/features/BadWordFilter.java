@@ -1,7 +1,6 @@
 package com.severalcircles.flames.features;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -14,7 +13,7 @@ public class BadWordFilter {
 
   private static int largestWordLength = 0;
 
-  private static final Map<String, String[]> allBadWords = new HashMap<String, String[]>();
+  private static final Map<String, String[]> allBadWords = new HashMap<>();
 
   /**
    * Iterates over a String input and checks whether any cuss word was found - and for any/all cuss word found, 
@@ -47,8 +46,8 @@ public class BadWordFilter {
         if (allBadWords.containsKey(wordToCheck)) {
           String[] ignoreCheck = allBadWords.get(wordToCheck);
           boolean ignore = false;
-          for (int stringIndex = 0; stringIndex < ignoreCheck.length; stringIndex++) {
-            if (modifiedInput.contains(ignoreCheck[stringIndex])) {
+          for (String s : ignoreCheck) {
+            if (modifiedInput.contains(s)) {
               ignore = true;
               break;
             }
@@ -85,10 +84,10 @@ public class BadWordFilter {
           .openConnection().getInputStream()));
       
       
-      String currentLine = "";
+      String currentLine;
       while ((currentLine = reader.readLine()) != null) {
         readCounter++;
-        String[] content = null;
+        String[] content;
         try {
           if (1 == readCounter) {
             continue;
@@ -116,10 +115,10 @@ public class BadWordFilter {
 
           // Make sure there are no capital letters in the spreadsheet
           allBadWords.put(word.replaceAll(" ", "").toLowerCase(), ignore_in_combination_with_words);
-        } catch (Exception except) {
+        } catch (Exception ignored) {
         }
       } // end while
-    } catch (IOException except) {
+    } catch (IOException ignored) {
     }
   } // end loadBadWords
 

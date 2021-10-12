@@ -13,10 +13,8 @@ import com.severalcircles.flames.command.data.HiCommand;
 import com.severalcircles.flames.command.data.MyDataCommand;
 import com.severalcircles.flames.command.data.TodayCommand;
 import com.severalcircles.flames.data.base.FlamesDataManager;
-import com.severalcircles.flames.data.global.FlushHistoricalData;
 import com.severalcircles.flames.events.ButtonEvent;
 import com.severalcircles.flames.events.CommandEvent;
-import com.severalcircles.flames.events.MemberAddEvent;
 import com.severalcircles.flames.events.MessageEvent;
 import com.severalcircles.flames.features.external.spotify.ReconnectRunnable;
 import com.severalcircles.flames.features.external.spotify.SpotifyConnection;
@@ -100,12 +98,12 @@ public class Flames {
         commandMap.put("help", new HelpCommand());
         commandMap.put("debug", new DebugCommand());
         commandMap.put("today", new TodayCommand());
+        //noinspection ResultOfMethodCallIgnored
         api.updateCommands();
         // --- Events ---
         new CommandEvent().register(api);
         new MessageEvent().register(api);
         new ButtonEvent().register(api);
-        new MemberAddEvent().register(api);
     }
 
     /**

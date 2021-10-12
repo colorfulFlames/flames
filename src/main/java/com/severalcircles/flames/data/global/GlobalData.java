@@ -1,6 +1,5 @@
 package com.severalcircles.flames.data.global;
 
-import ch.qos.logback.core.util.FileUtil;
 import com.severalcircles.flames.data.base.FlamesDataManager;
 
 import java.io.*;
@@ -38,7 +37,7 @@ public class GlobalData {
         try {
             averageScore = globalScore / participants;
         } catch (ArithmeticException e) {
-            if (participants == 0) participants = 1;
+            participants = 1;
             averageScore = globalScore;
             write();
         }

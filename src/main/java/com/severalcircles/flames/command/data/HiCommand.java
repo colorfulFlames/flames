@@ -30,7 +30,7 @@ public class HiCommand implements FlamesCommand {
         User discordUser = event.getUser();
         int dailyBonus;
         if (Instant.now().truncatedTo(ChronoUnit.DAYS).isAfter(flamesUser.getLastSeen().truncatedTo(ChronoUnit.DAYS))) {
-            if (Instant.now().truncatedTo(ChronoUnit.DAYS).compareTo(flamesUser.getLastSeen().truncatedTo(ChronoUnit.DAYS)) == 1) flamesUser.setStreak(flamesUser.getStreak() + 1); else flamesUser.setStreak(0);
+            if (Instant.now().truncatedTo(ChronoUnit.DAYS).compareTo(flamesUser.getLastSeen().truncatedTo(ChronoUnit.DAYS)) > 0) flamesUser.setStreak(flamesUser.getStreak() + 1); else flamesUser.setStreak(0);
             dailyBonus = baseBonus + (riseBonus * flamesUser.getStats().getRISE()) + (streakBonus * flamesUser.getStreak()) + (int) Math.round(Math.random() * randomBonus);
             flamesUser.addScore(dailyBonus);
             GlobalData.globalScore += dailyBonus;
@@ -39,14 +39,14 @@ public class HiCommand implements FlamesCommand {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            String timeMessage = "Hi, %s";
+            String timeMessage;
             if (now.getHours() < 6) timeMessage = "A sunrise as pretty as %s";
             else if (now.getHours() < 9) timeMessage = "Good Morning, %s";
             else if (now.getHours() < 12) timeMessage = "Hi, %s";
             else if (now.getHours() < 15) timeMessage = "Good Afternoon, %s";
             else if (now.getHours() < 18) timeMessage = "Nice work today, %s!";
             else if (now.getHours() < 21) timeMessage = "Good Evening, %s";
-            else if (now.getHours() >= 21) timeMessage = "Have a good night, %s";
+            else timeMessage = "Have a good night, %s";
             MessageEmbed embed = new EmbedBuilder()
                     .setTitle("Welcome Back to Flames")
                     .setAuthor(String.format(timeMessage, discordUser.getName()), null, discordUser.getAvatarUrl())

@@ -35,8 +35,11 @@ public class FlamesDataManager {
      */
     public static void prepare() {
         Logger.getGlobal().log(Level.INFO, "Preparing Data...");
+        //noinspection ResultOfMethodCallIgnored
         flamesDirectory.mkdir();
+        //noinspection ResultOfMethodCallIgnored
         userDirectory.mkdir();
+        //noinspection ResultOfMethodCallIgnored
         guildDirectory.mkdir();
     }
 
@@ -72,13 +75,12 @@ public class FlamesDataManager {
 
     /**
      * Saves data for a FlamesUser to a file in the user directory
-     * @param flamesUser
      * @throws IOException If flames can't write files for whatever reason.
      */
     public static void save(FlamesUser flamesUser) throws IOException {
         String discordId = flamesUser.getDiscordId();
         String name;
-        try {name = Flames.api.getUserById(discordId).getName(); } catch (NullPointerException e) {name = "An Unknown Flames User";}
+        try {name = Objects.requireNonNull(Flames.api.getUserById(discordId)).getName(); } catch (NullPointerException e) {name = "An Unknown Flames User";}
 //        OutputStream outputStream;
         File udir = new File(userDirectory.getAbsolutePath() + "/" + discordId);
         File user = new File(udir.getAbsolutePath() + "/user.fl");
@@ -102,7 +104,6 @@ public class FlamesDataManager {
      * Reads data for a user from the data directory
      * @param user Discord User to get data for
      * @return A FlamesUser created from the data file
-     * @throws IOException
      * @throws ConsentException If the user hasn't consented yet won't return data
      */
     public static FlamesUser readUser(User user) throws IOException, ConsentException {
@@ -156,7 +157,6 @@ public class FlamesDataManager {
      * @param user Discord User to get data for
      * @param skipConsent If true, won't throw an exception if the user hasn't consented. For most cases, leave this false or null.
      * @return A FlamesUser created from the data file
-     * @throws IOException
      * @throws ConsentException If the user hasn't consented yet won't return data
      */
     public static FlamesUser readUser(User user, boolean skipConsent) throws IOException, ConsentException {
@@ -207,9 +207,6 @@ public class FlamesDataManager {
 
     /**
      * Functions the same as the other readUser function, except skips consent and accepts an ID string instead.
-     * @param id
-     * @return
-     * @throws IOException
      */
     public static FlamesUser readUser(String id) throws IOException {
         FlamesUser fluser = new FlamesUser();

@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 import java.io.IOException;
 import java.time.Instant;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -71,9 +72,10 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             Today.highScore = user.getScore();
             Today.highUser = event.getAuthor().getName();
         }
-        int quoteChance = (int) Math.round(Math.random() * Math.round(GlobalData.participants / 2));
+        @SuppressWarnings("IntegerDivisionInFloatingPointContext") int quoteChance = (int) Math.round(Math.random() * Math.round(GlobalData.participants / 2));
         System.out.println(quoteChance);
-        if (Today.quote[0] == "We're still waiting for somebody to say something epic." && sentiment.getMagnitude() >= 0.9 && quoteChance == Math.min(1, Math.round(GlobalData.participants / 2))) {
+        //noinspection IntegerDivisionInFloatingPointContext
+        if (Objects.equals(Today.quote[0], "We're still waiting for somebody to say something epic.") && sentiment.getMagnitude() >= 0.9 && quoteChance == Math.min(1, Math.round(GlobalData.participants / 2))) {
             Today.quote = new String[]{content, event.getAuthor().getName()};
             MessageEmbed congrats = new EmbedBuilder()
                     .setAuthor("Flames", null, event.getAuthor().getAvatarUrl())
