@@ -40,7 +40,7 @@ public class CommandEvent extends ListenerAdapter implements FlamesDiscordEvent 
                 } catch (IllegalStateException e) {
                     Logger.getGlobal().log(Level.INFO, "Somebody pressed a button :3");
                 } catch (ConsentException e) {
-                    event.reply("Hey bestie, looks like you've opted not to have your data collected by Flames. You can't have your cake, but then not eat it, so would you mind eating the cake first? Thanks!");
+                    event.reply("Hey bestie, looks like you've opted not to have your data collected by Flames. You can't have your cake, but then not eat it, so would you mind eating the cake first? Thanks!").complete();
                 }
             }
         }
