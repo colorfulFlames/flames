@@ -7,12 +7,19 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Manages Global Data such as average and global scores
+ */
 @SuppressWarnings("CanBeFinal")
 public class GlobalData {
     public static int averageScore;
     public static int globalScore;
     public static int participants;
 
+    /**
+     * Writes to data file.
+     *
+     */
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void write() throws IOException {
         Logger.getGlobal().log(Level.FINE, "Saving global data");
@@ -25,6 +32,11 @@ public class GlobalData {
         OutputStream outputStream = new FileOutputStream(file);
         properties.store(outputStream, "Flames Global Data File");
     }
+
+    /**
+     * Reads values from data files and then assigns them to the appropriate objects.
+     *
+     */
     @SuppressWarnings("deprecation")
     public static void read() throws IOException {
         File file = new File(FlamesDataManager.flamesDirectory.getAbsolutePath() + "/global.properties");
