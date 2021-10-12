@@ -17,12 +17,22 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Class for managing Flames data, such as user and guild data.
+ */
 public class FlamesDataManager {
+    /**
+     * Data directory
+     */
     public static final File flamesDirectory = new File(System.getProperty("user.dir") + "/Flames");
     static final File userDirectory = new File(flamesDirectory.getAbsolutePath() + "/user");
     static final File guildDirectory = new File(flamesDirectory.getAbsolutePath() + "/guild");
 
     //    static List<File> openFiles = new LinkedList<>();
+
+    /**
+     * Checks if data directories exists and creates them if not.
+     */
     public static void prepare() {
         Logger.getGlobal().log(Level.INFO, "Preparing Data...");
         flamesDirectory.mkdir();
@@ -60,6 +70,11 @@ public class FlamesDataManager {
 
     }
 
+    /**
+     * Saves data for a FlamesUser to a file in the user directory
+     * @param flamesUser
+     * @throws IOException If flames can't write files for whatever reason.
+     */
     public static void save(FlamesUser flamesUser) throws IOException {
         String discordId = flamesUser.getDiscordId();
         String name;
@@ -82,6 +97,14 @@ public class FlamesDataManager {
         flamesUser.getFunFacts().createData().store(os3, "Fun Facts for " + name);
 
     }
+
+    /**
+     * Reads data for a user from the data directory
+     * @param user Discord User to get data for
+     * @return A FlamesUser created from the data file
+     * @throws IOException
+     * @throws ConsentException If the user hasn't consented yet won't return data
+     */
     public static FlamesUser readUser(User user) throws IOException, ConsentException {
         FlamesUser fluser = new FlamesUser();
         UserStats stats = new UserStats();
@@ -127,6 +150,15 @@ public class FlamesDataManager {
         if (fluser.getConsent() != 1) throw new ConsentException(fluser.getConsent(), user);
         return fluser;
     }
+
+    /**
+     * Reads data for a user from the data directory
+     * @param user Discord User to get data for
+     * @param skipConsent If true, won't throw an exception if the user hasn't consented. For most cases, leave this false or null.
+     * @return A FlamesUser created from the data file
+     * @throws IOException
+     * @throws ConsentException If the user hasn't consented yet won't return data
+     */
     public static FlamesUser readUser(User user, boolean skipConsent) throws IOException, ConsentException {
         FlamesUser fluser = new FlamesUser();
         UserStats stats = new UserStats();
@@ -173,6 +205,12 @@ public class FlamesDataManager {
         return fluser;
     }
 
+    /**
+     * Functions the same as the other readUser function, except skips consent and accepts an ID string instead.
+     * @param id
+     * @return
+     * @throws IOException
+     */
     public static FlamesUser readUser(String id) throws IOException {
         FlamesUser fluser = new FlamesUser();
         UserStats stats = new UserStats();
