@@ -17,11 +17,8 @@ import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import java.awt.*;
 import java.time.Instant;
 import java.time.ZoneOffset;
-import java.time.temporal.ChronoField;
-import java.time.temporal.ChronoUnit;
-import java.util.Locale;
 import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.Objects;
 
 public class TodayCommand implements FlamesCommand {
     @Override
@@ -29,7 +26,7 @@ public class TodayCommand implements FlamesCommand {
         String trendingEntity = "";
         int times = 0;
         for (Map.Entry<String, Integer> entry: Analysis.entityCache.entrySet()) {
-            if (entry.getKey() != trendingEntity && entry.getValue() > times) {
+            if (!Objects.equals(entry.getKey(), trendingEntity) && entry.getValue() > times) {
                 trendingEntity = entry.getKey();
                 times = entry.getValue();
             }

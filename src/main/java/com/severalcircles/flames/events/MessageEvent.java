@@ -7,6 +7,7 @@ package com.severalcircles.flames.events;
 import com.google.cloud.language.v1.Sentiment;
 import com.severalcircles.flames.data.base.ConsentException;
 import com.severalcircles.flames.data.base.FlamesDataManager;
+import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.UserFunFacts;
 import com.severalcircles.flames.features.Analysis;
@@ -24,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 import java.io.IOException;
 import java.time.Instant;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -62,7 +64,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         if (score >= 0) score *= user.getStats().getPOW();
         else score /= user.getStats().getRES();
         user.setEmotion(user.getEmotion() + sentiment.getScore());
-        user.getStats().addExp(score);
+        user.getStats().addExp(Math.max(0, score));
         user.setScore(user.getScore() + score);
 
         Today.emotion += score;
@@ -70,9 +72,10 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             Today.highScore = user.getScore();
             Today.highUser = event.getAuthor().getName();
         }
-        int quoteChance = (int) Math.round(Math.random() * 2);
+        @SuppressWarnings("IntegerDivisionInFloatingPointContext") int quoteChance = (int) Math.round(Math.random() * Math.round(GlobalData.participants / 2));
         System.out.println(quoteChance);
-        if (Today.quote[0] == "We're still waiting for somebody to say something epic." && sentiment.getMagnitude() >= 0.9 && quoteChance == 1) {
+        //noinspection IntegerDivisionInFloatingPointContext
+        if (Objects.equals(Today.quote[0], "We're still waiting for somebody to say something epic.") && sentiment.getMagnitude() >= 0.9 && quoteChance == Math.min(1, Math.round(GlobalData.participants / 2))) {
             Today.quote = new String[]{content, event.getAuthor().getName()};
             MessageEmbed congrats = new EmbedBuilder()
                     .setAuthor("Flames", null, event.getAuthor().getAvatarUrl())

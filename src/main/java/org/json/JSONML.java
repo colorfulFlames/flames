@@ -32,6 +32,7 @@ SOFTWARE.
  * @author JSON.org
  * @version 2016-01-30
  */
+@SuppressWarnings("ALL")
 public class JSONML {
     /**
      * Parse XML values and store them in a JSONArray.

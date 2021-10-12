@@ -5,6 +5,9 @@ import com.severalcircles.flames.data.global.GlobalData;
 
 import java.util.Properties;
 
+/**
+ * Represents Stats data for a FlamesUser
+ */
 public class UserStats implements FlamesData {
     public static final double powerGrowth = 0.75;
     public static final double resistanceGrowth = 0.5;
@@ -77,7 +80,10 @@ public class UserStats implements FlamesData {
             if (random <= charismaGrowth) CAR++;
         }
     }
-
+    /**
+     *
+     * @return Properties object which can be written to a file or returned by the Flames API
+     */
     public Properties createData() {
         Properties data = new Properties();
         data.put("exp", exp + "");

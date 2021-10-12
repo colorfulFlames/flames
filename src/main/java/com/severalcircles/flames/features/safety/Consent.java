@@ -9,9 +9,15 @@ import net.dv8tion.jda.api.interactions.components.Button;
 import java.awt.*;
 import java.time.Instant;
 import java.util.*;
-
+/**
+ * Handles getting privacy policy consent from users
+ */
 public class Consent {
 //    public static final List<String> awaitingConsent = new LinkedList<>();
+
+    /**
+     * Sends the consent dialog to a user
+     */
     @SuppressWarnings("SameReturnValue")
     public static void getConsent(User user) throws InsufficientPermissionException {
         ResourceBundle resources = ResourceBundle.getBundle("features/Consent", Locale.ENGLISH);

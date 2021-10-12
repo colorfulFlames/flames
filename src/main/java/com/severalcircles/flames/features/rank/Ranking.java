@@ -4,8 +4,15 @@ import com.severalcircles.flames.data.global.GlobalData;
 
 import java.io.IOException;
 
+/**
+ * Determines thresholds for each rank and allows getting the rank for a given score.
+ */
 public class Ranking {
     public static final int[] thresholds = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+    /**
+     * Re-calculates the rank thresholds based on the current average score
+     */
     public static void updateThresholds() throws IOException {
         GlobalData.read();
         // Bronze is the average score
@@ -36,6 +43,12 @@ public class Ranking {
         thresholds[8] = Math.abs(2 * thresholds[6]);
         System.out.println(thresholds[8]);
     }
+
+    /**
+     * Gets the Rank for a given score value
+     * @param score Input score value
+     * @return Corresponding rank
+     */
     public static Rank getRank(int score) {
         // what a glorious function
         if (thresholds[0] <= 0) return Rank.UNRANKED;
@@ -51,7 +64,13 @@ public class Ranking {
         else if (score >= thresholds[8]) return Rank.PLATINUM_SUMMIT;
         else return Rank.UNRANKED;
     }
-    public static int getRank(Rank rank) {
+
+    /**
+     * Gets the integer value for a Rank object
+     * @param rank Input Rank Value
+     * @return Corresponding Integer
+     */
+    protected static int getRank(Rank rank) {
         // yet another glorious function
         switch(rank) {
             case APPROACHING_BRONZE: return 0;

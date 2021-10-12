@@ -16,6 +16,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
+/**
+ * Handles connecting to Spotify and retrieving data from it
+ */
 public class SpotifyConnection {
     String token;
     public static final String clientId = System.getenv("SPOTIFY_CLIENT");

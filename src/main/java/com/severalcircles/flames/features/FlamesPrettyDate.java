@@ -5,43 +5,46 @@ import java.util.Date;
 
 @SuppressWarnings("deprecation")
 public class FlamesPrettyDate {
+    /**
+     * @return String with Instant formatted as a nice, human-readable date string.
+     */
     public static String prettifyDate(Instant instant) {
         String prettyDate = "";
         switch (Date.from(instant).getMonth()) {
             default:
-            case 1:
+            case 0:
                 prettyDate += "January ";
                 break;
-            case 2:
+            case 1:
                 prettyDate += "February ";
                 break;
-            case 3:
+            case 2:
                 prettyDate += "March ";
                 break;
-            case 4:
+            case 3:
                 prettyDate += "April ";
                 break;
-            case 5:
+            case 4:
                 prettyDate += "May ";
                 break;
-            case 6:
+            case 5:
                 prettyDate += "June ";
                 break;
-            case 7:
+            case 6:
                 prettyDate += "July ";
                 break;
-            case 8:
+            case 7:
                 prettyDate += "August ";
                 break;
-            case 9:
+            case 8:
                 prettyDate += "September ";
                 break;
-            case 10:
+            case 9:
                 prettyDate += "October ";
                 break;
-            case 11:
+            case 10:
                 prettyDate += "November ";
-            case 12:
+            case 11:
                 prettyDate += "December ";
         }
         prettyDate += Date.from(instant).getDate() + ", " + (Date.from(instant).getYear()+1900);

@@ -13,6 +13,7 @@ import org.json.JSONException;
 import java.awt.*;
 import java.io.IOException;
 import java.time.Instant;
+import java.util.Objects;
 
 public class ArtistCommand implements FlamesCommand {
     @Override
@@ -20,7 +21,7 @@ public class ArtistCommand implements FlamesCommand {
         event.deferReply().queue();
         SpotifyArtist artist;
         try {
-            artist = Flames.spotifyConnection.getArtist((event.getOption("artist").getAsString()));
+            artist = Flames.spotifyConnection.getArtist((Objects.requireNonNull(event.getOption("artist")).getAsString()));
         } catch (IOException e) {
             e.printStackTrace();
             event.getHook().sendMessage("Couldn't connect to Spotify right now. Try again later.").queue();

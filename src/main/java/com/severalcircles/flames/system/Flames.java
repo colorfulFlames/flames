@@ -13,10 +13,8 @@ import com.severalcircles.flames.command.data.HiCommand;
 import com.severalcircles.flames.command.data.MyDataCommand;
 import com.severalcircles.flames.command.data.TodayCommand;
 import com.severalcircles.flames.data.base.FlamesDataManager;
-import com.severalcircles.flames.data.global.FlushHistoricalData;
 import com.severalcircles.flames.events.ButtonEvent;
 import com.severalcircles.flames.events.CommandEvent;
-import com.severalcircles.flames.events.MemberAddEvent;
 import com.severalcircles.flames.events.MessageEvent;
 import com.severalcircles.flames.features.external.spotify.ReconnectRunnable;
 import com.severalcircles.flames.features.external.spotify.SpotifyConnection;
@@ -43,7 +41,13 @@ import java.util.logging.Logger;
 public class Flames {
     public static final Map<String, FlamesCommand> commandMap = new HashMap<>();
     public static JDA api;
+    /**
+     * Global Spotify Connection referenced throughout Flames
+     */
     public static SpotifyConnection spotifyConnection;
+    /**
+     * Bugsnag instance used to report bugs
+     */
     public static Bugsnag bugsnag;
     private static int fatalErrorCounter;
     static {
@@ -53,6 +57,11 @@ public class Flames {
             Logger.getGlobal().log(Level.SEVERE, "Failed to connect to Spotify.");
         }
     }
+
+    /**
+     * Bootloader function
+     * @param args any arguments passed to Flames via the command line
+     */
     public static void main(String[] args) {
         // --- Initial Preparations ---
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("America/New_York"));
@@ -89,13 +98,17 @@ public class Flames {
         commandMap.put("help", new HelpCommand());
         commandMap.put("debug", new DebugCommand());
         commandMap.put("today", new TodayCommand());
+        //noinspection ResultOfMethodCallIgnored
         api.updateCommands();
         // --- Events ---
         new CommandEvent().register(api);
         new MessageEvent().register(api);
         new ButtonEvent().register(api);
-        new MemberAddEvent().register(api);
     }
+
+    /**
+     * Increases the counter of the number of times a fatal error has occurred. If this number gets too high, Flames will exit.
+     */
     public static void incrementErrorCount() {
         fatalErrorCounter++;
         if (fatalErrorCounter > 10) {
