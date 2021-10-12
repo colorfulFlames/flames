@@ -43,7 +43,13 @@ import java.util.logging.Logger;
 public class Flames {
     public static final Map<String, FlamesCommand> commandMap = new HashMap<>();
     public static JDA api;
+    /**
+     * Global Spotify Connection referenced throughout Flames
+     */
     public static SpotifyConnection spotifyConnection;
+    /**
+     * Bugsnag instance used to report bugs
+     */
     public static Bugsnag bugsnag;
     private static int fatalErrorCounter;
     static {
@@ -53,6 +59,11 @@ public class Flames {
             Logger.getGlobal().log(Level.SEVERE, "Failed to connect to Spotify.");
         }
     }
+
+    /**
+     * Bootloader function
+     * @param args any arguments passed to Flames via the command line
+     */
     public static void main(String[] args) {
         // --- Initial Preparations ---
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("America/New_York"));
@@ -96,6 +107,10 @@ public class Flames {
         new ButtonEvent().register(api);
         new MemberAddEvent().register(api);
     }
+
+    /**
+     * Increases the counter of the number of times a fatal error has occurred. If this number gets too high, Flames will exit.
+     */
     public static void incrementErrorCount() {
         fatalErrorCounter++;
         if (fatalErrorCounter > 10) {
