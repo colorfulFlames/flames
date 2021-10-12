@@ -1,4 +1,4 @@
-BASEDIR=$(CURDIR)/src/main
+BASEDIR=$(CURDIR)/src/main/java
 OUTPUTDIR=$(CURDIR)/docs# you may change docs with custom folder name
 PACKAGE=com.severalcircles.flames# write the package name here
 html:
