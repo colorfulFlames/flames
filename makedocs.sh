@@ -1,4 +1,4 @@
 make html
 git add --all
-git commit -a --allow-empty-message
+git commit -a -m "Update Docs"
 git push
