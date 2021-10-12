@@ -1,5 +1,8 @@
 package com.severalcircles.flames.features.external.spotify;
 
+/**
+ * Represents an Artist on Spotify
+ */
 public class SpotifyArtist {
 //    String url;
     int followers;

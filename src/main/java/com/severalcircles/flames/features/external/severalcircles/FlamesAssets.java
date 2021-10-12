@@ -2,6 +2,9 @@ package com.severalcircles.flames.features.external.severalcircles;
 
 import com.severalcircles.flames.features.rank.Rank;
 
+/**
+ * Contains permalinks to assets stored at severalcircles.com.
+ */
 public class FlamesAssets {
     private static final String rankUrl = "https://severalcircles.com/flames/assets/icons/rank/";
     public static final String globalDataUrl = "https://severalcircles.com/flames/assets/icons/global_data.png";
