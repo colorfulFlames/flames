@@ -12,7 +12,7 @@ import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.UserFunFacts;
 import com.severalcircles.flames.features.Analysis;
 import com.severalcircles.flames.features.BadWordFilter;
-import com.severalcircles.flames.features.FlamesPrettyDate;
+import com.severalcircles.flames.features.StringUtils;
 import com.severalcircles.flames.features.today.Today;
 import com.severalcircles.flames.system.Flames;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -80,7 +80,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             MessageEmbed congrats = new EmbedBuilder()
                     .setAuthor("Flames", null, event.getAuthor().getAvatarUrl())
                     .setTitle(event.getAuthor().getName() + ", congratulations on being selected for the quote of the day!")
-                    .addField("\"" + content + "\"", "- " + event.getAuthor().getName() + ", " + FlamesPrettyDate.prettifyDate(Instant.now()), true)
+                    .addField("\"" + content + "\"", "- " + event.getAuthor().getName() + ", " + StringUtils.prettifyDate(Instant.now()), true)
                     .setFooter("/today to see it for yourself!", Flames.api.getSelfUser().getAvatarUrl())
                     .setColor(Color.CYAN.darker())
                     .build();

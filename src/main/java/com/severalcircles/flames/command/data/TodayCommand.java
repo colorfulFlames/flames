@@ -7,7 +7,7 @@ package com.severalcircles.flames.command.data;
 import com.severalcircles.flames.command.FlamesCommand;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.features.Analysis;
-import com.severalcircles.flames.features.FlamesPrettyDate;
+import com.severalcircles.flames.features.StringUtils;
 import com.severalcircles.flames.features.today.Today;
 import com.severalcircles.flames.system.Flames;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -43,14 +43,14 @@ public class TodayCommand implements FlamesCommand {
         else if (emotion > -50) emotionString = "A little sad";
         else emotionString = "Pretty upset";
         MessageEmbed today = new EmbedBuilder()
-                .setAuthor("Today for " + day + ", " + FlamesPrettyDate.prettifyDate(now),null,  event.getUser().getAvatarUrl())
+                .setAuthor("Today for " + day + ", " + StringUtils.prettifyDate(now),null,  event.getUser().getAvatarUrl())
                 .setTitle("Today...")
                 .addField("We're talking about", trendingEntity, true)
                 .addBlankField(true)
                 .addField("We're feeling", emotionString + " (" + emotion + ")", true)
                 .addField("The highest scoring user is", Today.highUser + " (" + Today.highScore + ")", true)
                 .addBlankField(false)
-                .addField("\"" + Today.quote[0] + "\"", " - " + Today.quote[1] + ", " + FlamesPrettyDate.prettifyDate(now), false)
+                .addField("\"" + Today.quote[0] + "\"", " - " + Today.quote[1] + ", " + StringUtils.prettifyDate(now), false)
                 .addBlankField(false)
                 .addField("...and that's what today is all about.", "What will tomorrow bring?", true)
                 .setColor(Color.GREEN.darker())
