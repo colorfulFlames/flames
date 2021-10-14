@@ -4,6 +4,7 @@ import com.severalcircles.flames.command.FlamesCommand;
 import com.severalcircles.flames.data.base.FlamesDataManager;
 import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.features.StringUtils;
 import com.severalcircles.flames.features.external.severalcircles.FlamesAssets;
 import com.severalcircles.flames.system.Flames;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -55,7 +56,7 @@ public class HiCommand implements FlamesCommand {
                     .setImage(FlamesAssets.welcomeBackUrl)
                     .addField("Daily Bonus", "" + dailyBonus, true)
                     .setColor(Color.ORANGE)
-                    .addField("Your Flames Score", "" + flamesUser.getScore() + " FP", true)
+                    .addField("Your Flames Score", "" + StringUtils.formatScore(flamesUser.getScore()) + " FP", true)
                     .setTimestamp(Instant.now()).build();
             event.replyEmbeds(embed).queue();
             flamesUser.setLastSeen(Instant.now());

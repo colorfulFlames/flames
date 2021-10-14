@@ -3,7 +3,7 @@ package com.severalcircles.flames.command;
 import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.events.ButtonEvent;
-import com.severalcircles.flames.features.FlamesPrettyDate;
+import com.severalcircles.flames.features.StringUtils;
 import com.severalcircles.flames.system.Flames;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -29,7 +29,7 @@ public class DebugCommand implements FlamesCommand{
                 .addField("Number of Participants", String.valueOf(GlobalData.participants), true)
                 .addField("Guilds", String.valueOf(Flames.api.getGuilds().size()), true)
                 .addField("Status", Flames.api.getStatus().name(), true)
-                .addField("Created", FlamesPrettyDate.prettifyDate(Flames.api.getSelfUser().getTimeCreated().toInstant()), true)
+                .addField("Created", StringUtils.prettifyDate(Flames.api.getSelfUser().getTimeCreated().toInstant()), true)
                 .setTimestamp(Instant.now())
                 .setFooter("Flames", Flames.api.getSelfUser().getAvatarUrl()).build();
         event.replyEmbeds(builder).complete();

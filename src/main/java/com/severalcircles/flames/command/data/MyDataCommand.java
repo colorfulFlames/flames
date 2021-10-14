@@ -3,6 +3,7 @@ package com.severalcircles.flames.command.data;
 import com.severalcircles.flames.api.FlamesAPI;
 import com.severalcircles.flames.command.FlamesCommand;
 import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.features.StringUtils;
 import com.severalcircles.flames.features.external.severalcircles.FlamesAssets;
 import com.severalcircles.flames.features.rank.Ranking;
 import com.severalcircles.flames.system.Flames;
@@ -84,7 +85,7 @@ public class MyDataCommand implements FlamesCommand {
                 .setAuthor(resources.getString("author"), null, user.getAvatarUrl())
                 .setTitle(String.format(resources.getString("title"), user.getName()), FlamesAPI.getUserDataLink(user))
                 .setDescription(String.format(resources.getString("description"), sender.getStats().getLevel()))
-                .addField(resources.getString("flamesScore"), sender.getScore() + "", true)
+                .addField(resources.getString("flamesScore"), StringUtils.formatScore(sender.getScore()) + " FP", true)
                 .addField(resources.getString("rank"), rank, true)
                 .addField(resources.getString("toNext"), Ranking.toNext(sender.getScore()) + "", true)
                 .addField(resources.getString("emotion"), emotionString, true)
