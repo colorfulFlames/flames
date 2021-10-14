@@ -2,7 +2,6 @@
 package com.severalcircles.flames.system;
 
 import com.bugsnag.Bugsnag;
-import com.severalcircles.flames.api.FlamesAPI;
 import com.severalcircles.flames.command.DebugCommand;
 import com.severalcircles.flames.command.FlamesCommand;
 import com.severalcircles.flames.command.HelpCommand;
@@ -76,7 +75,6 @@ public class Flames {
         scheduler.scheduleAtFixedRate(new ReconnectRunnable(), 1, 1, TimeUnit.HOURS);
 //        scheduler.scheduleAtFixedRate(new FlushHistoricalData(), 1, 1, TimeUnit.HOURS);
         scheduler.scheduleAtFixedRate(new ResetTodayRunnable(), initalDelay, TimeUnit.DAYS.toSeconds(1), TimeUnit.SECONDS);
-        FlamesAPI.start();
         // --- Connecting to the API and Logging in to Discord ---
         try {
             Logger.getGlobal().log(Level.INFO, "Token is " + System.getenv("FlamesToken"));
