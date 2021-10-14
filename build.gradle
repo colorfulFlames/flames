@@ -9,7 +9,7 @@ plugins {
 
 mainClassName = 'com.severalcircles.flames.system.Flames'
 
-version 'Next'
+version 'SNAPSHOT-4.3a'
 def jdaVersion = '4.3.0_277'
 
 sourceCompatibility = targetCompatibility = 1.8
@@ -21,7 +21,19 @@ repositories {
         url "https://m2.dv8tion.net/releases"
     }
 }
+task createProperties(dependsOn: processResources) {
+    doLast {
+        new File("$buildDir/resources/main/version.properties").withWriter { w ->
+            Properties p = new Properties()
+            p['version'] = project.version.toString()
+            p.store w, null
+        }
+    }
+}
 
+classes {
+    dependsOn createProperties
+}
 dependencies {
     implementation("net.dv8tion:JDA:$jdaVersion")
     implementation platform('com.google.cloud:libraries-bom:22.0.0')

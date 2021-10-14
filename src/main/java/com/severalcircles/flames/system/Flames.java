@@ -23,11 +23,13 @@ import net.dv8tion.jda.api.JDABuilder;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.Duration;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -38,6 +40,8 @@ import java.util.logging.Logger;
  * Main class for Flames. Sets up everything you could ever hope for.
  */
 public class Flames {
+    static Properties properties = new Properties();
+    public static String version;
     public static final Map<String, FlamesCommand> commandMap = new HashMap<>();
     public static JDA api;
     /**
@@ -61,8 +65,17 @@ public class Flames {
      * Bootloader function
      * @param args any arguments passed to Flames via the command line
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // --- Initial Preparations ---
+        InputStream is = Flames.class.getClassLoader().getResourceAsStream("version.properties");
+        properties.load(is);
+        version = properties.getProperty("version");
+        Logger.getGlobal().log(Level.INFO, "Flames version " + version);
+        if (version.contains("SNAPSHOT")) {
+            Logger.getGlobal().log(Level.INFO, "You are running a development snapshot version of Flames. That means this version represents a \"snapshot\" of what the next release looks like at the time it was developed.\n" +
+                    "There is absolutely ZERO promises with this build. You get what you get, please do not throw a fit.\n" +
+                    "Do not use this version for anything other than testing. If you are even thinking about using this in any kind of production setting, think again. Wait until this version is officially released.");
+        }
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("America/New_York"));
         ZonedDateTime nextRun = now.withHour(0).withMinute(0).withSecond(0);
         if(now.compareTo(nextRun) > 0)
