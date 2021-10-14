@@ -10,5 +10,7 @@ That's so cool! We are currently working on the SysAdmin guide, so stay tuned fo
 ## Here to help out?
 That's awesome! Feel free to fork this repository, shake things up, then open a pull request to have your changes review. Check out our [Contribution Guidelines](https://github.com/SeveralCircles/flames/blob/master/CONTRIBUTING.md) for more information on contributing to Flames.
 
+Code documentation is available on the [Javadocs](https://severalcircles.github.io/flames).
+
 ## License
 All code in this repository is made available to you thanks to the MIT license.
