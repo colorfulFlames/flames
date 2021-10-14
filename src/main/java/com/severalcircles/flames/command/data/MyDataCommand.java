@@ -1,20 +1,11 @@
 package com.severalcircles.flames.command.data;
 
-import com.severalcircles.flames.api.FlamesAPI;
+//import com.severalcircles.flames.api.FlamesAPI;
 import com.severalcircles.flames.command.FlamesCommand;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.features.external.severalcircles.FlamesAssets;
 import com.severalcircles.flames.features.rank.Ranking;
 import com.severalcircles.flames.system.Flames;
-//import com.severalcircles.flames.ux.embeds.errors.ErrorLevel;
-//import com.severalcircles.flames.ux.embeds.errors.ErrorMessage;
-//import com.severalcircles.flames./**/ux.embeds.errors.ErrorType;
-//import discord4j.core.event.domain.message.MessageCreateEvent;
-//import discord4j.core.object.entity.Message;
-//import discord4j.core.object.entity.User;
-//import discord4j.core.spec.EmbedCreateSpec;
-//import discord4j.rest.http.client.ClientException;
-//import discord4j.rest.util.Color;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
@@ -27,6 +18,16 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+//import com.severalcircles.flames.ux.embeds.errors.ErrorLevel;
+//import com.severalcircles.flames.ux.embeds.errors.ErrorMessage;
+//import com.severalcircles.flames./**/ux.embeds.errors.ErrorType;
+//import discord4j.core.event.domain.message.MessageCreateEvent;
+//import discord4j.core.object.entity.Message;
+//import discord4j.core.object.entity.User;
+//import discord4j.core.spec.EmbedCreateSpec;
+//import discord4j.rest.http.client.ClientException;
+//import discord4j.rest.util.Color;
 
 public class MyDataCommand implements FlamesCommand {
     @Override
@@ -82,7 +83,7 @@ public class MyDataCommand implements FlamesCommand {
         MessageEmbed embed = new EmbedBuilder()
                 .setColor(new Color(153, 85,187))
                 .setAuthor(resources.getString("author"), null, user.getAvatarUrl())
-                .setTitle(String.format(resources.getString("title"), user.getName()), FlamesAPI.getUserDataLink(user))
+                .setTitle(String.format(resources.getString("title"), user.getName()), "https://flamesapi.severalcircles.com/user/" + user.getId())
                 .setDescription(String.format(resources.getString("description"), sender.getStats().getLevel()))
                 .addField(resources.getString("flamesScore"), sender.getScore() + "", true)
                 .addField(resources.getString("rank"), rank, true)
