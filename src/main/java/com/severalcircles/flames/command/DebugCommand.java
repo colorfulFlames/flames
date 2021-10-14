@@ -20,7 +20,7 @@ public class DebugCommand implements FlamesCommand{
         ResourceBundle common = ResourceBundle.getBundle("Common", Locale.ENGLISH);
         MessageEmbed builder = new EmbedBuilder()
                 .setAuthor("Debugging Information")
-                .setTitle(Flames.api.getSelfUser().getName() + " version " + common.getString("version"))
+                .setTitle(Flames.api.getSelfUser().getName() + " version " + Flames.version)
                 .setColor(Color.GREEN.darker())
                 .setDescription("by Several Circles")
                 .addField("Gateway Ping", String.valueOf(Flames.api.getGatewayPing()), true)
