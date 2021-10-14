@@ -22,7 +22,7 @@ public class StatsButtonAction implements ButtonAction {
                 .setTitle(event.getUser().getName())
                 .setDescription("Level " + stats.getLevel())
                 .addField("EXP", stats.getExp()+ "", true)
-                .addField("To Next Level", (GlobalData.averageScore * (stats.getLevel() + 1) - stats.getExp()) + "", true)
+                .addField("Estimated To Next Level", (Math.max(GlobalData.averageScore * 10 * stats.getLevel() * 1000, (stats.getLevel() + 1000 - GlobalData.participants))) - stats.getExp() + "", true)
                 .addField("Power", stats.getPOW() + "", true)
                 .addField("Resistance", stats.getRES() + "", true)
                 .addField("Luck", stats.getLUCK() + "", true)

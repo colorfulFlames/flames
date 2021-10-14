@@ -66,7 +66,7 @@ public class UserStats implements FlamesData {
         checkLevelUp();
     }
     public void checkLevelUp() {
-        if (this.exp / (GlobalData.averageScore * level + 1000) >= 1) {
+        if (this.exp / (Math.max(GlobalData.averageScore * 10 * level, 1000 * level) + 1000 - GlobalData.participants) >= 1) {
             level++;
             double random = Math.random();
             if (random <= powerGrowth) POW++;
