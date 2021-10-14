@@ -56,7 +56,7 @@ public class HiCommand implements FlamesCommand {
                     .setImage(FlamesAssets.welcomeBackUrl)
                     .addField("Daily Bonus", "" + dailyBonus, true)
                     .setColor(Color.ORANGE)
-                    .addField("Your Flames Score", "" + StringUtils.formatScore(flamesUser.getScore()) + " FP", true)
+                    .addField("Your Flames Score", "" + StringUtils.formatScore(flamesUser.getScore()), true)
                     .setTimestamp(Instant.now()).build();
             event.replyEmbeds(embed).queue();
             flamesUser.setLastSeen(Instant.now());

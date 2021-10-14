@@ -81,14 +81,17 @@ public class MyDataCommand implements FlamesCommand {
         else if (emotion >= 0) emotionString = resources.getString("emotion.mid");
         else if (emotion > -1) emotionString = resources.getString("emotion.midminus");
         else emotionString = resources.getString("emotion.low");
+        String toNext;
+        if (Ranking.toNext(sender.getScore()) <= 0) toNext = "?";
+        else toNext = StringUtils.formatScore(Ranking.toNext(sender.getScore()));
         MessageEmbed embed = new EmbedBuilder()
                 .setColor(new Color(153, 85,187))
                 .setAuthor(resources.getString("author"), null, user.getAvatarUrl())
                 .setTitle(String.format(resources.getString("title"), user.getName()), "https://flamesapi.severalcircles.com/user/" + user.getId())
                 .setDescription(String.format(resources.getString("description"), sender.getStats().getLevel()))
-                .addField(resources.getString("flamesScore"), StringUtils.formatScore(sender.getScore()) + " FP", true)
+                .addField(resources.getString("flamesScore"), StringUtils.formatScore(sender.getScore()), true)
                 .addField(resources.getString("rank"), rank, true)
-                .addField(resources.getString("toNext"), Ranking.toNext(sender.getScore()) + "", true)
+                .addField(resources.getString("toNext"), toNext, true)
                 .addField(resources.getString("emotion"), emotionString, true)
                 .setThumbnail(FlamesAssets.getRankIcon(Ranking.getRank(sender.getScore())))
                 .setFooter(resources.getString("footer"), Flames.api.getSelfUser().getAvatarUrl()).build();

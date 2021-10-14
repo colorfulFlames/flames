@@ -52,7 +52,7 @@ public class StringUtils {
         return prettyDate;
     }
     public static String formatScore(int score) {
-        DecimalFormat df = new DecimalFormat("### ### ###");
-        return df.format(score);
+        DecimalFormat df = new DecimalFormat("###,###,###");
+        return df.format(score).replace(".", " ") + " FP";
     }
 }
