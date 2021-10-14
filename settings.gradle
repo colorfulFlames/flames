@@ -1,1 +1,3 @@
 rootProject.name = 'Flames'
+include 'API'
+
