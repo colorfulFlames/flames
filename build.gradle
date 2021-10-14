@@ -9,7 +9,7 @@ plugins {
 
 mainClassName = 'com.severalcircles.flames.system.Flames'
 
-version 'SNAPSHOT-4.3a'
+version '4.3'
 def jdaVersion = '4.3.0_277'
 
 sourceCompatibility = targetCompatibility = 1.8
