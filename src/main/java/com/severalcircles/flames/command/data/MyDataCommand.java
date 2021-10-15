@@ -1,6 +1,5 @@
 package com.severalcircles.flames.command.data;
 
-//import com.severalcircles.flames.api.FlamesAPI;
 import com.severalcircles.flames.command.FlamesCommand;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.features.StringUtils;

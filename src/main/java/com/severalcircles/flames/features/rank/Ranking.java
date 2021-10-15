@@ -15,22 +15,17 @@ public class Ranking {
      */
     public static void updateThresholds() throws IOException {
         GlobalData.read();
-        // Bronze is the average score
-        thresholds[1] = Math.abs(GlobalData.averageScore);
+        // Bronze is the average score times 10, minus the number of participants.
+        thresholds[1] = Math.abs(GlobalData.averageScore * 10) - GlobalData.averageScore;
         // Approaching Bronze is half of Bronze
         thresholds[0] = Math.abs(thresholds[1] / 2);
-        System.out.println(thresholds[0]);
-        System.out.println(thresholds[1]);
         // Silver is 1.5 times Bronze
         thresholds[2] = Math.abs(thresholds[1]);
-        System.out.println(thresholds[2]);
         // Shining Silver is double Bronze
         thresholds[3] = Math.abs(2 * thresholds[1]);
-        System.out.println(thresholds[3]);
         // Gold is triple Bronze
         thresholds[4] = Math.abs(3 * thresholds[1]);
         System.out.println(thresholds[4]);
-        // Beyond Gold is 1.5 times Gold
         thresholds[5] = Math.abs(thresholds[4]);
         System.out.println(thresholds[5]);
         // Platinum is double Gold
