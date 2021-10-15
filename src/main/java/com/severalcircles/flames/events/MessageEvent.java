@@ -12,7 +12,7 @@ import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.UserFunFacts;
 import com.severalcircles.flames.features.Analysis;
 import com.severalcircles.flames.features.BadWordFilter;
-import com.severalcircles.flames.features.FlamesPrettyDate;
+import com.severalcircles.flames.features.StringUtils;
 import com.severalcircles.flames.features.today.Today;
 import com.severalcircles.flames.system.Flames;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -25,7 +25,6 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 import java.io.IOException;
 import java.time.Instant;
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -75,16 +74,18 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         @SuppressWarnings("IntegerDivisionInFloatingPointContext") int quoteChance = (int) Math.round(Math.random() * Math.round(GlobalData.participants / 2));
         System.out.println(quoteChance);
         //noinspection IntegerDivisionInFloatingPointContext
-        if (Objects.equals(Today.quote[0], "We're still waiting for somebody to say something epic.") && sentiment.getMagnitude() >= 0.9 && quoteChance == Math.min(1, Math.round(GlobalData.participants / 2))) {
-            Today.quote = new String[]{content, event.getAuthor().getName()};
+        if (Today.quoteEmotion < sentiment.getMagnitude() && !Today.quoteLocked && event.getAuthor().getName() != Today.quote[1]) {
+            if (Today.quoteChanges > Math.max(1, Math.round(GlobalData.participants / 10))) Today.quoteLocked = true;
+            if (sentiment.getMagnitude() > 1) Today.quoteLocked = true;
             MessageEmbed congrats = new EmbedBuilder()
                     .setAuthor("Flames", null, event.getAuthor().getAvatarUrl())
-                    .setTitle(event.getAuthor().getName() + ", congratulations on being selected for the quote of the day!")
-                    .addField("\"" + content + "\"", "- " + event.getAuthor().getName() + ", " + FlamesPrettyDate.prettifyDate(Instant.now()), true)
+                    .setTitle(event.getAuthor().getName() + ", congratulations on taking the quote of the day from " + Today.quote[1] + "!")
+                    .addField("\"" + content + "\"", "- " + event.getAuthor().getName() + ", " + StringUtils.prettifyDate(Instant.now()), true)
                     .setFooter("/today to see it for yourself!", Flames.api.getSelfUser().getAvatarUrl())
                     .setColor(Color.CYAN.darker())
                     .build();
             event.getMessage().reply(congrats).complete();
+            Today.quote = new String[]{content, event.getAuthor().getName()};
         }
         UserFunFacts funFacts = user.getFunFacts();
         if (Analysis.analyzeEntities(event.getMessage().getContentRaw())) funFacts.setFrenchToastMentioned(funFacts.getFrenchToastMentioned() + 1);

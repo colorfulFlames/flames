@@ -5,7 +5,7 @@ import com.severalcircles.flames.data.base.ConsentException;
 import com.severalcircles.flames.data.base.FlamesDataManager;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.UserFunFacts;
-import com.severalcircles.flames.features.FlamesPrettyDate;
+import com.severalcircles.flames.features.StringUtils;
 import com.severalcircles.flames.features.rank.Ranking;
 import com.severalcircles.flames.system.Flames;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -80,8 +80,8 @@ FunFactsButtonAction implements ButtonAction {
                 .setAuthor("User Data: Fun Facts")
                 .setTitle(event.getUser().getName())
                 .setDescription("French Toast Score: " + funFacts.getFrenchToastMentioned() + "")
-                .addField("Best Day Ever", FlamesPrettyDate.prettifyDate(funFacts.getHappyDay()),true)
-                .addField("Worst Day Ever", (FlamesPrettyDate.prettifyDate(funFacts.getSadDay())), true)
+                .addField("Best Day Ever", StringUtils.prettifyDate(funFacts.getHappyDay()),true)
+                .addField("Worst Day Ever", (StringUtils.prettifyDate(funFacts.getSadDay())), true)
                 .addField("Highest Ever Flames Score", funFacts.getHighestFlamesScore() + " (" + rank + ")", true)
                 .addField("Lowest Ever Flames Score", funFacts.getLowestFlamesScore() + "", true)
                 .setTimestamp(Instant.now())

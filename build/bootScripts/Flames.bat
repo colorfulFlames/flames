@@ -63,7 +63,7 @@ set CMD_LINE_ARGS=%*
 :execute
 @rem Setup the command line
 
-set JARPATH=%APP_HOME%\lib\Flames-4.2.jar
+set JARPATH=%APP_HOME%\lib\Flames-4.2.1b.jar
 
 @rem Execute Flames
 "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %FLAMES_OPTS%  -jar "%JARPATH%" %CMD_LINE_ARGS%

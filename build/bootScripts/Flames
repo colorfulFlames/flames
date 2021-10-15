@@ -64,7 +64,7 @@ case "`uname`" in
     ;;
 esac
 
-JARPATH=$APP_HOME/lib/Flames-4.2.jar
+JARPATH=$APP_HOME/lib/Flames-4.2.1b.jar
 
 # Determine the Java command to use to start the JVM.
 if [ -n "$JAVA_HOME" ] ; then

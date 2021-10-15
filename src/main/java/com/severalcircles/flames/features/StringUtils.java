@@ -1,10 +1,11 @@
 package com.severalcircles.flames.features;
 
+import java.text.DecimalFormat;
 import java.time.Instant;
 import java.util.Date;
 
 @SuppressWarnings("deprecation")
-public class FlamesPrettyDate {
+public class StringUtils {
     /**
      * @return String with Instant formatted as a nice, human-readable date string.
      */
@@ -49,5 +50,9 @@ public class FlamesPrettyDate {
         }
         prettyDate += Date.from(instant).getDate() + ", " + (Date.from(instant).getYear()+1900);
         return prettyDate;
+    }
+    public static String formatScore(int score) {
+        DecimalFormat df = new DecimalFormat("###,###,###");
+        return df.format(score).replace(".", " ") + " FP";
     }
 }

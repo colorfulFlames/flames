@@ -3,6 +3,7 @@ package com.severalcircles.flames.command.data;
 import com.severalcircles.flames.command.FlamesCommand;
 import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.features.StringUtils;
 import com.severalcircles.flames.features.external.severalcircles.FlamesAssets;
 import com.severalcircles.flames.system.Flames;
 //import discord4j.core.event.domain.message.MessageCreateEvent;
@@ -30,8 +31,8 @@ public class GlobalDataCommand implements FlamesCommand {
                 .setAuthor(resources.getString("author"), null, user.getAvatarUrl())
                 .setTitle(Flames.api.getSelfUser().getName())
 //                .setUrl("https://en.wikipedia.org/wiki/" + trending.replace(" ", "_"))
-                .addField(resources.getString("totalScore"), GlobalData.globalScore + "", true)
-                .addField(resources.getString("averageScore"), GlobalData.averageScore + "", true)
+                .addField(resources.getString("totalScore"), StringUtils.formatScore(GlobalData.globalScore), true)
+                .addField(resources.getString("averageScore"), StringUtils.formatScore(GlobalData.averageScore), true)
 //                .addField(resources.getString("trendingTopic"), trending, true)
                 .setTimestamp(Instant.now())
                 .setThumbnail(FlamesAssets.globalDataUrl)
