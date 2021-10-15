@@ -2,6 +2,7 @@ package com.severalcircles.flames.buttonaction.data;
 
 import com.severalcircles.flames.buttonaction.ButtonAction;
 import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.features.StringUtils;
 import com.severalcircles.flames.features.external.severalcircles.FlamesAssets;
 import com.severalcircles.flames.features.rank.Ranking;
 import com.severalcircles.flames.system.Flames;
@@ -9,6 +10,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
+import net.dv8tion.jda.api.interactions.components.Button;
 
 import java.awt.*;
 import java.io.IOException;
@@ -68,18 +70,21 @@ public class MyDataButtonAction implements ButtonAction {
         else if (emotion >= 0) emotionString = resources.getString("emotion.mid");
         else if (emotion > -1) emotionString = resources.getString("emotion.midminus");
         else emotionString = resources.getString("emotion.low");
+        String toNext;
+        if (Ranking.toNext(sender.getScore()) <= 0) toNext = "?";
+        else toNext = StringUtils.formatScore(Ranking.toNext(sender.getScore()));
         MessageEmbed embed = new EmbedBuilder()
                 .setColor(new Color(153, 85,187))
                 .setAuthor(resources.getString("author"), null, user.getAvatarUrl())
-                .setTitle(String.format(resources.getString("title"), user.getName()))
+                .setTitle(String.format(resources.getString("title"), user.getName()), "https://flamesapi.severalcircles.com/user/" + user.getId())
                 .setDescription(String.format(resources.getString("description"), sender.getStats().getLevel()))
-                .addField(resources.getString("flamesScore"), sender.getScore() + "", true)
+                .addField(resources.getString("flamesScore"), StringUtils.formatScore(sender.getScore()), true)
                 .addField(resources.getString("rank"), rank, true)
-                .addField(resources.getString("toNext"), Ranking.toNext(sender.getScore()) + "", true)
+                .addField(resources.getString("toNext"), toNext, true)
                 .addField(resources.getString("emotion"), emotionString, true)
                 .setThumbnail(FlamesAssets.getRankIcon(Ranking.getRank(sender.getScore())))
                 .setFooter(resources.getString("footer"), Flames.api.getSelfUser().getAvatarUrl()).build();
-        event.editMessageEmbeds(embed).setActionRow(net.dv8tion.jda.api.interactions.components.Button.success("mydata", "My Data"), net.dv8tion.jda.api.interactions.components.Button.primary("stats", "Stats"), net.dv8tion.jda.api.interactions.components.Button.primary("funFacts", "Fun Facts")).complete();
+        event.replyEmbeds(embed).addActionRow(net.dv8tion.jda.api.interactions.components.Button.success("mydata", "My Data"), net.dv8tion.jda.api.interactions.components.Button.primary("stats", "Stats"), Button.primary("funFacts", "Fun Facts")).queue();
 
     }
 }
