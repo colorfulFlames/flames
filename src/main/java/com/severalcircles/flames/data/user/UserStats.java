@@ -9,10 +9,10 @@ import java.util.Properties;
  * Represents Stats data for a FlamesUser
  */
 public class UserStats implements FlamesData {
-    public static final double powerGrowth = 0.75;
+    public static final double powerGrowth = 0.25;
     public static final double resistanceGrowth = 0.5;
-    public static final double luckGrowth = 0.25;
-    public static final double risingGrowth = 0.25;
+    public static final double luckGrowth = 0.05;
+    public static final double risingGrowth = 0.1;
     public static final double charismaGrowth = 0.5;
 
     private int exp = 0;
@@ -66,7 +66,7 @@ public class UserStats implements FlamesData {
         checkLevelUp();
     }
     public void checkLevelUp() {
-        if (this.exp / (Math.max(GlobalData.averageScore * 10 * level, 1000 * level) + 1000 - GlobalData.participants) >= 1) {
+        if (this.exp / GlobalData.averageScore * level + GlobalData.participants * this.CAR >= 1) {
             level++;
             double random = Math.random();
             if (random <= powerGrowth) POW++;
