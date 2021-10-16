@@ -16,7 +16,7 @@ public class StatsButtonAction implements ButtonAction {
     @Override
     public void execute(ButtonClickEvent event, FlamesUser user) {
         UserStats stats = user.getStats();
-        int next = Math.max(GlobalData.averageScore * 10 * stats.getLevel() * 1000, (stats.getLevel() + 1000 - GlobalData.participants));
+        int next = GlobalData.averageScore * stats.getLevel() + GlobalData.participants * stats.getCAR();
         MessageEmbed embed = new EmbedBuilder()
                 .setColor(new Color(153, 85,187))
                 .setAuthor("User Data: Stats", null, event.getUser().getAvatarUrl())
