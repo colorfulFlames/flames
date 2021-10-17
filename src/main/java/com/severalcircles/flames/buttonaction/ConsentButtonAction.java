@@ -25,11 +25,14 @@ public class ConsentButtonAction implements ButtonAction {
 //        event.getMessage().delete();
         event.editMessageEmbeds(thanks).complete();
 //            Consent.welcomeToFlames(event.getUser());
-            GlobalData.participants++;
-            GlobalData.write();
+            if (user.getConsent() != 1) {
+                GlobalData.participants++;
+                GlobalData.write();
+            }
             user.setConsent(1);
         } else {
             event.editMessage("Alright. Let me know if you change your mind.").queue();
+            if (user.getConsent() == 1) GlobalData.participants--;
 //        FlamesUser user;
         user.setConsent(2);
         }
