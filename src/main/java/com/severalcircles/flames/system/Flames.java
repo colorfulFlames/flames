@@ -7,10 +7,7 @@ import com.severalcircles.flames.command.FlamesCommand;
 import com.severalcircles.flames.command.HelpCommand;
 import com.severalcircles.flames.command.TestCommand;
 import com.severalcircles.flames.command.connections.ArtistCommand;
-import com.severalcircles.flames.command.data.GlobalDataCommand;
-import com.severalcircles.flames.command.data.HiCommand;
-import com.severalcircles.flames.command.data.MyDataCommand;
-import com.severalcircles.flames.command.data.TodayCommand;
+import com.severalcircles.flames.command.data.*;
 import com.severalcircles.flames.data.base.FlamesDataManager;
 import com.severalcircles.flames.events.ButtonEvent;
 import com.severalcircles.flames.events.CommandEvent;
@@ -109,6 +106,7 @@ public class Flames {
         commandMap.put("help", new HelpCommand());
         commandMap.put("debug", new DebugCommand());
         commandMap.put("today", new TodayCommand());
+        commandMap.put("guilddata", new GuildDataCommand());
         //noinspection ResultOfMethodCallIgnored
         api.updateCommands();
         // --- Events ---
