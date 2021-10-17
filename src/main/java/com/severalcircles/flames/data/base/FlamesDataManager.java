@@ -4,11 +4,14 @@
 
 package com.severalcircles.flames.data.base;
 
+import com.severalcircles.flames.data.guild.FlamesGuild;
+import com.severalcircles.flames.data.guild.NewGuildException;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.UserFunFacts;
 import com.severalcircles.flames.data.user.UserStats;
 import com.severalcircles.flames.features.rank.Rank;
 import com.severalcircles.flames.system.Flames;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.User;
 
 import java.io.*;
@@ -27,7 +30,6 @@ public class FlamesDataManager {
     public static final File flamesDirectory = new File(System.getProperty("user.dir") + "/Flames");
     static final File userDirectory = new File(flamesDirectory.getAbsolutePath() + "/user");
     static final File guildDirectory = new File(flamesDirectory.getAbsolutePath() + "/guild");
-
     //    static List<File> openFiles = new LinkedList<>();
 
     /**
@@ -136,7 +138,7 @@ public class FlamesDataManager {
         fluser.setLastSeen(Instant.parse(data.get("lastSeen") + ""));
 
         funFacts.setFrenchToastMentioned(Integer.parseInt(funfactsdata.get("frenchToastScore") + ""));
-        funFacts.setBestRank(Rank.valueOf(funfactsdata.get("bestRank") + ""));
+        funFacts.setBestRank(Rank.valueOf(funfactsdata.get("bestRank").toString().toUpperCase(Locale.ROOT).replace(" ", "_") + ""));
         funFacts.setLowestFlamesScore(Integer.parseInt(funfactsdata.get("lowScore") + ""));
         funFacts.setHighestFlamesScore(Integer.parseInt(funfactsdata.get("highScore") + ""));
         funFacts.setSadDay(Instant.parse(funfactsdata.get("sadDay") + ""));
@@ -248,5 +250,39 @@ public class FlamesDataManager {
         fluser.setStats(stats);
         fluser.setFunFacts(funFacts);
         return fluser;
+    }
+
+    /**
+     * Checks if a guild has been seen before. Behaves otherwise the same as newUser.
+     */
+    public static boolean newGuild(Guild guild) throws IOException {
+        File guildDir = new File(guildDirectory.getAbsolutePath() + "/" + guild.getId());
+        File mainFile = new File(guildDir.getAbsolutePath() + "/guild.fl");
+        FlamesGuild flGuild;
+        if (guildDir.mkdir()) {
+            flGuild = new FlamesGuild(guild.getName(), guild.getId(), Instant.now(), 0, 0);
+            OutputStream os = new FileOutputStream(mainFile);
+            flGuild.createData().store(os, "Flames Guild Data");
+            return true;
+        } else return false;
+    }
+
+    /**
+     * Saves a guild to its data file.
+     */
+    public static void save(FlamesGuild guild) throws IOException {
+        File guildDir = new File(guildDirectory.getAbsolutePath() + "/" + guild.getId());
+        File mainFile = new File(guildDir.getAbsolutePath() + "/guild.fl");
+        OutputStream os = new FileOutputStream(mainFile);
+        guild.createData().store(os, "Flames Guild Data");
+    }
+    public static FlamesGuild readGuild(String id) throws IOException, NewGuildException {
+        if (newGuild(Flames.api.getGuildById(id))) throw new NewGuildException();
+        File guildDir = new File(guildDirectory.getAbsolutePath() + "/" + id);
+        File mainFile = new File(guildDir.getAbsolutePath() + "/guild.fl");
+        Properties data = new Properties();
+        InputStream is = new FileInputStream(mainFile);
+        data.load(is);
+        return new FlamesGuild(data.get("name") + "", data.get("discordId") + "", Instant.parse(data.get("joined") + ""), Integer.parseInt(data.get("score") + ""), Float.parseFloat(data.get("emotion") + ""));
     }
 }

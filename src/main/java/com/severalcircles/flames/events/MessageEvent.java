@@ -8,6 +8,8 @@ import com.google.cloud.language.v1.Sentiment;
 import com.severalcircles.flames.data.base.ConsentException;
 import com.severalcircles.flames.data.base.FlamesDataManager;
 import com.severalcircles.flames.data.global.GlobalData;
+import com.severalcircles.flames.data.guild.FlamesGuild;
+import com.severalcircles.flames.data.guild.NewGuildException;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.UserFunFacts;
 import com.severalcircles.flames.features.Analysis;
@@ -40,6 +42,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         String content = BadWordFilter.getCensoredText(event.getMessage().getContentDisplay());
         // Try reading the user data. If something goes wrong trying to read the data and the error is uncaught all the way to this point, that's a big uh-oh moment, so it'll increment the fatal error counter. If the user hasn't consented, it'll just ignore and return;
         FlamesUser user;
+        FlamesGuild guild;
         try {
             user = FlamesDataManager.readUser(event.getAuthor());
         } catch (IOException e) {
@@ -50,7 +53,15 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             Logger.getGlobal().log(Level.FINE, "Ignoring " + event.getAuthor().getName() + "'s message because they haven't consented yet.");
             return;
         }
-
+        try {
+            guild = FlamesDataManager.readGuild(event.getGuild().getId());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        } catch (NewGuildException e) {
+            e.printStackTrace();
+            return;
+        }
         Sentiment sentiment;
         try {
             sentiment = Analysis.analyze(event.getMessage().getContentRaw());
@@ -65,8 +76,9 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         user.setEmotion(user.getEmotion() + sentiment.getScore());
         user.getStats().addExp(Math.max(0, score));
         user.setScore(user.getScore() + score);
-
-        Today.emotion += score;
+        guild.setFlamesScore(guild.getFlamesScore() + score);
+        guild.setEmotion(guild.getEmotion() + sentiment.getScore());
+        Today.emotion += score / GlobalData.participants;
         if (user.getScore() > Today.highScore) {
             Today.highScore = user.getScore();
             Today.highUser = event.getAuthor().getName();
@@ -102,6 +114,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         user.setFunFacts(funFacts);
         try {
             FlamesDataManager.save(user);
+            FlamesDataManager.save(guild);
         } catch (IOException e) {
             e.printStackTrace();
             Flames.incrementErrorCount();
