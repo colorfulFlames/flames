@@ -138,7 +138,7 @@ public class FlamesDataManager {
         fluser.setLastSeen(Instant.parse(data.get("lastSeen") + ""));
 
         funFacts.setFrenchToastMentioned(Integer.parseInt(funfactsdata.get("frenchToastScore") + ""));
-        funFacts.setBestRank(Rank.valueOf(funfactsdata.get("bestRank") + ""));
+        funFacts.setBestRank(Rank.valueOf(funfactsdata.get("bestRank").toString().toUpperCase(Locale.ROOT).replace(" ", "_") + ""));
         funFacts.setLowestFlamesScore(Integer.parseInt(funfactsdata.get("lowScore") + ""));
         funFacts.setHighestFlamesScore(Integer.parseInt(funfactsdata.get("highScore") + ""));
         funFacts.setSadDay(Instant.parse(funfactsdata.get("sadDay") + ""));

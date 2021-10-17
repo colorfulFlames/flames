@@ -42,7 +42,7 @@ public class GuildDataCommand implements FlamesCommand {
         FlamesUser owner;
         try {
             owner = FlamesDataManager.readUser(guild.getOwner().getUser());
-        } catch (IOException | ConsentException e) {
+        } catch (IOException | ConsentException | NullPointerException e) {
             owner = new FlamesUser();
         }
         float emotion = gdata.getEmotion();
@@ -59,7 +59,7 @@ public class GuildDataCommand implements FlamesCommand {
                 .setThumbnail(guild.getIconUrl())
                 .addField("Flames Score", StringUtils.formatScore(gdata.getFlamesScore()), true)
                 .addField("Rank", Ranking.getRank((int) Math.round(gdata.getFlamesScore() / guild.getMemberCount())).toString(), true)
-                .addField("Owner", guild.getOwner().getEffectiveName() + " (" + Ranking.getRank(owner.getScore()).toString() + ")", true)
+//                .addField("Owner", guild.getOwner().getEffectiveName() + " (" + Ranking.getRank(owner.getScore()).toString() + ")", true)
                 .addField("Feeling", emotionString, true)
                 .setTimestamp(Instant.now())
                 .setColor(Color.magenta.darker())
