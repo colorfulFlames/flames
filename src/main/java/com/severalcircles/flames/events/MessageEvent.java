@@ -78,7 +78,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         user.setScore(user.getScore() + score);
         guild.setFlamesScore(guild.getFlamesScore() + score);
         guild.setEmotion(guild.getEmotion() + sentiment.getScore());
-        Today.emotion += score;
+        Today.emotion += score / GlobalData.participants;
         if (user.getScore() > Today.highScore) {
             Today.highScore = user.getScore();
             Today.highUser = event.getAuthor().getName();
