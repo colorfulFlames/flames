@@ -8,7 +8,6 @@ plugins {
 }
 
 mainClassName = 'com.severalcircles.flames.system.Flames'
-
 version '4.4'
 def jdaVersion = '4.3.0_277'
 
