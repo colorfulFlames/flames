@@ -1,6 +1,7 @@
 package com.severalcircles.flames.features.external.severalcircles;
 
 import com.severalcircles.flames.features.rank.Rank;
+import com.severalcircles.flames.system.Flames;
 
 /**
  * Contains permalinks to assets stored at severalcircles.com.
@@ -43,6 +44,10 @@ public class FlamesAssets {
                 return rankUrl + "unranked.png";
 //                break;
         }
+    }
+    public static String getVersionIcon() {
+        if (Flames.version.contains("4.4")) return "https://www.severalcircles.com/flames/assets/versions/4.4.png";
+        return "https://www.severalcircles.com/flames/assets/versions/" + Flames.version + ".png";
     }
 
 }
