@@ -86,7 +86,7 @@ public class MyDataCommand implements FlamesCommand {
         MessageEmbed embed = new EmbedBuilder()
                 .setColor(new Color(153, 85,187))
                 .setAuthor(resources.getString("author"), null, user.getAvatarUrl())
-                .setTitle(String.format(resources.getString("title"), user.getName()), "https://flamesapi.severalcircles.com/user/" + user.getId())
+                .setTitle(String.format(resources.getString("title"), user.getName()), "https://flamesapi.severalcircles.com/user/" + user.getId() + "/user")
                 .setDescription(String.format(resources.getString("description"), sender.getStats().getLevel()))
                 .addField(resources.getString("flamesScore"), StringUtils.formatScore(sender.getScore()), true)
                 .addField(resources.getString("rank"), rank, true)
