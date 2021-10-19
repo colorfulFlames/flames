@@ -9,34 +9,32 @@ import java.io.IOException;
  */
 public class Ranking {
     public static final int[] thresholds = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-
+    public static int baseValue = 0;
     /**
      * Re-calculates the rank thresholds based on the current average score
      */
     public static void updateThresholds() throws IOException {
         GlobalData.read();
-        // Bronze is the average score times 10, minus the number of participants.
-        thresholds[1] = Math.abs(GlobalData.averageScore * 10) - GlobalData.averageScore;
-        // Approaching Bronze is half of Bronze
-        thresholds[0] = Math.abs(thresholds[1] / 2);
-        // Silver is 1.5 times Bronze
-        thresholds[2] = Math.abs(thresholds[1]);
-        // Shining Silver is double Bronze
-        thresholds[3] = Math.abs(2 * thresholds[1]);
-        // Gold is triple Bronze
-        thresholds[4] = Math.abs(3 * thresholds[1]);
-        System.out.println(thresholds[4]);
-        thresholds[5] = Math.abs(thresholds[4]);
-        System.out.println(thresholds[5]);
-        // Platinum is double Gold
-        thresholds[6] = Math.abs(2 * thresholds[4]);
-        System.out.println(thresholds[6]);
-        // Sparkling Platinum is 1.5 times Platinum
-        thresholds[7] = Math.abs(thresholds[6]);
-        System.out.println(thresholds[7]);
-        // Platinum Summit is double Platinum
-        thresholds[8] = Math.abs(2 * thresholds[6]);
-        System.out.println(thresholds[8]);
+        // The base value used to calculate ranks is 10 times the average score, minus the number of participants
+        baseValue = 10 * GlobalData.averageScore - GlobalData.participants;
+        // Bronze is the base value divided by 10
+        thresholds[1] = Math.abs(baseValue / 10);
+        // Approaching Bronze is 75% of bronze
+        thresholds[0] = (int) Math.abs(thresholds[1] * 0.75);
+        // Silver is double Bronze
+        thresholds[2] = Math.abs(thresholds[1] * 2);
+        // Shining Silver is double Silver
+        thresholds[3] = Math.abs(2 * thresholds[2]);
+        // Gold is the base value
+        thresholds[4] = Math.abs(baseValue);
+        // Beyond Gold is double Gold
+        thresholds[5] = (int) Math.abs(2 * thresholds[4]);
+        // Platinum is 5 times Gold
+        thresholds[6] = Math.abs(5 * thresholds[4]);
+        // Sparkling Platinum is 2 times Platinum
+        thresholds[7] = Math.abs(thresholds[6] * 2);
+        // Platinum Summit is 5 times Platinum
+        thresholds[8] = Math.abs(5 * thresholds[6]);
     }
 
     /**
