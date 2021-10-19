@@ -77,8 +77,8 @@ FunFactsButtonAction implements ButtonAction {
         }
         MessageEmbed embed = new EmbedBuilder()
                 .setColor(new Color(153, 85,187))
-                .setAuthor("User Data: Fun Facts")
-                .setTitle(event.getUser().getName())
+                .setAuthor("User Data: Fun Facts", null, event.getUser().getAvatarUrl())
+                .setTitle(event.getUser().getName(), "https://flamesapi.severalcircles.com/user/" + event.getUser().getId() + "/funfacts")
                 .setDescription("French Toast Score: " + funFacts.getFrenchToastMentioned() + "")
                 .addField("Best Day Ever", StringUtils.prettifyDate(funFacts.getHappyDay()),true)
                 .addField("Worst Day Ever", (StringUtils.prettifyDate(funFacts.getSadDay())), true)

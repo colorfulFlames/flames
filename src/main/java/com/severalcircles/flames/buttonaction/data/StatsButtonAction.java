@@ -20,7 +20,7 @@ public class StatsButtonAction implements ButtonAction {
         MessageEmbed embed = new EmbedBuilder()
                 .setColor(new Color(153, 85,187))
                 .setAuthor("User Data: Stats", null, event.getUser().getAvatarUrl())
-                .setTitle(event.getUser().getName())
+                .setTitle(event.getUser().getName(), "https://flamesapi.severalcircles.com/user/" + event.getUser().getId() + "/stats")
                 .setDescription("Level " + stats.getLevel())
                 .addField("EXP", stats.getExp()+ "", true)
                 .addField("Estimated To Next Level", (Math.abs(next - stats.getExp()) + " (" + ((stats.getExp() / next) * 100) + "%)"), true)
