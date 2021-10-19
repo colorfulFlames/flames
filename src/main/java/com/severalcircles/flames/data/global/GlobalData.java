@@ -46,13 +46,7 @@ public class GlobalData {
 //        averageScore = Integer.parseInt(properties.get("averageScore") + "");
         globalScore = Integer.parseInt(properties.get("globalScore") + "");
         participants = Integer.parseInt(properties.get("participants") + "");
-        try {
-            averageScore = globalScore / participants;
-        } catch (ArithmeticException e) {
-            participants = 1;
-            averageScore = globalScore;
-            write();
-        }
+        averageScore = globalScore / participants;
         System.out.println("AS:" + averageScore);
     }
 }
