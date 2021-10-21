@@ -9,6 +9,7 @@ import com.severalcircles.flames.command.TestCommand;
 import com.severalcircles.flames.command.connections.ArtistCommand;
 import com.severalcircles.flames.command.data.*;
 import com.severalcircles.flames.data.base.FlamesDataManager;
+import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.events.ButtonEvent;
 import com.severalcircles.flames.events.CommandEvent;
 import com.severalcircles.flames.events.MessageEvent;
@@ -81,6 +82,7 @@ public class Flames {
         long initalDelay = duration.getSeconds();
         bugsnag = new Bugsnag("4db7c7d93598a437149f27b877cc6a93");
         FlamesDataManager.prepare();
+        GlobalData.read();
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(new ReconnectRunnable(), 1, 1, TimeUnit.HOURS);
 //        scheduler.scheduleAtFixedRate(new FlushHistoricalData(), 1, 1, TimeUnit.HOURS);
