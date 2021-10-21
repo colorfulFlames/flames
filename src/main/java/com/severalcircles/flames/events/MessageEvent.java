@@ -15,6 +15,8 @@ import com.severalcircles.flames.data.user.UserFunFacts;
 import com.severalcircles.flames.features.Analysis;
 import com.severalcircles.flames.features.BadWordFilter;
 import com.severalcircles.flames.features.StringUtils;
+import com.severalcircles.flames.features.rank.Rank;
+import com.severalcircles.flames.features.rank.Ranking;
 import com.severalcircles.flames.features.today.Today;
 import com.severalcircles.flames.system.Flames;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -86,18 +88,23 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         @SuppressWarnings("IntegerDivisionInFloatingPointContext") int quoteChance = (int) Math.round(Math.random() * Math.round(GlobalData.participants / 2));
         System.out.println(quoteChance);
         //noinspection IntegerDivisionInFloatingPointContext
-        if (Today.quoteEmotion < sentiment.getMagnitude() && !Today.quoteLocked && event.getAuthor().getName() != Today.quote[1]) {
+        if (Today.quoteEmotion < sentiment.getMagnitude() && !Today.quoteLocked) {
+            if (Today.quote[1] == event.getAuthor().getName()) return;
+            if (Ranking.getRank(user.getScore()) == Rank.UNRANKED | Ranking.getRank(user.getScore()) == Rank.APPROACHING_BRONZE) return;
             if (Today.quoteChanges > Math.max(1, Math.round(GlobalData.participants / 10))) Today.quoteLocked = true;
             if (sentiment.getMagnitude() > 1) Today.quoteLocked = true;
             MessageEmbed congrats = new EmbedBuilder()
                     .setAuthor("Flames", null, event.getAuthor().getAvatarUrl())
                     .setTitle(event.getAuthor().getName() + ", congratulations on taking the quote of the day from " + Today.quote[1] + "!")
                     .addField("\"" + content + "\"", "- " + event.getAuthor().getName() + ", " + StringUtils.prettifyDate(Instant.now()), true)
+                    .addField("Bonus", StringUtils.formatScore(10000), true)
                     .setFooter("/today to see it for yourself!", Flames.api.getSelfUser().getAvatarUrl())
                     .setColor(Color.CYAN.darker())
                     .build();
             event.getMessage().reply(congrats).complete();
+            user.setScore(user.getScore() + 10000);
             Today.quote = new String[]{content, event.getAuthor().getName()};
+            Today.quoteChanges++;
         }
         UserFunFacts funFacts = user.getFunFacts();
         if (Analysis.analyzeEntities(event.getMessage().getContentRaw())) funFacts.setFrenchToastMentioned(funFacts.getFrenchToastMentioned() + 1);
