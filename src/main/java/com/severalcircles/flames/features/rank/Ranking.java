@@ -3,6 +3,8 @@ package com.severalcircles.flames.features.rank;
 import com.severalcircles.flames.data.global.GlobalData;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Determines thresholds for each rank and allows getting the rank for a given score.
@@ -13,6 +15,11 @@ public class Ranking {
     /**
      * Re-calculates the rank thresholds based on the current average score
      */
+    private static ResourceBundle rankResources;
+    public static ResourceBundle getResources(Locale locale) {
+        rankResources = ResourceBundle.getBundle("features/Ranking", locale);
+        return rankResources;
+    }
     public static void updateThresholds() throws IOException {
         GlobalData.read();
         // The base value used to calculate ranks is 10 times the average score, minus the number of participants

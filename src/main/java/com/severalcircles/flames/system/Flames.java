@@ -25,9 +25,7 @@ import java.io.InputStream;
 import java.time.Duration;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -51,6 +49,11 @@ public class Flames {
      */
     public static Bugsnag bugsnag;
     private static int fatalErrorCounter;
+    private static ResourceBundle commonRsc;
+    public static ResourceBundle getCommonRsc(Locale locale) {
+        commonRsc = ResourceBundle.getBundle("Common", locale);
+        return commonRsc;
+    }
     static {
         try {
             spotifyConnection = new SpotifyConnection();
