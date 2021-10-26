@@ -15,6 +15,7 @@ import com.severalcircles.flames.events.CommandEvent;
 import com.severalcircles.flames.events.MessageEvent;
 import com.severalcircles.flames.features.external.spotify.ReconnectRunnable;
 import com.severalcircles.flames.features.external.spotify.SpotifyConnection;
+import com.severalcircles.flames.features.info.error.exception.FlamesProtectException;
 import com.severalcircles.flames.features.today.ResetTodayRunnable;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
