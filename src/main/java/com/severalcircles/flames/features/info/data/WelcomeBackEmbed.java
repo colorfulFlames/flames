@@ -30,7 +30,6 @@ public class WelcomeBackEmbed implements FlamesEmbed {
         this.user = user;
         this.flamesUser = flamesUser;
     }
-
     @Override
     public MessageEmbed get() {
         Date now = Date.from(Instant.now());
