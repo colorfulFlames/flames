@@ -7,6 +7,7 @@ package com.severalcircles.flames.events;
 import com.severalcircles.flames.command.FlamesCommand;
 import com.severalcircles.flames.data.base.ConsentException;
 import com.severalcircles.flames.data.base.FlamesDataManager;
+import com.severalcircles.flames.features.info.error.message.fourhundred.ConsentErrorMessage;
 import com.severalcircles.flames.system.Flames;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
@@ -40,7 +41,7 @@ public class CommandEvent extends ListenerAdapter implements FlamesDiscordEvent 
                 } catch (IllegalStateException e) {
                     Logger.getGlobal().log(Level.INFO, "Somebody pressed a button :3");
                 } catch (ConsentException e) {
-                    event.reply("Hey bestie, looks like you've opted not to have your data collected by Flames. You can't have your cake, but then not eat it, so would you mind eating the cake first? Thanks!").complete();
+                    event.replyEmbeds(new ConsentErrorMessage(e).get());
                 }
             }
         }
