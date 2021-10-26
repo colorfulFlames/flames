@@ -15,6 +15,7 @@ import com.severalcircles.flames.events.CommandEvent;
 import com.severalcircles.flames.events.MessageEvent;
 import com.severalcircles.flames.features.external.spotify.ReconnectRunnable;
 import com.severalcircles.flames.features.external.spotify.SpotifyConnection;
+import com.severalcircles.flames.features.info.error.exception.FlamesProtectException;
 import com.severalcircles.flames.features.today.ResetTodayRunnable;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -25,9 +26,7 @@ import java.io.InputStream;
 import java.time.Duration;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -51,6 +50,11 @@ public class Flames {
      */
     public static Bugsnag bugsnag;
     private static int fatalErrorCounter;
+    private static ResourceBundle commonRsc;
+    public static ResourceBundle getCommonRsc(Locale locale) {
+        commonRsc = ResourceBundle.getBundle("Common", locale);
+        return commonRsc;
+    }
     static {
         try {
             spotifyConnection = new SpotifyConnection();
