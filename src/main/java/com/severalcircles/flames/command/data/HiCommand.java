@@ -4,25 +4,24 @@ import com.severalcircles.flames.command.FlamesCommand;
 import com.severalcircles.flames.data.base.FlamesDataManager;
 import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.features.StringUtils;
-import com.severalcircles.flames.features.external.severalcircles.FlamesAssets;
+import com.severalcircles.flames.features.info.data.WelcomeBackEmbed;
 import com.severalcircles.flames.system.Flames;
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 
-import java.awt.*;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class HiCommand implements FlamesCommand {
-    final static int baseBonus = 1000;
-    final static int riseBonus = 100;
-    final static int streakBonus = 100;
-    final static int randomBonus = 25;
+    static ResourceBundle values = ResourceBundle.getBundle("balancing/WelcomeBackValues", Locale.getDefault());
+    final static int baseBonus = (int) values.getObject("baseBonus");
+    final static int riseBonus = (int) values.getObject("riseBonus");
+    final static int streakBonus = (int) values.getObject("streakBonus");
+    final static int randomBonus = (int) values.getObject("randomBonus");
 
     @SuppressWarnings("deprecation")
     @Override
@@ -40,25 +39,7 @@ public class HiCommand implements FlamesCommand {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            String timeMessage;
-            if (now.getHours() < 6) timeMessage = "A sunrise as pretty as %s";
-            else if (now.getHours() < 9) timeMessage = "Good Morning, %s";
-            else if (now.getHours() < 12) timeMessage = "Hi, %s";
-            else if (now.getHours() < 15) timeMessage = "Good Afternoon, %s";
-            else if (now.getHours() < 18) timeMessage = "Nice work today, %s!";
-            else if (now.getHours() < 21) timeMessage = "Good Evening, %s";
-            else timeMessage = "Have a good night, %s";
-            MessageEmbed embed = new EmbedBuilder()
-                    .setTitle("Welcome Back to Flames")
-                    .setAuthor(String.format(timeMessage, discordUser.getName()), null, discordUser.getAvatarUrl())
-                    .setDescription("It's so nice to see you again!")
-                    .setFooter("Flames", Flames.api.getSelfUser().getAvatarUrl())
-                    .setImage(FlamesAssets.welcomeBackUrl)
-                    .addField("Daily Bonus", "" + dailyBonus, true)
-                    .setColor(Color.ORANGE)
-                    .addField("Your Flames Score", "" + StringUtils.formatScore(flamesUser.getScore()), true)
-                    .setTimestamp(Instant.now()).build();
-            event.replyEmbeds(embed).queue();
+            event.replyEmbeds(new WelcomeBackEmbed(dailyBonus, discordUser, flamesUser).get()).queue();
             flamesUser.setLastSeen(Instant.now());
             try {
                 FlamesDataManager.save(flamesUser);
