@@ -20,7 +20,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class WelcomeBackEmbed implements FlamesEmbed {
-    private static ResourceBundle resources = ResourceBundle.getBundle("features/data/WelcomeBackEmbed", Locale.getDefault());
+    private static ResourceBundle resources;
     private int dailyBonus;
     private User user;
     private FlamesUser flamesUser;
@@ -29,6 +29,7 @@ public class WelcomeBackEmbed implements FlamesEmbed {
         this.dailyBonus = dailyBonus;
         this.user = user;
         this.flamesUser = flamesUser;
+        resources = ResourceBundle.getBundle("features/data/WelcomeBackEmbed", flamesUser.getConfig().getLocale());
     }
     @Override
     public MessageEmbed get() {

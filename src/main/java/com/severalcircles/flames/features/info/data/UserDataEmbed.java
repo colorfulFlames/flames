@@ -23,10 +23,11 @@ public class UserDataEmbed implements FlamesEmbed {
     private User user;
     private FlamesUser flamesUser;
     // I'll fix this later lmao
-    private static ResourceBundle resources = ResourceBundle.getBundle("features/UserDataEmbed", Locale.getDefault());
+    private ResourceBundle resources;
     public UserDataEmbed(User user, FlamesUser flamesUser) {
         this.user = user;
         this.flamesUser = flamesUser;
+        resources = ResourceBundle.getBundle("features/UserDataEmbed", flamesUser.getConfig().getLocale());
     }
 
 
