@@ -5,20 +5,20 @@
 package com.severalcircles.flames.events;
 
 import com.google.cloud.language.v1.Sentiment;
-import com.severalcircles.flames.data.base.ConsentException;
-import com.severalcircles.flames.data.base.FlamesDataManager;
+import com.severalcircles.flames.data.user.consent.ConsentException;
+import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.guild.FlamesGuild;
 import com.severalcircles.flames.data.guild.NewGuildException;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.UserFunFacts;
-import com.severalcircles.flames.features.Analysis;
-import com.severalcircles.flames.features.BadWordFilter;
-import com.severalcircles.flames.features.StringUtils;
-import com.severalcircles.flames.features.rank.Rank;
-import com.severalcircles.flames.features.rank.Ranking;
-import com.severalcircles.flames.features.today.Today;
-import com.severalcircles.flames.system.Flames;
+import com.severalcircles.flames.external.google.Analysis;
+import com.severalcircles.flames.util.BadWordFilter;
+import com.severalcircles.flames.util.StringUtil;
+import com.severalcircles.flames.data.ranking.Rank;
+import com.severalcircles.flames.data.ranking.Ranking;
+import com.severalcircles.flames.today.Today;
+import com.severalcircles.flames.Flames;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -96,8 +96,8 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             MessageEmbed congrats = new EmbedBuilder()
                     .setAuthor("Flames", null, event.getAuthor().getAvatarUrl())
                     .setTitle(event.getAuthor().getName() + ", congratulations on taking the quote of the day from " + Today.quote[1] + "!")
-                    .addField("\"" + content + "\"", "- " + event.getAuthor().getName() + ", " + StringUtils.prettifyDate(Instant.now()), true)
-                    .addField("Bonus", StringUtils.formatScore(10000), true)
+                    .addField("\"" + content + "\"", "- " + event.getAuthor().getName() + ", " + StringUtil.prettifyDate(Instant.now()), true)
+                    .addField("Bonus", StringUtil.formatScore(10000), true)
                     .setFooter("/today to see it for yourself!", Flames.api.getSelfUser().getAvatarUrl())
                     .setColor(Color.CYAN.darker())
                     .build();

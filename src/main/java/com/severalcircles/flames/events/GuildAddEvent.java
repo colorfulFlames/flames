@@ -4,7 +4,7 @@
 
 package com.severalcircles.flames.events;
 
-import com.severalcircles.flames.data.base.FlamesDataManager;
+import com.severalcircles.flames.data.FlamesDataManager;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;

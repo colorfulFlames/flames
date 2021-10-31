@@ -4,11 +4,11 @@
 
 package com.severalcircles.flames.events;
 
-import com.severalcircles.flames.command.FlamesCommand;
-import com.severalcircles.flames.data.base.ConsentException;
-import com.severalcircles.flames.data.base.FlamesDataManager;
-import com.severalcircles.flames.features.info.error.message.fourhundred.ConsentErrorMessage;
-import com.severalcircles.flames.system.Flames;
+import com.severalcircles.flames.FlamesCommand;
+import com.severalcircles.flames.data.user.consent.ConsentException;
+import com.severalcircles.flames.data.FlamesDataManager;
+import com.severalcircles.flames.error.message.fourhundred.ConsentErrorMessage;
+import com.severalcircles.flames.Flames;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -41,7 +41,7 @@ public class CommandEvent extends ListenerAdapter implements FlamesDiscordEvent 
                 } catch (IllegalStateException e) {
                     Logger.getGlobal().log(Level.INFO, "Somebody pressed a button :3");
                 } catch (ConsentException e) {
-                    event.replyEmbeds(new ConsentErrorMessage(e).get());
+                    event.replyEmbeds(new ConsentErrorMessage(e).get()).complete();
                 }
             }
         }

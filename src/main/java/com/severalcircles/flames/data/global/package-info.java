@@ -2,6 +2,6 @@
  * Copyright (c) 2021 Several Circles.
  */
 /**
- * Global Data Structure
+ * Used for accessing and controlling the Global Data.
  */
 package com.severalcircles.flames.data.global;

@@ -2,6 +2,6 @@
  * Copyright (c) 2021 Several Circles.
  */
 /**
- * Event Listeners for Discord Events (e.g. Message Events)
+ * All the event triggers, like the Message Event.
  */
 package com.severalcircles.flames.events;
