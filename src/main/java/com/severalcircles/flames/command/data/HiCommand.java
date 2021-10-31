@@ -18,10 +18,10 @@ import java.util.ResourceBundle;
 
 public class HiCommand implements FlamesCommand {
     static ResourceBundle values = ResourceBundle.getBundle("balancing/WelcomeBackValues", Locale.getDefault());
-    final static int baseBonus = (int) values.getObject("baseBonus");
-    final static int riseBonus = (int) values.getObject("riseBonus");
-    final static int streakBonus = (int) values.getObject("streakBonus");
-    final static int randomBonus = (int) values.getObject("randomBonus");
+    final static int baseBonus = Integer.parseInt(values.getString("baseBonus"));
+    final static int riseBonus = Integer.parseInt(values.getString(("riseBonus")));
+    final static int streakBonus = Integer.parseInt(values.getString(("streakBonus")));
+    final static int randomBonus = Integer.parseInt(values.getString("randomBonus"));
 
     @SuppressWarnings("deprecation")
     @Override

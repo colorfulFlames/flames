@@ -27,7 +27,7 @@ public class UserDataEmbed implements FlamesEmbed {
     public UserDataEmbed(User user, FlamesUser flamesUser) {
         this.user = user;
         this.flamesUser = flamesUser;
-        resources = ResourceBundle.getBundle("features/UserDataEmbed", flamesUser.getConfig().getLocale());
+        resources = ResourceBundle.getBundle("features/data/UserDataEmbed", flamesUser.getConfig().getLocale());
     }
 
 
@@ -35,7 +35,7 @@ public class UserDataEmbed implements FlamesEmbed {
     public MessageEmbed get() {
         MessageEmbed embed = new EmbedBuilder()
                 .setAuthor(resources.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
-                .setTitle(resources.getString("title"))
+                .setTitle(String.format(resources.getString("title"), user.getName()))
                 .addField(resources.getString("score"), StringUtils.formatScore(flamesUser.getScore()), true)
                 .addField(resources.getString("rank"), Ranking.getResources(Locale.getDefault()).getString(Ranking.getRank(flamesUser.getScore()).toString()), true)
                 .addField(resources.getString("toNext"), StringUtils.formatScore(Ranking.toNext(flamesUser.getScore())), true)

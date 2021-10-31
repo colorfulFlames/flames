@@ -125,6 +125,9 @@ public class FlamesDataManager {
         File stats2 = new File(udir.getAbsolutePath() + "/stats.fl");
         File funfacts = new File(udir.getAbsolutePath() + "/funfacts.fl");
         File config1 = new File(udir.getAbsolutePath() + "/config.fl");
+        userfl.createNewFile();
+        stats2.createNewFile();
+        funfacts.createNewFile();
         FileInputStream inputStream1 = new FileInputStream(userfl);
         FileInputStream inputStream2 = new FileInputStream(stats2);
         FileInputStream inputStream3 = new FileInputStream(funfacts);
@@ -154,7 +157,7 @@ public class FlamesDataManager {
         funFacts.setHappyDay(Instant.parse(funfactsdata.get("happyDay") + ""));
         funFacts.setHighestEmotion(Float.parseFloat(funfactsdata.get("highestEmotion")+ ""));
         funFacts.setLowestEmotion(Float.parseFloat(funfactsdata.get("lowestEmotion") + ""));
-
+        if (config.getLocale() == null) config.setLocale(Locale.getDefault());
         stats = new UserStats(Integer.parseInt(statsdata.get("exp") + ""), Integer.parseInt(statsdata.get("level") + ""), Integer.parseInt(statsdata.get("POW") + ""), Integer.parseInt(statsdata.get("RES") + ""), Integer.parseInt(statsdata.get("LUCK") + ""), Integer.parseInt(statsdata.get("RISE") + ""), Integer.parseInt(statsdata.get("CAR") + ""));
         config = new UserConfig(Locale.forLanguageTag(configdata.get("locale") + ""));
         fluser.setStats(stats);

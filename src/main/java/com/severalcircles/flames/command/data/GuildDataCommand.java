@@ -10,6 +10,7 @@ import com.severalcircles.flames.data.base.FlamesDataManager;
 import com.severalcircles.flames.data.guild.FlamesGuild;
 import com.severalcircles.flames.data.guild.NewGuildException;
 import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.features.Emotion;
 import com.severalcircles.flames.features.StringUtils;
 import com.severalcircles.flames.features.rank.Ranking;
 import com.severalcircles.flames.system.Flames;
@@ -21,11 +22,9 @@ import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import java.awt.*;
 import java.io.IOException;
 import java.time.Instant;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class GuildDataCommand implements FlamesCommand {
-    ResourceBundle resources = ResourceBundle.getBundle("commands/MyDataCommand", Locale.ENGLISH);
+//    ResourceBundle resources = ResourceBundle.getBundle("commands/MyDataCommand", Locale.ENGLISH);
     @Override
     public void execute(SlashCommandEvent event, FlamesUser sender) {
         Guild guild = event.getGuild();
@@ -46,12 +45,7 @@ public class GuildDataCommand implements FlamesCommand {
             owner = new FlamesUser();
         }
         float emotion = gdata.getEmotion();
-        String emotionString;
-        if (emotion > 5) emotionString = resources.getString("emotion.high");
-        else if (emotion > 2) emotionString = resources.getString("emotion.midplus");
-        else if (emotion >= 0) emotionString = resources.getString("emotion.mid");
-        else if (emotion > -1) emotionString = resources.getString("emotion.midminus");
-        else emotionString = resources.getString("emotion.low");
+        String emotionString = Emotion.getEmotionString(emotion, sender.getConfig().getLocale());
         MessageEmbed embed = new EmbedBuilder()
                 .setAuthor("Guild Data", null, event.getUser().getAvatarUrl())
                 .setTitle(guild.getName())

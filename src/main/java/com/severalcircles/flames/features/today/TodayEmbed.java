@@ -25,10 +25,11 @@ import java.util.ResourceBundle;
 public class TodayEmbed implements FlamesEmbed {
     private User user;
     private FlamesUser flamesUser;
-    private static ResourceBundle resources = ResourceBundle.getBundle("features/TodayEmbed", Locale.getDefault());
+    private static ResourceBundle resources;
     public TodayEmbed(User user, FlamesUser flamesUser) {
         this.flamesUser = flamesUser;
         this.user = user;
+        resources = ResourceBundle.getBundle("features/TodayEmbed", flamesUser.getConfig().getLocale());
     }
     @Override
     public MessageEmbed get() {
@@ -48,7 +49,7 @@ public class TodayEmbed implements FlamesEmbed {
                 .addBlankField(false)
                 .addField("\"" + Today.quote[0] + "\"", "- " + Today.quote[1] + ", " + StringUtils.prettifyDate(Instant.now()), false)
                 .addBlankField(false)
-                .addField(resources.getString("allAbout"), resources.getString("tommorowBring"), false)
+                .addField(resources.getString("allAbout"), resources.getString("tomorrowBring"), false)
                 .setFooter(String.format(Flames.getCommonRsc(Locale.getDefault()).getString("userFooter"), user.getName(), Ranking.getResources(Locale.getDefault()).getString(String.valueOf(Ranking.getRank(flamesUser.getScore())))), user.getAvatarUrl())
                 .setColor(Color.GREEN.darker())
                 .build();
