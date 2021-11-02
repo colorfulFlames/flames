@@ -89,7 +89,8 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         System.out.println(quoteChance);
         //noinspection IntegerDivisionInFloatingPointContext
         if (Today.quoteEmotion < sentiment.getMagnitude() && !Today.quoteLocked) {
-            if (Today.quote[1] == event.getAuthor().getName()) return;
+            if (sentiment.getMagnitude() < 0.5) return;
+            if (Today.quote[2] == event.getAuthor().getId()) return;
             if (Ranking.getRank(user.getScore()) == Rank.UNRANKED | Ranking.getRank(user.getScore()) == Rank.APPROACHING_BRONZE) return;
             if (Today.quoteChanges > Math.max(1, Math.round(GlobalData.participants / 10))) Today.quoteLocked = true;
             if (sentiment.getMagnitude() > 1) Today.quoteLocked = true;
@@ -97,13 +98,13 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
                     .setAuthor("Flames", null, event.getAuthor().getAvatarUrl())
                     .setTitle(event.getAuthor().getName() + ", congratulations on taking the quote of the day from " + Today.quote[1] + "!")
                     .addField("\"" + content + "\"", "- " + event.getAuthor().getName() + ", " + StringUtils.prettifyDate(Instant.now()), true)
-                    .addField("Bonus", StringUtils.formatScore(10000), true)
+                    .addField("Bonus", StringUtils.formatScore(2500), true)
                     .setFooter("/today to see it for yourself!", Flames.api.getSelfUser().getAvatarUrl())
                     .setColor(Color.CYAN.darker())
                     .build();
             event.getMessage().reply(congrats).complete();
-            user.setScore(user.getScore() + 10000);
-            Today.quote = new String[]{content, event.getAuthor().getName()};
+            user.setScore(user.getScore() + 2500);
+            Today.quote = new String[]{content, event.getAuthor().getName(), event.getAuthor().getId()};
             Today.quoteChanges++;
         }
         UserFunFacts funFacts = user.getFunFacts();
