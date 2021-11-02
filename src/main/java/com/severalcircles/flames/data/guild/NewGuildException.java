@@ -4,7 +4,7 @@
 
 package com.severalcircles.flames.data.guild;
 
-import com.severalcircles.flames.features.info.error.FlamesError;
+import com.severalcircles.flames.FlamesError;
 
 public class NewGuildException extends Exception implements FlamesError {
     @Override

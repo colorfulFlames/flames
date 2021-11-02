@@ -1,6 +1,10 @@
+/*
+ * Copyright (c) 2021 Several Circles.
+ */
+
 package com.severalcircles.flames.data.global;
 
-import com.severalcircles.flames.data.base.FlamesDataManager;
+import com.severalcircles.flames.data.FlamesDataManager;
 
 import java.io.*;
 import java.util.Properties;
