@@ -59,14 +59,6 @@ public class FlamesGuild implements FlamesData {
         this.joined = joined;
     }
 
-//    public List<GuildBan> getBanList() {
-//        return banList;
-//    }
-//
-//    public void addBanToList(GuildBan ban) {
-//        this.banList = banList;
-//    }
-
     public int getFlamesScore() {
         return flamesScore;
     }

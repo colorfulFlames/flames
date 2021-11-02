@@ -5,12 +5,12 @@
 package com.severalcircles.flames.data.user;
 
 public enum UserSetting {
-    LOCALE("1");
+    LOCALE();
     private String code;
-    UserSetting(String code) {
-        this.code = code;
+    UserSetting() {
+        this.code = "1";
     }
     public String getCode() {
-        return this.code = code;
+        return code;
     }
 }

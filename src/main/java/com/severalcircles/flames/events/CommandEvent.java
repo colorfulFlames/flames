@@ -4,11 +4,11 @@
 
 package com.severalcircles.flames.events;
 
-import com.severalcircles.flames.command.FlamesCommand;
-import com.severalcircles.flames.data.base.ConsentException;
-import com.severalcircles.flames.data.base.FlamesDataManager;
-import com.severalcircles.flames.features.info.error.message.fourhundred.ConsentErrorMessage;
-import com.severalcircles.flames.system.Flames;
+import com.severalcircles.flames.Flames;
+import com.severalcircles.flames.data.FlamesDataManager;
+import com.severalcircles.flames.data.user.consent.ConsentException;
+import com.severalcircles.flames.frontend.FlamesCommand;
+import com.severalcircles.flames.frontend.message.fourhundred.ConsentErrorMessage;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
