@@ -45,8 +45,10 @@ public class StringUtils {
                 break;
             case 10:
                 prettyDate += "November ";
+                break;
             case 11:
                 prettyDate += "December ";
+                break;
         }
         prettyDate += Date.from(instant).getDate() + ", " + (Date.from(instant).getYear()+1900);
         return prettyDate;

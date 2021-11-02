@@ -16,7 +16,6 @@ import net.dv8tion.jda.api.entities.User;
 import java.awt.*;
 import java.time.Instant;
 import java.util.Date;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class WelcomeBackEmbed implements FlamesEmbed {
@@ -48,7 +47,7 @@ public class WelcomeBackEmbed implements FlamesEmbed {
                 .addField(resources.getString("score"), StringUtils.formatScore(flamesUser.getScore()), true)
                 .setDescription(resources.getString("description"))
                 .setColor(Color.ORANGE)
-                .setFooter(String.format(Flames.getCommonRsc(Locale.getDefault()).getString("userFooter"), user.getName(), Ranking.getResources(Locale.getDefault()).getString(String.valueOf(Ranking.getRank(flamesUser.getScore())))), user.getAvatarUrl())
+                .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(String.valueOf(Ranking.getRank(flamesUser.getScore())))), user.getAvatarUrl())
                 .build();
         return embed;
     }

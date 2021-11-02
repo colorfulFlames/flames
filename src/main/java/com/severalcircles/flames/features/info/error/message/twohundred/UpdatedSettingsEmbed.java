@@ -27,7 +27,7 @@ public class UpdatedSettingsEmbed implements FlamesEmbed {
     public MessageEmbed get() {
         MessageEmbed embed = new EmbedBuilder()
                 .setAuthor(resources.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
-                .setTitle(resources.getString("title"))
+                .setTitle(String.format(resources.getString("title"), user.getName()))
                 .setFooter(String.format(resources.getString("footer"), "200-00" + updatedSetting.getCode()), user.getAvatarUrl())
                 .setColor(Color.GREEN)
                 .setTimestamp(Instant.now())

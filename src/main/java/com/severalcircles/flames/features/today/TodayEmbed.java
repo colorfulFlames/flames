@@ -17,7 +17,6 @@ import net.dv8tion.jda.api.entities.User;
 
 import java.awt.*;
 import java.time.Instant;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -45,12 +44,12 @@ public class TodayEmbed implements FlamesEmbed {
                 .setAuthor(String.format(resources.getString("author"), StringUtils.prettifyDate(Instant.now())), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setTitle(resources.getString("title"))
                 .addField(resources.getString("talkingAbout"), trendingEntity, true)
-                .addField(resources.getString("feeling"), Emotion.getEmotionString(Today.emotion, Locale.getDefault()), true)
+                .addField(resources.getString("feeling"), Emotion.getEmotionString(Today.emotion, flamesUser.getConfig().getLocale()), true)
                 .addBlankField(false)
                 .addField("\"" + Today.quote[0] + "\"", "- " + Today.quote[1] + ", " + StringUtils.prettifyDate(Instant.now()), false)
                 .addBlankField(false)
                 .addField(resources.getString("allAbout"), resources.getString("tomorrowBring"), false)
-                .setFooter(String.format(Flames.getCommonRsc(Locale.getDefault()).getString("userFooter"), user.getName(), Ranking.getResources(Locale.getDefault()).getString(String.valueOf(Ranking.getRank(flamesUser.getScore())))), user.getAvatarUrl())
+                .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(String.valueOf(Ranking.getRank(flamesUser.getScore())))), user.getAvatarUrl())
                 .setColor(Color.GREEN.darker())
                 .build();
         return embed;

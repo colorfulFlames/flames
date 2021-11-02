@@ -16,7 +16,6 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 
 import java.awt.*;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class UserDataEmbed implements FlamesEmbed {
@@ -37,12 +36,12 @@ public class UserDataEmbed implements FlamesEmbed {
                 .setAuthor(resources.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setTitle(String.format(resources.getString("title"), user.getName()))
                 .addField(resources.getString("score"), StringUtils.formatScore(flamesUser.getScore()), true)
-                .addField(resources.getString("rank"), Ranking.getResources(Locale.getDefault()).getString(Ranking.getRank(flamesUser.getScore()).toString()), true)
+                .addField(resources.getString("rank"), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(Ranking.getRank(flamesUser.getScore()).toString()), true)
                 .addField(resources.getString("toNext"), StringUtils.formatScore(Ranking.toNext(flamesUser.getScore())), true)
-                .addField(resources.getString("emotion"), Emotion.getEmotionString(flamesUser.getEmotion(), Locale.getDefault()), true)
+                .addField(resources.getString("emotion"), Emotion.getEmotionString(flamesUser.getEmotion(), flamesUser.getConfig().getLocale()), true)
                 .setDescription(String.format(resources.getString("level"), flamesUser.getStats().getLevel()))
                 .setColor(new Color(153, 85,187))
-                .setFooter(String.format(Flames.getCommonRsc(Locale.getDefault()).getString("userFooter"), user.getName(), Ranking.getResources(Locale.getDefault()).getString(Ranking.getRank(flamesUser.getScore()).toString())))
+                .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(Ranking.getRank(flamesUser.getScore()).toString())))
                 .setThumbnail(FlamesAssets.getRankIcon(Ranking.getRank(flamesUser.getScore())))
                 .build();
         return embed;

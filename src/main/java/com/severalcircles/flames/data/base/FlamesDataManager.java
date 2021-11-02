@@ -57,17 +57,21 @@ public class FlamesDataManager {
         File userl = new File(udir.getAbsolutePath() + "/user.fl");
         File stats = new File(udir.getAbsolutePath() + "/stats.fl");
         File funfacts = new File(udir.getAbsolutePath() + "/funfacts.fl");
+        File config = new File(udir.getAbsolutePath() + "/config.fl");
         // If any of the user data files don't exist, we're just going to assume that the data either doesn't exist or is corrupted and start from scratch because it shouldn't ever happen normally.
-        if (udir.mkdir() | userl.createNewFile() | stats.createNewFile() | funfacts.createNewFile()) {
+        if (udir.mkdir() | userl.createNewFile() | stats.createNewFile() | funfacts.createNewFile() | config.createNewFile()) {
             FlamesUser flamesUser = new FlamesUser();
             Logger.getGlobal().log(Level.INFO, "User Data for " + discordId + " does not exist. Creating it now.");
             FileOutputStream os1 = new FileOutputStream(userl);
             FileOutputStream os2 = new FileOutputStream(stats);
             FileOutputStream os3 = new FileOutputStream(funfacts);
+            FileOutputStream os4 = new FileOutputStream(config);
             flamesUser.setDiscordId(discordId);
             flamesUser.createData().store(os1, "User Data for " + name);
             flamesUser.getStats().createData().store(os2, "User Stats for " + name);
             flamesUser.getFunFacts().createData().store(os3, "Fun Facts for " + name);
+            flamesUser.getConfig().createData().store(os4, "Configuration for " + name);
+
 //            Consent.getConsent(user);
             return true;
         } else {

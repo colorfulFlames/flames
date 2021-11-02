@@ -17,6 +17,7 @@ public class UserConfig implements FlamesData {
     }
 
     public UserConfig() {
+
     }
 
     public Locale getLocale() {
@@ -30,7 +31,7 @@ public class UserConfig implements FlamesData {
     @Override
     public Properties createData() {
         Properties properties = new Properties();
-        properties.put("locale", locale.toLanguageTag());
+        properties.put("locale", this.locale.toLanguageTag());
         return properties;
     }
 }

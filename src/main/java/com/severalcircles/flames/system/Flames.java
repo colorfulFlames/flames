@@ -19,6 +19,8 @@ import com.severalcircles.flames.features.info.error.exception.FlamesProtectExce
 import com.severalcircles.flames.features.today.ResetTodayRunnable;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
@@ -104,17 +106,30 @@ public class Flames {
             e.printStackTrace();
         }
         // --- Commands ---
+        List<CommandData> commandDataList = new LinkedList<>();
         commandMap.put("based", new TestCommand());
+        commandDataList.add(new CommandData("based", "based"));
         commandMap.put("mydata", new MyDataCommand());
+        commandDataList.add(new CommandData("mydata", "Displays your User Data"));
         commandMap.put("globaldata", new GlobalDataCommand());
+        commandDataList.add(new CommandData("globaldata", "Displays the current Global Data"));
         commandMap.put("artist", new ArtistCommand());
+        commandDataList.add(new CommandData("artist", "Displays information for a Spotify artist").addOption(OptionType.STRING, "artist", "The name of the artist"));
         commandMap.put("hi", new HiCommand());
+        commandDataList.add(new CommandData("hi", "Collect your Daily Bonus"));
         commandMap.put("help", new HelpCommand());
+        commandDataList.add(new CommandData("help", "Get links to support resources like the support server and the documentation"));
         commandMap.put("debug", new DebugCommand());
+        commandDataList.add(new CommandData("debug", "Displays debugging information"));
         commandMap.put("today", new TodayCommand());
+        commandDataList.add(new CommandData("today", "Find out what Today is all about"));
         commandMap.put("guilddata", new GuildDataCommand());
+        commandDataList.add(new CommandData("guilddata", "Displays information for the current guild"));
+        commandMap.put("locale", new LocaleCommand());
+        commandDataList.add(new CommandData("locale", "Switches your locale").addOption(OptionType.STRING, "new_locale", "The locale you want to switch to", true));
+//        RegisterCommand.register();
         //noinspection ResultOfMethodCallIgnored
-        api.updateCommands();
+        api.updateCommands().addCommands(commandDataList).complete();
         // --- Events ---
         new CommandEvent().register(api);
         new MessageEvent().register(api);
