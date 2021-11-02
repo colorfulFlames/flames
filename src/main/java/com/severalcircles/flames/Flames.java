@@ -82,7 +82,7 @@ public class Flames {
         properties.load(is);
         version = properties.getProperty("version");
         Logger.getGlobal().log(Level.INFO, "Flames version " + version);
-        if (version.contains("SNAPSHOT")) {
+        if (version.contains("-beta") | version.contains("-alpha")) {
             Logger.getGlobal().log(Level.INFO, "You are running a development snapshot version of Flames. That means this version represents a \"snapshot\" of what the next release looks like at the time it was developed.\n" +
                     "There is absolutely ZERO promises with this build. You get what you get, please do not throw a fit.\n" +
                     "Do not use this version for anything other than testing. If you are even thinking about using this in any kind of production setting, think again. Wait until this version is officially released.");
