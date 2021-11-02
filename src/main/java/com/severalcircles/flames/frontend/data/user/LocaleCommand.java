@@ -15,12 +15,13 @@ import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 
 import java.io.IOException;
 import java.util.Locale;
+import java.util.Objects;
 
 public class LocaleCommand implements FlamesCommand {
 
     @Override
     public void execute(SlashCommandEvent event, FlamesUser sender) {
-        String setTo = event.getOption("new_locale").getAsString();
+        String setTo = Objects.requireNonNull(event.getOption("new_locale")).getAsString();
         System.out.println(setTo);
         Locale newLocale;
         if (setTo.equals("en")) {

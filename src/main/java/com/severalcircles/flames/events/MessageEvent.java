@@ -57,10 +57,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         }
         try {
             guild = FlamesDataManager.readGuild(event.getGuild().getId());
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        } catch (NewGuildException e) {
+        } catch (IOException | NewGuildException e) {
             e.printStackTrace();
             return;
         }
@@ -81,6 +78,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         user.setScore(user.getScore() + score);
         guild.setFlamesScore(guild.getFlamesScore() + score);
         guild.setEmotion(guild.getEmotion() + sentiment.getScore());
+        //noinspection IntegerDivisionInFloatingPointContext
         Today.emotion += score / GlobalData.participants;
         if (user.getScore() > Today.highScore) {
             Today.highScore = user.getScore();
@@ -88,11 +86,11 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         }
         @SuppressWarnings("IntegerDivisionInFloatingPointContext") int quoteChance = (int) Math.round(Math.random() * Math.round(GlobalData.participants / 2));
         System.out.println(quoteChance);
-        //noinspection IntegerDivisionInFloatingPointContext
         if (Today.quoteEmotion < sentiment.getMagnitude() && !Today.quoteLocked) {
             if (sentiment.getMagnitude() < 0.5) return;
-            if (Today.quote[2] == event.getAuthor().getId()) return;
+            if (Today.quote[2].equals(event.getAuthor().getId())) return;
             if (Ranking.getRank(user.getScore()) == Rank.UNRANKED | Ranking.getRank(user.getScore()) == Rank.APPROACHING_BRONZE) return;
+            //noinspection IntegerDivisionInFloatingPointContext
             if (Today.quoteChanges > Math.max(1, Math.round(GlobalData.participants / 10))) Today.quoteLocked = true;
             if (sentiment.getMagnitude() > 1) Today.quoteLocked = true;
             MessageEmbed congrats = new EmbedBuilder()

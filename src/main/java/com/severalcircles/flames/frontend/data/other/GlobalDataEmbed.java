@@ -31,7 +31,7 @@ public class GlobalDataEmbed implements FlamesEmbed {
 
     @Override
     public MessageEmbed get() {
-        MessageEmbed embed = new EmbedBuilder()
+        return new EmbedBuilder()
                 .setAuthor(resources.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setTitle(String.format(resources.getString("title"), Flames.api.getSelfUser().getName()))
                 .addField(resources.getString("globalScore"), StringUtils.formatScore(GlobalData.globalScore), true)
@@ -39,6 +39,5 @@ public class GlobalDataEmbed implements FlamesEmbed {
                 .setColor(new Color(15, 131, 217))
                 .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(Ranking.getRank(flamesUser.getScore()).toString())))
                 .build();
-        return embed;
     }
 }

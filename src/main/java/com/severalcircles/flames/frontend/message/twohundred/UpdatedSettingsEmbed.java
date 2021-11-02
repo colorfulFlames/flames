@@ -40,13 +40,12 @@ public class UpdatedSettingsEmbed implements FlamesEmbed {
     @Override
     public MessageEmbed get() {
         if (em != null) return em.get();
-        MessageEmbed embed = new EmbedBuilder()
+        return new EmbedBuilder()
                 .setAuthor(resources.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setTitle(String.format(resources.getString("title"), user.getName()))
                 .setFooter(String.format(resources.getString("footer"), "200-00" + updatedSetting.getCode()), user.getAvatarUrl())
                 .setColor(Color.GREEN)
                 .setTimestamp(Instant.now())
                 .build();
-        return embed;
     }
 }

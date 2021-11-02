@@ -4,9 +4,6 @@
 
 package com.severalcircles.flames.events;
 
-//import com.severalcircles.flames.buttonaction.*;
-//import com.severalcircles.flames.frontend.ButtonAction;
-
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.user.consent.Consent;
@@ -33,9 +30,9 @@ public class ButtonEvent extends ListenerAdapter implements FlamesDiscordEvent {
         buttonActionMap.put("consent", new ConsentButtonAction());
 //        buttonActionMap.put("gdata", new GlobalDataButton());
         buttonActionMap.put("stats", new StatsButtonAction());
-        buttonActionMap.put("funFacts", (FlamesButtonAction) new FunFactsButtonAction());
-        buttonActionMap.put("manageData", (FlamesButtonAction) new ManageUserDataButtonAction());
-        buttonActionMap.put("mydata", (FlamesButtonAction) new MyDataButtonAction());
+        buttonActionMap.put("funFacts", new FunFactsButtonAction());
+        buttonActionMap.put("manageData", new ManageUserDataButtonAction());
+        buttonActionMap.put("mydata", new MyDataButtonAction());
     }
 
     @Override

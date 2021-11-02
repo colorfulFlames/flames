@@ -36,7 +36,7 @@ public class GuildDataEmbed implements FlamesEmbed {
 
     @Override
     public MessageEmbed get() {
-        MessageEmbed embed = new EmbedBuilder()
+        return new EmbedBuilder()
                 .setAuthor(resources.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setTitle(String.format(resources.getString("title"), guild1.getName()))
                 .addField(resources.getString("score"), StringUtils.formatScore(guild.getFlamesScore()), true)
@@ -44,6 +44,5 @@ public class GuildDataEmbed implements FlamesEmbed {
                 .setColor(Color.magenta.darker())
                 .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(Ranking.getRank(flamesUser.getScore()).toString())))
                 .build();
-        return embed;
     }
 }

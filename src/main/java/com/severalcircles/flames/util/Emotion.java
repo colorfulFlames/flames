@@ -8,10 +8,8 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Emotion {
-    private static ResourceBundle resourceBundle;
     public static ResourceBundle getResources(Locale locale) {
-        resourceBundle = ResourceBundle.getBundle("features/Emotion", locale);
-        return resourceBundle;
+        return ResourceBundle.getBundle("features/Emotion", locale);
     }
     public static String getEmotionString(float emotion, Locale locale) {
         if (emotion < 10 && emotion >= 0) return getResources(locale).getString("mid");

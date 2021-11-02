@@ -43,13 +43,12 @@ public class BadArgumentsErrorMessage extends FlamesErrorMessage implements Flam
     }
     @Override
     public MessageEmbed get() {
-        MessageEmbed embed = new EmbedBuilder()
+        return new EmbedBuilder()
                 .setAuthor(resources.getString("author"))
                 .setTitle(String.format(resources.getString("title"), user.getName()))
                 .setDescription(exception.getMessage())
                 .setColor(Color.red)
                 .setFooter(String.format(resources.getString("footer"), exception.getCode()))
                 .build();
-        return embed;
     }
 }

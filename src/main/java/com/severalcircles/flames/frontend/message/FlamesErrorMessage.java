@@ -28,7 +28,7 @@ public abstract class FlamesErrorMessage implements FlamesEmbed {
     }
     @Override
     public MessageEmbed get() {
-        MessageEmbed embed = new EmbedBuilder()
+        return new EmbedBuilder()
                 .setAuthor(String.format(resources.getString("author"), Flames.api.getSelfUser().getName()))
                 .setColor(Color.red)
                 .setTitle(resources.getString("title"))
@@ -37,6 +37,5 @@ public abstract class FlamesErrorMessage implements FlamesEmbed {
                 .setFooter(String.format(resources.getString("footer"), errorCode))
                 .setTimestamp(Instant.now())
                 .build();
-        return embed;
     }
 }

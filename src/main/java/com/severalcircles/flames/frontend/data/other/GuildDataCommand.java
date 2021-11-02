@@ -15,15 +15,16 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class GuildDataCommand implements FlamesCommand {
 //    ResourceBundle resources = ResourceBundle.getBundle("commands/MyDataCommand", Locale.ENGLISH);
     @Override
     public void execute(SlashCommandEvent event, FlamesUser sender) {
         Guild guild = event.getGuild();
-        FlamesGuild gdata = null;
+        FlamesGuild gdata;
         try {
-            gdata = FlamesDataManager.readGuild(event.getGuild().getId());
+            gdata = FlamesDataManager.readGuild(Objects.requireNonNull(event.getGuild()).getId());
         } catch (IOException e) {
             event.replyEmbeds(new GenericErrorMessage(e).get()).complete();
             return;

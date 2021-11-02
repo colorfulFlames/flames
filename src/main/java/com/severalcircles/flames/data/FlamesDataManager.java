@@ -252,7 +252,7 @@ public class FlamesDataManager {
         guild.createData().store(os, "Flames Guild Data");
     }
     public static FlamesGuild readGuild(String id) throws IOException, NewGuildException {
-        if (newGuild(Flames.api.getGuildById(id))) throw new NewGuildException();
+        if (newGuild(Objects.requireNonNull(Flames.api.getGuildById(id)))) throw new NewGuildException();
         File guildDir = new File(guildDirectory.getAbsolutePath() + "/" + id);
         File mainFile = new File(guildDir.getAbsolutePath() + "/guild.fl");
         Properties data = new Properties();

@@ -16,13 +16,9 @@ import java.util.ResourceBundle;
 public class Ranking {
     public static final int[] thresholds = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     public static int baseValue = 0;
-    /**
-     * Re-calculates the rank thresholds based on the current average score
-     */
-    private static ResourceBundle rankResources;
+
     public static ResourceBundle getResources(Locale locale) {
-        rankResources = ResourceBundle.getBundle("features/Ranking", locale);
-        return rankResources;
+        return ResourceBundle.getBundle("features/Ranking", locale);
     }
     public static void updateThresholds() throws IOException {
         GlobalData.read();

@@ -20,13 +20,12 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class HiCommand implements FlamesCommand {
-    static ResourceBundle values = ResourceBundle.getBundle("balancing/WelcomeBackValues", Locale.getDefault());
+    static final ResourceBundle values = ResourceBundle.getBundle("balancing/WelcomeBackValues", Locale.getDefault());
     final static int baseBonus = Integer.parseInt(values.getString("baseBonus"));
     final static int riseBonus = Integer.parseInt(values.getString(("riseBonus")));
     final static int streakBonus = Integer.parseInt(values.getString(("streakBonus")));
     final static int randomBonus = Integer.parseInt(values.getString("randomBonus"));
 
-    @SuppressWarnings("deprecation")
     @Override
     public void execute(SlashCommandEvent event, FlamesUser flamesUser) {
         Date now = Date.from(Instant.now());

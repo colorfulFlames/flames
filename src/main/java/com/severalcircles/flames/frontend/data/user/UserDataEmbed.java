@@ -32,7 +32,7 @@ public class UserDataEmbed implements FlamesEmbed {
 
     @Override
     public MessageEmbed get() {
-        MessageEmbed embed = new EmbedBuilder()
+        return new EmbedBuilder()
                 .setAuthor(resources.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setTitle(String.format(resources.getString("title"), user.getName()))
                 .addField(resources.getString("score"), StringUtils.formatScore(flamesUser.getScore()), true)
@@ -44,6 +44,5 @@ public class UserDataEmbed implements FlamesEmbed {
                 .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(Ranking.getRank(flamesUser.getScore()).toString())))
                 .setThumbnail(FlamesAssets.getRankIcon(Ranking.getRank(flamesUser.getScore())))
                 .build();
-        return embed;
     }
 }

@@ -32,7 +32,7 @@ public class ConsentErrorMessage extends FlamesErrorMessage {
     }
     @Override
     public MessageEmbed get() {
-        MessageEmbed embed = new EmbedBuilder()
+        return new EmbedBuilder()
                 .setAuthor(String.format(resources.getString("author"), Flames.api.getSelfUser().getName()))
                 .setColor(Color.red)
                 .setTitle(resources.getString("title"))
@@ -41,6 +41,5 @@ public class ConsentErrorMessage extends FlamesErrorMessage {
                 .setFooter(String.format(resources.getString("footer"), errorCode))
                 .setTimestamp(Instant.now())
                 .build();
-        return embed;
     }
 }

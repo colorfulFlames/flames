@@ -47,7 +47,7 @@ import java.util.logging.Logger;
  * Main class for Flames. Sets up everything you could ever hope for.
  */
 public class Flames {
-    static Properties properties = new Properties();
+    static final Properties properties = new Properties();
     public static String version;
     public static final Map<String, FlamesCommand> commandMap = new HashMap<>();
     public static JDA api;
@@ -60,10 +60,9 @@ public class Flames {
      */
     public static Bugsnag bugsnag;
     private static int fatalErrorCounter;
-    private static ResourceBundle commonRsc;
+
     public static ResourceBundle getCommonRsc(Locale locale) {
-        commonRsc = ResourceBundle.getBundle("Common", locale);
-        return commonRsc;
+        return ResourceBundle.getBundle("Common", locale);
     }
     static {
         try {
@@ -136,7 +135,6 @@ public class Flames {
         commandMap.put("locale", new LocaleCommand());
         commandDataList.add(new CommandData("locale", "Switches your locale").addOption(OptionType.STRING, "new_locale", "The locale you want to switch to", true));
 //        RegisterCommand.register();
-        //noinspection ResultOfMethodCallIgnored
         api.updateCommands().addCommands(commandDataList).complete();
         // --- Events ---
         new CommandEvent().register(api);

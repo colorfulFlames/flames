@@ -40,7 +40,7 @@ public class TodayEmbed implements FlamesEmbed {
                 times = entry.getValue();
             }
         }
-        MessageEmbed embed = new EmbedBuilder()
+        return new EmbedBuilder()
                 .setAuthor(String.format(resources.getString("author"), StringUtils.prettifyDate(Instant.now())), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setTitle(resources.getString("title"))
                 .addField(resources.getString("talkingAbout"), trendingEntity, true)
@@ -52,6 +52,5 @@ public class TodayEmbed implements FlamesEmbed {
                 .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(String.valueOf(Ranking.getRank(flamesUser.getScore())))), user.getAvatarUrl())
                 .setColor(Color.GREEN.darker())
                 .build();
-        return embed;
     }
 }

@@ -34,13 +34,18 @@ public class WelcomeBackEmbed implements FlamesEmbed {
     public MessageEmbed get() {
         Date now = Date.from(Instant.now());
         String timeMessage;
+        //noinspection deprecation
         if (now.getHours() < 6) timeMessage = resources.getString("author.earlymorning");
-        else if (now.getHours() < 12) timeMessage = resources.getString("author.morning");
-        else if (now.getHours() < 15) timeMessage = resources.getString("author.earlyafternoon");
-        else if (now.getHours() < 18) timeMessage = resources.getString("author.lateafternoon");
-        else if (now.getHours() < 21) timeMessage = resources.getString("author.evening");
+        else //noinspection deprecation
+            if (now.getHours() < 12) timeMessage = resources.getString("author.morning");
+        else //noinspection deprecation
+            if (now.getHours() < 15) timeMessage = resources.getString("author.earlyafternoon");
+        else //noinspection deprecation
+                if (now.getHours() < 18) timeMessage = resources.getString("author.lateafternoon");
+        else //noinspection deprecation
+            if (now.getHours() < 21) timeMessage = resources.getString("author.evening");
         else timeMessage = resources.getString("author.night");
-        MessageEmbed embed = new EmbedBuilder()
+        return new EmbedBuilder()
                 .setAuthor(String.format(timeMessage, user.getName()), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setTitle(resources.getString("title"))
                 .addField(resources.getString("dailyBonus"), StringUtils.formatScore(dailyBonus), true)
@@ -49,6 +54,5 @@ public class WelcomeBackEmbed implements FlamesEmbed {
                 .setColor(Color.ORANGE)
                 .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(String.valueOf(Ranking.getRank(flamesUser.getScore())))), user.getAvatarUrl())
                 .build();
-        return embed;
     }
 }
