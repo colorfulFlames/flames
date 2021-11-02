@@ -71,7 +71,7 @@ set CLASSPATH=%APP_HOME%\lib\Flames-5.0-beta.jar;%APP_HOME%\lib\JDA-4.3.0_277.ja
 
 
 @rem Execute Flames
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %FLAMES_OPTS%  -classpath "%CLASSPATH%" com.severalcircles.flames.system.Flames %*
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %FLAMES_OPTS%  -classpath "%CLASSPATH%" com.severalcircles.flames.Flames %*
 
 :end
 @rem End local scope for the variables with windows NT shell

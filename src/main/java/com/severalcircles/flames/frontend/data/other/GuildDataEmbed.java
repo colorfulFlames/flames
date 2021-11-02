@@ -42,7 +42,7 @@ public class GuildDataEmbed implements FlamesEmbed {
                 .addField(resources.getString("score"), StringUtils.formatScore(guild.getFlamesScore()), true)
                 .addField(resources.getString("rank"), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(Ranking.getRank(guild.getFlamesScore() / guild1.getMemberCount()).toString()), true)
                 .setColor(Color.magenta.darker())
-                .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(Ranking.getRank(flamesUser.getScore()).toString())))
+                .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(Ranking.getRank(flamesUser.getScore()).toString()), user.getAvatarUrl()))
                 .build();
     }
 }

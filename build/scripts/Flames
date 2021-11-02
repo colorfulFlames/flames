@@ -201,7 +201,7 @@ fi
 
 set -- \
         -classpath "$CLASSPATH" \
-        com.severalcircles.flames.system.Flames \
+        com.severalcircles.flames.Flames \
         "$@"
 
 # Use "xargs" to parse quoted args.
