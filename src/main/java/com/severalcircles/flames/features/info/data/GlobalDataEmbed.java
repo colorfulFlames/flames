@@ -4,8 +4,8 @@
 
 package com.severalcircles.flames.features.info.data;
 
+import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.features.Emotion;
 import com.severalcircles.flames.features.StringUtils;
 import com.severalcircles.flames.features.external.severalcircles.FlamesAssets;
 import com.severalcircles.flames.features.info.FlamesEmbed;
@@ -18,15 +18,15 @@ import net.dv8tion.jda.api.entities.User;
 import java.awt.*;
 import java.util.ResourceBundle;
 
-public class UserDataEmbed implements FlamesEmbed {
+public class GlobalDataEmbed implements FlamesEmbed {
     private User user;
     private FlamesUser flamesUser;
     // I'll fix this later lmao
     private ResourceBundle resources;
-    public UserDataEmbed(User user, FlamesUser flamesUser) {
+    public GlobalDataEmbed(User user, FlamesUser flamesUser) {
         this.user = user;
         this.flamesUser = flamesUser;
-        resources = ResourceBundle.getBundle("features/data/UserDataEmbed", flamesUser.getConfig().getLocale());
+        resources = ResourceBundle.getBundle("features/data/GlobalDataEmbed", flamesUser.getConfig().getLocale());
     }
 
 
@@ -34,15 +34,11 @@ public class UserDataEmbed implements FlamesEmbed {
     public MessageEmbed get() {
         MessageEmbed embed = new EmbedBuilder()
                 .setAuthor(resources.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
-                .setTitle(String.format(resources.getString("title"), user.getName()))
-                .addField(resources.getString("score"), StringUtils.formatScore(flamesUser.getScore()), true)
-                .addField(resources.getString("rank"), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(Ranking.getRank(flamesUser.getScore()).toString()), true)
-                .addField(resources.getString("toNext"), StringUtils.formatScore(Ranking.toNext(flamesUser.getScore())), true)
-                .addField(resources.getString("emotion"), Emotion.getEmotionString(flamesUser.getEmotion(), flamesUser.getConfig().getLocale()), true)
-                .setDescription(String.format(resources.getString("level"), flamesUser.getStats().getLevel()))
-                .setColor(new Color(153, 85,187))
+                .setTitle(String.format(resources.getString("title"), Flames.api.getSelfUser().getName()))
+                .addField(resources.getString("globalScore"), StringUtils.formatScore(GlobalData.globalScore), true)
+                .addField(resources.getString("averageScore"), StringUtils.formatScore(GlobalData.averageScore), true)
+                .setColor(new Color(15, 131, 217))
                 .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(Ranking.getRank(flamesUser.getScore()).toString())))
-                .setThumbnail(FlamesAssets.getRankIcon(Ranking.getRank(flamesUser.getScore())))
                 .build();
         return embed;
     }

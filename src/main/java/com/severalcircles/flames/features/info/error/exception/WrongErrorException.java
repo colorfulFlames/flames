@@ -2,13 +2,13 @@
  * Copyright (c) 2021 Several Circles.
  */
 
-package com.severalcircles.flames.data.guild;
+package com.severalcircles.flames.features.info.error.exception;
 
 import com.severalcircles.flames.features.info.error.FlamesError;
 
-public class NewGuildException extends Exception implements FlamesError {
+public class WrongErrorException extends Exception implements FlamesError {
     @Override
     public String getCode() {
-        return "503-001";
+        return "500-001";
     }
 }

@@ -4,29 +4,33 @@
 
 package com.severalcircles.flames.features.info.data;
 
+import com.severalcircles.flames.data.guild.FlamesGuild;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.features.Emotion;
 import com.severalcircles.flames.features.StringUtils;
-import com.severalcircles.flames.features.external.severalcircles.FlamesAssets;
 import com.severalcircles.flames.features.info.FlamesEmbed;
 import com.severalcircles.flames.features.rank.Ranking;
 import com.severalcircles.flames.system.Flames;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 
 import java.awt.*;
 import java.util.ResourceBundle;
 
-public class UserDataEmbed implements FlamesEmbed {
+public class GuildDataEmbed implements FlamesEmbed {
     private User user;
     private FlamesUser flamesUser;
+    private FlamesGuild guild;
+    private Guild guild1;
     // I'll fix this later lmao
     private ResourceBundle resources;
-    public UserDataEmbed(User user, FlamesUser flamesUser) {
+    public GuildDataEmbed(User user, FlamesUser flamesUser, FlamesGuild guild, Guild guild1) {
         this.user = user;
         this.flamesUser = flamesUser;
-        resources = ResourceBundle.getBundle("features/data/UserDataEmbed", flamesUser.getConfig().getLocale());
+        this.guild = guild;
+        this.guild1 = guild1;
+        resources = ResourceBundle.getBundle("features/data/GuildDataEmbed", flamesUser.getConfig().getLocale());
     }
 
 
@@ -34,15 +38,11 @@ public class UserDataEmbed implements FlamesEmbed {
     public MessageEmbed get() {
         MessageEmbed embed = new EmbedBuilder()
                 .setAuthor(resources.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
-                .setTitle(String.format(resources.getString("title"), user.getName()))
-                .addField(resources.getString("score"), StringUtils.formatScore(flamesUser.getScore()), true)
-                .addField(resources.getString("rank"), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(Ranking.getRank(flamesUser.getScore()).toString()), true)
-                .addField(resources.getString("toNext"), StringUtils.formatScore(Ranking.toNext(flamesUser.getScore())), true)
-                .addField(resources.getString("emotion"), Emotion.getEmotionString(flamesUser.getEmotion(), flamesUser.getConfig().getLocale()), true)
-                .setDescription(String.format(resources.getString("level"), flamesUser.getStats().getLevel()))
-                .setColor(new Color(153, 85,187))
+                .setTitle(String.format(resources.getString("title"), guild1.getName()))
+                .addField(resources.getString("score"), StringUtils.formatScore(guild.getFlamesScore()), true)
+                .addField(resources.getString("rank"), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(Ranking.getRank((int) guild.getFlamesScore() / guild1.getMemberCount()).toString()), true)
+                .setColor(Color.magenta.darker())
                 .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(Ranking.getRank(flamesUser.getScore()).toString())))
-                .setThumbnail(FlamesAssets.getRankIcon(Ranking.getRank(flamesUser.getScore())))
                 .build();
         return embed;
     }
