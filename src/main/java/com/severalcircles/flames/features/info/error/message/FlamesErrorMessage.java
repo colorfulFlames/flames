@@ -23,7 +23,7 @@ public abstract class FlamesErrorMessage implements FlamesEmbed {
 //        this.msgRef = msgRef;
     }
     public FlamesErrorMessage(Exception e) {
-        errorCode = "599-001";
+        errorCode = "500-999";
 //        this.msgRef = msgRef;
     }
     @Override

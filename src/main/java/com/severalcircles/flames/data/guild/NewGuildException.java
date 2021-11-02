@@ -4,5 +4,11 @@
 
 package com.severalcircles.flames.data.guild;
 
-public class NewGuildException extends Exception{
+import com.severalcircles.flames.features.info.error.FlamesError;
+
+public class NewGuildException extends Exception implements FlamesError {
+    @Override
+    public String getCode() {
+        return "503-001";
+    }
 }

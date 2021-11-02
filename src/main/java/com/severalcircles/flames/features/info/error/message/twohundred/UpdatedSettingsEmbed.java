@@ -4,27 +4,42 @@
 
 package com.severalcircles.flames.features.info.error.message.twohundred;
 
+import com.severalcircles.flames.data.base.ConsentException;
+import com.severalcircles.flames.data.base.FlamesDataManager;
 import com.severalcircles.flames.data.user.UserSetting;
 import com.severalcircles.flames.features.info.FlamesEmbed;
+import com.severalcircles.flames.features.info.error.FlamesError;
+import com.severalcircles.flames.features.info.error.message.fivehundred.GenericErrorMessage;
 import com.severalcircles.flames.system.Flames;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 
 import java.awt.*;
+import java.io.IOException;
 import java.time.Instant;
 import java.util.ResourceBundle;
 
 public class UpdatedSettingsEmbed implements FlamesEmbed {
     private UserSetting updatedSetting;
     private User user;
+    GenericErrorMessage em;
     ResourceBundle resources = ResourceBundle.getBundle("message/UpdatedSettingsEmbed");
     public UpdatedSettingsEmbed(UserSetting updatedSetting, User user) {
         this.updatedSetting = updatedSetting;
         this.user = user;
+        try {
+            this.resources = ResourceBundle.getBundle("message/UpdatedSettingsEmbed", FlamesDataManager.readUser(user).getConfig().getLocale());
+        } catch (IOException e) {
+            em = new GenericErrorMessage(e);
+        } catch (ConsentException e) {
+            e.printStackTrace();
+            em = new GenericErrorMessage((FlamesError) e);
+        }
     }
     @Override
     public MessageEmbed get() {
+        if (em != null) return em.get();
         MessageEmbed embed = new EmbedBuilder()
                 .setAuthor(resources.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setTitle(String.format(resources.getString("title"), user.getName()))

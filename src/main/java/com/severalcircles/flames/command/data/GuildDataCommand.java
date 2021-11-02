@@ -10,6 +10,8 @@ import com.severalcircles.flames.data.guild.FlamesGuild;
 import com.severalcircles.flames.data.guild.NewGuildException;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.features.info.data.GuildDataEmbed;
+import com.severalcircles.flames.features.info.error.FlamesError;
+import com.severalcircles.flames.features.info.error.message.fivehundred.GenericErrorMessage;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 
@@ -24,10 +26,11 @@ public class GuildDataCommand implements FlamesCommand {
         try {
             gdata = FlamesDataManager.readGuild(event.getGuild().getId());
         } catch (IOException e) {
-            e.printStackTrace();
+            event.replyEmbeds(new GenericErrorMessage(e).get()).complete();
+            return;
         } catch (NewGuildException e) {
-            // TODO: Add error message
-            e.printStackTrace();
+            event.replyEmbeds(new GenericErrorMessage((FlamesError) e).get()).complete();
+            return;
         }
         event.replyEmbeds(new GuildDataEmbed(event.getUser(), sender, gdata, guild).get()).complete();
     }
