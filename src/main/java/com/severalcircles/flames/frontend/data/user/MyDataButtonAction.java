@@ -11,6 +11,6 @@ import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 public class MyDataButtonAction implements FlamesButtonAction {
     @Override
     public void execute(ButtonClickEvent event, FlamesUser sender) {
-        event.replyEmbeds(new UserDataEmbed(event.getUser(), sender).get());
+        event.replyEmbeds(new UserDataEmbed(event.getUser(), sender).get()).complete();
     }
 }
