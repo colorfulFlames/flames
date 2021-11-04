@@ -4,6 +4,9 @@
 
 package com.severalcircles.flames.frontend.today;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Today {
     public static int highScore = 0;
     public static String highUser = "Nobody yet!";
@@ -12,4 +15,5 @@ public class Today {
     public static final float quoteEmotion = (float) 0.5;
     public static int quoteChanges = 0;
     public static boolean quoteLocked = false;
+    public static List<String> thanks = new LinkedList<>();
 }

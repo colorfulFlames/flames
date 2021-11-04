@@ -7,6 +7,7 @@ package com.severalcircles.flames.frontend.today;
 import com.severalcircles.flames.external.Analysis;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 
 public class ResetTodayRunnable implements Runnable{
 
@@ -19,5 +20,6 @@ public class ResetTodayRunnable implements Runnable{
         Today.quote = new String[]{"We're still waiting for somebody to say something epic.", "Flames"};
         Today.quoteChanges = 0;
         Today.quoteLocked = false;
+        Today.thanks = new LinkedList<>();
     }
 }
