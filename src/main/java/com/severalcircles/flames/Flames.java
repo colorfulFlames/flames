@@ -23,6 +23,7 @@ import com.severalcircles.flames.frontend.info.ArtistCommand;
 import com.severalcircles.flames.frontend.info.DebugCommand;
 import com.severalcircles.flames.frontend.info.HelpCommand;
 import com.severalcircles.flames.frontend.info.TestCommand;
+import com.severalcircles.flames.frontend.thanks.ThanksCommand;
 import com.severalcircles.flames.frontend.today.ResetTodayRunnable;
 import com.severalcircles.flames.frontend.today.TodayCommand;
 import net.dv8tion.jda.api.JDA;
@@ -121,7 +122,7 @@ public class Flames {
         commandMap.put("globaldata", new GlobalDataCommand());
         commandDataList.add(new CommandData("globaldata", "Displays the current Global Data"));
         commandMap.put("artist", new ArtistCommand());
-        commandDataList.add(new CommandData("artist", "Displays information for a Spotify artist").addOption(OptionType.STRING, "artist", "The name of the artist"));
+        commandDataList.add(new CommandData("artist", "Displays information for a Spotify artist").addOption(OptionType.STRING, "artist", "The name of the artist", true));
         commandMap.put("hi", new HiCommand());
         commandDataList.add(new CommandData("hi", "Collect your Daily Bonus"));
         commandMap.put("help", new HelpCommand());
@@ -134,6 +135,8 @@ public class Flames {
         commandDataList.add(new CommandData("guilddata", "Displays information for the current guild"));
         commandMap.put("locale", new LocaleCommand());
         commandDataList.add(new CommandData("locale", "Switches your locale").addOption(OptionType.STRING, "new_locale", "The locale you want to switch to", true));
+        commandMap.put("thanks", new ThanksCommand());
+        commandDataList.add(new CommandData("thanks", "Gives Thanks to a user").addOption(OptionType.USER, "who", "The user you want to thank", true).addOption(OptionType.STRING, "msg", "An optional message to attach"));
 //        RegisterCommand.register();
         api.updateCommands().addCommands(commandDataList).complete();
         // --- Events ---
