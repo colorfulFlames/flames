@@ -4,6 +4,7 @@
 
 package com.severalcircles.flames.frontend.message.fourhundred;
 
+import com.severalcircles.flames.data.DataVersionException;
 import com.severalcircles.flames.data.user.consent.ConsentException;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.frontend.FlamesEmbed;
@@ -31,7 +32,7 @@ public class BadArgumentsErrorMessage extends FlamesErrorMessage implements Flam
        super((FlamesError) e);
         try {
             resources = ResourceBundle.getBundle("error/BadArgumentsErrorMessage", FlamesDataManager.readUser(user).getConfig().getLocale());
-        } catch (IOException | ConsentException ex) {
+        } catch (IOException | ConsentException | DataVersionException ex) {
             resources = ResourceBundle.getBundle("error/BadArgumentsErrorMessage", Locale.getDefault());
         }
         this.user = user;

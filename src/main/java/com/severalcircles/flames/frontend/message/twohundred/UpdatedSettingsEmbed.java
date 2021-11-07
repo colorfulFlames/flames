@@ -6,6 +6,7 @@ package com.severalcircles.flames.frontend.message.twohundred;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.FlamesError;
+import com.severalcircles.flames.data.DataVersionException;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.user.UserSetting;
 import com.severalcircles.flames.data.user.consent.ConsentException;
@@ -30,7 +31,8 @@ public class UpdatedSettingsEmbed implements FlamesEmbed {
         this.user = user;
         try {
             this.resources = ResourceBundle.getBundle("message/UpdatedSettingsEmbed", FlamesDataManager.readUser(user).getConfig().getLocale());
-        } catch (IOException e) {
+        } catch (IOException | DataVersionException e) {
+            // Weird DataVersionException but go off
             em = new GenericErrorMessage(e);
         } catch (ConsentException e) {
             e.printStackTrace();

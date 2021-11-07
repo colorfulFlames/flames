@@ -6,6 +6,7 @@ package com.severalcircles.flames.events;
 
 import com.google.cloud.language.v1.Sentiment;
 import com.severalcircles.flames.Flames;
+import com.severalcircles.flames.data.DataVersionException;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.guild.FlamesGuild;
@@ -53,6 +54,9 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             return;
         } catch (ConsentException e) {
             Logger.getGlobal().log(Level.FINE, "Ignoring " + event.getAuthor().getName() + "'s message because they haven't consented yet.");
+            return;
+        } catch (DataVersionException e) {
+            e.printStackTrace();
             return;
         }
         try {
