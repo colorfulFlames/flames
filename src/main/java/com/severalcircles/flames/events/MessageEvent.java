@@ -74,8 +74,8 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             return;
         }
         int score = Math.round((sentiment.getScore() * 10) * (sentiment.getMagnitude() * 10));
-        if (score >= 0) score *= user.getStats().getPOW();
-        else score /= user.getStats().getRES();
+        score *= user.getStats().getPOW();
+        if (score <= 0) score += user.getStats().getRES() * 10;
         if (user.getStats().getLUCK() >= Math.random() * 100 - user.getStats().getCAR()) score *= 2;
         user.setEmotion(user.getEmotion() + sentiment.getScore());
         user.getStats().addExp(Math.max(0, score));
