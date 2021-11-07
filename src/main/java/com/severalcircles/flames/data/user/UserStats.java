@@ -37,6 +37,35 @@ public class UserStats implements FlamesData {
         this.RISE = RISE;
         this.CAR = CAR;
     }
+
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void setPOW(int POW) {
+        this.POW = POW;
+    }
+
+    public void setRES(int RES) {
+        this.RES = RES;
+    }
+
+    public void setLUCK(int LUCK) {
+        this.LUCK = LUCK;
+    }
+
+    public void setRISE(int RISE) {
+        this.RISE = RISE;
+    }
+
+    public void setCAR(int CAR) {
+        this.CAR = CAR;
+    }
+
     public int getExp() {
         return exp;
     }

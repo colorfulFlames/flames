@@ -119,7 +119,7 @@ public class FlamesDataManager {
      * @return A FlamesUser created from the data file
      * @throws ConsentException If the user hasn't consented yet won't return data
      */
-    public static FlamesUser readUser(User user) throws IOException, ConsentException {
+    public static FlamesUser readUser(User user) throws IOException, ConsentException, DataVersionException {
         FlamesUser fluser = new FlamesUser();
         UserStats stats = new UserStats();
         UserFunFacts funFacts = new UserFunFacts();
@@ -127,6 +127,7 @@ public class FlamesDataManager {
         if (newUser(user)) {
             throw new ConsentException(0, user);
         }
+        new FlamesDataUpdater(fluser).run();
         File udir = new File(userDirectory.getAbsolutePath() + "/" + user.getId());
         File userfl = new File(udir.getAbsolutePath() + "/user.fl");
         File stats2 = new File(udir.getAbsolutePath() + "/stats.fl");

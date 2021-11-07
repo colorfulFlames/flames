@@ -5,11 +5,14 @@
 package com.severalcircles.flames.frontend.data.user;
 
 import com.severalcircles.flames.Flames;
+import com.severalcircles.flames.FlamesError;
+import com.severalcircles.flames.data.DataVersionException;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.UserFunFacts;
 import com.severalcircles.flames.data.user.consent.ConsentException;
 import com.severalcircles.flames.frontend.FlamesButtonAction;
+import com.severalcircles.flames.frontend.message.fourhundred.DataVersionErrorMessage;
 import com.severalcircles.flames.util.Ranking;
 import com.severalcircles.flames.util.StringUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -31,6 +34,9 @@ FunFactsButtonAction implements FlamesButtonAction {
                 user = FlamesDataManager.readUser(event.getUser());
             } catch (ConsentException ignored) {
 
+            } catch (DataVersionException e) {
+                event.replyEmbeds(new DataVersionErrorMessage((FlamesError) e).get());
+                e.printStackTrace();
             }
             funFacts = user.getFunFacts();
             if (funFacts == null) {

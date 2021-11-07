@@ -26,6 +26,10 @@ public class FlamesUser implements FlamesData {
     private UserFunFacts funFacts;
     private double dataVersion = 2.1;
 
+    public double getDataVersion() {
+        return dataVersion;
+    }
+
     public UserConfig getConfig() {
         return config;
     }

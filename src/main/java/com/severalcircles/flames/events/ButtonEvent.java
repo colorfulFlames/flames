@@ -5,11 +5,14 @@
 package com.severalcircles.flames.events;
 
 import com.severalcircles.flames.Flames;
+import com.severalcircles.flames.FlamesError;
+import com.severalcircles.flames.data.DataVersionException;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.user.consent.Consent;
 import com.severalcircles.flames.data.user.consent.ConsentException;
 import com.severalcircles.flames.frontend.FlamesButtonAction;
 import com.severalcircles.flames.frontend.data.user.*;
+import com.severalcircles.flames.frontend.message.fourhundred.DataVersionErrorMessage;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -62,6 +65,10 @@ public class ButtonEvent extends ListenerAdapter implements FlamesDiscordEvent {
                     if (e.consentLevel == 1) {
                         Consent.getConsent(event.getUser());
                     }
+                } catch (DataVersionException e) {
+                    event.replyEmbeds(new DataVersionErrorMessage((FlamesError) e).get()).complete();
+                    e.printStackTrace();
+                    return;
                 }
             }
         }
