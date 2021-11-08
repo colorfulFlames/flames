@@ -32,6 +32,7 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
 import javax.security.auth.login.LoginException;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Duration;
@@ -138,7 +139,7 @@ public class Flames {
         commandMap.put("thanks", new ThanksCommand());
         commandDataList.add(new CommandData("thanks", "Gives Thanks to a user").addOption(OptionType.USER, "who", "The user you want to thank", true).addOption(OptionType.STRING, "msg", "An optional message to attach"));
 //        RegisterCommand.register();
-        api.updateCommands().addCommands(commandDataList).complete();
+        if (new File(version + ".flamesfile").createNewFile()) api.updateCommands().addCommands(commandDataList).complete();
         // --- Events ---
         new CommandEvent().register(api);
         new MessageEvent().register(api);

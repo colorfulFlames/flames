@@ -6,6 +6,7 @@ package com.severalcircles.flames.frontend.data.user;
 
 import com.severalcircles.flames.frontend.FlamesCommand;
 import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.frontend.data.user.embed.UserDataEmbed;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.components.Button;
