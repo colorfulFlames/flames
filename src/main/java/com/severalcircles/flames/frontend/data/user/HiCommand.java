@@ -8,6 +8,7 @@ import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.frontend.data.user.embed.WelcomeBackEmbed;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import com.severalcircles.flames.frontend.FlamesCommand;
