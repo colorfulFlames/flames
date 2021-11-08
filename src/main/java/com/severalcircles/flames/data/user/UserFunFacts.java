@@ -1,7 +1,11 @@
+/*
+ * Copyright (c) 2021 Several Circles.
+ */
+
 package com.severalcircles.flames.data.user;
 
 import com.severalcircles.flames.data.FlamesData;
-import com.severalcircles.flames.features.rank.Rank;
+import com.severalcircles.flames.util.Rank;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;

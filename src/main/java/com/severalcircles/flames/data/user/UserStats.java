@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021 Several Circles.
+ */
+
 package com.severalcircles.flames.data.user;
 
 import com.severalcircles.flames.data.FlamesData;
@@ -33,6 +37,35 @@ public class UserStats implements FlamesData {
         this.RISE = RISE;
         this.CAR = CAR;
     }
+
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void setPOW(int POW) {
+        this.POW = POW;
+    }
+
+    public void setRES(int RES) {
+        this.RES = RES;
+    }
+
+    public void setLUCK(int LUCK) {
+        this.LUCK = LUCK;
+    }
+
+    public void setRISE(int RISE) {
+        this.RISE = RISE;
+    }
+
+    public void setCAR(int CAR) {
+        this.CAR = CAR;
+    }
+
     public int getExp() {
         return exp;
     }
@@ -66,7 +99,7 @@ public class UserStats implements FlamesData {
         checkLevelUp();
     }
     public void checkLevelUp() {
-        if (Math.abs(this.exp / GlobalData.averageScore * level + GlobalData.participants * this.CAR) >= 1) {
+        if (Math.abs(2^level + GlobalData.participants) < exp) {
             level++;
             double random = Math.random();
             if (random <= powerGrowth) POW++;

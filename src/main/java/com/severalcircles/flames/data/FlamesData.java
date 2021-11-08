@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021.
+ * Copyright (c) 2021-2021 Several Circles.
  */
 
 package com.severalcircles.flames.data;

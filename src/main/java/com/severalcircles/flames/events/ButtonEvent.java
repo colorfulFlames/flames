@@ -4,19 +4,15 @@
 
 package com.severalcircles.flames.events;
 
-import com.severalcircles.flames.buttonaction.*;
-import com.severalcircles.flames.buttonaction.data.FunFactsButtonAction;
-import com.severalcircles.flames.buttonaction.data.ManageUserDataButtonAction;
-import com.severalcircles.flames.buttonaction.data.MyDataButtonAction;
-import com.severalcircles.flames.buttonaction.data.StatsButtonAction;
-//import com.severalcircles.flames.buttonaction.data.deleteuserdata.DeleteUserDataButtonAction;
-//import com.severalcircles.flames.buttonaction.data.deleteuserdata.FixUserDataButtonAction;
-//import com.severalcircles.flames.buttonaction.data.deleteuserdata.NoDontButtonAction;
-//import com.severalcircles.flames.buttonaction.data.deleteuserdata.ReallyDeleteButtonAction;
-import com.severalcircles.flames.data.base.ConsentException;
-import com.severalcircles.flames.data.base.FlamesDataManager;
-import com.severalcircles.flames.features.safety.Consent;
-import com.severalcircles.flames.system.Flames;
+import com.severalcircles.flames.Flames;
+import com.severalcircles.flames.FlamesError;
+import com.severalcircles.flames.data.DataVersionException;
+import com.severalcircles.flames.data.FlamesDataManager;
+import com.severalcircles.flames.data.user.consent.Consent;
+import com.severalcircles.flames.data.user.consent.ConsentException;
+import com.severalcircles.flames.frontend.FlamesButtonAction;
+import com.severalcircles.flames.frontend.data.user.*;
+import com.severalcircles.flames.frontend.message.fourhundred.DataVersionErrorMessage;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -29,7 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ButtonEvent extends ListenerAdapter implements FlamesDiscordEvent {
-    public static final Map<String, ButtonAction> buttonActionMap = new HashMap<>();
+    public static final Map<String, FlamesButtonAction> buttonActionMap = new HashMap<>();
 
     public void register(JDA api) {
         api.addEventListener(new ButtonEvent());
@@ -55,7 +51,7 @@ public class ButtonEvent extends ListenerAdapter implements FlamesDiscordEvent {
             }
             return;
         }
-        for (Map.Entry<String, ButtonAction> entry: buttonActionMap.entrySet()) {
+        for (Map.Entry<String, FlamesButtonAction> entry: buttonActionMap.entrySet()) {
             System.out.println(entry.getKey());
             if (entry.getKey().equals(event.getComponentId())) {
                 try {
@@ -69,6 +65,10 @@ public class ButtonEvent extends ListenerAdapter implements FlamesDiscordEvent {
                     if (e.consentLevel == 1) {
                         Consent.getConsent(event.getUser());
                     }
+                } catch (DataVersionException e) {
+                    event.replyEmbeds(new DataVersionErrorMessage((FlamesError) e).get()).complete();
+                    e.printStackTrace();
+                    return;
                 }
             }
         }

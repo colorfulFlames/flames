@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021 Several Circles.
+ */
+
 package com.severalcircles.flames.data.user;
 
 import com.severalcircles.flames.data.FlamesData;
@@ -10,7 +14,7 @@ import java.util.Properties;
  */
 public class FlamesUser implements FlamesData {
 
-    public static final double latestVersion = 2.0;
+    public static final double latestVersion = 2.1;
 
     private int score;
     private float emotion;
@@ -20,7 +24,34 @@ public class FlamesUser implements FlamesData {
     private UserStats stats;
     private int consent;
     private UserFunFacts funFacts;
-    private double dataVersion = 2.0;
+    private double dataVersion = 2.1;
+
+    public double getDataVersion() {
+        return dataVersion;
+    }
+
+    public UserConfig getConfig() {
+        return config;
+    }
+
+    public void setConfig(UserConfig config) {
+        this.config = config;
+    }
+
+    private UserConfig config;
+
+    public FlamesUser(int score, float emotion, Instant lastSeen, int streak, String discordId, UserStats stats, int consent, UserFunFacts funFacts, double dataVersion, UserConfig config) {
+        this.score = score;
+        this.emotion = emotion;
+        this.lastSeen = lastSeen;
+        this.streak = streak;
+        this.discordId = discordId;
+        this.stats = stats;
+        this.consent = consent;
+        this.funFacts = funFacts;
+        this.dataVersion = dataVersion;
+        this.config = config;
+    }
 
     public UserFunFacts getFunFacts() {
         return funFacts;
@@ -50,17 +81,6 @@ public class FlamesUser implements FlamesData {
         this.dataVersion = dataVersion;
     }
 
-    public FlamesUser(int score, float emotion, Instant lastSeen, int streak, String discordId, UserStats stats, int consent, UserFunFacts funFacts, double dataVersion) {
-        this.score = score;
-        this.emotion = emotion;
-        this.streak = streak;
-        this.discordId = discordId;
-        this.stats = stats;
-        this.consent = consent;
-        this.funFacts = funFacts;
-        this.dataVersion = dataVersion;
-        this.lastSeen = lastSeen;
-    }
     public UserStats getStats() {
         return stats;
     }
