@@ -24,7 +24,7 @@ public class FlamesUser implements FlamesData {
     private UserStats stats;
     private int consent;
     private UserFunFacts funFacts;
-    private double dataVersion = 2.1;
+    private double dataVersion;
 
     public double getDataVersion() {
         return dataVersion;
@@ -106,6 +106,7 @@ public class FlamesUser implements FlamesData {
         this.consent = 0;
         this.funFacts = new UserFunFacts();
         this.config = new UserConfig();
+        this.dataVersion = 2.1;
     }
 
     public void addScore(int amount) {
