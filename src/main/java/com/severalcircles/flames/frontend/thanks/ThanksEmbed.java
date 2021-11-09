@@ -9,7 +9,7 @@ import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import com.severalcircles.flames.frontend.message.fivehundred.GenericErrorMessage;
 import com.severalcircles.flames.frontend.today.Today;
-import com.severalcircles.flames.util.StringUtils;
+import com.severalcircles.flames.util.StringUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
@@ -66,7 +66,7 @@ public class ThanksEmbed implements FlamesEmbed {
                 .setAuthor(String.format(resources.getString("author"), sender.getName()), null, sender.getAvatarUrl())
                 .setTitle(String.format(resources.getString("title"), thanked.getName()))
                 .setDescription(msg)
-                .addField(resources.getString("bonus"), StringUtils.formatScore(2500), true)
+                .addField(resources.getString("bonus"), StringUtil.formatScore(2500), true)
                 .setImage(resources.getString("image"))
                 .setColor(Color.yellow)
                 .setFooter(String.format(resources.getString("footer"), sender.getName()), thanked.getAvatarUrl())

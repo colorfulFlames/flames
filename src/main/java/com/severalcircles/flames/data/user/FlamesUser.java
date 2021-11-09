@@ -105,6 +105,7 @@ public class FlamesUser implements FlamesData {
         this.stats = new UserStats();
         this.consent = 0;
         this.funFacts = new UserFunFacts();
+        this.config = new UserConfig();
     }
 
     public void addScore(int amount) {

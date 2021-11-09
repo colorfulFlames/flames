@@ -13,7 +13,7 @@ import com.severalcircles.flames.frontend.FlamesCommand;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
-import com.severalcircles.flames.util.StringUtils;
+import com.severalcircles.flames.util.StringUtil;
 
 import java.awt.*;
 import java.time.Instant;
@@ -35,9 +35,9 @@ public class DebugCommand implements FlamesCommand {
                 .addField("Number of Participants", String.valueOf(GlobalData.participants), true)
                 .addField("Guilds", String.valueOf(Flames.api.getGuilds().size()), true)
                 .addField("Status", Flames.api.getStatus().name(), true)
-                .addField("Created", StringUtils.prettifyDate(Flames.api.getSelfUser().getTimeCreated().toInstant()), true)
+                .addField("Created", StringUtil.prettifyDate(Flames.api.getSelfUser().getTimeCreated().toInstant()), true)
                 .setTimestamp(Instant.now())
-                .setImage(FlamesAssets.getVersionIcon())
+                .setThumbnail(FlamesAssets.getVersionIcon())
                 .setFooter("Flames", Flames.api.getSelfUser().getAvatarUrl()).build();
         event.replyEmbeds(builder).complete();
     }

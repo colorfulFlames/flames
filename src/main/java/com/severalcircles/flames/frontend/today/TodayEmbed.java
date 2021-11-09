@@ -10,7 +10,7 @@ import com.severalcircles.flames.external.Analysis;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import com.severalcircles.flames.util.Emotion;
 import com.severalcircles.flames.util.Ranking;
-import com.severalcircles.flames.util.StringUtils;
+import com.severalcircles.flames.util.StringUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
@@ -41,12 +41,12 @@ public class TodayEmbed implements FlamesEmbed {
             }
         }
         return new EmbedBuilder()
-                .setAuthor(String.format(resources.getString("author"), StringUtils.prettifyDate(Instant.now())), null, Flames.api.getSelfUser().getAvatarUrl())
+                .setAuthor(String.format(resources.getString("author"), StringUtil.prettifyDate(Instant.now())), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setTitle(resources.getString("title"))
                 .addField(resources.getString("talkingAbout"), trendingEntity, true)
                 .addField(resources.getString("feeling"), Emotion.getEmotionString(Today.emotion, flamesUser.getConfig().getLocale()), true)
                 .addBlankField(false)
-                .addField("\"" + Today.quote[0] + "\"", "- " + Today.quote[1] + ", " + StringUtils.prettifyDate(Instant.now()), false)
+                .addField("\"" + Today.quote[0] + "\"", "- " + Today.quote[1] + ", " + StringUtil.prettifyDate(Instant.now()), false)
                 .addBlankField(false)
                 .addField(resources.getString("allAbout"), resources.getString("tomorrowBring"), false)
                 .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(String.valueOf(Ranking.getRank(flamesUser.getScore())))), user.getAvatarUrl())

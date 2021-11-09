@@ -38,7 +38,7 @@ public class StatsEmbed implements FlamesEmbed {
                 .setTitle(String.format(resources.getString("title"), user.getName()), "https://flamesapi.severalcircles.com/user/" + user.getId() + "/stats")
                 .setDescription(String.format(resources.getString("description"), stats.getLevel()))
                 .addField(resources.getString("exp"), stats.getExp() + "", true)
-                .addField(resources.getString("tonext"),(Math.abs(next - stats.getExp()) + " (" + ((stats.getExp() / next) * 100) + "%)"), true)
+                .addField(resources.getString("tonext"), String.valueOf(Math.abs(next - stats.getExp())), true)
                 .addField(resources.getString("pow"), stats.getPOW() + "", true)
                 .addField(resources.getString("res"), stats.getRES() + "", true)
                 .addField(resources.getString("luck"), stats.getLUCK() + "", true)

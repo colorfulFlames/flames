@@ -19,7 +19,7 @@ import com.severalcircles.flames.frontend.today.Today;
 import com.severalcircles.flames.util.BadWordFilter;
 import com.severalcircles.flames.util.Rank;
 import com.severalcircles.flames.util.Ranking;
-import com.severalcircles.flames.util.StringUtils;
+import com.severalcircles.flames.util.StringUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -99,8 +99,8 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             MessageEmbed congrats = new EmbedBuilder()
                     .setAuthor("Flames", null, event.getAuthor().getAvatarUrl())
                     .setTitle(event.getAuthor().getName() + ", congratulations on taking the quote of the day from " + Today.quote[1] + "!")
-                    .addField("\"" + content + "\"", "- " + event.getAuthor().getName() + ", " + StringUtils.prettifyDate(Instant.now()), true)
-                    .addField("Bonus", StringUtils.formatScore(2500), true)
+                    .addField("\"" + content + "\"", "- " + event.getAuthor().getName() + ", " + StringUtil.prettifyDate(Instant.now()), true)
+                    .addField("Bonus", StringUtil.formatScore(2500), true)
                     .setFooter("/today to see it for yourself!", Flames.api.getSelfUser().getAvatarUrl())
                     .setColor(Color.CYAN.darker())
                     .build();

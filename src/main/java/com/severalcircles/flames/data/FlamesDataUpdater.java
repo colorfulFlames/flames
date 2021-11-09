@@ -34,6 +34,7 @@ public class FlamesDataUpdater {
             stats.setRISE((int) Math.round(Math.random() * stats.getLevel()));
             stats.setPOW((int) Math.round(Math.random() * stats.getLevel()));
             stats.setRES((int) Math.round(Math.random() * stats.getLevel()));
+            if (flamesUser.getScore() >= 100000) flamesUser.setScore(flamesUser.getScore() / 2);
         }
         flamesUser.setStats(stats);
         FlamesDataManager.save(flamesUser);

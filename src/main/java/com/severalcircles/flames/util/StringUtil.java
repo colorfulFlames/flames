@@ -9,7 +9,7 @@ import java.time.Instant;
 import java.util.Date;
 
 @SuppressWarnings("deprecation")
-public class StringUtils {
+public class StringUtil {
     /**
      * @return String with Instant formatted as a nice, human-readable date string.
      */
@@ -58,6 +58,10 @@ public class StringUtils {
         return prettyDate;
     }
     public static String formatScore(int score) {
+        if (score > 1000 && score < 1000000) {
+            return score / 1000 + "K FP";
+        }
+        if (score >= 1000000) return score / 1000000 + "M FP";
         DecimalFormat df = new DecimalFormat("###,###,###");
         return df.format(score).replace(".", " ") + " FP";
     }

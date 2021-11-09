@@ -10,7 +10,7 @@ import com.severalcircles.flames.external.FlamesAssets;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import com.severalcircles.flames.util.Emotion;
 import com.severalcircles.flames.util.Ranking;
-import com.severalcircles.flames.util.StringUtils;
+import com.severalcircles.flames.util.StringUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
@@ -32,12 +32,15 @@ public class UserDataEmbed implements FlamesEmbed {
 
     @Override
     public MessageEmbed get() {
+        String tonext;
+        if (Ranking.toNext(flamesUser.getScore()) <= 0) tonext = "?";
+        else tonext = StringUtil.formatScore(Ranking.toNext(flamesUser.getScore()));
         return new EmbedBuilder()
                 .setAuthor(resources.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setTitle(String.format(resources.getString("title"), user.getName()))
-                .addField(resources.getString("score"), StringUtils.formatScore(flamesUser.getScore()), true)
+                .addField(resources.getString("score"), StringUtil.formatScore(flamesUser.getScore()), true)
                 .addField(resources.getString("rank"), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(Ranking.getRank(flamesUser.getScore()).toString()), true)
-                .addField(resources.getString("toNext"), StringUtils.formatScore(Ranking.toNext(flamesUser.getScore())), true)
+                .addField(resources.getString("toNext"), tonext, true)
                 .addField(resources.getString("emotion"), Emotion.getEmotionString(flamesUser.getEmotion(), flamesUser.getConfig().getLocale()), true)
                 .setDescription(String.format(resources.getString("level"), flamesUser.getStats().getLevel()))
                 .setColor(new Color(153, 85,187))

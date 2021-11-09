@@ -10,7 +10,7 @@ import com.severalcircles.flames.util.Ranking;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
-import com.severalcircles.flames.util.StringUtils;
+import com.severalcircles.flames.util.StringUtil;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 
 import java.awt.*;
@@ -48,8 +48,8 @@ public class WelcomeBackEmbed implements FlamesEmbed {
         return new EmbedBuilder()
                 .setAuthor(String.format(timeMessage, user.getName()), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setTitle(resources.getString("title"))
-                .addField(resources.getString("dailyBonus"), StringUtils.formatScore(dailyBonus), true)
-                .addField(resources.getString("score"), StringUtils.formatScore(flamesUser.getScore()), true)
+                .addField(resources.getString("dailyBonus"), StringUtil.formatScore(dailyBonus), true)
+                .addField(resources.getString("score"), StringUtil.formatScore(flamesUser.getScore()), true)
                 .setDescription(resources.getString("description"))
                 .setColor(Color.ORANGE)
                 .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(String.valueOf(Ranking.getRank(flamesUser.getScore())))), user.getAvatarUrl())

@@ -17,7 +17,7 @@ public class UserConfig implements FlamesData {
     }
 
     public UserConfig() {
-
+        this.locale = Locale.getDefault();
     }
 
     public Locale getLocale() {

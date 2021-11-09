@@ -12,7 +12,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
-import com.severalcircles.flames.util.StringUtils;
+import com.severalcircles.flames.util.StringUtil;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 
 import java.awt.*;
@@ -39,7 +39,7 @@ public class GuildDataEmbed implements FlamesEmbed {
         return new EmbedBuilder()
                 .setAuthor(resources.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setTitle(String.format(resources.getString("title"), guild1.getName()))
-                .addField(resources.getString("score"), StringUtils.formatScore(guild.getFlamesScore()), true)
+                .addField(resources.getString("score"), StringUtil.formatScore(guild.getFlamesScore()), true)
                 .addField(resources.getString("rank"), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(Ranking.getRank(guild.getFlamesScore() / guild1.getMemberCount()).toString()), true)
                 .setColor(Color.magenta.darker())
                 .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(Ranking.getRank(flamesUser.getScore()).toString()), user.getAvatarUrl()))
