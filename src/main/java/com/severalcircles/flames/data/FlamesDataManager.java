@@ -95,7 +95,7 @@ public class FlamesDataManager {
     public static void save(FlamesUser flamesUser) throws IOException {
         String discordId = flamesUser.getDiscordId();
         String name;
-        try {name = Objects.requireNonNull(Flames.api.getUserById(discordId)).getName(); } catch (NullPointerException e) {name = "An Unknown Flames User";}
+        try {name = Flames.api.getUserById(discordId).getName(); } catch (NullPointerException | IllegalArgumentException e) {name = "An Unknown Flames User";}
 //        OutputStream outputStream;
         File udir = new File(userDirectory.getAbsolutePath() + "/" + discordId);
         File user = new File(udir.getAbsolutePath() + "/user.fl");
@@ -129,7 +129,6 @@ public class FlamesDataManager {
         UserStats stats = new UserStats();
         UserFunFacts funFacts = new UserFunFacts();
         UserConfig config = new UserConfig();
-        if (new FlamesDataUpdater(fluser).run()) throw new ConsentException(1, user);
         if (newUser(user)) {
             throw new ConsentException(0, user);
         }
@@ -171,6 +170,9 @@ public class FlamesDataManager {
         funFacts.setHighestEmotion(Float.parseFloat(funfactsdata.get("highestEmotion")+ ""));
         funFacts.setLowestEmotion(Float.parseFloat(funfactsdata.get("lowestEmotion") + ""));
         if (config.getLocale() == null) config.setLocale(Locale.getDefault());
+        if (new File(udir.getAbsolutePath() + "/" + FlamesUser.latestVersion + ".flamesfile").createNewFile()) {
+            new FlamesDataUpdater(fluser).run();
+        }
         stats = new UserStats(Integer.parseInt(statsdata.get("exp") + ""), Integer.parseInt(statsdata.get("level") + ""), Integer.parseInt(statsdata.get("POW") + ""), Integer.parseInt(statsdata.get("RES") + ""), Integer.parseInt(statsdata.get("LUCK") + ""), Integer.parseInt(statsdata.get("RISE") + ""), Integer.parseInt(statsdata.get("CAR") + ""));
         config = new UserConfig(Locale.forLanguageTag(configdata.get("locale") + ""));
         fluser.setStats(stats);

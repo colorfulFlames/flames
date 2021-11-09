@@ -51,7 +51,7 @@ public class Ranking {
      */
     public static Rank getRank(int score) {
         // what a glorious function
-        if (thresholds[0] <= 0) return Rank.UNRANKED;
+        if (thresholds[0] < 0) return Rank.UNRANKED;
         if (score < thresholds[0]) return Rank.UNRANKED;
         else if (score < thresholds[1]) return Rank.APPROACHING_BRONZE;
         else if (score < thresholds[2]) return Rank.BRONZE;
