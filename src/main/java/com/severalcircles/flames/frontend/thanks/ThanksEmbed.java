@@ -69,7 +69,7 @@ public class ThanksEmbed implements FlamesEmbed {
                 .addField(resources.getString("bonus"), StringUtil.formatScore(2500), true)
                 .setImage(resources.getString("image"))
                 .setColor(Color.yellow)
-                .setFooter(String.format(resources.getString("footer"), sender.getName()), thanked.getAvatarUrl())
+                .setFooter(String.format(resources.getString("footer"), thanked.getName()), thanked.getAvatarUrl())
                 .build();
     }
 }
