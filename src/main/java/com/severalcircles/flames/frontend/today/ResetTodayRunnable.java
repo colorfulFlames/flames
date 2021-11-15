@@ -6,10 +6,13 @@ package com.severalcircles.flames.frontend.today;
 
 import com.severalcircles.flames.external.Analysis;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class ResetTodayRunnable implements Runnable{
+public class ResetTodayRunnable implements Runnable {
+    static final Calendar thanksgiving = Calendar.getInstance();
 
     @Override
     public void run() {
@@ -21,5 +24,9 @@ public class ResetTodayRunnable implements Runnable{
         Today.quoteChanges = 0;
         Today.quoteLocked = false;
         Today.thanks = new LinkedList<>();
+        Date now = new Date();
+        thanksgiving.set(2021, Calendar.NOVEMBER, 25);
+        if (Calendar.getInstance().compareTo(thanksgiving) == 0) Today.isThanksgiving = true;
+        Today.thanksgivingThanks = new HashMap<>();
     }
 }
