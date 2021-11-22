@@ -87,6 +87,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             Today.highScore = user.getScore();
             Today.highUser = event.getAuthor().getName();
         }
+        user.getStats().addExp(Math.round(sentiment.getScore() * 10));
         @SuppressWarnings("IntegerDivisionInFloatingPointContext") int quoteChance = (int) Math.round(Math.random() * Math.round(GlobalData.participants / 2));
         System.out.println(quoteChance);
         if (Today.quoteEmotion < sentiment.getMagnitude() && !Today.quoteLocked) {

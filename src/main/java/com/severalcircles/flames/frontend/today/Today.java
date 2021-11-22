@@ -4,8 +4,10 @@
 
 package com.severalcircles.flames.frontend.today;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class Today {
     public static int highScore = 0;
@@ -16,4 +18,6 @@ public class Today {
     public static int quoteChanges = 0;
     public static boolean quoteLocked = false;
     public static List<String> thanks = new LinkedList<>();
+    public static boolean isThanksgiving = false;
+    public static Map<String, List<String>> thanksgivingThanks = new HashMap<>();
 }

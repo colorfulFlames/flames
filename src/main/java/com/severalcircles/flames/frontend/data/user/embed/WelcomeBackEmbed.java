@@ -6,6 +6,7 @@ package com.severalcircles.flames.frontend.data.user.embed;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.frontend.today.Today;
 import com.severalcircles.flames.util.Ranking;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -35,7 +36,8 @@ public class WelcomeBackEmbed implements FlamesEmbed {
         Date now = Date.from(Instant.now());
         String timeMessage;
         //noinspection deprecation
-        if (now.getHours() < 6) timeMessage = resources.getString("author.earlymorning");
+        if (Today.isThanksgiving) timeMessage = resources.getString("author.thanksgiving");
+        else if (now.getHours() < 6) timeMessage = resources.getString("author.earlymorning");
         else //noinspection deprecation
             if (now.getHours() < 12) timeMessage = resources.getString("author.morning");
         else //noinspection deprecation
