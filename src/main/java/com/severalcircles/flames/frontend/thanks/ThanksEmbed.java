@@ -16,9 +16,8 @@ import net.dv8tion.jda.api.entities.User;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class ThanksEmbed implements FlamesEmbed {
     private User thanked;
@@ -50,9 +49,11 @@ public class ThanksEmbed implements FlamesEmbed {
     @Override
     public MessageEmbed get() {
         if (thanked.getId() == sender.getId()) return new EmbedBuilder().setTitle(resources.getString("noThankSelf")).setColor(Color.red).build();
-        if (Today.thanks.contains(sender.getId())) {
+        if (!Today.thanksgivingThanks.containsKey(sender.getId())) Today.thanksgivingThanks.put(sender.getId(), new LinkedList<>());
+        if ((!Today.isThanksgiving && Today.thanks.contains(sender.getId())) | (Today.isThanksgiving && Today.thanksgivingThanks.get(sender.getId()).contains(thanked.getId()))) {
             return new EmbedBuilder().setTitle(String.format(resources.getString("alreadyThanked"), sender.getName())).setColor(Color.red).build();
         }
+
         flamesUserThanked.setScore(flamesUserThanked.getScore() + 2500);
         try {
             FlamesDataManager.save(flamesUserThanked);
@@ -61,6 +62,17 @@ public class ThanksEmbed implements FlamesEmbed {
             return new GenericErrorMessage(e).get();
         }
         Today.thanks.add(sender.getId());
+        List<String> thasnked;
+        if (Today.isThanksgiving) {
+            try {
+                thasnked = Today.thanksgivingThanks.get(sender.getId());
+            } catch (NullPointerException e) {
+                Today.thanksgivingThanks.put(sender.getId(), new LinkedList<>());
+                thasnked = Today.thanksgivingThanks.get(sender.getId());
+            }
+            thasnked.add(thanked.getId());
+            Today.thanksgivingThanks.put(sender.getId(), thasnked);
+        }
         success.add(sender.getId());
         return new EmbedBuilder()
                 .setAuthor(String.format(resources.getString("author"), sender.getName()), null, sender.getAvatarUrl())

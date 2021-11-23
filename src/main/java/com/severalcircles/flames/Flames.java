@@ -104,6 +104,7 @@ public class Flames {
         scheduler.scheduleAtFixedRate(new RankUpdateRunnable(), 0, 1, TimeUnit.HOURS);
 //        scheduler.scheduleAtFixedRate(new FlushHistoricalData(), 1, 1, TimeUnit.HOURS);
         scheduler.scheduleAtFixedRate(new ResetTodayRunnable(), initalDelay, TimeUnit.DAYS.toSeconds(1), TimeUnit.SECONDS);
+        new ResetTodayRunnable().run();
         // --- Connecting to the API and Logging in to Discord ---
         try {
             Logger.getGlobal().log(Level.INFO, "Token is " + System.getenv("FlamesToken"));
