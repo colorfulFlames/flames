@@ -40,9 +40,12 @@ public class TodayEmbed implements FlamesEmbed {
                 times = entry.getValue();
             }
         }
+        String title;
+        if (Today.isThanksgiving) title = resources.getString("title.thanksgiving");
+        else title = resources.getString("title");
         return new EmbedBuilder()
                 .setAuthor(String.format(resources.getString("author"), StringUtil.prettifyDate(Instant.now())), null, Flames.api.getSelfUser().getAvatarUrl())
-                .setTitle(resources.getString("title"))
+                .setTitle(title)
                 .addField(resources.getString("talkingAbout"), trendingEntity, true)
                 .addField(resources.getString("feeling"), Emotion.getEmotionString(Today.emotion, flamesUser.getConfig().getLocale()), true)
                 .addBlankField(false)

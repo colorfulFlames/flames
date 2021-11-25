@@ -6,6 +6,7 @@ package com.severalcircles.flames.frontend.today;
 
 import com.severalcircles.flames.external.Analysis;
 
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -26,7 +27,8 @@ public class ResetTodayRunnable implements Runnable {
         Today.thanks = new LinkedList<>();
         Date now = new Date();
         thanksgiving.set(2021, Calendar.NOVEMBER, 25);
-        if (Calendar.getInstance().compareTo(thanksgiving) == 0) Today.isThanksgiving = true;
+        System.out.println(Calendar.getInstance().toInstant().truncatedTo(ChronoUnit.DAYS).compareTo(thanksgiving.toInstant().truncatedTo(ChronoUnit.DAYS)));
+        if (Calendar.getInstance().toInstant().truncatedTo(ChronoUnit.DAYS).compareTo(thanksgiving.toInstant().truncatedTo(ChronoUnit.DAYS)) == 0) Today.isThanksgiving = true;
         Today.thanksgivingThanks = new HashMap<>();
     }
 }
