@@ -48,7 +48,7 @@ public class ThanksEmbed implements FlamesEmbed {
 
     @Override
     public MessageEmbed get() {
-        if (thanked.getId() == sender.getId()) return new EmbedBuilder().setTitle(resources.getString("noThankSelf")).setColor(Color.red).build();
+        if (thanked.getId().equals(sender.getId())) return new EmbedBuilder().setTitle(resources.getString("noThankSelf")).setColor(Color.red).build();
         if (!Today.thanksgivingThanks.containsKey(sender.getId())) Today.thanksgivingThanks.put(sender.getId(), new LinkedList<>());
         if ((!Today.isThanksgiving && Today.thanks.contains(sender.getId())) | (Today.isThanksgiving && Today.thanksgivingThanks.get(sender.getId()).contains(thanked.getId()))) {
             return new EmbedBuilder().setTitle(String.format(resources.getString("alreadyThanked"), sender.getName())).setColor(Color.red).build();
