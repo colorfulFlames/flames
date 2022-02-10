@@ -14,7 +14,7 @@ import com.severalcircles.flames.data.guild.NewGuildException;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.UserFunFacts;
 import com.severalcircles.flames.data.user.consent.ConsentException;
-import com.severalcircles.flames.external.Analysis;
+import com.severalcircles.flames.external.analysis.Analysis;
 import com.severalcircles.flames.frontend.today.Today;
 import com.severalcircles.flames.util.BadWordFilter;
 import com.severalcircles.flames.util.Rank;
@@ -67,7 +67,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         }
         Sentiment sentiment;
         try {
-            sentiment = Analysis.analyze(event.getMessage().getContentRaw());
+            sentiment = Analysis.analyze(event.getMessage().getContentRaw()).getSentiment();
         } catch (Exception e) {
             e.printStackTrace();
             Flames.incrementErrorCount();
@@ -111,7 +111,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             Today.quoteChanges++;
         }
         UserFunFacts funFacts = user.getFunFacts();
-        if (Analysis.analyzeEntities(event.getMessage().getContentRaw())) funFacts.setFrenchToastMentioned(funFacts.getFrenchToastMentioned() + 1);
+//        if (Analysis.analyzeEntities(event.getMessage().getContentRaw())) funFacts.setFrenchToastMentioned(funFacts.getFrenchToastMentioned() + 1);
         if (funFacts.getHighestFlamesScore() < user.getScore()) funFacts.setHighestFlamesScore(user.getScore());
         if (funFacts.getLowestFlamesScore() > user.getScore()) funFacts.setLowestFlamesScore(user.getScore());
         if (funFacts.getHighestEmotion() < user.getEmotion()) {
