@@ -4,7 +4,7 @@
 
 package com.severalcircles.flames.frontend.today;
 
-import com.severalcircles.flames.external.analysis.Analysis;
+import com.severalcircles.flames.external.Analysis;
 
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;

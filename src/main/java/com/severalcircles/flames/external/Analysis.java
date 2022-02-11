@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Several Circles.
  */
 
-package com.severalcircles.flames.external.analysis;
+package com.severalcircles.flames.external;
 import com.google.cloud.language.v1.*;
 import com.google.cloud.language.v1.Document.Type;
 
@@ -15,10 +15,7 @@ import java.util.*;
 public class Analysis {
     public static Map<String, Integer> entityCache = new HashMap<>();
     //    public static Map<String, String> knowledgeBase = new HashMap<>();
-    public static FinishedAnalysis analyze(String message) throws Exception {
-        return new FinishedAnalysis(analyzeEntities(message), analyzeSentiment(message));
-    }
-    public static Sentiment analyzeSentiment(String message) throws Exception {
+    public static Sentiment analyze(String message) throws Exception {
         // Instantiates a client
         try (LanguageServiceClient language = LanguageServiceClient.create()) {
 
@@ -38,10 +35,10 @@ public class Analysis {
     /**
      * @return true if message mentions french toast, else false.
      */
-    public static List<Entity> analyzeEntities(String message) throws IOException {
+    public static boolean analyzeEntities(String message) {
         boolean toast = false;
         // Instantiate the Language client com.google.cloud.language.v1.LanguageServiceClient
-        LanguageServiceClient language = LanguageServiceClient.create();
+        try (LanguageServiceClient language = LanguageServiceClient.create()) {
             Document doc = Document.newBuilder().setContent(message).setType(Type.PLAIN_TEXT).build();
             AnalyzeEntitiesRequest request =
                     AnalyzeEntitiesRequest.newBuilder()
@@ -50,7 +47,20 @@ public class Analysis {
                             .build();
 
             AnalyzeEntitiesResponse response = language.analyzeEntities(request);
+
             // Print the response
-        return response.getEntitiesList();
+            for (Entity entity : response.getEntitiesList()) {
+                System.out.printf("Entity: %s", entity.getName());
+                System.out.printf("Salience: %.3f\n", entity.getSalience());
+                System.out.println("Metadata: ");
+                if (entity.getName().toLowerCase().contains("french toast")) toast = true;
+//                Logger.getGlobal().log(Level.FINE, "Reading guild: " + discordId);
+                if (entityCache.containsKey(entity.getName())) entityCache.put(entity.getName(), entityCache.get(entity.getName()) + 1);
+                else entityCache.put(entity.getName(), 1);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return toast;
     }
 }

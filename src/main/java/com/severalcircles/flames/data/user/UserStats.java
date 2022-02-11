@@ -67,31 +67,31 @@ public class UserStats implements FlamesData {
     }
 
     public int getExp() {
-        return 1;
+        return exp;
     }
 
     public int getLevel() {
-        return 1;
+        return level;
     }
 
     public int getPOW() {
-        return 1;
+        return POW;
     }
 
     public int getRES() {
-        return 1;
+        return RES;
     }
 
     public int getLUCK() {
-        return 1;
+        return LUCK;
     }
 
     public int getRISE() {
-        return 1;
+        return RISE;
     }
 
     public int getCAR() {
-        return 1;
+        return CAR;
     }
 
     public void addExp(int amountToAdd) {

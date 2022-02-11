@@ -26,7 +26,6 @@ public class CommandEvent extends ListenerAdapter implements FlamesDiscordEvent 
 
     public void register(JDA api) {
         api.addEventListener(new CommandEvent());
-        Logger.getGlobal().log(Level.FINE, "Registering " + MessageEvent.class.getName());
     }
     @Override
     public void onSlashCommand(@NotNull SlashCommandEvent event) {

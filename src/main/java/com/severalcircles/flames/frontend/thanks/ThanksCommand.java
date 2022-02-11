@@ -24,7 +24,7 @@ public class ThanksCommand implements FlamesCommand {
         User thanked = Objects.requireNonNull(event.getOption("who")).getAsUser();
         String msg;
         try {
-            msg = Objects.requireNonNull(event.getOption("msg")).getAsString();
+            msg = event.getOption("msg").getAsString();
         } catch (NullPointerException e) {
             msg = "";
         }

@@ -36,21 +36,15 @@ import javax.security.auth.login.LoginException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.time.Duration;
-import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 /**
  * Main class for Flames. Sets up everything you could ever hope for.
@@ -68,19 +62,16 @@ public class Flames {
      * Bugsnag instance used to report bugs
      */
     public static Bugsnag bugsnag;
-    static int fatalErrorCounter;
+    private static int fatalErrorCounter;
 
     public static ResourceBundle getCommonRsc(Locale locale) {
         return ResourceBundle.getBundle("Common", locale);
     }
-    public static String reportHeader;
-
     static {
         try {
-            reportHeader = "OP:" + System.getProperty("user.name") + " HN:" + InetAddress.getLocalHost().getHostName() + " OS:" + System.getProperty("os.name") + " JRE:" + System.getProperty("java.vendor") + " FV:%s" + " IN:";
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-            System.exit(1);
+            spotifyConnection = new SpotifyConnection();
+        } catch (IOException e) {
+            Logger.getGlobal().log(Level.SEVERE, "Failed to connect to Spotify.");
         }
     }
 
@@ -93,26 +84,11 @@ public class Flames {
         InputStream is = Flames.class.getClassLoader().getResourceAsStream("version.properties");
         properties.load(is);
         version = properties.getProperty("version");
-        reportHeader = String.format(reportHeader, version);
-        String logName = "Flames " + version + "@" + InetAddress.getLocalHost().getHostName() + " " + Instant.now().truncatedTo(ChronoUnit.SECONDS).toString().replace(":", " ").replace("T", " T") + ".log";
-        File logDir = new File(FlamesDataManager.flamesDirectory.getAbsolutePath() + "/logs");
-        logDir.mkdir();
-        File logFile = new File(logDir.getAbsolutePath() + "/" + logName);
-        logFile.createNewFile();
-        FileHandler handler = new FileHandler(logFile.getAbsolutePath());
-        handler.setFormatter(new SimpleFormatter());
-        Logger.getGlobal().addHandler(handler);
-        Logger.getGlobal().log(Level.INFO, "Flames");
-        Logger.getGlobal().info(reportHeader + Instant.now());
-        if (version.contains("-beta") | version.contains("-alpha") | version.contains("-SNAPSHOT")) {
-            Logger.getGlobal().log(Level.WARNING, "You are running a development snapshot version of Flames. That means this version represents a \"snapshot\" of what the next release looks like at the time it was developed.\n" +
+        Logger.getGlobal().log(Level.INFO, "Flames version " + version);
+        if (version.contains("-beta") | version.contains("-alpha")) {
+            Logger.getGlobal().log(Level.INFO, "You are running a development snapshot version of Flames. That means this version represents a \"snapshot\" of what the next release looks like at the time it was developed.\n" +
                     "There is absolutely ZERO promises with this build. You get what you get, please do not throw a fit.\n" +
                     "Do not use this version for anything other than testing. If you are even thinking about using this in any kind of production setting, think again. Wait until this version is officially released.");
-        }
-        try {
-            spotifyConnection = new SpotifyConnection();
-        } catch (IOException e) {
-            Logger.getGlobal().log(Level.SEVERE, "Failed to connect to Spotify.");
         }
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("America/New_York"));
         ZonedDateTime nextRun = now.withHour(0).withMinute(0).withSecond(0);
@@ -120,7 +96,6 @@ public class Flames {
             nextRun = nextRun.plusDays(1);
         Duration duration = Duration.between(now, nextRun);
         long initalDelay = duration.getSeconds();
-        Logger.getGlobal().log(Level.INFO, "Connecting to Bugsnag");
         bugsnag = new Bugsnag("4db7c7d93598a437149f27b877cc6a93");
         FlamesDataManager.prepare();
         GlobalData.read();
@@ -130,9 +105,9 @@ public class Flames {
 //        scheduler.scheduleAtFixedRate(new FlushHistoricalData(), 1, 1, TimeUnit.HOURS);
         scheduler.scheduleAtFixedRate(new ResetTodayRunnable(), initalDelay, TimeUnit.DAYS.toSeconds(1), TimeUnit.SECONDS);
         new ResetTodayRunnable().run();
-        Runtime.getRuntime().addShutdownHook(new ExitFlames());
         // --- Connecting to the API and Logging in to Discord ---
         try {
+            Logger.getGlobal().log(Level.INFO, "Token is " + System.getenv("FlamesToken"));
             api = JDABuilder.createDefault(System.getenv("FlamesToken")).build();
             api.awaitReady();
         } catch (LoginException e) {
@@ -143,7 +118,6 @@ public class Flames {
             e.printStackTrace();
         }
         // --- Commands ---
-        Logger.getGlobal().log(Level.INFO, "Registering Commands");
         List<CommandData> commandDataList = new LinkedList<>();
         commandMap.put("based", new TestCommand());
         commandDataList.add(new CommandData("based", "based"));
@@ -173,7 +147,6 @@ public class Flames {
         new CommandEvent().register(api);
         new MessageEvent().register(api);
         new ButtonEvent().register(api);
-        Logger.getGlobal().info("Done loading. Enjoy!");
     }
 
     /**

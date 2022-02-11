@@ -6,7 +6,6 @@ package com.severalcircles.flames.data.user;
 
 public enum UserSetting {
     LOCALE();
-    @SuppressWarnings("FieldMayBeFinal")
     private String code;
     UserSetting() {
         this.code = "1";

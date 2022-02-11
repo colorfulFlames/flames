@@ -7,7 +7,10 @@ package com.severalcircles.flames.data;
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.guild.FlamesGuild;
 import com.severalcircles.flames.data.guild.NewGuildException;
-import com.severalcircles.flames.data.user.*;
+import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.data.user.UserConfig;
+import com.severalcircles.flames.data.user.UserFunFacts;
+import com.severalcircles.flames.data.user.UserStats;
 import com.severalcircles.flames.data.user.consent.ConsentException;
 import com.severalcircles.flames.util.Rank;
 import net.dv8tion.jda.api.entities.Guild;
@@ -92,16 +95,15 @@ public class FlamesDataManager {
     public static void save(FlamesUser flamesUser) throws IOException {
         String discordId = flamesUser.getDiscordId();
         String name;
-        try {name = Objects.requireNonNull(Flames.api.getUserById(discordId)).getName(); } catch (NullPointerException | IllegalArgumentException e) {name = "An Unknown Flames User";}
+        try {name = Flames.api.getUserById(discordId).getName(); } catch (NullPointerException | IllegalArgumentException e) {name = "An Unknown Flames User";}
 //        OutputStream outputStream;
         File udir = new File(userDirectory.getAbsolutePath() + "/" + discordId);
         File user = new File(udir.getAbsolutePath() + "/user.fl");
         File stats = new File(udir.getAbsolutePath() + "/stats.fl");
         File funfacts = new File(udir.getAbsolutePath() + "/funfacts.fl");
         File config = new File(udir.getAbsolutePath() + "/config.fl");
-        File relationships = new File(udir.getAbsolutePath() + "/relationships.fl");
         // If any of the user data files don't exist, we're just going to assume that the data either doesn't exist or is corrupted and start from scratch because it shouldn't ever happen normally.
-        if (udir.mkdir() | user.createNewFile() | stats.createNewFile() | funfacts.createNewFile() | config.createNewFile() | relationships.createNewFile()) {
+        if (udir.mkdir() | user.createNewFile() | stats.createNewFile() | funfacts.createNewFile() | config.createNewFile()) {
             Logger.getGlobal().log(Level.INFO, "User Data for " + discordId + " does not exist. Creating it now.");
         }
         flamesUser.setDiscordId(discordId);
@@ -109,12 +111,11 @@ public class FlamesDataManager {
         FileOutputStream os2 = new FileOutputStream(stats);
         FileOutputStream os3 = new FileOutputStream(funfacts);
         FileOutputStream os4 = new FileOutputStream(config);
-        FileOutputStream os5 = new FileOutputStream(relationships);
         flamesUser.createData().store(os1, "User Data for " + name);
         flamesUser.getStats().createData().store(os2, "User Stats for " + name);
         flamesUser.getFunFacts().createData().store(os3, "Fun Facts for " + name);
         flamesUser.getConfig().createData().store(os4, "Configuration for " + name);
-        flamesUser.getRelationships().createData().store(os5, "Relationships for " + name);
+
     }
 
     /**
@@ -128,8 +129,7 @@ public class FlamesDataManager {
         UserStats stats = new UserStats();
         UserFunFacts funFacts = new UserFunFacts();
         UserConfig config = new UserConfig();
-        UserRelationships userRelationships = new UserRelationships();
-        if (newUser(user) | user.isBot()) {
+        if (newUser(user)) {
             throw new ConsentException(0, user);
         }
         File udir = new File(userDirectory.getAbsolutePath() + "/" + user.getId());
@@ -137,26 +137,21 @@ public class FlamesDataManager {
         File stats2 = new File(udir.getAbsolutePath() + "/stats.fl");
         File funfacts = new File(udir.getAbsolutePath() + "/funfacts.fl");
         File config1 = new File(udir.getAbsolutePath() + "/config.fl");
-        File relationships = new File(udir.getAbsolutePath() + "/relationships.fl");
         userfl.createNewFile();
         stats2.createNewFile();
         funfacts.createNewFile();
-        relationships.createNewFile();
         FileInputStream inputStream1 = new FileInputStream(userfl);
         FileInputStream inputStream2 = new FileInputStream(stats2);
         FileInputStream inputStream3 = new FileInputStream(funfacts);
         FileInputStream inputStream4 = new FileInputStream(config1);
-        FileInputStream inputStream5 = new FileInputStream(relationships);
         Properties data = new Properties();
         Properties statsdata = new Properties();
         Properties funfactsdata = new Properties();
         Properties configdata = new Properties();
-        Properties relationshipData = new Properties();
         data.load(inputStream1);
         statsdata.load(inputStream2);
         funfactsdata.load(inputStream3);
         configdata.load(inputStream4);
-        relationshipData.load(inputStream5);
 
         fluser.setScore(Integer.parseInt(data.get("score") + ""));
         fluser.setEmotion(Float.parseFloat(data.get("emotion") + ""));
@@ -178,13 +173,11 @@ public class FlamesDataManager {
         if (new File(udir.getAbsolutePath() + "/" + FlamesUser.latestVersion + ".flamesfile").createNewFile()) {
             new FlamesDataUpdater(fluser).run();
         }
-//        stats = new UserStats(Integer.parseInt(statsdata.get("exp") + ""), Integer.parseInt(statsdata.get("level") + ""), Integer.parseInt(statsdata.get("POW") + ""), Integer.parseInt(statsdata.get("RES") + ""), Integer.parseInt(statsdata.get("LUCK") + ""), Integer.parseInt(statsdata.get("RISE") + ""), Integer.parseInt(statsdata.get("CAR") + ""));
+        stats = new UserStats(Integer.parseInt(statsdata.get("exp") + ""), Integer.parseInt(statsdata.get("level") + ""), Integer.parseInt(statsdata.get("POW") + ""), Integer.parseInt(statsdata.get("RES") + ""), Integer.parseInt(statsdata.get("LUCK") + ""), Integer.parseInt(statsdata.get("RISE") + ""), Integer.parseInt(statsdata.get("CAR") + ""));
         config = new UserConfig(Locale.forLanguageTag(configdata.get("locale") + ""));
-        relationshipData.forEach((key, value) -> userRelationships.addRelationship(key.toString(), Integer.parseInt(value.toString())));
         fluser.setStats(stats);
         fluser.setFunFacts(funFacts);
         fluser.setConfig(config);
-        fluser.setRelationships(userRelationships);
         if (fluser.getConsent() != 1) throw new ConsentException(fluser.getConsent(), user);
         return fluser;
     }

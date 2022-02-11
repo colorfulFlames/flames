@@ -44,19 +44,12 @@ public class GlobalData {
     @SuppressWarnings("deprecation")
     public static void read() throws IOException {
         File file = new File(FlamesDataManager.flamesDirectory.getAbsolutePath() + "/global.properties");
-        file.createNewFile();
         @SuppressWarnings("deprecation") InputStream inputStream = file.toURL().openStream();
         Properties properties = new Properties();
         properties.load(inputStream);
 //        averageScore = Integer.parseInt(properties.get("averageScore") + "");
-        try {
-            globalScore = Integer.parseInt(properties.get("globalScore") + "");
-
-            participants = Integer.parseInt(properties.get("participants") + "");
-        } catch (NumberFormatException e) {
-            globalScore = 1;
-            participants = 1;
-        }
+        globalScore = Integer.parseInt(properties.get("globalScore") + "");
+        participants = Integer.parseInt(properties.get("participants") + "");
         averageScore = globalScore / participants;
         System.out.println("AS:" + averageScore);
     }

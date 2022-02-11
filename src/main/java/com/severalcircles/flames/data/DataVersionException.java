@@ -7,7 +7,6 @@ package com.severalcircles.flames.data;
 import com.severalcircles.flames.FlamesError;
 
 public class DataVersionException extends Exception implements FlamesError {
-    @SuppressWarnings("FieldMayBeFinal")
     private int code;
     public DataVersionException(boolean tooOld) {
         if (tooOld) code = 2;
