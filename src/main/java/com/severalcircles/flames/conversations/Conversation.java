@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Conversation {
     private Map<String, Integer> entities;
@@ -71,6 +73,7 @@ public class Conversation {
         return expires;
     }
     public void processMessage(Message message, FinishedAnalysis finishedAnalysis) throws ExpiredConversationException {
+        Logger.getGlobal().log(Level.INFO, "Processing Message");
         if (expires.compareTo(Instant.now()) > 0) throw new ExpiredConversationException();
         expires = Instant.now().plus(5, ChronoUnit.MINUTES);
         emotion += finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude();

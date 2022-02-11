@@ -101,7 +101,7 @@ public class FlamesDataManager {
         File config = new File(udir.getAbsolutePath() + "/config.fl");
         File relationships = new File(udir.getAbsolutePath() + "/relationships.fl");
         // If any of the user data files don't exist, we're just going to assume that the data either doesn't exist or is corrupted and start from scratch because it shouldn't ever happen normally.
-        if (udir.mkdir() | user.createNewFile() | stats.createNewFile() | funfacts.createNewFile() | config.createNewFile()) {
+        if (udir.mkdir() | user.createNewFile() | stats.createNewFile() | funfacts.createNewFile() | config.createNewFile() | relationships.createNewFile()) {
             Logger.getGlobal().log(Level.INFO, "User Data for " + discordId + " does not exist. Creating it now.");
         }
         flamesUser.setDiscordId(discordId);

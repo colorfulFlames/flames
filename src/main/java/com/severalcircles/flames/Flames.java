@@ -6,11 +6,13 @@
 package com.severalcircles.flames;
 
 import com.bugsnag.Bugsnag;
+import com.google.cloud.language.v1.LanguageServiceClient;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.events.ButtonEvent;
 import com.severalcircles.flames.events.CommandEvent;
 import com.severalcircles.flames.events.MessageEvent;
+import com.severalcircles.flames.events.NewMessageEvent;
 import com.severalcircles.flames.external.spotify.ReconnectRunnable;
 import com.severalcircles.flames.external.spotify.SpotifyConnection;
 import com.severalcircles.flames.frontend.FlamesCommand;
@@ -145,7 +147,7 @@ public class Flames {
         if (new File(version + ".flamesfile").createNewFile()) api.updateCommands().addCommands(commandDataList).complete();
         // --- Events ---
         new CommandEvent().register(api);
-        new MessageEvent().register(api);
+        new NewMessageEvent().register(api);
         new ButtonEvent().register(api);
     }
 

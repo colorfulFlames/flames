@@ -21,7 +21,7 @@ public class UserRelationships implements FlamesData {
             relationships.put("0", 0);
         }
         relationships.forEach((key, value) -> {
-            properties.put(key, value);
+            properties.put(key + "", value + "");
         });
         return properties;
     }
@@ -31,6 +31,7 @@ public class UserRelationships implements FlamesData {
     }
     public UserRelationships() {
         this.relationships = new HashMap<>();
+        this.relationships.put("0", 0);
     }
     public void addRelationship(String id, int score) {
         if (!relationships.containsKey(id)) relationships.put(id, score);

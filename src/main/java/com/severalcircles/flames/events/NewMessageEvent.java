@@ -15,6 +15,7 @@ import com.severalcircles.flames.data.user.consent.ConsentException;
 import com.severalcircles.flames.external.analysis.Analysis;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
 import com.severalcircles.flames.frontend.today.Today;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -29,12 +30,14 @@ public class NewMessageEvent extends ListenerAdapter implements FlamesDiscordEve
 
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
+        Logger.getGlobal().log(Level.INFO,"New Message Event");
         super.onMessageReceived(event);
         User user = event.getAuthor();
         Logger logger = Logger.getGlobal();
         // Check to make sure it's worth processing the message
         // Bots don't get processed by Flames, simply because it's easier on everyone.
         if (user.isBot()) return;
+        Logger.getGlobal().log(Level.INFO,"Not a bot");
         FlamesUser flamesUser;
         // Read Flames User
         try {
@@ -62,6 +65,7 @@ public class NewMessageEvent extends ListenerAdapter implements FlamesDiscordEve
         }
         // Process conversation
         if (ConversationsController.activeConversations.containsKey(event.getChannel().getId())) {
+            Logger.getGlobal().log(Level.INFO, "Already in conversation");
             try {
                 ConversationsController.activeConversations.get(event.getChannel().getId()).processMessage(event.getMessage(), finishedAnalysis);
             } catch (ExpiredConversationException e) {
@@ -69,6 +73,7 @@ public class NewMessageEvent extends ListenerAdapter implements FlamesDiscordEve
                 ConversationsController.activeConversations.remove(event.getChannel().getId());
             }
         } else {
+            Logger.getGlobal().log(Level.INFO, "New Conversation");
             Conversation conversation = new Conversation(event.getChannel());
             try {
                 conversation.processMessage(event.getMessage(), finishedAnalysis);
@@ -77,6 +82,9 @@ public class NewMessageEvent extends ListenerAdapter implements FlamesDiscordEve
                 e.printStackTrace();
             }
             ConversationsController.activeConversations.put(event.getChannel().getId(), conversation);
+            ConversationsController.activeConversations.forEach((element, index) -> {
+                System.out.println(element);
+            });
         }
         // Check quote of the day
         if (!Today.quote[2].equals(event.getAuthor().getId())) {
@@ -87,5 +95,9 @@ public class NewMessageEvent extends ListenerAdapter implements FlamesDiscordEve
             }
             flamesUser.setScore(flamesUser.getScore() + 864);
         }
+    }
+
+    public static void register(JDA api) {
+        api.addEventListener(new NewMessageEvent());
     }
 }

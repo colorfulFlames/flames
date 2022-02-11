@@ -37,7 +37,7 @@ dependencies {
     implementation("net.dv8tion:JDA:$jdaVersion")
     implementation platform('com.google.cloud:libraries-bom:22.0.0')
     implementation platform('com.google.cloud:libraries-bom:20.8.0')
-    implementation 'com.google.cloud:google-cloud-language'
+    implementation 'com.google.cloud:google-cloud-language:2.1.4'
     implementation 'com.bugsnag:bugsnag:3.6.2'
 
 }
