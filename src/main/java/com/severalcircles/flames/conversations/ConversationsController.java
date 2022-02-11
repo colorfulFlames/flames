@@ -4,8 +4,6 @@
 
 package com.severalcircles.flames.conversations;
 
-import net.dv8tion.jda.api.entities.MessageChannel;
-
 import java.util.HashMap;
 import java.util.Map;
 

@@ -92,7 +92,7 @@ public class FlamesDataManager {
     public static void save(FlamesUser flamesUser) throws IOException {
         String discordId = flamesUser.getDiscordId();
         String name;
-        try {name = Flames.api.getUserById(discordId).getName(); } catch (NullPointerException | IllegalArgumentException e) {name = "An Unknown Flames User";}
+        try {name = Objects.requireNonNull(Flames.api.getUserById(discordId)).getName(); } catch (NullPointerException | IllegalArgumentException e) {name = "An Unknown Flames User";}
 //        OutputStream outputStream;
         File udir = new File(userDirectory.getAbsolutePath() + "/" + discordId);
         File user = new File(udir.getAbsolutePath() + "/user.fl");
@@ -178,11 +178,9 @@ public class FlamesDataManager {
         if (new File(udir.getAbsolutePath() + "/" + FlamesUser.latestVersion + ".flamesfile").createNewFile()) {
             new FlamesDataUpdater(fluser).run();
         }
-        stats = new UserStats(Integer.parseInt(statsdata.get("exp") + ""), Integer.parseInt(statsdata.get("level") + ""), Integer.parseInt(statsdata.get("POW") + ""), Integer.parseInt(statsdata.get("RES") + ""), Integer.parseInt(statsdata.get("LUCK") + ""), Integer.parseInt(statsdata.get("RISE") + ""), Integer.parseInt(statsdata.get("CAR") + ""));
+//        stats = new UserStats(Integer.parseInt(statsdata.get("exp") + ""), Integer.parseInt(statsdata.get("level") + ""), Integer.parseInt(statsdata.get("POW") + ""), Integer.parseInt(statsdata.get("RES") + ""), Integer.parseInt(statsdata.get("LUCK") + ""), Integer.parseInt(statsdata.get("RISE") + ""), Integer.parseInt(statsdata.get("CAR") + ""));
         config = new UserConfig(Locale.forLanguageTag(configdata.get("locale") + ""));
-        relationshipData.forEach((key, value) -> {
-            userRelationships.addRelationship(key.toString(), Integer.parseInt(value.toString()));
-        });
+        relationshipData.forEach((key, value) -> userRelationships.addRelationship(key.toString(), Integer.parseInt(value.toString())));
         fluser.setStats(stats);
         fluser.setFunFacts(funFacts);
         fluser.setConfig(config);

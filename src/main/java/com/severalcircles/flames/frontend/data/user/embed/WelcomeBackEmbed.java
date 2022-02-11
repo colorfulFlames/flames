@@ -35,7 +35,6 @@ public class WelcomeBackEmbed implements FlamesEmbed {
     public MessageEmbed get() {
         Date now = Date.from(Instant.now());
         String timeMessage;
-        //noinspection deprecation
         if (Today.isThanksgiving) timeMessage = resources.getString("author.thanksgiving");
         else //noinspection deprecation
             if (now.getHours() < 6) timeMessage = resources.getString("author.earlymorning");

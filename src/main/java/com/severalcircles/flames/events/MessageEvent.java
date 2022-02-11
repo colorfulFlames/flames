@@ -22,6 +22,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -44,7 +45,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             flamesUser = FlamesDataManager.readUser(user);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Can't read user data for " + user.getId() + ".");
-            logger.log(Level.SEVERE, e.getStackTrace().toString());
+            logger.log(Level.SEVERE, Arrays.toString(e.getStackTrace()));
             Flames.incrementErrorCount();
             return;
         } catch (ConsentException e) {
@@ -82,9 +83,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
                 e.printStackTrace();
             }
             ConversationsController.activeConversations.put(event.getChannel().getId(), conversation);
-            ConversationsController.activeConversations.forEach((element, index) -> {
-                System.out.println(element);
-            });
+            ConversationsController.activeConversations.forEach((element, index) -> System.out.println(element));
         }
         // Check quote of the day
         if (!Today.quote[2].equals(event.getAuthor().getId())) {
@@ -93,12 +92,12 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
                 Today.quote[1] = event.getAuthor().getName();
                 Today.quote[2] = event.getAuthor().getId();
             }
-            Logger.getGlobal().log(Level.FINE, "Quote of the day is now " + Today.quote);
+            Logger.getGlobal().log(Level.FINE, "Quote of the day is now " + Arrays.toString(Today.quote));
             flamesUser.setScore(flamesUser.getScore() + 864);
         }
     }
 
-    public static void register(JDA api) {
+    public void register(JDA api) {
         Logger.getGlobal().log(Level.FINE, "Registering " + MessageEvent.class.getName());
         api.addEventListener(new MessageEvent());
     }

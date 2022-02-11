@@ -4,8 +4,6 @@
 
 package com.severalcircles.flames;
 
-import jdk.internal.jline.internal.Log;
-
 import java.time.Instant;
 import java.util.logging.Level;
 import java.util.logging.Logger;

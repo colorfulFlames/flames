@@ -10,7 +10,6 @@ import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.consent.ConsentException;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
-import net.dv8tion.jda.api.entities.GuildChannel;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
@@ -18,7 +17,6 @@ import net.dv8tion.jda.api.entities.User;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAmount;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,12 +25,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Conversation {
+    @SuppressWarnings("FieldMayBeFinal")
     private Map<String, Integer> entities;
+    @SuppressWarnings("FieldMayBeFinal")
     private MessageChannel channel;
+    @SuppressWarnings("FieldMayBeFinal")
     private List<User> userList;
     private Instant expires;
     private double emotion;
+    @SuppressWarnings("FieldMayBeFinal")
     private Map<String, String> quote;
+    @SuppressWarnings("FieldMayBeFinal")
     private double quoteScore;
     private Map<String, FlamesUser> conversationCache;
     public Conversation(MessageChannel channel) {
@@ -94,9 +97,7 @@ public class Conversation {
                 }
             }
             FlamesUser user = conversationCache.get(element.getId());
-            userList.forEach((member) -> {
-                user.getRelationships().addRelationship(member.getId(), 1);
-            });
+            userList.forEach((member) -> user.getRelationships().addRelationship(member.getId(), 1));
             if (user.getDiscordId().equals(message.getAuthor().getId())) {
                 int score = user.getScore() + (int) Math.round((finishedAnalysis.getEmotion() + (conversationCache.size() * 10)) * Math.abs(emotion));
                 user.setScore(score);
