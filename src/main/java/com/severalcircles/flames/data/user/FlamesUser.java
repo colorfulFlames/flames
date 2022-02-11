@@ -14,7 +14,7 @@ import java.util.Properties;
  */
 public class FlamesUser implements FlamesData {
 
-    public static final double latestVersion = 2.1;
+    public static final double latestVersion = 2.2;
 
     private int score;
     private float emotion;
@@ -25,6 +25,15 @@ public class FlamesUser implements FlamesData {
     private int consent;
     private UserFunFacts funFacts;
     private double dataVersion;
+    private UserRelationships relationships;
+
+    public UserRelationships getRelationships() {
+        return relationships;
+    }
+
+    public void setRelationships(UserRelationships relationships) {
+        this.relationships = relationships;
+    }
 
     public double getDataVersion() {
         return dataVersion;
@@ -40,7 +49,7 @@ public class FlamesUser implements FlamesData {
 
     private UserConfig config;
 
-    public FlamesUser(int score, float emotion, Instant lastSeen, int streak, String discordId, UserStats stats, int consent, UserFunFacts funFacts, double dataVersion, UserConfig config) {
+    public FlamesUser(int score, float emotion, Instant lastSeen, int streak, String discordId, UserStats stats, int consent, UserFunFacts funFacts, double dataVersion, UserConfig config, UserRelationships relationships) {
         this.score = score;
         this.emotion = emotion;
         this.lastSeen = lastSeen;
@@ -51,6 +60,7 @@ public class FlamesUser implements FlamesData {
         this.funFacts = funFacts;
         this.dataVersion = dataVersion;
         this.config = config;
+        this.relationships = relationships;
     }
 
     public UserFunFacts getFunFacts() {
@@ -106,7 +116,8 @@ public class FlamesUser implements FlamesData {
         this.consent = 0;
         this.funFacts = new UserFunFacts();
         this.config = new UserConfig();
-        this.dataVersion = 2.1;
+        this.relationships = new UserRelationships();
+        this.dataVersion = 2.2;
     }
 
     public void addScore(int amount) {
