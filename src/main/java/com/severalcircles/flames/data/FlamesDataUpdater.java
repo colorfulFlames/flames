@@ -11,19 +11,20 @@ import com.severalcircles.flames.data.user.UserStats;
 //import sun.util.logging.PlatformLogger;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FlamesDataUpdater {
     public static final double minimumVersion = 2.0;
-    @SuppressWarnings("FieldMayBeFinal")
     private FlamesUser flamesUser;
-    @SuppressWarnings("FieldMayBeFinal")
     private UserStats stats;
-
+    private UserFunFacts funFacts;
+    private UserConfig config;
     public FlamesDataUpdater(FlamesUser flamesUser) {
         this.flamesUser = flamesUser;
         this.stats = flamesUser.getStats();
-        UserFunFacts funFacts = flamesUser.getFunFacts();
-        UserConfig config = flamesUser.getConfig();
+        this.funFacts = flamesUser.getFunFacts();
+        this.config = flamesUser.getConfig();
     }
     public boolean run() throws DataVersionException, IOException {
         if (flamesUser.getDataVersion() < minimumVersion) throw new DataVersionException(true);

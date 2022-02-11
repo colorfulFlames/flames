@@ -16,6 +16,6 @@ public class MyDataCommand implements FlamesCommand {
     public void execute(SlashCommandEvent event, FlamesUser sender) {
 //        ResourceBundle resourceBundle = ResourceBundle.getBundle("features/UserDataEmbed", flamesUser.getConfig().getLocale()));
         MessageEmbed embed = new UserDataEmbed(event.getUser(), sender).get();
-        event.replyEmbeds(embed).addActionRow(Button.success("mydata", "My Data"), Button.primary("funFacts", "Fun Facts")).queue();
+        event.replyEmbeds(embed).addActionRow(Button.success("mydata", "My Data"), Button.primary("stats", "Stats"), Button.primary("funFacts", "Fun Facts")).queue();
 
 }}

@@ -30,7 +30,7 @@ public class FunFactsEmbed implements FlamesEmbed {
     @Override
     public MessageEmbed get() {
         UserFunFacts funFacts = flamesUser.getFunFacts();
-        return new EmbedBuilder()
+        MessageEmbed embed = new EmbedBuilder()
                 .setAuthor(resources.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setColor(new Color(153, 85,187))
                 .setTitle(String.format(resources.getString("title"), user.getName()))
@@ -42,5 +42,6 @@ public class FunFactsEmbed implements FlamesEmbed {
                 .setTimestamp(Instant.now())
                 .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(String.valueOf(Ranking.getRank(flamesUser.getScore())))), user.getAvatarUrl())
                 .build();
+        return embed;
     }
 }

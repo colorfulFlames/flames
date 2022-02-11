@@ -6,7 +6,7 @@ package com.severalcircles.flames.frontend.today;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.external.analysis.Analysis;
+import com.severalcircles.flames.external.Analysis;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import com.severalcircles.flames.util.Emotion;
 import com.severalcircles.flames.util.Ranking;

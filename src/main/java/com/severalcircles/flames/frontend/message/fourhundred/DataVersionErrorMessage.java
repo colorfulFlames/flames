@@ -27,7 +27,7 @@ public class DataVersionErrorMessage extends FlamesErrorMessage {
         this.errorCode = "500-999";
     }
     public MessageEmbed get() {
-        return new EmbedBuilder()
+        MessageEmbed embed = new EmbedBuilder()
                 .setColor(Color.red)
                 .setAuthor(resources.getString("author"))
                 .setTitle(resources.getString("title"))
@@ -35,5 +35,6 @@ public class DataVersionErrorMessage extends FlamesErrorMessage {
                 .setFooter(String.format(resources.getString("footer"), errorCode))
                 .setTimestamp(Instant.now())
                 .build();
+        return embed;
     }
 }

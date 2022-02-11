@@ -51,7 +51,8 @@ public class FlamesAssets {
         }
     }
     public static String getVersionIcon() {
-        if (Flames.version.startsWith("6.")) return "https://www.severalcircles.com/flames/assets/versions/6.png";
+        if (Flames.version.contains("4.4")) return "https://www.severalcircles.com/flames/assets/versions/4.4.png";
+        if (Flames.version.contains("5.")) return "https://www.severalcircles.com/flames/assets/versions/5.png";
         return "https://www.severalcircles.com/flames/assets/versions/" + Flames.version + ".png";
     }
 

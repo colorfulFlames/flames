@@ -19,11 +19,8 @@ import java.time.Instant;
 import java.util.ResourceBundle;
 
 public class StatsEmbed implements FlamesEmbed {
-    @SuppressWarnings("FieldMayBeFinal")
     private FlamesUser flamesUser;
-    @SuppressWarnings("FieldMayBeFinal")
     private User user;
-    @SuppressWarnings("FieldMayBeFinal")
     private ResourceBundle resources;
 
     public StatsEmbed(User user, FlamesUser flamesUser) {
@@ -36,7 +33,7 @@ public class StatsEmbed implements FlamesEmbed {
     public MessageEmbed get() {
         UserStats stats = flamesUser.getStats();
         int next = 2^stats.getLevel() + GlobalData.participants;
-        return new EmbedBuilder()
+        MessageEmbed embed = new EmbedBuilder()
                 .setAuthor(resources.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setTitle(String.format(resources.getString("title"), user.getName()), "https://flamesapi.severalcircles.com/user/" + user.getId() + "/stats")
                 .setDescription(String.format(resources.getString("description"), stats.getLevel()))
@@ -51,5 +48,6 @@ public class StatsEmbed implements FlamesEmbed {
                 .setTimestamp(Instant.now())
                 .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(String.valueOf(Ranking.getRank(flamesUser.getScore())))), user.getAvatarUrl())
                 .build();
+        return embed;
     }
 }

@@ -20,18 +20,13 @@ import java.util.*;
 import java.util.List;
 
 public class ThanksEmbed implements FlamesEmbed {
-    @SuppressWarnings("FieldMayBeFinal")
     private User thanked;
-    @SuppressWarnings("FieldMayBeFinal")
     private User sender;
-    @SuppressWarnings("FieldMayBeFinal")
     private FlamesUser flamesUserThanked;
-    @SuppressWarnings("FieldMayBeFinal")
     private FlamesUser flamesUserSender;
-    @SuppressWarnings("FieldMayBeFinal")
     private ResourceBundle resources;
     private String msg;
-    static List<String> success = new LinkedList<>();
+    static List<String> success = new LinkedList<String>();
     public ThanksEmbed(User thanked, User sender, FlamesUser flamesUserThanked, FlamesUser flamesUserSender, String msg) {
         this.thanked = thanked;
         this.sender = sender;
@@ -53,7 +48,7 @@ public class ThanksEmbed implements FlamesEmbed {
 
     @Override
     public MessageEmbed get() {
-        if (thanked.getId().equals(sender.getId())) return new EmbedBuilder().setTitle(resources.getString("noThankSelf")).setColor(Color.red).build();
+        if (thanked.getId() == sender.getId()) return new EmbedBuilder().setTitle(resources.getString("noThankSelf")).setColor(Color.red).build();
         if (!Today.thanksgivingThanks.containsKey(sender.getId())) Today.thanksgivingThanks.put(sender.getId(), new LinkedList<>());
         if ((!Today.isThanksgiving && Today.thanks.contains(sender.getId())) | (Today.isThanksgiving && Today.thanksgivingThanks.get(sender.getId()).contains(thanked.getId()))) {
             return new EmbedBuilder().setTitle(String.format(resources.getString("alreadyThanked"), sender.getName())).setColor(Color.red).build();

@@ -36,7 +36,6 @@ public class ButtonEvent extends ListenerAdapter implements FlamesDiscordEvent {
         buttonActionMap.put("funFacts", new FunFactsButtonAction());
 //        buttonActionMap.put("manageData", new ManageUserDataButtonAction());
         buttonActionMap.put("mydata", new MyDataButtonAction());
-        Logger.getGlobal().log(Level.FINE, "Registering " + MessageEvent.class.getName());
     }
 
     @Override
