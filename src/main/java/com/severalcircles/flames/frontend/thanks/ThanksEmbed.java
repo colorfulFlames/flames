@@ -20,13 +20,18 @@ import java.util.*;
 import java.util.List;
 
 public class ThanksEmbed implements FlamesEmbed {
+    @SuppressWarnings("FieldMayBeFinal")
     private User thanked;
+    @SuppressWarnings("FieldMayBeFinal")
     private User sender;
+    @SuppressWarnings("FieldMayBeFinal")
     private FlamesUser flamesUserThanked;
+    @SuppressWarnings("FieldMayBeFinal")
     private FlamesUser flamesUserSender;
+    @SuppressWarnings("FieldMayBeFinal")
     private ResourceBundle resources;
     private String msg;
-    static List<String> success = new LinkedList<String>();
+    static List<String> success = new LinkedList<>();
     public ThanksEmbed(User thanked, User sender, FlamesUser flamesUserThanked, FlamesUser flamesUserSender, String msg) {
         this.thanked = thanked;
         this.sender = sender;

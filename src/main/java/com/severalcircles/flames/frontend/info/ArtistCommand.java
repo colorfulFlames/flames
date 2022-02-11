@@ -8,6 +8,7 @@ import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.external.spotify.SpotifyArtist;
 import com.severalcircles.flames.frontend.FlamesCommand;
+import com.severalcircles.flames.frontend.message.fivehundred.SpotifyConnectionFailedErrorMessage;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
@@ -26,10 +27,9 @@ public class ArtistCommand implements FlamesCommand {
         SpotifyArtist artist;
         try {
             artist = Flames.spotifyConnection.getArtist((Objects.requireNonNull(event.getOption("artist")).getAsString()));
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             e.printStackTrace();
-            event.getHook().sendMessage("Couldn't connect to Spotify right now. Try again later.").queue();
-//            artist = null;
+            event.getHook().sendMessageEmbeds(new SpotifyConnectionFailedErrorMessage(e).get()).queue();
             return;
         } catch (JSONException e) {
             event.getHook().sendMessage("Couldn't find an artist by that name.").queue();

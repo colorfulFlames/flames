@@ -5,10 +5,8 @@
 package com.severalcircles.flames.data.user;
 
 import com.severalcircles.flames.data.FlamesData;
-import net.dv8tion.jda.api.entities.User;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -20,9 +18,7 @@ public class UserRelationships implements FlamesData {
         if (relationships.size() == 0) {
             relationships.put("0", 0);
         }
-        relationships.forEach((key, value) -> {
-            properties.put(key + "", value + "");
-        });
+        relationships.forEach((key, value) -> properties.put(key + "", value + ""));
         return properties;
     }
 
