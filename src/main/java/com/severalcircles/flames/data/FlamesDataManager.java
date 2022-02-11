@@ -129,7 +129,7 @@ public class FlamesDataManager {
         UserFunFacts funFacts = new UserFunFacts();
         UserConfig config = new UserConfig();
         UserRelationships userRelationships = new UserRelationships();
-        if (newUser(user)) {
+        if (newUser(user) | user.isBot()) {
             throw new ConsentException(0, user);
         }
         File udir = new File(userDirectory.getAbsolutePath() + "/" + user.getId());
