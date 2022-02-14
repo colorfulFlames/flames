@@ -53,7 +53,7 @@ public class WelcomeBackEmbed implements FlamesEmbed {
                 .addField(resources.getString("dailyBonus"), StringUtil.formatScore(dailyBonus), true)
                 .addField(resources.getString("score"), StringUtil.formatScore(flamesUser.getScore()), true)
                 .setDescription(resources.getString("description"))
-                .setColor(Color.ORANGE)
+                .setColor(Color.decode("#D9581C"))
                 .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(String.valueOf(Ranking.getRank(flamesUser.getScore())))), user.getAvatarUrl())
                 .build();
     }
