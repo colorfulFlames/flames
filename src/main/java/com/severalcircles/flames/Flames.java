@@ -14,6 +14,7 @@ import com.severalcircles.flames.events.MessageEvent;
 import com.severalcircles.flames.external.spotify.ReconnectRunnable;
 import com.severalcircles.flames.external.spotify.SpotifyConnection;
 import com.severalcircles.flames.frontend.FlamesCommand;
+import com.severalcircles.flames.frontend.data.ConversationCommand;
 import com.severalcircles.flames.frontend.data.other.GlobalDataCommand;
 import com.severalcircles.flames.frontend.data.other.GuildDataCommand;
 import com.severalcircles.flames.frontend.data.user.HiCommand;
@@ -93,6 +94,7 @@ public class Flames {
         InputStream is = Flames.class.getClassLoader().getResourceAsStream("version.properties");
         properties.load(is);
         version = properties.getProperty("version");
+        FlamesDataManager.prepare();
         reportHeader = String.format(reportHeader, version);
         String logName = "Flames " + version + "@" + InetAddress.getLocalHost().getHostName() + " " + Instant.now().truncatedTo(ChronoUnit.SECONDS).toString().replace(":", " ").replace("T", " T") + ".log";
         File logDir = new File(FlamesDataManager.flamesDirectory.getAbsolutePath() + "/logs");
@@ -122,7 +124,6 @@ public class Flames {
         long initalDelay = duration.getSeconds();
         Logger.getGlobal().log(Level.INFO, "Connecting to Bugsnag");
         bugsnag = new Bugsnag("4db7c7d93598a437149f27b877cc6a93");
-        FlamesDataManager.prepare();
         GlobalData.read();
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(new ReconnectRunnable(), 1, 1, TimeUnit.HOURS);
@@ -167,6 +168,8 @@ public class Flames {
         commandDataList.add(new CommandData("locale", "Switches your locale").addOption(OptionType.STRING, "new_locale", "The locale you want to switch to", true));
         commandMap.put("thanks", new ThanksCommand());
         commandDataList.add(new CommandData("thanks", "Gives Thanks to a user").addOption(OptionType.USER, "who", "The user you want to thank", true).addOption(OptionType.STRING, "msg", "An optional message to attach"));
+        commandMap.put("conversation", new ConversationCommand());
+        commandDataList.add(new CommandData("conversation", "Shows information about the current conversation"));
 //        RegisterCommand.register();
         if (new File(version + ".flamesfile").createNewFile()) api.updateCommands().addCommands(commandDataList).complete();
         // --- Events ---

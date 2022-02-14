@@ -36,7 +36,7 @@ public class GlobalDataEmbed implements FlamesEmbed {
                 .setTitle(String.format(resources.getString("title"), Flames.api.getSelfUser().getName()))
                 .addField(resources.getString("globalScore"), StringUtil.formatScore(GlobalData.globalScore), true)
                 .addField(resources.getString("averageScore"), StringUtil.formatScore(GlobalData.averageScore), true)
-                .setColor(new Color(15, 131, 217))
+                .setColor(Color.decode("#DBC2CF"))
                 .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(Ranking.getRank(flamesUser.getScore()).toString()), user.getAvatarUrl()))
                 .build();
     }

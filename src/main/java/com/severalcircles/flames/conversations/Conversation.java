@@ -34,7 +34,7 @@ public class Conversation {
     private Instant expires;
     private double emotion;
     @SuppressWarnings("FieldMayBeFinal")
-    private Map<String, String> quote;
+    private String quote[] = {"This isn't epic yet", "Flames"};
     @SuppressWarnings("FieldMayBeFinal")
     private double quoteScore;
     private Map<String, FlamesUser> conversationCache;
@@ -44,8 +44,8 @@ public class Conversation {
         this.userList = new LinkedList<>();
         this.expires = Instant.now().plus(5, ChronoUnit.MINUTES);
         this.emotion = 0;
-        this.quote = new HashMap<>();
         this.quoteScore = 0;
+        this.conversationCache = new HashMap<>();
     }
 
     public Map<String, Integer> getEntities() {
@@ -64,7 +64,7 @@ public class Conversation {
         return emotion;
     }
 
-    public Map<String, String> getQuote() {
+    public String[] getQuote() {
         return quote;
     }
 
@@ -77,9 +77,13 @@ public class Conversation {
     }
     public void processMessage(Message message, FinishedAnalysis finishedAnalysis) throws ExpiredConversationException {
         Logger.getGlobal().log(Level.INFO, "Processing Message");
-        if (expires.compareTo(Instant.now()) > 0) throw new ExpiredConversationException();
+        if (expires.compareTo(Instant.now()) < 0) throw new ExpiredConversationException();
         expires = Instant.now().plus(5, ChronoUnit.MINUTES);
         emotion += finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude();
+        if (finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude() > quoteScore) {
+            this.quote = new String[]{message.getContentRaw() + "", message.getAuthor().getName() + ""};
+            this.quoteScore = finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude();
+        }
         if (!userList.contains(message.getAuthor())) userList.add(message.getAuthor());
         finishedAnalysis.getEntityList().forEach((element) -> {
             if (!entities.containsKey(element.getName())) entities.put(element.getName(), 1);
