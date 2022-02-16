@@ -7,6 +7,7 @@ package com.severalcircles.flames.conversations;
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.DataVersionException;
 import com.severalcircles.flames.data.FlamesDataManager;
+import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.consent.ConsentException;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
@@ -103,8 +104,19 @@ public class Conversation {
             FlamesUser user = conversationCache.get(element.getId());
             userList.forEach((member) -> user.getRelationships().addRelationship(member.getId(), 1));
             if (user.getDiscordId().equals(message.getAuthor().getId())) {
-                int score = user.getScore() + (int) Math.round((finishedAnalysis.getEmotion() + (conversationCache.size() * 10)) * Math.abs(emotion));
-                user.setScore(score);
+                int score = (int) Math.round((finishedAnalysis.getEmotion() + (conversationCache.size() * 10)) * Math.abs(emotion));
+                user.setScore(user.getScore());
+                if (user.getEmotion() > user.getFunFacts().getHighestEmotion()) {
+                    user.getFunFacts().setHighestEmotion(user.getEmotion());
+                    user.getFunFacts().setHappyDay(Instant.now());
+                }
+                if (user.getEmotion() < user.getFunFacts().getLowestEmotion()) {
+                    user.getFunFacts().setLowestEmotion(user.getEmotion());
+                    user.getFunFacts().setSadDay(Instant.now());
+                }
+                if (user.getScore() > user.getFunFacts().getHighestFlamesScore()) user.getFunFacts().setHighestFlamesScore(user.getScore());
+                GlobalData.globalScore += score;
+                GlobalData.averageScore = GlobalData.globalScore / GlobalData.participants;
             }
             conversationCache.put(element.getId(), user);
         });
