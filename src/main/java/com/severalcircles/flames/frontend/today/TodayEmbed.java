@@ -53,7 +53,7 @@ public class TodayEmbed implements FlamesEmbed {
                 .addBlankField(false)
                 .addField(resources.getString("allAbout"), resources.getString("tomorrowBring"), false)
                 .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(String.valueOf(Ranking.getRank(flamesUser.getScore())))), user.getAvatarUrl())
-                .setColor(Color.GREEN.darker())
+                .setColor(Color.decode("#F1D302"))
                 .build();
     }
 }

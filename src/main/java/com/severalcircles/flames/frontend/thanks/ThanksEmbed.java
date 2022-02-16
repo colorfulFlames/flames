@@ -54,7 +54,7 @@ public class ThanksEmbed implements FlamesEmbed {
             return new EmbedBuilder().setTitle(String.format(resources.getString("alreadyThanked"), sender.getName())).setColor(Color.red).build();
         }
 
-        flamesUserThanked.setScore(flamesUserThanked.getScore() + 2500);
+        flamesUserThanked.setScore(flamesUserThanked.getScore() + 250);
         try {
             FlamesDataManager.save(flamesUserThanked);
         } catch (IOException e) {
@@ -78,7 +78,7 @@ public class ThanksEmbed implements FlamesEmbed {
                 .setAuthor(String.format(resources.getString("author"), sender.getName()), null, sender.getAvatarUrl())
                 .setTitle(String.format(resources.getString("title"), thanked.getName()))
                 .setDescription(msg)
-                .addField(resources.getString("bonus"), StringUtil.formatScore(2500), true)
+                .addField(resources.getString("bonus"), StringUtil.formatScore(250), true)
                 .setImage(resources.getString("image"))
                 .setColor(Color.yellow)
                 .setFooter(String.format(resources.getString("footer"), thanked.getName()), thanked.getAvatarUrl())

@@ -30,6 +30,7 @@ public class CommandEvent extends ListenerAdapter implements FlamesDiscordEvent 
     @Override
     public void onSlashCommand(@NotNull SlashCommandEvent event) {
         System.out.println("Slash command detected");
+        event.deferReply(true);
         System.out.println(event.getName());
         for (Map.Entry<String, FlamesCommand> entry : Flames.commandMap.entrySet()) {
             System.out.println(entry.getKey());
