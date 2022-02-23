@@ -68,7 +68,7 @@ public class FlamesDataManager {
             FileOutputStream os4 = new FileOutputStream(config);
             flamesUser.setDiscordId(discordId);
             flamesUser.createData().store(os1, "User Data for " + name);
-            flamesUser.getStats().createData().store(os2, "User Stats for " + name);
+//            flamesUser.getStats().createData().store(os2, "User Stats for " + name);
             flamesUser.getFunFacts().createData().store(os3, "Fun Facts for " + name);
             flamesUser.getConfig().createData().store(os4, "Configuration for " + name);
 
@@ -111,7 +111,7 @@ public class FlamesDataManager {
         FileOutputStream os4 = new FileOutputStream(config);
         FileOutputStream os5 = new FileOutputStream(relationships);
         flamesUser.createData().store(os1, "User Data for " + name);
-        flamesUser.getStats().createData().store(os2, "User Stats for " + name);
+//        flamesUser.getStats().createData().store(os2, "User Stats for " + name);
         flamesUser.getFunFacts().createData().store(os3, "Fun Facts for " + name);
         flamesUser.getConfig().createData().store(os4, "Configuration for " + name);
         flamesUser.getRelationships().createData().store(os5, "Relationships for " + name);
@@ -125,7 +125,7 @@ public class FlamesDataManager {
      */
     public static FlamesUser readUser(User user) throws IOException, ConsentException, DataVersionException {
         FlamesUser fluser = new FlamesUser();
-        UserStats stats = new UserStats();
+//        UserStats stats = new UserStats();
         UserFunFacts funFacts = new UserFunFacts();
         UserConfig config = new UserConfig();
         UserRelationships userRelationships = new UserRelationships();
@@ -181,7 +181,7 @@ public class FlamesDataManager {
 //        stats = new UserStats(Integer.parseInt(statsdata.get("exp") + ""), Integer.parseInt(statsdata.get("level") + ""), Integer.parseInt(statsdata.get("POW") + ""), Integer.parseInt(statsdata.get("RES") + ""), Integer.parseInt(statsdata.get("LUCK") + ""), Integer.parseInt(statsdata.get("RISE") + ""), Integer.parseInt(statsdata.get("CAR") + ""));
         config = new UserConfig(Locale.forLanguageTag(configdata.get("locale") + ""));
         relationshipData.forEach((key, value) -> userRelationships.addRelationship(key.toString(), Integer.parseInt(value.toString())));
-        fluser.setStats(stats);
+//        fluser.setStats(stats);
         fluser.setFunFacts(funFacts);
         fluser.setConfig(config);
         fluser.setRelationships(userRelationships);
@@ -198,23 +198,23 @@ public class FlamesDataManager {
      */
     public static FlamesUser readUser(User user, boolean skipConsent) throws IOException, ConsentException {
         FlamesUser fluser = new FlamesUser();
-        UserStats stats = new UserStats();
+//        UserStats stats = new UserStats();
         UserFunFacts funFacts = new UserFunFacts();
         if (newUser(user)) {
             throw new ConsentException(0, user);
         }
         File udir = new File(userDirectory.getAbsolutePath() + "/" + user.getId());
         File userfl = new File(udir.getAbsolutePath() + "/user.fl");
-        File stats2 = new File(udir.getAbsolutePath() + "/stats.fl");
+//        File stats2 = new File(udir.getAbsolutePath() + "/stats.fl");
         File funfacts = new File(udir.getAbsolutePath() + "/funfacts.fl");
         FileInputStream inputStream1 = new FileInputStream(userfl);
-        FileInputStream inputStream2 = new FileInputStream(stats2);
+//        FileInputStream inputStream2 = new FileInputStream(stats2);
         FileInputStream inputStream3 = new FileInputStream(funfacts);
         Properties data = new Properties();
         Properties statsdata = new Properties();
         Properties funfactsdata = new Properties();
         data.load(inputStream1);
-        statsdata.load(inputStream2);
+//        statsdata.load(inputStream2);
         funfactsdata.load(inputStream3);
 
         fluser.setScore(Integer.parseInt(data.get("score") + ""));
@@ -234,9 +234,9 @@ public class FlamesDataManager {
         funFacts.setHighestEmotion(Float.parseFloat(funfactsdata.get("highestEmotion")+ ""));
         funFacts.setLowestEmotion(Float.parseFloat(funfactsdata.get("lowestEmotion") + ""));
 
-        stats = new UserStats(Integer.parseInt(statsdata.get("exp") + ""), Integer.parseInt(statsdata.get("level") + ""), Integer.parseInt(statsdata.get("POW") + ""), Integer.parseInt(statsdata.get("RES") + ""), Integer.parseInt(statsdata.get("LUCK") + ""), Integer.parseInt(statsdata.get("RISE") + ""), Integer.parseInt(statsdata.get("CAR") + ""));
+//        stats = new UserStats(Integer.parseInt(statsdata.get("exp") + ""), Integer.parseInt(statsdata.get("level") + ""), Integer.parseInt(statsdata.get("POW") + ""), Integer.parseInt(statsdata.get("RES") + ""), Integer.parseInt(statsdata.get("LUCK") + ""), Integer.parseInt(statsdata.get("RISE") + ""), Integer.parseInt(statsdata.get("CAR") + ""));
 
-        fluser.setStats(stats);
+//        fluser.setStats(stats);
         fluser.setFunFacts(funFacts);
         if (fluser.getConsent() != 1 && !skipConsent) throw new ConsentException(fluser.getConsent(), user);
         return fluser;

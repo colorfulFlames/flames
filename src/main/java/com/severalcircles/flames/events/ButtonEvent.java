@@ -14,7 +14,6 @@ import com.severalcircles.flames.frontend.FlamesButtonAction;
 import com.severalcircles.flames.frontend.data.user.ConsentButtonAction;
 import com.severalcircles.flames.frontend.data.user.FunFactsButtonAction;
 import com.severalcircles.flames.frontend.data.user.MyDataButtonAction;
-import com.severalcircles.flames.frontend.data.user.StatsButtonAction;
 import com.severalcircles.flames.frontend.message.fourhundred.DataVersionErrorMessage;
 import net.dv8tion.jda.api.JDA;
 //import net.dv8tion.jda.api.events.interaction.ButtonInteractionEvent;
@@ -36,7 +35,7 @@ public class ButtonEvent extends ListenerAdapter implements FlamesDiscordEvent {
         buttonActionMap.put("consentn't", new ConsentButtonAction());
         buttonActionMap.put("consent", new ConsentButtonAction());
 //        buttonActionMap.put("gdata", new GlobalDataButton());
-        buttonActionMap.put("stats", new StatsButtonAction());
+//        buttonActionMap.put("stats", new StatsButtonAction());
         buttonActionMap.put("funFacts", new FunFactsButtonAction());
 //        buttonActionMap.put("manageData", new ManageUserDataButtonAction());
         buttonActionMap.put("mydata", new MyDataButtonAction());

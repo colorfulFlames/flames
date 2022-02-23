@@ -21,7 +21,7 @@ public class FlamesUser implements FlamesData {
     private Instant lastSeen;
     private int streak;
     private String discordId;
-    private UserStats stats;
+//    private UserStats stats;
     private int consent;
     private UserFunFacts funFacts;
     private double dataVersion;
@@ -49,13 +49,13 @@ public class FlamesUser implements FlamesData {
 
     private UserConfig config;
 
-    public FlamesUser(int score, float emotion, Instant lastSeen, int streak, String discordId, UserStats stats, int consent, UserFunFacts funFacts, double dataVersion, UserConfig config, UserRelationships relationships) {
+    public FlamesUser(int score, float emotion, Instant lastSeen, int streak, String discordId, int consent, UserFunFacts funFacts, double dataVersion, UserConfig config, UserRelationships relationships) {
         this.score = score;
         this.emotion = emotion;
         this.lastSeen = lastSeen;
         this.streak = streak;
         this.discordId = discordId;
-        this.stats = stats;
+//        this.stats = stats;
         this.consent = consent;
         this.funFacts = funFacts;
         this.dataVersion = dataVersion;
@@ -91,13 +91,13 @@ public class FlamesUser implements FlamesData {
         this.dataVersion = dataVersion;
     }
 
-    public UserStats getStats() {
-        return stats;
-    }
+//    public UserStats getStats() {
+//        return stats;
+//    }
 
-    public void setStats(UserStats stats) {
-        this.stats = stats;
-    }
+//    public void setStats(UserStats stats) {
+//        this.stats = stats;
+//    }
 
     public int getConsent() {
         return consent;
@@ -112,7 +112,7 @@ public class FlamesUser implements FlamesData {
         this.emotion = 0;
         this.lastSeen = Instant.now();
         this.streak = 0;
-        this.stats = new UserStats();
+//        this.stats = new UserStats();
         this.consent = 0;
         this.funFacts = new UserFunFacts();
         this.config = new UserConfig();
