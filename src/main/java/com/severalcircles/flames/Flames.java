@@ -8,9 +8,7 @@ package com.severalcircles.flames;
 import com.bugsnag.Bugsnag;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.global.GlobalData;
-import com.severalcircles.flames.events.ButtonEvent;
-import com.severalcircles.flames.events.CommandEvent;
-import com.severalcircles.flames.events.MessageEvent;
+import com.severalcircles.flames.events.*;
 import com.severalcircles.flames.external.spotify.ReconnectRunnable;
 import com.severalcircles.flames.external.spotify.SpotifyConnection;
 import com.severalcircles.flames.frontend.FlamesCommand;
@@ -28,8 +26,10 @@ import com.severalcircles.flames.frontend.thanks.ThanksCommand;
 import com.severalcircles.flames.frontend.today.ResetTodayRunnable;
 import com.severalcircles.flames.frontend.today.TodayCommand;
 import com.severalcircles.flames.util.RankUpdateRunnable;
+import com.sun.org.apache.bcel.internal.generic.Select;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.interactions.commands.Command;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
@@ -63,6 +63,7 @@ public class Flames {
     public static String version;
     public static final Map<String, FlamesCommand> commandMap = new HashMap<>();
     public static JDA api;
+    public static final List<CommandData> commandDataList = new LinkedList<>();
     /**
      * Global Spotify Connection referenced throughout Flames
      */
@@ -148,37 +149,41 @@ public class Flames {
         }
         // --- Commands ---
         Logger.getGlobal().log(Level.INFO, "Registering Commands");
-        List<CommandData> commandDataList = new LinkedList<>();
+
         commandMap.put("based", new TestCommand());
-        Commands.slash("based", "based");
+        commandDataList.add(Commands.slash("based", "based"));
         commandMap.put("mydata", new MyDataCommand());
-        Commands.slash("mydata", "Displays your User Data");
+        commandDataList.add(Commands.slash("mydata", "Displays your User Data"));
         commandMap.put("globaldata", new GlobalDataCommand());
-        Commands.slash("globaldata", "Displays the current Global Data");
+        commandDataList.add(Commands.slash("globaldata", "Displays the current Global Data"));
         commandMap.put("artist", new ArtistCommand());
-        Commands.slash("artist", "Displays information for a Spotify artist").addOption(OptionType.STRING, "artist", "The name of the artist", true);
+        commandDataList.add(Commands.slash("artist", "Displays information for a Spotify artist").addOption(OptionType.STRING, "artist", "The name of the artist", true));
         commandMap.put("hi", new HiCommand());
-        Commands.slash("hi", "Collect your Daily Bonus");
+        commandDataList.add(Commands.slash("hi", "Collect your Daily Bonus"));
         commandMap.put("help", new HelpCommand());
-        Commands.slash("help", "Get links to support resources like the support server and the documentation");
+        commandDataList.add(Commands.slash("help", "Get links to support resources like the support server and the documentation"));
         commandMap.put("debug", new DebugCommand());
-        Commands.slash("debug", "Displays debugging information");
+        commandDataList.add(Commands.slash("debug", "Displays debugging information"));
         commandMap.put("today", new TodayCommand());
-        Commands.slash("today", "Find out what Today is all about");
+        commandDataList.add(Commands.slash("today", "Find out what Today is all about"));
         commandMap.put("guilddata", new GuildDataCommand());
-        Commands.slash("guilddata", "Displays information for the current guild");
+        commandDataList.add(Commands.slash("guilddata", "Displays information for the current guild"));
         commandMap.put("locale", new LocaleCommand());
-        Commands.slash("locale", "Switches your locale").addOption(OptionType.STRING, "new_locale", "The locale you want to switch to", true);
+        commandDataList.add(Commands.slash("locale", "Switches your locale").addOption(OptionType.STRING, "new_locale", "The locale you want to switch to", true));
         commandMap.put("thanks", new ThanksCommand());
-        Commands.slash("thanks", "Gives Thanks to a user").addOption(OptionType.USER, "who", "The user you want to thank", true).addOption(OptionType.STRING, "msg", "An optional message to attach");
+        commandDataList.add(Commands.slash("thanks", "Gives Thanks to a user").addOption(OptionType.USER, "who", "The user you want to thank", true).addOption(OptionType.STRING, "msg", "An optional message to attach"));
         commandMap.put("conversation", new ConversationCommand());
-        Commands.slash("conversation", "Shows information about the current conversation");
-//        RegisterCommand.register();
-        if (new File(version + ".flamesfile").createNewFile()) api.updateCommands().addCommands(commandDataList).complete();
+        new UserContextEvent().register(api);
+        commandDataList.add(Commands.slash("conversation", "Shows information about the current conversation"));
+        if (new File(version + ".flamesfile").createNewFile()) api.updateCommands()
+                .addCommands(commandDataList)
+            .complete();
+
         // --- Events ---
         new CommandEvent().register(api);
         new MessageEvent().register(api);
         new ButtonEvent().register(api);
+        new SelectMenuEvent().register(api);
         Logger.getGlobal().info("Done loading. Enjoy!");
     }
 

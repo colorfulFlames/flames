@@ -10,6 +10,7 @@ import com.severalcircles.flames.frontend.data.user.embed.UserDataEmbed;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
+import net.dv8tion.jda.api.interactions.components.selections.SelectMenu;
 //import net.dv8tion.jda.api.interactions.components.Button;
 
 public class MyDataCommand implements FlamesCommand {
@@ -17,6 +18,6 @@ public class MyDataCommand implements FlamesCommand {
     public void execute(SlashCommandInteractionEvent event, FlamesUser sender) {
 //        ResourceBundle resourceBundle = ResourceBundle.getBundle("features/UserDataEmbed", flamesUser.getConfig().getLocale()));
         MessageEmbed embed = new UserDataEmbed(event.getUser(), sender).get();
-        event.replyEmbeds(embed).addActionRow(Button.success("mydata", "My Data"), Button.primary("funFacts", "Fun Facts")).queue();
+        event.replyEmbeds(embed).addActionRow(new UserDataDropdown().getDropdown(sender)).queue();
 
 }}

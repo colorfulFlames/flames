@@ -36,7 +36,7 @@ public class Consent {
                 .setDescription(resources.getString("description"))
                 .addField("By continuing to use Flames, you are agreeing to this privacy policy.", "tl;dr (because we know you didn't read it), Flames sends the messages you send to Google (completely anonymously!) to be analyzed, then only stores the values it gets back. We don't use your data for advertising, nor do we sell it to anyone.", true)
                 .setFooter(resources.getString("footer"), null).build();
-        user.openPrivateChannel().complete().sendMessage((Message) embed).setActionRow(net.dv8tion.jda.api.interactions.components.buttons.Button.danger("consentn't", "I don't consent to the privacy policy."), Button.success("consent", "I consent to the privacy policy")).complete();
+        user.openPrivateChannel().complete().sendMessageEmbeds(embed).setActionRow(net.dv8tion.jda.api.interactions.components.buttons.Button.danger("consentn't", "I don't consent to the privacy policy."), Button.success("consent", "I consent to the privacy policy")).complete();
 //        awaitingConsent.add(user.getId());
 
     }
