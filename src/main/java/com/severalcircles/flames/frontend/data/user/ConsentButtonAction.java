@@ -10,14 +10,15 @@ import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.frontend.FlamesButtonAction;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
+//import net.dv8tion.jda.api.events.interaction.ButtonInteractionEvent;
 
 import java.awt.*;
 import java.io.IOException;
 
 public class ConsentButtonAction implements FlamesButtonAction {
     @Override
-    public void execute(ButtonClickEvent event, FlamesUser user) throws IOException {
+    public void execute(ButtonInteractionEvent event, FlamesUser user) throws IOException {
 //        if (event.isAcknowledged()) return;
         if (event.getComponentId().equals("consent")) {
             System.out.println(3);

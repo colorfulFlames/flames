@@ -35,10 +35,10 @@ public class Conversation {
     private Instant expires;
     private double emotion;
     @SuppressWarnings("FieldMayBeFinal")
-    private String quote[] = {"This isn't epic yet", "Flames"};
+    private String[] quote = {"This isn't epic yet", "Flames"};
     @SuppressWarnings("FieldMayBeFinal")
     private double quoteScore;
-    private Map<String, FlamesUser> conversationCache;
+    private final Map<String, FlamesUser> conversationCache;
     public Conversation(MessageChannel channel) {
         this.channel = channel;
         this.entities = new HashMap<>();

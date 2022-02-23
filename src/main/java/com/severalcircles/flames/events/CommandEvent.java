@@ -13,7 +13,7 @@ import com.severalcircles.flames.frontend.FlamesCommand;
 import com.severalcircles.flames.frontend.message.fourhundred.ConsentErrorMessage;
 import com.severalcircles.flames.frontend.message.fourhundred.DataVersionErrorMessage;
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,8 +28,9 @@ public class CommandEvent extends ListenerAdapter implements FlamesDiscordEvent 
         api.addEventListener(new CommandEvent());
         Logger.getGlobal().log(Level.FINE, "Registering " + MessageEvent.class.getName());
     }
+
     @Override
-    public void onSlashCommand(@NotNull SlashCommandEvent event) {
+    public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
         System.out.println("Slash command detected");
         event.deferReply(true);
         System.out.println(event.getName());

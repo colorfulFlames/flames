@@ -5,10 +5,12 @@
 package com.severalcircles.flames.data.user.consent;
 
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.exceptions.InsufficientPermissionException;
-import net.dv8tion.jda.api.interactions.components.Button;
+import net.dv8tion.jda.api.interactions.components.buttons.Button;
+//import net.dv8tion.jda.api.interactions.components.Button;
 
 import java.awt.*;
 import java.time.Instant;
@@ -34,7 +36,7 @@ public class Consent {
                 .setDescription(resources.getString("description"))
                 .addField("By continuing to use Flames, you are agreeing to this privacy policy.", "tl;dr (because we know you didn't read it), Flames sends the messages you send to Google (completely anonymously!) to be analyzed, then only stores the values it gets back. We don't use your data for advertising, nor do we sell it to anyone.", true)
                 .setFooter(resources.getString("footer"), null).build();
-        user.openPrivateChannel().complete().sendMessage(embed).setActionRow(Button.danger("consentn't", "I don't consent to the privacy policy."), Button.success("consent", "I consent to the privacy policy")).complete();
+        user.openPrivateChannel().complete().sendMessage((Message) embed).setActionRow(net.dv8tion.jda.api.interactions.components.buttons.Button.danger("consentn't", "I don't consent to the privacy policy."), Button.success("consent", "I consent to the privacy policy")).complete();
 //        awaitingConsent.add(user.getId());
 
     }

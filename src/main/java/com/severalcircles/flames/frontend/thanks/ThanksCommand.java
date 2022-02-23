@@ -13,14 +13,14 @@ import com.severalcircles.flames.frontend.FlamesCommand;
 import com.severalcircles.flames.frontend.message.fivehundred.GenericErrorMessage;
 import com.severalcircles.flames.frontend.message.fourhundred.DataVersionErrorMessage;
 import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
 import java.io.IOException;
 import java.util.Objects;
 
 public class ThanksCommand implements FlamesCommand {
     @Override
-    public void execute(SlashCommandEvent event, FlamesUser sender) {
+    public void execute(SlashCommandInteractionEvent event, FlamesUser sender) {
         User thanked = Objects.requireNonNull(event.getOption("who")).getAsUser();
         String msg;
         try {

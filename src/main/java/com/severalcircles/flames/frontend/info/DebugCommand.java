@@ -12,7 +12,7 @@ import com.severalcircles.flames.external.FlamesAssets;
 import com.severalcircles.flames.frontend.FlamesCommand;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import com.severalcircles.flames.util.StringUtil;
 
 import java.awt.*;
@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 
 public class DebugCommand implements FlamesCommand {
     @Override
-    public void execute(SlashCommandEvent event, FlamesUser sender) {
+    public void execute(SlashCommandInteractionEvent event, FlamesUser sender) {
         ResourceBundle common = ResourceBundle.getBundle("Common", Locale.ENGLISH);
         MessageEmbed builder = new EmbedBuilder()
                 .setAuthor("Debugging Information")

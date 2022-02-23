@@ -11,13 +11,13 @@ import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.consent.ConsentException;
 import com.severalcircles.flames.frontend.FlamesCommand;
 import com.severalcircles.flames.frontend.message.fivehundred.GenericErrorMessage;
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
 import java.io.IOException;
 
 public class ConversationCommand implements FlamesCommand {
     @Override
-    public void execute(SlashCommandEvent event, FlamesUser sender) {
+    public void execute(SlashCommandInteractionEvent event, FlamesUser sender) {
         event.deferReply(true);
         if (ConversationsController.activeConversations.containsKey(event.getChannel().getId())) {
             try {

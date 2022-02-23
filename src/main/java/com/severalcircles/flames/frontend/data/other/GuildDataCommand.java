@@ -12,7 +12,7 @@ import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.FlamesError;
 import com.severalcircles.flames.frontend.message.fivehundred.GenericErrorMessage;
 import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -20,7 +20,7 @@ import java.util.Objects;
 public class GuildDataCommand implements FlamesCommand {
 //    ResourceBundle resources = ResourceBundle.getBundle("commands/MyDataCommand", Locale.ENGLISH);
     @Override
-    public void execute(SlashCommandEvent event, FlamesUser sender) {
+    public void execute(SlashCommandInteractionEvent event, FlamesUser sender) {
         Guild guild = event.getGuild();
         FlamesGuild gdata;
         try {

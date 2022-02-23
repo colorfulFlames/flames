@@ -11,8 +11,8 @@ import com.severalcircles.flames.frontend.FlamesCommand;
 import com.severalcircles.flames.frontend.message.fivehundred.SpotifyConnectionFailedErrorMessage;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
-import net.dv8tion.jda.api.interactions.components.Button;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import org.json.JSONException;
 
 import java.awt.*;
@@ -22,7 +22,7 @@ import java.util.Objects;
 
 public class ArtistCommand implements FlamesCommand {
     @Override
-    public void execute(SlashCommandEvent event, FlamesUser sender) {
+    public void execute(SlashCommandInteractionEvent event, FlamesUser sender) {
         event.deferReply().queue();
         SpotifyArtist artist;
         try {
