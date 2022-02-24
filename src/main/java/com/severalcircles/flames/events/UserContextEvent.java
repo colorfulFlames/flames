@@ -7,6 +7,7 @@ package com.severalcircles.flames.events;
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.frontend.FlamesUserContext;
 import com.severalcircles.flames.frontend.data.user.UserContextData;
+import com.severalcircles.flames.frontend.thanks.ThanksContext;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -28,6 +29,8 @@ public class UserContextEvent extends ListenerAdapter implements FlamesDiscordEv
     public void register(JDA api) {
         userContexts.put("User Data", new UserContextData());
         Flames.commandDataList.add(Commands.context(Command.Type.USER, "User Data"));
+        userContexts.put("Give Thanks", new ThanksContext());
+        Flames.commandDataList.add(Commands.context(Command.Type.USER, "Give Thanks"));
         api.addEventListener(new UserContextEvent());
     }
     @Override

@@ -9,6 +9,8 @@ import com.severalcircles.flames.events.SelectMenuEvent;
 import com.severalcircles.flames.frontend.FlamesDropdown;
 import com.severalcircles.flames.frontend.data.user.embed.FunFactsEmbed;
 import com.severalcircles.flames.frontend.data.user.embed.UserDataEmbed;
+import net.dv8tion.jda.api.entities.Emoji;
+import net.dv8tion.jda.api.entities.Emote;
 import net.dv8tion.jda.api.events.interaction.component.SelectMenuInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.selections.SelectMenu;
 import net.dv8tion.jda.api.utils.data.DataObject;

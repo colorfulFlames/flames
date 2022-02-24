@@ -23,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,6 +39,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         // Check to make sure it's worth processing the message
         // Bots don't get processed by Flames, simply because it's easier on everyone.
         if (user.isBot()) return;
+        if (user.getName().toUpperCase(Locale.ROOT).contains("GOLDLEWIS")) event.getMessage().reply("https://media.discordapp.net/attachments/543162982536970240/943936840015159336/SpottedGoldlewis.gif").complete();
         Logger.getGlobal().log(Level.FINE, event.getAuthor().getName() + " is not a bot");
         FlamesUser flamesUser;
         // Read Flames User
