@@ -27,13 +27,7 @@ public class FlamesDataUpdater {
     public boolean run() throws DataVersionException, IOException {
         if (flamesUser.getDataVersion() < minimumVersion) throw new DataVersionException(true);
         if (flamesUser.getDataVersion() > FlamesUser.latestVersion) throw new DataVersionException(false);
-//            stats.setLevel((int) Math.round(Math.log(stats.getExp()) / Math.log(2)) + 1);
-//            stats.setCAR((int) Math.round(Math.random() * stats.getLevel()));
-//            stats.setLUCK((int) Math.round(Math.random() * stats.getLevel()));
-//            stats.setRISE((int) Math.round(Math.random() * stats.getLevel()));
-//            stats.setPOW((int) Math.round(Math.random() * stats.getLevel()));
-//            stats.setRES((int) Math.round(Math.random() * stats.getLevel()));
-            if (flamesUser.getScore() >= 100000) flamesUser.setScore(flamesUser.getScore() / 2);
+        if (flamesUser.getScore() >= 100000) flamesUser.setScore(flamesUser.getScore() / 2);
             flamesUser.setDataVersion(2.1);
 //        flamesUser.setStats(stats);
         FlamesDataManager.save(flamesUser);

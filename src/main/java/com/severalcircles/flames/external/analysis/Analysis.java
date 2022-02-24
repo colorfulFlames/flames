@@ -51,6 +51,10 @@ public class Analysis {
 
             AnalyzeEntitiesResponse response = language.analyzeEntities(request);
             // Print the response
+        response.getEntitiesList().forEach((element) -> {
+            if (!entityCache.containsKey(element.getName())) entityCache.put(element.getName(), 1);
+            else entityCache.put(element.getName(), entityCache.get(element.getName()) + 1);
+        });
         return response.getEntitiesList();
     }
 }

@@ -91,14 +91,6 @@ public class FlamesUser implements FlamesData {
         this.dataVersion = dataVersion;
     }
 
-//    public UserStats getStats() {
-//        return stats;
-//    }
-
-//    public void setStats(UserStats stats) {
-//        this.stats = stats;
-//    }
-
     public int getConsent() {
         return consent;
     }

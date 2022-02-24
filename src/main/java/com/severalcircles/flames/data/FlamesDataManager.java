@@ -234,9 +234,6 @@ public class FlamesDataManager {
         funFacts.setHighestEmotion(Float.parseFloat(funfactsdata.get("highestEmotion")+ ""));
         funFacts.setLowestEmotion(Float.parseFloat(funfactsdata.get("lowestEmotion") + ""));
 
-//        stats = new UserStats(Integer.parseInt(statsdata.get("exp") + ""), Integer.parseInt(statsdata.get("level") + ""), Integer.parseInt(statsdata.get("POW") + ""), Integer.parseInt(statsdata.get("RES") + ""), Integer.parseInt(statsdata.get("LUCK") + ""), Integer.parseInt(statsdata.get("RISE") + ""), Integer.parseInt(statsdata.get("CAR") + ""));
-
-//        fluser.setStats(stats);
         fluser.setFunFacts(funFacts);
         if (fluser.getConsent() != 1 && !skipConsent) throw new ConsentException(fluser.getConsent(), user);
         return fluser;
