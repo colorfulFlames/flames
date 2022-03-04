@@ -14,6 +14,7 @@ import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.consent.ConsentException;
 import com.severalcircles.flames.external.analysis.Analysis;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
+import com.severalcircles.flames.external.dialog.DialogSession;
 import com.severalcircles.flames.frontend.today.Today;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.User;
@@ -96,6 +97,18 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             }
             Logger.getGlobal().log(Level.FINE, "Quote of the day is now " + Arrays.toString(Today.quote));
             flamesUser.setScore(flamesUser.getScore() + 864);
+        }
+        if (event.getMessage().getContentRaw().toUpperCase(Locale.ROOT).startsWith("FLAMES,")) {
+            DialogSession session = new DialogSession();
+
+            try {
+                String response[] = session.processMessage(event.getMessage().getContentRaw().toUpperCase(Locale.ROOT).replace("FLAMES,", "")).split("~");
+                System.out.println(response[0] + "~" + response[1]);
+                if (response[1].replace("~","").contains("&")) new IntentEvent().execute(response, event);
+                event.getMessage().reply(response[0]).complete();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

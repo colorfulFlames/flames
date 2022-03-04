@@ -12,6 +12,7 @@ import com.severalcircles.flames.events.*;
 import com.severalcircles.flames.external.spotify.ReconnectRunnable;
 import com.severalcircles.flames.external.spotify.SpotifyConnection;
 import com.severalcircles.flames.frontend.FlamesCommand;
+import com.severalcircles.flames.frontend.askflames.AskCommand;
 import com.severalcircles.flames.frontend.data.ConversationCommand;
 import com.severalcircles.flames.frontend.data.other.GlobalDataCommand;
 import com.severalcircles.flames.frontend.data.other.GuildDataCommand;
@@ -26,10 +27,8 @@ import com.severalcircles.flames.frontend.thanks.ThanksCommand;
 import com.severalcircles.flames.frontend.today.ResetTodayRunnable;
 import com.severalcircles.flames.frontend.today.TodayCommand;
 import com.severalcircles.flames.util.RankUpdateRunnable;
-import com.sun.org.apache.bcel.internal.generic.Select;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.interactions.commands.Command;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
@@ -46,7 +45,6 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -95,6 +93,7 @@ public class Flames {
     public static void main(String[] args) throws IOException {
         // --- Initial Preparations ---
 //        ImageSearchTest.run();
+//        LoadBalancerRegistry.getDefaultRegistry().register(new PickFirstLoadBalancerProvider());
         InputStream is = Flames.class.getClassLoader().getResourceAsStream("version.properties");
         properties.load(is);
         version = properties.getProperty("version");
@@ -175,6 +174,8 @@ public class Flames {
         commandMap.put("conversation", new ConversationCommand());
         new UserContextEvent().register(api);
         commandDataList.add(Commands.slash("conversation", "Shows information about the current conversation"));
+//        commandDataList.add(Commands.slash("ask", "Ask Flames anything").addOption(OptionType.STRING, "query", "your question, comment, or concern"));
+        commandMap.put("ask", new AskCommand());
         if (new File(version + ".flamesfile").createNewFile()) api.updateCommands()
                 .addCommands(commandDataList)
             .complete();
@@ -184,6 +185,7 @@ public class Flames {
         new MessageEvent().register(api);
         new ButtonEvent().register(api);
         new SelectMenuEvent().register(api);
+        new IntentEvent().register();
         Logger.getGlobal().info("Done loading. Enjoy!");
     }
 
