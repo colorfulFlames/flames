@@ -2,7 +2,7 @@
  * Copyright (c) 2022 Several Circles.
  */
 
-package com.severalcircles.flames.frontend.data.user;
+package com.severalcircles.flames.frontend.data.user.intents;
 
 import com.severalcircles.flames.data.DataVersionException;
 import com.severalcircles.flames.data.FlamesDataManager;

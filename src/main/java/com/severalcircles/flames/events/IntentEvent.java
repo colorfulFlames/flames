@@ -4,16 +4,10 @@
 
 package com.severalcircles.flames.events;
 
-import com.severalcircles.flames.data.DataVersionException;
-import com.severalcircles.flames.data.FlamesDataManager;
-import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.data.user.consent.ConsentException;
 import com.severalcircles.flames.frontend.FlamesIntentResponse;
-import com.severalcircles.flames.frontend.data.user.MyDataIntent;
-import com.severalcircles.flames.frontend.data.user.embed.UserDataEmbed;
+import com.severalcircles.flames.frontend.data.user.intents.MyDataIntent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
