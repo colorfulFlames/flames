@@ -12,17 +12,17 @@ import com.severalcircles.flames.events.*;
 import com.severalcircles.flames.external.spotify.ReconnectRunnable;
 import com.severalcircles.flames.external.spotify.SpotifyConnection;
 import com.severalcircles.flames.frontend.FlamesCommand;
-import com.severalcircles.flames.frontend.askflames.AskCommand;
 import com.severalcircles.flames.frontend.data.ConversationCommand;
 import com.severalcircles.flames.frontend.data.other.GlobalDataCommand;
 import com.severalcircles.flames.frontend.data.other.GuildDataCommand;
 import com.severalcircles.flames.frontend.data.user.HiCommand;
 import com.severalcircles.flames.frontend.data.user.LocaleCommand;
 import com.severalcircles.flames.frontend.data.user.MyDataCommand;
+import com.severalcircles.flames.frontend.info.AboutCommand;
 import com.severalcircles.flames.frontend.info.ArtistCommand;
-import com.severalcircles.flames.frontend.info.DebugCommand;
 import com.severalcircles.flames.frontend.info.HelpCommand;
 import com.severalcircles.flames.frontend.info.TestCommand;
+import com.severalcircles.flames.frontend.info.debug.DebugCommand;
 import com.severalcircles.flames.frontend.thanks.ThanksCommand;
 import com.severalcircles.flames.frontend.today.ResetTodayRunnable;
 import com.severalcircles.flames.frontend.today.TodayCommand;
@@ -174,8 +174,8 @@ public class Flames {
         commandMap.put("conversation", new ConversationCommand());
         new UserContextEvent().register(api);
         commandDataList.add(Commands.slash("conversation", "Shows information about the current conversation"));
-//        commandDataList.add(Commands.slash("ask", "Ask Flames anything").addOption(OptionType.STRING, "query", "your question, comment, or concern"));
-        commandMap.put("ask", new AskCommand());
+        commandMap.put("about", new AboutCommand());
+        commandDataList.add(Commands.slash("about", "The funny legal stuff"));
         if (new File(version + ".flamesfile").createNewFile()) api.updateCommands()
                 .addCommands(commandDataList)
             .complete();

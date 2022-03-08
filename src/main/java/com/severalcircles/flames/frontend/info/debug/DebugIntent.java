@@ -2,7 +2,7 @@
  * Copyright (c) 2022 Several Circles.
  */
 
-package com.severalcircles.flames.frontend.info;
+package com.severalcircles.flames.frontend.info.debug;
 
 import com.severalcircles.flames.data.DataVersionException;
 import com.severalcircles.flames.data.FlamesDataManager;
@@ -23,6 +23,7 @@ public class DebugIntent implements FlamesIntentResponse {
         } catch (IOException | DataVersionException | ConsentException e) {
             e.printStackTrace();
             return;
+
         }
 //        TODO: Fix debug embed
 //        origMsg.getMessage().replyEmbeds(new TodayEmbed(origMsg.getAuthor(), flamesUser).get()).complete();
