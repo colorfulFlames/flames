@@ -34,9 +34,7 @@ import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 
 import javax.security.auth.login.LoginException;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.time.Duration;
@@ -197,6 +195,27 @@ public class Flames {
         if (fatalErrorCounter > 10) {
             Logger.getGlobal().log(Level.SEVERE, "Flames has detected a recurring fatal problem. To protect Flames' data, it will now exit. There may be stack traces above with more information.");
             bugsnag.notify(new FlamesProtectException("Fatal error counter went over 5"));
+            File file = new File(FlamesDataManager.flamesDirectory.getAbsolutePath() + "/logs/Flames FatalReport:" + Instant.now().toString() + ".log");
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                Logger.getGlobal().log(Level.SEVERE, "Could this get any worse?");
+                e.printStackTrace();
+                System.exit(3);
+            }
+            String log = reportHeader + "\n" +
+                    "Flames has detected a recurring fatal issue. Similar issues are known to cause damage to Flames and it's data, so in the interest of protecting itself, Flames has been shut down.\n" +
+                    "Please report this issue to the developers at https://github.com/colorfulFlames/flames/issues/new?assignees=SeveralCircles&labels=bug&template=bug_report.md&title=Flames Protect Exception\n" +
+                    "Thank you for your cooperation.";
+            FileWriter writer;
+            try {
+                writer = new FileWriter(file);
+                writer.write(log);
+            } catch (IOException e) {
+                Logger.getGlobal().log(Level.SEVERE, "Could this get any worse?");
+                e.printStackTrace();
+                System.exit(3);
+            }
             System.exit(2);
         }
     }
