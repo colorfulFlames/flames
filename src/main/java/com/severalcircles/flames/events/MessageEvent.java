@@ -102,7 +102,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             DialogSession session = new DialogSession();
 
             try {
-                String response[] = session.processMessage(event.getMessage().getContentRaw().toUpperCase(Locale.ROOT).replace("FLAMES,", "")).split("~");
+                String response[] = session.processMessage(event.getMessage().getContentRaw().replaceAll("([fF])+lames, ", ""), event.getChannel().getId()).split("~");
                 System.out.println(response[0] + "~" + response[1]);
                 if (response[1].replace("~","").contains("&")) new IntentEvent().execute(response, event);
                 event.getMessage().reply(response[0]).complete();

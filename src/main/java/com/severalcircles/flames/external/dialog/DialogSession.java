@@ -13,7 +13,7 @@ public class DialogSession {
     public DialogSession() {
         sessionId = "" + (Math.round(Math.random() * 10000));
     }
-    public String processMessage(String text) throws IOException {
+    public String processMessage(String text, String id) throws IOException {
         try (SessionsClient sessionsClient = SessionsClient.create()) {
             // Set the session name using the sessionId (UUID) and projectID (my-project-id)
             SessionName session = SessionName.of("flames-312616", sessionId);
