@@ -24,6 +24,6 @@ public class DebugCommand implements FlamesCommand {
     @Override
     public void execute(SlashCommandInteractionEvent event, FlamesUser sender) {
         ResourceBundle common = ResourceBundle.getBundle("Common", Locale.ENGLISH);
-        event.replyEmbeds(new DebugEmbed().get()).complete();
+        event.replyEmbeds(new DebugEmbed(event.getUser(), sender).get()).complete();
     }
 }
