@@ -12,7 +12,6 @@ import com.severalcircles.flames.data.user.consent.Consent;
 import com.severalcircles.flames.data.user.consent.ConsentException;
 import com.severalcircles.flames.frontend.FlamesButtonAction;
 import com.severalcircles.flames.frontend.data.user.ConsentButtonAction;
-import com.severalcircles.flames.frontend.data.user.FunFactsButtonAction;
 import com.severalcircles.flames.frontend.data.user.MyDataButtonAction;
 import com.severalcircles.flames.frontend.message.fourhundred.DataVersionErrorMessage;
 import net.dv8tion.jda.api.JDA;

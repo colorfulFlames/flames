@@ -106,6 +106,7 @@ public class Conversation {
             if (user.getDiscordId().equals(message.getAuthor().getId())) {
                 int score = (int) Math.round((finishedAnalysis.getEmotion() + (conversationCache.size() * 10)) * Math.abs(emotion));
                 user.setScore(user.getScore());
+                user.setEmotion(user.getEmotion() + (float) emotion);
                 if (user.getEmotion() > user.getFunFacts().getHighestEmotion()) {
                     user.getFunFacts().setHighestEmotion(user.getEmotion());
                     user.getFunFacts().setHappyDay(Instant.now());
