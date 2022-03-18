@@ -5,6 +5,7 @@
 package com.severalcircles.flames.frontend.data.user.embed;
 
 import com.severalcircles.flames.Flames;
+import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.external.FlamesAssets;
 import com.severalcircles.flames.frontend.FlamesEmbed;
@@ -37,11 +38,12 @@ public class UserDataEmbed implements FlamesEmbed {
         else tonext = StringUtil.formatScore(Ranking.toNext(flamesUser.getScore()));
         return new EmbedBuilder()
                 .setAuthor(resources.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
-                .setTitle(String.format(resources.getString("title"), user.getName()))
+                .setTitle(String.format(resources.getString("title"), StringUtil.getFormattedName(user)))
                 .addField(resources.getString("score"), StringUtil.formatScore(flamesUser.getScore()), true)
                 .addField(resources.getString("rank"), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(Ranking.getRank(flamesUser.getScore()).toString()), true)
                 .addField(resources.getString("toNext"), tonext, true)
                 .addField(resources.getString("emotion"), Emotion.getEmotionString(flamesUser.getEmotion(), flamesUser.getConfig().getLocale()), true)
+                .addField(resources.getString("globalContribution"), Math.round(flamesUser.getScore() / GlobalData.globalScore) + "%", true)
                 .setDescription(String.format(resources.getString("level")))
                 .setColor(Color.decode("#F4231F"))
                 .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(String.valueOf(Ranking.getRank(flamesUser.getScore())))), user.getAvatarUrl())
