@@ -31,6 +31,7 @@ public class FlamesDataManager {
     public static final File flamesDirectory = new File(System.getProperty("user.dir") + "/Flames");
     static final File userDirectory = new File(flamesDirectory.getAbsolutePath() + "/user");
     static final File guildDirectory = new File(flamesDirectory.getAbsolutePath() + "/guild");
+    public static final File wildfireFile = new File(flamesDirectory.getAbsolutePath() + "/wildfire.fl");
     //    static List<File> openFiles = new LinkedList<>();
 
     /**
@@ -44,6 +45,12 @@ public class FlamesDataManager {
         userDirectory.mkdir();
         //noinspection ResultOfMethodCallIgnored
         guildDirectory.mkdir();
+        try {
+            wildfireFile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Flames.incrementErrorCount();
+        }
     }
 
     /**

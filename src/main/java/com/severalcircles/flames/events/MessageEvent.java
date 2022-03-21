@@ -12,6 +12,7 @@ import com.severalcircles.flames.data.DataVersionException;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.consent.ConsentException;
+import com.severalcircles.flames.data.user.wildfire.Wildfire;
 import com.severalcircles.flames.external.analysis.Analysis;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
 import com.severalcircles.flames.external.dialog.DialogSession;
@@ -59,6 +60,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             e.printStackTrace();
             return;
         }
+        Wildfire.processMessage(event.getMessage());
         // Analyze Message
         FinishedAnalysis finishedAnalysis;
         try {
