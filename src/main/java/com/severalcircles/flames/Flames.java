@@ -92,8 +92,6 @@ public class Flames {
      */
     public static void main(String[] args) throws IOException {
         // --- Initial Preparations ---
-//        ImageSearchTest.run();
-//        LoadBalancerRegistry.getDefaultRegistry().register(new PickFirstLoadBalancerProvider());
         InputStream is = Flames.class.getClassLoader().getResourceAsStream("version.properties");
         properties.load(is);
         version = properties.getProperty("version");
@@ -165,8 +163,6 @@ public class Flames {
         commandDataList.add(Commands.slash("debug", "Displays debugging information"));
         commandMap.put("today", new TodayCommand());
         commandDataList.add(Commands.slash("today", "Find out what Today is all about"));
-//        commandMap.put("guilddata", new GuildDataCommand());
-//        commandDataList.add(Commands.slash("guilddata", "Displays information for the current guild"));
         commandMap.put("locale", new LocaleCommand());
         commandDataList.add(Commands.slash("locale", "Switches your locale").addOption(OptionType.STRING, "new_locale", "The locale you want to switch to", true));
         commandMap.put("thanks", new ThanksCommand());

@@ -5,7 +5,6 @@
 package com.severalcircles.flames.data.user.consent;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.exceptions.InsufficientPermissionException;

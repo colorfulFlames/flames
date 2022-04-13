@@ -24,6 +24,8 @@ public class UserFunFacts implements FlamesData {
     private int lowestFlamesScore;
     private Rank bestRank;
 
+    private String favoriteQuote;
+
     private int frenchToastMentioned;
 
     /**
@@ -40,17 +42,8 @@ public class UserFunFacts implements FlamesData {
         data.put("lowScore", lowestFlamesScore + "");
         data.put("frenchToastScore", frenchToastMentioned + "");
         data.put("bestRank", bestRank.toString());
+        data.put("favoriteQuote", favoriteQuote.toString());
         return data;
-    }
-    public UserFunFacts(@NotNull Instant sadDay, float lowestEmotion, Instant happyDay, float highestEmotion, int highestFlamesScore, int lowestFlamesScore, @NotNull Rank bestRank, int frenchToastMentioned) {
-        this.sadDay = sadDay;
-        this.lowestEmotion = lowestEmotion;
-        this.happyDay = happyDay;
-        this.highestEmotion = highestEmotion;
-        this.highestFlamesScore = highestFlamesScore;
-        this.lowestFlamesScore = lowestFlamesScore;
-        this.bestRank = bestRank;
-        this.frenchToastMentioned = frenchToastMentioned;
     }
     public UserFunFacts() {
         this.sadDay = Instant.now();
@@ -61,6 +54,7 @@ public class UserFunFacts implements FlamesData {
         this.lowestFlamesScore = 0;
         this.bestRank = Rank.UNRANKED;
         this.frenchToastMentioned = 0;
+        this.favoriteQuote = "I haven't said anything epic yet.";
     }
     public Instant getSadDay() {
         return sadDay;
@@ -120,5 +114,13 @@ public class UserFunFacts implements FlamesData {
 
     public void setFrenchToastMentioned(int frenchToastMentioned) {
         this.frenchToastMentioned = frenchToastMentioned;
+    }
+
+    public String getFavoriteQuote() {
+        return favoriteQuote;
+    }
+
+    public void setFavoriteQuote(String favoriteQuote) {
+        this.favoriteQuote = favoriteQuote;
     }
 }

@@ -10,7 +10,6 @@ import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.consent.ConsentException;
 import com.severalcircles.flames.frontend.FlamesUserContext;
 import com.severalcircles.flames.frontend.data.user.embed.UserDataEmbed;
-import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
 
 import java.io.IOException;

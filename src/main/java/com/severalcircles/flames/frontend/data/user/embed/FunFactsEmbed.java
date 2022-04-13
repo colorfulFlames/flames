@@ -34,7 +34,7 @@ public class FunFactsEmbed implements FlamesEmbed {
                 .setAuthor(resources.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setColor(new Color(153, 85,187))
                 .setTitle(String.format(resources.getString("title"), user.getName()))
-                .setDescription(String.format(resources.getString("description"), funFacts.getFrenchToastMentioned()))
+                .setDescription(String.format(resources.getString("description"), funFacts.getFavoriteQuote()))
                 .addField(resources.getString("happyDay"), StringUtil.prettifyDate(funFacts.getHappyDay()), true)
                 .addField(resources.getString("sadDay"), StringUtil.prettifyDate(funFacts.getSadDay()), true)
                 .addField(resources.getString("highScore"), StringUtil.formatScore(funFacts.getHighestFlamesScore()), true)

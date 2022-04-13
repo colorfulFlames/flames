@@ -15,8 +15,7 @@ public class FlamesDataUpdater {
     public static final double minimumVersion = 2.0;
     @SuppressWarnings("FieldMayBeFinal")
     private FlamesUser flamesUser;
-    @SuppressWarnings("FieldMayBeFinal")
-//    private UserStats stats;
+    //    private UserStats stats;
 
     public FlamesDataUpdater(FlamesUser flamesUser) {
         this.flamesUser = flamesUser;
@@ -24,13 +23,12 @@ public class FlamesDataUpdater {
         UserFunFacts funFacts = flamesUser.getFunFacts();
         UserConfig config = flamesUser.getConfig();
     }
-    public boolean run() throws DataVersionException, IOException {
+    public void run() throws DataVersionException, IOException {
         if (flamesUser.getDataVersion() < minimumVersion) throw new DataVersionException(true);
         if (flamesUser.getDataVersion() > FlamesUser.latestVersion) throw new DataVersionException(false);
         if (flamesUser.getScore() >= 100000) flamesUser.setScore(flamesUser.getScore() / 2);
             flamesUser.setDataVersion(2.1);
 //        flamesUser.setStats(stats);
         FlamesDataManager.save(flamesUser);
-        return true;
     }
 }

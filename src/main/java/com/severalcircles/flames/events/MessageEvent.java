@@ -12,7 +12,7 @@ import com.severalcircles.flames.data.DataVersionException;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.consent.ConsentException;
-import com.severalcircles.flames.data.user.wildfire.Wildfire;
+//import com.severalcircles.flames.data.user.wildfire.Wildfire;
 import com.severalcircles.flames.external.analysis.Analysis;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
 import com.severalcircles.flames.external.dialog.DialogSession;
@@ -60,7 +60,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             e.printStackTrace();
             return;
         }
-        Wildfire.processMessage(event.getMessage());
+//        Wildfire.processMessage(event.getMessage());
         // Analyze Message
         FinishedAnalysis finishedAnalysis;
         try {
@@ -104,7 +104,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             DialogSession session = new DialogSession();
 
             try {
-                String response[] = session.processMessage(event.getMessage().getContentRaw().replaceAll("([fF])+lames, ", ""), event.getChannel().getId()).split("~");
+                String[] response = session.processMessage(event.getMessage().getContentRaw().replaceAll("([fF])+lames, ", ""), event.getChannel().getId()).split("~");
                 System.out.println(response[0] + "~" + response[1]);
                 if (response[1].replace("~","").contains("&")) new IntentEvent().execute(response, event);
                 event.getMessage().reply(response[0]).complete();

@@ -26,7 +26,6 @@ public class FlamesUser implements FlamesData {
     private UserFunFacts funFacts;
     private double dataVersion;
     private UserRelationships relationships;
-
     public UserRelationships getRelationships() {
         return relationships;
     }

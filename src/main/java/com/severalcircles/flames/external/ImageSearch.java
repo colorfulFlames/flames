@@ -4,20 +4,15 @@
 
 package com.severalcircles.flames.external;
 
-import com.google.logging.type.HttpRequest;
 //import jdk.incubator.http.HttpClient;
 //import jdk.incubator.http.HttpResponse;
 import com.severalcircles.flames.util.BadWordFilter;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
+        import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ImageSearch {
     public static String searchImage(String q) throws IOException {

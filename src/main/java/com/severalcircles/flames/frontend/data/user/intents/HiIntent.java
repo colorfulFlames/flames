@@ -42,6 +42,7 @@ public class HiIntent implements FlamesIntentResponse {
         int dailyBonus;
         if (Instant.now().truncatedTo(ChronoUnit.DAYS).isAfter(flamesUser.getLastSeen().truncatedTo(ChronoUnit.DAYS))) {
             if (Instant.now().truncatedTo(ChronoUnit.DAYS).compareTo(flamesUser.getLastSeen().truncatedTo(ChronoUnit.DAYS)) > 0) flamesUser.setStreak(flamesUser.getStreak() + 1); else flamesUser.setStreak(0);
+            //noinspection deprecation
             dailyBonus = baseBonus + (riseBonus * now.getDay() + 1) + (streakBonus * flamesUser.getStreak()) + (int) Math.round(Math.random() * randomBonus);
             flamesUser.addScore(dailyBonus);
             GlobalData.globalScore += dailyBonus;

@@ -24,13 +24,19 @@ public class LocaleCommand implements FlamesCommand {
         String setTo = Objects.requireNonNull(event.getOption("new_locale")).getAsString();
         System.out.println(setTo);
         Locale newLocale;
-        if (setTo.equals("en")) {
-            newLocale = Locale.forLanguageTag("en");
-        } else if (setTo.equals("es")) {
-            newLocale = Locale.forLanguageTag("es");
-        } else {
-            event.replyEmbeds(new BadArgumentsErrorMessage(new BadArgumentsException("Locale must be one of `en,es`"), event.getUser()).get()).complete();
-            return;
+        switch (setTo) {
+            case "en":
+                newLocale = Locale.forLanguageTag("en-US");
+                break;
+            case "es":
+                newLocale = Locale.forLanguageTag("es");
+                break;
+            case "tra":
+                newLocale = Locale.forLanguageTag("tra");
+                break;
+            default:
+                event.replyEmbeds(new BadArgumentsErrorMessage(new BadArgumentsException("Locale must be one of `en,tra,es`"), event.getUser()).get()).complete();
+                return;
         }
         sender.getConfig().setLocale(newLocale);
         try {

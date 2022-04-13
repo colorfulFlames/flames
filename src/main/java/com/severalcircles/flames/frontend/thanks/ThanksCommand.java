@@ -36,7 +36,7 @@ public class ThanksCommand implements FlamesCommand {
             event.replyEmbeds(new GenericErrorMessage(e).get()).complete();
             return;
         } catch (ConsentException | NullPointerException e) {
-            event.reply("That user isn't using Flames yet.").complete();
+            event.reply("That user isn't using Flames yet.").setEphemeral(true).complete();
             return;
         } catch (DataVersionException e) {
             event.replyEmbeds(new DataVersionErrorMessage((FlamesError) e).get()).complete();

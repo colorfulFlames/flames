@@ -11,7 +11,6 @@ import com.severalcircles.flames.events.ButtonEvent;
 import com.severalcircles.flames.external.FlamesAssets;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import com.severalcircles.flames.util.StringUtil;
-import jdk.nashorn.internal.runtime.Debug;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
@@ -31,7 +30,7 @@ public class DebugEmbed implements FlamesEmbed {
     }
     @Override
     public MessageEmbed get() {
-        MessageEmbed builder = new EmbedBuilder()
+        return new EmbedBuilder()
                 .setAuthor(resources.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setTitle(String.format(resources.getString("title"), Flames.api.getSelfUser().getName(), Flames.version))
                 .setColor(Color.GREEN.darker())
@@ -46,6 +45,5 @@ public class DebugEmbed implements FlamesEmbed {
                 .setTimestamp(Instant.now())
                 .setThumbnail(FlamesAssets.getVersionIcon())
                 .setFooter(resources.getString("copyright"), Flames.api.getSelfUser().getAvatarUrl()).build();
-        return builder;
     }
 }

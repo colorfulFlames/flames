@@ -181,6 +181,7 @@ public class FlamesDataManager {
         funFacts.setHappyDay(Instant.parse(funfactsdata.get("happyDay") + ""));
         funFacts.setHighestEmotion(Float.parseFloat(funfactsdata.get("highestEmotion")+ ""));
         funFacts.setLowestEmotion(Float.parseFloat(funfactsdata.get("lowestEmotion") + ""));
+        try {funFacts.setFavoriteQuote(funfactsdata.get("favoriteQuote") + ""); } catch (NullPointerException e) {} // It doesn't matter lol
         if (config.getLocale() == null) config.setLocale(Locale.getDefault());
         if (new File(udir.getAbsolutePath() + "/" + FlamesUser.latestVersion + ".flamesfile").createNewFile()) {
             new FlamesDataUpdater(fluser).run();
