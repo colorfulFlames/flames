@@ -14,6 +14,7 @@ import com.severalcircles.flames.external.spotify.SpotifyConnection;
 import com.severalcircles.flames.frontend.FlamesCommand;
 import com.severalcircles.flames.frontend.data.ConversationCommand;
 import com.severalcircles.flames.frontend.data.other.GlobalDataCommand;
+import com.severalcircles.flames.frontend.data.user.GetAlongCommand;
 import com.severalcircles.flames.frontend.data.user.HiCommand;
 import com.severalcircles.flames.frontend.data.user.LocaleCommand;
 import com.severalcircles.flames.frontend.data.user.MyDataCommand;
@@ -172,6 +173,8 @@ public class Flames {
         commandDataList.add(Commands.slash("conversation", "Shows information about the current conversation"));
         commandMap.put("about", new AboutCommand());
         commandDataList.add(Commands.slash("about", "The funny legal stuff"));
+        commandMap.put("getalong", new GetAlongCommand());
+        commandDataList.add(Commands.slash("getalong", "See how well you Get Along with another user"));
         if (new File(version + ".flamesfile").createNewFile()) api.updateCommands()
                 .addCommands(commandDataList)
             .complete();

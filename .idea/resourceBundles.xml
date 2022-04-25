@@ -4,6 +4,10 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/Common.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/Common_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/Common_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/error/NotFlamesUserMessage.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/error/NotFlamesUserMessage_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/error/NotFlamesUserMessage_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/error/NotFlamesUserMessage_tra.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/DebugEmbed.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/DebugEmbed_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/DebugEmbed_es.properties" />
@@ -25,6 +29,10 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/FunFactsEmbed.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/FunFactsEmbed_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/FunFactsEmbed_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/features/data/GetAlongEmbed.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/features/data/GetAlongEmbed_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/features/data/GetAlongEmbed_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/features/data/GetAlongEmbed_tra.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/GlobalDataEmbed.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/GlobalDataEmbed_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/GlobalDataEmbed_es.properties" />
@@ -130,6 +138,20 @@
       <file value="file://$PROJECT_DIR$/src/main/resources/Common_es.properties" />
       <file value="file://$PROJECT_DIR$/src/main/resources/Common_tra.properties" />
       <base-name>Common</base-name>
+    </custom-resource-bundle>
+    <custom-resource-bundle>
+      <file value="file://$PROJECT_DIR$/src/main/resources/features/data/GetAlongEmbed.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/features/data/GetAlongEmbed_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/features/data/GetAlongEmbed_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/features/data/GetAlongEmbed_tra.properties" />
+      <base-name>GetAlongEmbed</base-name>
+    </custom-resource-bundle>
+    <custom-resource-bundle>
+      <file value="file://$PROJECT_DIR$/src/main/resources/error/NotFlamesUserMessage.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/error/NotFlamesUserMessage_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/error/NotFlamesUserMessage_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/error/NotFlamesUserMessage_tra.properties" />
+      <base-name>NotFlamesUserMessage</base-name>
     </custom-resource-bundle>
   </component>
 </project>
