@@ -4,6 +4,13 @@
 
 package com.severalcircles.flames.util;
 
+import com.severalcircles.flames.data.DataVersionException;
+import com.severalcircles.flames.data.FlamesDataManager;
+import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.data.user.consent.ConsentException;
+import net.dv8tion.jda.api.entities.User;
+
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.Instant;
 import java.util.Date;
@@ -13,6 +20,7 @@ public class StringUtil {
     /**
      * @return String with Instant formatted as a nice, human-readable date string.
      */
+    public static int highestScore;
     public static String prettifyDate(Instant instant) {
         String prettyDate = "";
         switch (Date.from(instant).getMonth()) {
@@ -65,4 +73,20 @@ public class StringUtil {
         DecimalFormat df = new DecimalFormat("###,###,###");
         return df.format(score).replace(".", " ") + " FP";
     }
+    public static String getFormattedName(User user) {
+        FlamesUser flamesUser;
+        try {
+            flamesUser = FlamesDataManager.readUser(user);
+        } catch (IOException | ConsentException | DataVersionException e) {
+            e.printStackTrace();
+            return user.getName();
+        }
+        String name = user.getName();
+        if (flamesUser.getScore() >= highestScore) {
+            highestScore = flamesUser.getScore();
+            name += " ?";
+        }
+        return name;
+    }
 }
+

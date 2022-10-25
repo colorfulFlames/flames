@@ -12,8 +12,10 @@ import com.severalcircles.flames.data.DataVersionException;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.consent.ConsentException;
+//import com.severalcircles.flames.data.user.wildfire.Wildfire;
 import com.severalcircles.flames.external.analysis.Analysis;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
+import com.severalcircles.flames.external.dialog.DialogSession;
 import com.severalcircles.flames.frontend.today.Today;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.User;
@@ -23,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,6 +41,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         // Check to make sure it's worth processing the message
         // Bots don't get processed by Flames, simply because it's easier on everyone.
         if (user.isBot()) return;
+        if (user.getName().toUpperCase(Locale.ROOT).contains("GOLDLEWIS")) event.getMessage().reply("https://media.discordapp.net/attachments/543162982536970240/943936840015159336/SpottedGoldlewis.gif").complete();
         Logger.getGlobal().log(Level.FINE, event.getAuthor().getName() + " is not a bot");
         FlamesUser flamesUser;
         // Read Flames User
@@ -56,6 +60,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             e.printStackTrace();
             return;
         }
+//        Wildfire.processMessage(event.getMessage());
         // Analyze Message
         FinishedAnalysis finishedAnalysis;
         try {
@@ -94,6 +99,18 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             }
             Logger.getGlobal().log(Level.FINE, "Quote of the day is now " + Arrays.toString(Today.quote));
             flamesUser.setScore(flamesUser.getScore() + 864);
+        }
+        if (event.getMessage().getContentRaw().toUpperCase(Locale.ROOT).startsWith("FLAMES,")) {
+            DialogSession session = new DialogSession();
+
+            try {
+                String[] response = session.processMessage(event.getMessage().getContentRaw().replaceAll("([fF])+lames, ", ""), event.getChannel().getId()).split("~");
+                System.out.println(response[0] + "~" + response[1]);
+                if (response[1].replace("~","").contains("&")) new IntentEvent().execute(response, event);
+                event.getMessage().reply(response[0]).complete();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

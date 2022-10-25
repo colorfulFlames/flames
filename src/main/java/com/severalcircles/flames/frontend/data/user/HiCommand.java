@@ -10,7 +10,7 @@ import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.frontend.data.user.embed.WelcomeBackEmbed;
 import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import com.severalcircles.flames.frontend.FlamesCommand;
 
 import java.io.IOException;
@@ -28,13 +28,14 @@ public class HiCommand implements FlamesCommand {
     final static int randomBonus = Integer.parseInt(values.getString("randomBonus"));
 
     @Override
-    public void execute(SlashCommandEvent event, FlamesUser flamesUser) {
+    public void execute(SlashCommandInteractionEvent event, FlamesUser flamesUser) {
         Date now = Date.from(Instant.now());
         User discordUser = event.getUser();
         int dailyBonus;
         if (Instant.now().truncatedTo(ChronoUnit.DAYS).isAfter(flamesUser.getLastSeen().truncatedTo(ChronoUnit.DAYS))) {
             if (Instant.now().truncatedTo(ChronoUnit.DAYS).compareTo(flamesUser.getLastSeen().truncatedTo(ChronoUnit.DAYS)) > 0) flamesUser.setStreak(flamesUser.getStreak() + 1); else flamesUser.setStreak(0);
-            dailyBonus = baseBonus + (riseBonus * flamesUser.getStats().getRISE()) + (streakBonus * flamesUser.getStreak()) + (int) Math.round(Math.random() * randomBonus);
+            //noinspection deprecation
+            dailyBonus = baseBonus + (riseBonus * now.getDay() + 1) + (streakBonus * flamesUser.getStreak()) + (int) Math.round(Math.random() * randomBonus);
             flamesUser.addScore(dailyBonus);
             GlobalData.globalScore += dailyBonus;
             try {

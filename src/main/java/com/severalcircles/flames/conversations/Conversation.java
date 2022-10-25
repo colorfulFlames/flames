@@ -34,11 +34,9 @@ public class Conversation {
     private List<User> userList;
     private Instant expires;
     private double emotion;
-    @SuppressWarnings("FieldMayBeFinal")
-    private String quote[] = {"This isn't epic yet", "Flames"};
-    @SuppressWarnings("FieldMayBeFinal")
+    private String[] quote = {"This isn't epic yet", "Flames"};
     private double quoteScore;
-    private Map<String, FlamesUser> conversationCache;
+    private final Map<String, FlamesUser> conversationCache;
     public Conversation(MessageChannel channel) {
         this.channel = channel;
         this.entities = new HashMap<>();
@@ -77,6 +75,7 @@ public class Conversation {
         return expires;
     }
     public void processMessage(Message message, FinishedAnalysis finishedAnalysis) throws ExpiredConversationException {
+        boolean newFavorite = false;
         Logger.getGlobal().log(Level.INFO, "Processing Message");
         if (expires.compareTo(Instant.now()) < 0) throw new ExpiredConversationException();
         expires = Instant.now().plus(5, ChronoUnit.MINUTES);
@@ -84,12 +83,14 @@ public class Conversation {
         if (finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude() > quoteScore) {
             this.quote = new String[]{message.getContentRaw() + "", message.getAuthor().getName() + ""};
             this.quoteScore = finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude();
+            if (Math.round(Math.random() * 10) == 6) newFavorite = true;
         }
         if (!userList.contains(message.getAuthor())) userList.add(message.getAuthor());
         finishedAnalysis.getEntityList().forEach((element) -> {
             if (!entities.containsKey(element.getName())) entities.put(element.getName(), 1);
             else entities.put(element.getName(), entities.get(element.getName()) + 1);
         });
+        boolean finalNewFavorite = newFavorite;
         userList.forEach((element) -> {
             if (!conversationCache.containsKey(element.getId())) {
                 try {
@@ -104,8 +105,10 @@ public class Conversation {
             FlamesUser user = conversationCache.get(element.getId());
             userList.forEach((member) -> user.getRelationships().addRelationship(member.getId(), 1));
             if (user.getDiscordId().equals(message.getAuthor().getId())) {
-                int score = (int) Math.round((finishedAnalysis.getEmotion() + (conversationCache.size() * 10)) * Math.abs(emotion));
-                user.setScore(user.getScore());
+                if (finalNewFavorite | user.getFunFacts().getFavoriteQuote().equals("I haven't said anything epic yet.")) user.getFunFacts().setFavoriteQuote(message.getContentRaw());
+                int score = (int) Math.round((finishedAnalysis.getEmotion() + (conversationCache.size() * 10)) * emotion);
+                user.setScore(user.getScore() + score);
+                user.setEmotion(user.getEmotion() + (float) emotion);
                 if (user.getEmotion() > user.getFunFacts().getHighestEmotion()) {
                     user.getFunFacts().setHighestEmotion(user.getEmotion());
                     user.getFunFacts().setHappyDay(Instant.now());

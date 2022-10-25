@@ -5,12 +5,13 @@
 package com.severalcircles.flames.frontend.today;
 
 import com.severalcircles.flames.data.user.FlamesUser;
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+//import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import com.severalcircles.flames.frontend.FlamesCommand;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
 public class TodayCommand implements FlamesCommand {
     @Override
-    public void execute(SlashCommandEvent event, FlamesUser sender) {
+    public void execute(SlashCommandInteractionEvent event, FlamesUser sender) {
         event.replyEmbeds(new TodayEmbed(event.getUser(), sender).get()).complete();
     }
 }

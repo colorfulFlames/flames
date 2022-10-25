@@ -8,22 +8,21 @@ package com.severalcircles.flames;
 import com.bugsnag.Bugsnag;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.global.GlobalData;
-import com.severalcircles.flames.events.ButtonEvent;
-import com.severalcircles.flames.events.CommandEvent;
-import com.severalcircles.flames.events.MessageEvent;
+import com.severalcircles.flames.events.*;
 import com.severalcircles.flames.external.spotify.ReconnectRunnable;
 import com.severalcircles.flames.external.spotify.SpotifyConnection;
 import com.severalcircles.flames.frontend.FlamesCommand;
 import com.severalcircles.flames.frontend.data.ConversationCommand;
 import com.severalcircles.flames.frontend.data.other.GlobalDataCommand;
-import com.severalcircles.flames.frontend.data.other.GuildDataCommand;
+import com.severalcircles.flames.frontend.data.user.GetAlongCommand;
 import com.severalcircles.flames.frontend.data.user.HiCommand;
 import com.severalcircles.flames.frontend.data.user.LocaleCommand;
 import com.severalcircles.flames.frontend.data.user.MyDataCommand;
+import com.severalcircles.flames.frontend.info.AboutCommand;
 import com.severalcircles.flames.frontend.info.ArtistCommand;
-import com.severalcircles.flames.frontend.info.DebugCommand;
 import com.severalcircles.flames.frontend.info.HelpCommand;
 import com.severalcircles.flames.frontend.info.TestCommand;
+import com.severalcircles.flames.frontend.info.debug.DebugCommand;
 import com.severalcircles.flames.frontend.thanks.ThanksCommand;
 import com.severalcircles.flames.frontend.today.ResetTodayRunnable;
 import com.severalcircles.flames.frontend.today.TodayCommand;
@@ -32,9 +31,11 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
+import net.dv8tion.jda.api.interactions.commands.build.Commands;
 
 import javax.security.auth.login.LoginException;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
@@ -45,7 +46,6 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -62,6 +62,7 @@ public class Flames {
     public static String version;
     public static final Map<String, FlamesCommand> commandMap = new HashMap<>();
     public static JDA api;
+    public static final List<CommandData> commandDataList = new LinkedList<>();
     /**
      * Global Spotify Connection referenced throughout Flames
      */
@@ -92,7 +93,6 @@ public class Flames {
      */
     public static void main(String[] args) throws IOException {
         // --- Initial Preparations ---
-//        ImageSearchTest.run();
         InputStream is = Flames.class.getClassLoader().getResourceAsStream("version.properties");
         properties.load(is);
         version = properties.getProperty("version");
@@ -147,37 +147,44 @@ public class Flames {
         }
         // --- Commands ---
         Logger.getGlobal().log(Level.INFO, "Registering Commands");
-        List<CommandData> commandDataList = new LinkedList<>();
+
         commandMap.put("based", new TestCommand());
-        commandDataList.add(new CommandData("based", "based"));
+        commandDataList.add(Commands.slash("based", "based"));
         commandMap.put("mydata", new MyDataCommand());
-        commandDataList.add(new CommandData("mydata", "Displays your User Data"));
+        commandDataList.add(Commands.slash("mydata", "Displays your User Data"));
         commandMap.put("globaldata", new GlobalDataCommand());
-        commandDataList.add(new CommandData("globaldata", "Displays the current Global Data"));
+        commandDataList.add(Commands.slash("globaldata", "Displays the current Global Data"));
         commandMap.put("artist", new ArtistCommand());
-        commandDataList.add(new CommandData("artist", "Displays information for a Spotify artist").addOption(OptionType.STRING, "artist", "The name of the artist", true));
+        commandDataList.add(Commands.slash("artist", "Displays information for a Spotify artist").addOption(OptionType.STRING, "artist", "The name of the artist", true));
         commandMap.put("hi", new HiCommand());
-        commandDataList.add(new CommandData("hi", "Collect your Daily Bonus"));
+        commandDataList.add(Commands.slash("hi", "Collect your Daily Bonus"));
         commandMap.put("help", new HelpCommand());
-        commandDataList.add(new CommandData("help", "Get links to support resources like the support server and the documentation"));
+        commandDataList.add(Commands.slash("help", "Get links to support resources like the support server and the documentation"));
         commandMap.put("debug", new DebugCommand());
-        commandDataList.add(new CommandData("debug", "Displays debugging information"));
+        commandDataList.add(Commands.slash("debug", "Displays debugging information"));
         commandMap.put("today", new TodayCommand());
-        commandDataList.add(new CommandData("today", "Find out what Today is all about"));
-        commandMap.put("guilddata", new GuildDataCommand());
-        commandDataList.add(new CommandData("guilddata", "Displays information for the current guild"));
+        commandDataList.add(Commands.slash("today", "Find out what Today is all about"));
         commandMap.put("locale", new LocaleCommand());
-        commandDataList.add(new CommandData("locale", "Switches your locale").addOption(OptionType.STRING, "new_locale", "The locale you want to switch to", true));
+        commandDataList.add(Commands.slash("locale", "Switches your locale").addOption(OptionType.STRING, "new_locale", "The locale you want to switch to", true));
         commandMap.put("thanks", new ThanksCommand());
-        commandDataList.add(new CommandData("thanks", "Gives Thanks to a user").addOption(OptionType.USER, "who", "The user you want to thank", true).addOption(OptionType.STRING, "msg", "An optional message to attach"));
+        commandDataList.add(Commands.slash("thanks", "Gives Thanks to a user").addOption(OptionType.USER, "who", "The user you want to thank", true).addOption(OptionType.STRING, "msg", "An optional message to attach"));
         commandMap.put("conversation", new ConversationCommand());
-        commandDataList.add(new CommandData("conversation", "Shows information about the current conversation"));
-//        RegisterCommand.register();
-        if (new File(version + ".flamesfile").createNewFile()) api.updateCommands().addCommands(commandDataList).complete();
+        new UserContextEvent().register(api);
+        commandDataList.add(Commands.slash("conversation", "Shows information about the current conversation"));
+        commandMap.put("about", new AboutCommand());
+        commandDataList.add(Commands.slash("about", "The funny legal stuff"));
+        commandMap.put("getalong", new GetAlongCommand());
+        commandDataList.add(Commands.slash("getalong", "See how well you Get Along with another user"));
+        if (new File(version + ".flamesfile").createNewFile()) api.updateCommands()
+                .addCommands(commandDataList)
+            .complete();
+
         // --- Events ---
         new CommandEvent().register(api);
         new MessageEvent().register(api);
         new ButtonEvent().register(api);
+        new SelectMenuEvent().register(api);
+        new IntentEvent().register();
         Logger.getGlobal().info("Done loading. Enjoy!");
     }
 
@@ -189,6 +196,27 @@ public class Flames {
         if (fatalErrorCounter > 10) {
             Logger.getGlobal().log(Level.SEVERE, "Flames has detected a recurring fatal problem. To protect Flames' data, it will now exit. There may be stack traces above with more information.");
             bugsnag.notify(new FlamesProtectException("Fatal error counter went over 5"));
+            File file = new File(FlamesDataManager.flamesDirectory.getAbsolutePath() + "/logs/Flames FatalReport:" + Instant.now().toString() + ".log");
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                Logger.getGlobal().log(Level.SEVERE, "Could this get any worse?");
+                e.printStackTrace();
+                System.exit(3);
+            }
+            String log = reportHeader + "\n" +
+                    "Flames has detected a recurring fatal issue. Similar issues are known to cause damage to Flames and it's data, so in the interest of protecting itself, Flames has been shut down.\n" +
+                    "Please report this issue to the developers at https://github.com/colorfulFlames/flames/issues/new?assignees=SeveralCircles&labels=bug&template=bug_report.md&title=Flames Protect Exception\n" +
+                    "Thank you for your cooperation.";
+            FileWriter writer;
+            try {
+                writer = new FileWriter(file);
+                writer.write(log);
+            } catch (IOException e) {
+                Logger.getGlobal().log(Level.SEVERE, "Could this get any worse?");
+                e.printStackTrace();
+                System.exit(3);
+            }
             System.exit(2);
         }
     }

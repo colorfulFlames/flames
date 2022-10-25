@@ -8,8 +8,8 @@ plugins {
 }
 
 mainClassName = 'com.severalcircles.flames.Flames'
-version '6.0'
-def jdaVersion = '4.3.0_277'
+version '6.4.1c'
+def jdaVersion = '5.0.0-alpha.9'
 
 sourceCompatibility = targetCompatibility = 1.8
 group 'com.severalcircles.flames'
@@ -33,11 +33,11 @@ task createProperties(dependsOn: processResources) {
 classes {
     dependsOn createProperties
 }
+
 dependencies {
     implementation("net.dv8tion:JDA:$jdaVersion")
-    implementation platform('com.google.cloud:libraries-bom:22.0.0')
-    implementation platform('com.google.cloud:libraries-bom:20.8.0')
+    implementation platform('com.google.cloud:libraries-bom:24.3.0')
+    implementation 'com.google.cloud:google-cloud-dialogflow'
     implementation 'com.google.cloud:google-cloud-language:2.1.4'
     implementation 'com.bugsnag:bugsnag:3.6.2'
-
 }

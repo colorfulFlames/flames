@@ -11,10 +11,12 @@ import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.user.consent.Consent;
 import com.severalcircles.flames.data.user.consent.ConsentException;
 import com.severalcircles.flames.frontend.FlamesButtonAction;
-import com.severalcircles.flames.frontend.data.user.*;
+import com.severalcircles.flames.frontend.data.user.ConsentButtonAction;
+import com.severalcircles.flames.frontend.data.user.MyDataButtonAction;
 import com.severalcircles.flames.frontend.message.fourhundred.DataVersionErrorMessage;
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
+//import net.dv8tion.jda.api.events.interaction.ButtonInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,17 +33,13 @@ public class ButtonEvent extends ListenerAdapter implements FlamesDiscordEvent {
         api.addEventListener(new ButtonEvent());
         buttonActionMap.put("consentn't", new ConsentButtonAction());
         buttonActionMap.put("consent", new ConsentButtonAction());
-//        buttonActionMap.put("gdata", new GlobalDataButton());
-        buttonActionMap.put("stats", new StatsButtonAction());
-        buttonActionMap.put("funFacts", new FunFactsButtonAction());
-//        buttonActionMap.put("manageData", new ManageUserDataButtonAction());
         buttonActionMap.put("mydata", new MyDataButtonAction());
         Logger.getGlobal().log(Level.FINE, "Registering " + MessageEvent.class.getName());
     }
 
     @Override
-    public void onButtonClick(@NotNull ButtonClickEvent event) {
-        super.onButtonClick(event);
+    public void onButtonInteraction(@NotNull ButtonInteractionEvent event) {
+        super.onButtonInteraction(event);
         System.out.println(event.getComponentId());
         if (event.getComponentId().equals("consent") | event.getComponentId().equals("consentn't")) {
             try {
