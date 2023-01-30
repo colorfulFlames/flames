@@ -10,7 +10,7 @@ import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.consent.ConsentException;
 import com.severalcircles.flames.frontend.data.user.UserDataDropdown;
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.events.interaction.component.SelectMenuInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.component.GenericSelectMenuInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,9 +24,9 @@ public class SelectMenuEvent extends ListenerAdapter implements FlamesDiscordEve
     }
 
     @Override
-    public void onSelectMenuInteraction(@NotNull SelectMenuInteractionEvent event) {
+    public void onGenericSelectMenuInteraction(@NotNull GenericSelectMenuInteractionEvent event) {
         Logger.getGlobal().log(Level.INFO, "Dropdown recieved");
-        super.onSelectMenuInteraction(event);
+        super.onGenericSelectMenuInteraction(event);
         FlamesUser flamesUser;
         try {
             flamesUser = FlamesDataManager.readUser(event.getUser());

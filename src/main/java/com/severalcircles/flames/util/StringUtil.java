@@ -70,7 +70,7 @@ public class StringUtil {
             return score / 1000 + "K FP";
         }
         if (score >= 1000000) return score / 1000000 + "M FP";
-        DecimalFormat df = new DecimalFormat("###,###,###");
+        DecimalFormat df = new DecimalFormat("###,###,###.###");
         return df.format(score).replace(".", " ") + " FP";
     }
     public static String getFormattedName(User user) {

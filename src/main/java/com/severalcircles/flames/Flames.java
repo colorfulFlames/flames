@@ -138,10 +138,6 @@ public class Flames {
         try {
             api = JDABuilder.createDefault(System.getenv("FlamesToken")).build();
             api.awaitReady();
-        } catch (LoginException e) {
-            Logger.getGlobal().log(Level.SEVERE, "Yeah that's not funny");
-            e.printStackTrace();
-            System.exit(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

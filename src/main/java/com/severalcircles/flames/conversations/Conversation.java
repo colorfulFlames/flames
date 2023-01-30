@@ -12,8 +12,10 @@ import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.consent.ConsentException;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageChannel;
+//import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
+//import net.dv8tion.jda.api.entitiesGuildMessageChannel;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.channel.middleman.GuildMessageChannel;
 
 import java.io.IOException;
 import java.time.Instant;
@@ -29,7 +31,7 @@ public class Conversation {
     @SuppressWarnings("FieldMayBeFinal")
     private Map<String, Integer> entities;
     @SuppressWarnings("FieldMayBeFinal")
-    private MessageChannel channel;
+    private GuildMessageChannel channel;
     @SuppressWarnings("FieldMayBeFinal")
     private List<User> userList;
     private Instant expires;
@@ -37,7 +39,7 @@ public class Conversation {
     private String[] quote = {"This isn't epic yet", "Flames"};
     private double quoteScore;
     private final Map<String, FlamesUser> conversationCache;
-    public Conversation(MessageChannel channel) {
+    public Conversation (GuildMessageChannel channel) {
         this.channel = channel;
         this.entities = new HashMap<>();
         this.userList = new LinkedList<>();
@@ -51,7 +53,7 @@ public class Conversation {
         return entities;
     }
 
-    public MessageChannel getChannel() {
+    public GuildMessageChannel getChannel() {
         return channel;
     }
 
