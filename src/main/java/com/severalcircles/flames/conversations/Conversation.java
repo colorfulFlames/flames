@@ -11,6 +11,7 @@ import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.consent.ConsentException;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
+import com.severalcircles.flames.frontend.today.Today;
 import net.dv8tion.jda.api.entities.Message;
 //import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 //import net.dv8tion.jda.api.entitiesGuildMessageChannel;
@@ -122,6 +123,9 @@ public class Conversation {
                 if (user.getScore() > user.getFunFacts().getHighestFlamesScore()) user.getFunFacts().setHighestFlamesScore(user.getScore());
                 GlobalData.globalScore += score;
                 GlobalData.averageScore = GlobalData.globalScore / GlobalData.participants;
+                if (user.getScore() > Today.highScore) {
+                    Today.highUser = message.getAuthor().getName() + " (" + user.getScore() + ")";
+                }
             }
             conversationCache.put(element.getId(), user);
         });

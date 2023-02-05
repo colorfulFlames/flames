@@ -48,6 +48,7 @@ public class TodayEmbed implements FlamesEmbed {
                 .setTitle(title)
                 .addField(resources.getString("talkingAbout"), trendingEntity, true)
                 .addField(resources.getString("feeling"), Emotion.getEmotionString(Today.emotion, flamesUser.getConfig().getLocale()), true)
+                .addField(resources.getString("highUser"), Today.highUser, true)
                 .addBlankField(false)
                 .addField("\"" + Today.quote[0] + "\"", "- " + Today.quote[1] + ", " + StringUtil.prettifyDate(Instant.now()), false)
                 .addBlankField(false)
