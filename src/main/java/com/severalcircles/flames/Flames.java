@@ -22,7 +22,6 @@ import com.severalcircles.flames.frontend.info.AboutCommand;
 import com.severalcircles.flames.frontend.info.ArtistCommand;
 import com.severalcircles.flames.frontend.info.HelpCommand;
 import com.severalcircles.flames.frontend.info.TestCommand;
-import com.severalcircles.flames.frontend.info.debug.DebugCommand;
 import com.severalcircles.flames.frontend.thanks.ThanksCommand;
 import com.severalcircles.flames.frontend.today.ResetTodayRunnable;
 import com.severalcircles.flames.frontend.today.TodayCommand;
@@ -156,8 +155,6 @@ public class Flames {
         commandDataList.add(Commands.slash("hi", "Collect your Daily Bonus"));
         commandMap.put("help", new HelpCommand());
         commandDataList.add(Commands.slash("help", "Get links to support resources like the support server and the documentation"));
-        commandMap.put("debug", new DebugCommand());
-        commandDataList.add(Commands.slash("debug", "Displays debugging information"));
         commandMap.put("today", new TodayCommand());
         commandDataList.add(Commands.slash("today", "Find out what Today is all about"));
         commandMap.put("locale", new LocaleCommand());
