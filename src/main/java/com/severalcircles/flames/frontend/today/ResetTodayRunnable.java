@@ -23,8 +23,6 @@ public class ResetTodayRunnable implements Runnable {
         Today.highScore = 0;
         Analysis.entityCache = new HashMap<>();
         Today.quote = new String[]{"We're still waiting for somebody to say something epic.", "Flames", "0"};
-        Today.quoteChanges = 0;
-        Today.quoteLocked = false;
         Today.thanks = new LinkedList<>();
         Today.highUser = "Nobody yet!";
         Date now = new Date();

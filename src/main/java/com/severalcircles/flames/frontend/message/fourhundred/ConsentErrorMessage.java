@@ -18,19 +18,13 @@ import java.util.ResourceBundle;
 
 public class ConsentErrorMessage extends FlamesErrorMessage {
     private final ResourceBundle resources = ResourceBundle.getBundle("error/Consent", Locale.getDefault());
-    String errorCode;
-    public ConsentErrorMessage(FlamesError e) {
-        super(e);
-        errorCode = e.getCode();
-    }
+    final String errorCode;
+
     public ConsentErrorMessage(ConsentException e) {
         super((FlamesError) e);
         errorCode = e.getCode();
     }
-    public ConsentErrorMessage(Exception e) {
-        super(e);
-    }
-    @Override
+
     public MessageEmbed get() {
         return new EmbedBuilder()
                 .setAuthor(String.format(resources.getString("author"), Flames.api.getSelfUser().getName()))

@@ -29,7 +29,6 @@ public class UserDataDropdown implements FlamesDropdown {
         }
     }
 
-    @Override
     public SelectMenu getDropdown(FlamesUser user) {
         Locale locale = user.getConfig().getLocale();
         resources = ResourceBundle.getBundle("features/data/UserDataDropdown", locale);

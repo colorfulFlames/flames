@@ -10,8 +10,8 @@ import com.google.cloud.language.v1.Sentiment;
 import java.util.List;
 
 public class FinishedAnalysis {
-    private List<Entity> entityList;
-    private Sentiment sentiment;
+    private final List<Entity> entityList;
+    private final Sentiment sentiment;
 
     public FinishedAnalysis(List<Entity> entityList, Sentiment sentiment) {
         this.entityList = entityList;
@@ -22,17 +22,10 @@ public class FinishedAnalysis {
         return entityList;
     }
 
-    public void setEntityList(List<Entity> entityList) {
-        this.entityList = entityList;
-    }
-
     public Sentiment getSentiment() {
         return sentiment;
     }
 
-    public void setSentiment(Sentiment sentiment) {
-        this.sentiment = sentiment;
-    }
     public double getEmotion() {
         return this.sentiment.getScore() * this.sentiment.getMagnitude();
     }

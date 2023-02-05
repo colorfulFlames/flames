@@ -18,6 +18,7 @@ import java.io.IOException;
 public class ConversationCommand implements FlamesCommand {
     @Override
     public void execute(SlashCommandInteractionEvent event, FlamesUser sender) {
+        //noinspection ResultOfMethodCallIgnored
         event.deferReply(true);
         if (ConversationsController.activeConversations.containsKey(event.getChannel().getId())) {
             try {

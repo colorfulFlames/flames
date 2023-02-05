@@ -39,11 +39,11 @@ public class ThanksCommand implements FlamesCommand {
             event.reply("That user isn't using Flames yet.").setEphemeral(true).complete();
             return;
         } catch (DataVersionException e) {
-            event.replyEmbeds(new DataVersionErrorMessage((FlamesError) e).get()).complete();
+            event.replyEmbeds(new DataVersionErrorMessage(e).get()).complete();
             e.printStackTrace();
             return;
         }
-        event.replyEmbeds(new ThanksEmbed(thanked, event.getUser(), flt, sender, msg).get()).complete();
+        event.replyEmbeds(new ThanksEmbed(thanked, event.getUser(), flt, msg).get()).complete();
         if (ThanksEmbed.success.contains(event.getUser().getId())) {
             event.getChannel().sendMessage(thanked.getAsMention()).complete();
             ThanksEmbed.success.remove(event.getUser().getId());

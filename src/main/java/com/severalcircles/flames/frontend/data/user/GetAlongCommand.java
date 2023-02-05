@@ -28,7 +28,7 @@ public class GetAlongCommand implements FlamesCommand {
         } catch (IOException | DataVersionException e) {
             e.printStackTrace();
         } catch (ConsentException e) {
-            event.replyEmbeds(new NotFlamesUserErrorMessage((FlamesError) e).get()).setEphemeral(true).complete();
+            event.replyEmbeds(new NotFlamesUserErrorMessage(e).get()).setEphemeral(true).complete();
             e.printStackTrace();
         }
         int score = sender.getRelationships().getRelationships().get(victim);

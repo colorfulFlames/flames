@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class IntentEvent {
-    static Map<String, FlamesIntentResponse> responseMap = new HashMap<>();
+    static final Map<String, FlamesIntentResponse> responseMap = new HashMap<>();
     public void register() {
         responseMap.put("&myData", new MyDataIntent());
         responseMap.put("&hi", new HiIntent());

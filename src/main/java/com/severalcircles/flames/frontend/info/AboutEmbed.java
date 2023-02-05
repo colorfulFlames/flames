@@ -17,14 +17,11 @@ import java.awt.*;
 import java.util.ResourceBundle;
 
 public class AboutEmbed implements FlamesEmbed {
-    private ResourceBundle local;
-    FlamesUser user;
+    private final ResourceBundle local;
 
     public AboutEmbed(FlamesUser user) {
-        this.user = user;
         this.local = ResourceBundle.getBundle("features/AboutEmbed", user.getConfig().getLocale());
     }
-    @Override
     public MessageEmbed get() {
         return new EmbedBuilder()
                 .setTitle(Flames.api.getSelfUser().getName())
@@ -32,7 +29,7 @@ public class AboutEmbed implements FlamesEmbed {
                 .setDescription(local.getString("description"))
                 .setImage(FlamesAssets.getVersionIcon())
                 .addField(local.getString("created"), StringUtil.prettifyDate(Flames.api.getSelfUser().getTimeCreated().toInstant()), true)
-                .addField(local.getString("users"), GlobalData.participants + "", true)
+                .addField(local.getString("users"), String.valueOf(GlobalData.participants), true)
                 .setColor(Color.decode("#D9581C"))
                 .build();
     }

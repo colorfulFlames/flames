@@ -5,7 +5,6 @@
 package com.severalcircles.flames.frontend.message.fivehundred;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.FlamesError;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 
@@ -16,18 +15,13 @@ import java.util.ResourceBundle;
 
 public class SpotifyConnectionFailedErrorMessage extends GenericErrorMessage {
     static final ResourceBundle resources = ResourceBundle.getBundle("error/SpotifyConnectionFailed", Locale.getDefault());
-    String errorCode;
-    public SpotifyConnectionFailedErrorMessage(FlamesError e) {
-        super(e);
-        this.errorCode = e.getCode();
-    }
+    final String errorCode;
 
     public SpotifyConnectionFailedErrorMessage(Exception e) {
         super(e);
         this.errorCode = "500-001";
     }
 
-    @Override
     public MessageEmbed get() {
         return new EmbedBuilder()
                 .setAuthor(String.format(resources.getString("author"), Flames.api.getSelfUser().getName()))

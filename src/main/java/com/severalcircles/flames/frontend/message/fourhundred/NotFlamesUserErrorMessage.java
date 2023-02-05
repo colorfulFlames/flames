@@ -15,17 +15,13 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class NotFlamesUserErrorMessage extends FlamesErrorMessage {
-    String errorCode;
-    ResourceBundle resources = ResourceBundle.getBundle("error/DataVersionErrorMessage", Locale.getDefault());
+    final String errorCode;
+    final ResourceBundle resources = ResourceBundle.getBundle("error/DataVersionErrorMessage", Locale.getDefault());
     public NotFlamesUserErrorMessage(FlamesError e) {
         super(e);
         this.errorCode = e.getCode();
     }
 
-    public NotFlamesUserErrorMessage(Exception e) {
-        super(e);
-        this.errorCode = "403-010";
-    }
     public MessageEmbed get() {
         return new EmbedBuilder()
                 .setColor(Color.red)

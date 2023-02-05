@@ -32,6 +32,7 @@ public class CommandEvent extends ListenerAdapter implements FlamesDiscordEvent 
     @Override
     public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
         System.out.println("Slash command detected");
+        //noinspection ResultOfMethodCallIgnored
         event.deferReply(true);
         System.out.println(event.getName());
         for (Map.Entry<String, FlamesCommand> entry : Flames.commandMap.entrySet()) {
@@ -47,9 +48,10 @@ public class CommandEvent extends ListenerAdapter implements FlamesDiscordEvent 
                 } catch (IllegalStateException e) {
                     Logger.getGlobal().log(Level.INFO, "Somebody pressed a button :3");
                 } catch (ConsentException e) {
+                    //noinspection ResultOfMethodCallIgnored
                     event.replyEmbeds(new ConsentErrorMessage(e).get());
                 } catch (DataVersionException e) {
-                    event.replyEmbeds(new DataVersionErrorMessage((FlamesError) e).get()).complete();
+                    event.replyEmbeds(new DataVersionErrorMessage(e).get()).complete();
                     e.printStackTrace();
                     return;
                 }

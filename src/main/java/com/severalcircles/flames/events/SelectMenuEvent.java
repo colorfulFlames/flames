@@ -35,6 +35,7 @@ public class SelectMenuEvent extends ListenerAdapter implements FlamesDiscordEve
             return;
         } catch (ConsentException e) {
             e.printStackTrace();
+            //noinspection ResultOfMethodCallIgnored
             event.reply("Please agree to the consent prompt first.");
             return;
         }
@@ -44,7 +45,8 @@ public class SelectMenuEvent extends ListenerAdapter implements FlamesDiscordEve
         }
         System.out.println("all done :)");
         if (menuInputData[0].equals("DataDropdown")) {
-            if (!event.getUser().getId().equals(menuInputData[1])) event.reply(" ");
+            if (!event.getUser().getId().equals(menuInputData[1])) //noinspection ResultOfMethodCallIgnored
+                event.reply(" ");
             else new UserDataDropdown().execute(event, menuInputData, flamesUser);
         }
     }

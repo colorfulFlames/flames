@@ -13,8 +13,7 @@ import java.io.IOException;
 
 public class FlamesDataUpdater {
     public static final double minimumVersion = 2.0;
-    @SuppressWarnings("FieldMayBeFinal")
-    private FlamesUser flamesUser;
+    private final FlamesUser flamesUser;
     //    private UserStats stats;
 
     public FlamesDataUpdater(FlamesUser flamesUser) {
@@ -27,7 +26,7 @@ public class FlamesDataUpdater {
         if (flamesUser.getDataVersion() < minimumVersion) throw new DataVersionException(true);
         if (flamesUser.getDataVersion() > FlamesUser.latestVersion) throw new DataVersionException(false);
         if (flamesUser.getScore() >= 100000) flamesUser.setScore(flamesUser.getScore() / 2);
-            flamesUser.setDataVersion(2.1);
+        flamesUser.setDataVersion(2.1);
 //        flamesUser.setStats(stats);
         FlamesDataManager.save(flamesUser);
     }

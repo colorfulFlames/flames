@@ -24,10 +24,7 @@ public class BadArgumentsErrorMessage extends FlamesErrorMessage implements Flam
     ResourceBundle resources;
     private final User user;
     private final BadArgumentsException exception;
-    public BadArgumentsErrorMessage(FlamesError e) {
-        super(e);
-        throw new IllegalArgumentException("Argument must be a BadArgumentsException.");
-    }
+
     public BadArgumentsErrorMessage(BadArgumentsException e, User user) {
        super((FlamesError) e);
         try {
@@ -38,11 +35,7 @@ public class BadArgumentsErrorMessage extends FlamesErrorMessage implements Flam
         this.user = user;
         this.exception = e;
     }
-    public BadArgumentsErrorMessage(Exception e) {
-        super(e);
-        throw new IllegalArgumentException("Argument must be a BadArgumentsException.");
-    }
-    @Override
+
     public MessageEmbed get() {
         return new EmbedBuilder()
                 .setAuthor(resources.getString("author"))

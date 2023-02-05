@@ -31,7 +31,6 @@ public class WelcomeBackEmbed implements FlamesEmbed {
         this.flamesUser = flamesUser;
         resources = ResourceBundle.getBundle("features/data/WelcomeBackEmbed", flamesUser.getConfig().getLocale());
     }
-    @Override
     public MessageEmbed get() {
         Date now = Date.from(Instant.now());
         String timeMessage;

@@ -30,7 +30,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent {
-    public void register() {Flames.api.addEventListener(this);}
 
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {

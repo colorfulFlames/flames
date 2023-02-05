@@ -9,9 +9,9 @@ import com.google.cloud.dialogflow.v2.*;
 import java.io.IOException;
 
 public class DialogSession {
-    private String sessionId;
+    private final String sessionId;
     public DialogSession() {
-        sessionId = "" + (Math.round(Math.random() * 10000));
+        sessionId = String.valueOf(Math.round(Math.random() * 10000));
     }
     public String processMessage(String text, String id) throws IOException {
         try (SessionsClient sessionsClient = SessionsClient.create()) {

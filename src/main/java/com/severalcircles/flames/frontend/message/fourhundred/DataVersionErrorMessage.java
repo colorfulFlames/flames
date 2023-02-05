@@ -15,17 +15,13 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class DataVersionErrorMessage extends FlamesErrorMessage {
-    String errorCode;
-    ResourceBundle resources = ResourceBundle.getBundle("error/DataVersionErrorMessage", Locale.getDefault());
+    final String errorCode;
+    final ResourceBundle resources = ResourceBundle.getBundle("error/DataVersionErrorMessage", Locale.getDefault());
     public DataVersionErrorMessage(FlamesError e) {
         super(e);
         this.errorCode = e.getCode();
     }
 
-    public DataVersionErrorMessage(Exception e) {
-        super(e);
-        this.errorCode = "500-999";
-    }
     public MessageEmbed get() {
         return new EmbedBuilder()
                 .setColor(Color.red)

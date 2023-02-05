@@ -28,7 +28,6 @@ public class UserConfig implements FlamesData {
         this.locale = locale;
     }
 
-    @Override
     public Properties createData() {
         Properties properties = new Properties();
         properties.put("locale", this.locale.toLanguageTag());

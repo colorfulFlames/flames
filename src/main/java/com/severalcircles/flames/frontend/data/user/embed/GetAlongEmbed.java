@@ -16,17 +16,16 @@ import java.time.Instant;
 import java.util.ResourceBundle;
 
 public class GetAlongEmbed implements FlamesEmbed {
-    User sender;
-    User victim;
-    ResourceBundle resources;
+    final User sender;
+    final User victim;
+    final ResourceBundle resources;
     String description;
-    int score;
-    FlamesUser flamesUser;
+    final int score;
+
     public GetAlongEmbed(User sender, FlamesUser flamesUser, User victim, int score) {
         this.sender = sender;
         this.victim = victim;
         this.score = score;
-        this.flamesUser = flamesUser;
         resources = ResourceBundle.getBundle("features/data/user/embed/GetAlongEmbed", flamesUser.getConfig().getLocale());
         try {
             description = resources.getString("description.level" + Math.round(Math.log(score)/Math.log(2) + 16));
@@ -35,13 +34,12 @@ public class GetAlongEmbed implements FlamesEmbed {
             description = resources.getString("description.level1");
         }
     }
-    @Override
     public MessageEmbed get() {
         return new EmbedBuilder()
                 .setAuthor(resources.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setTitle(String.format(resources.getString("title")), victim.getName())
                 .setDescription(description)
-                .addField(resources.getString("score"), score + "", true)
+                .addField(resources.getString("score"), String.valueOf(score), true)
                 .setTimestamp(Instant.now())
                 .setFooter("", sender.getAvatarUrl())
                 .setColor(Color.decode("F53733"))

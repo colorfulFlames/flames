@@ -13,8 +13,7 @@ import com.severalcircles.flames.util.Rank;
  */
 public class FlamesAssets {
     private static final String rankUrl = "https://severalcircles.com/flames/assets/icons/rank/";
-    public static final String globalDataUrl = "https://severalcircles.com/flames/assets/icons/global_data.png";
-    public static final String welcomeBackUrl = "https://severalcircles.com/flames/assets/welcomeback1.png";
+
     public static String getRankIcon(Rank rank) {
         switch (rank) {
             case APPROACHING_BRONZE:

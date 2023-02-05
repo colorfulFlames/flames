@@ -8,5 +8,5 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ConversationsController {
-    public static Map<String, Conversation> activeConversations = new HashMap<>();
+    public static final Map<String, Conversation> activeConversations = new HashMap<>();
 }

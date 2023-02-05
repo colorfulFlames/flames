@@ -4,8 +4,6 @@
 
 package com.severalcircles.flames.external;
 
-//import jdk.incubator.http.HttpClient;
-//import jdk.incubator.http.HttpResponse;
 import com.severalcircles.flames.util.BadWordFilter;
 import org.json.JSONObject;
 

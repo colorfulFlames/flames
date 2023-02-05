@@ -29,12 +29,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Conversation {
-    @SuppressWarnings("FieldMayBeFinal")
-    private Map<String, Integer> entities;
-    @SuppressWarnings("FieldMayBeFinal")
-    private GuildMessageChannel channel;
-    @SuppressWarnings("FieldMayBeFinal")
-    private List<User> userList;
+    private final Map<String, Integer> entities;
+    private final GuildMessageChannel channel;
+    private final List<User> userList;
     private Instant expires;
     private double emotion;
     private String[] quote = {"This isn't epic yet", "Flames"};
@@ -58,10 +55,6 @@ public class Conversation {
         return channel;
     }
 
-    public List<User> getUserList() {
-        return userList;
-    }
-
     public double getEmotion() {
         return emotion;
     }
@@ -70,13 +63,6 @@ public class Conversation {
         return quote;
     }
 
-    public double getQuoteScore() {
-        return quoteScore;
-    }
-
-    public Instant getExpires() {
-        return expires;
-    }
     public void processMessage(Message message, FinishedAnalysis finishedAnalysis) throws ExpiredConversationException {
         boolean newFavorite = false;
         Logger.getGlobal().log(Level.INFO, "Processing Message");
@@ -84,7 +70,7 @@ public class Conversation {
         expires = Instant.now().plus(5, ChronoUnit.MINUTES);
         emotion += finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude();
         if (finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude() > quoteScore) {
-            this.quote = new String[]{message.getContentRaw() + "", message.getAuthor().getName() + ""};
+            this.quote = new String[]{message.getContentRaw(), message.getAuthor().getName()};
             this.quoteScore = finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude();
             if (Math.round(Math.random() * 10) == 6) newFavorite = true;
         }

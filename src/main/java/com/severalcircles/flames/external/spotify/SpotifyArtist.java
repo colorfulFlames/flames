@@ -9,13 +9,12 @@ package com.severalcircles.flames.external.spotify;
  */
 public class SpotifyArtist {
 //    String url;
-    int followers;
-    String id;
-    String image;
-    String name;
-    int popularity;
-    String uri;
-    String genre;
+final int followers;
+    final String image;
+    final String name;
+    final int popularity;
+    final String uri;
+    final String genre;
 
     public int getFollowers() {
         return followers;
@@ -24,16 +23,11 @@ public class SpotifyArtist {
     public SpotifyArtist(String genre, int followers, String id, String image, String name, int popularity, String uri) {
 //        this.url = url;
         this.followers = followers;
-        this.id = id;
         this.image = image;
         this.name = name;
         this.popularity = popularity;
         this.uri = uri;
         this.genre = genre;
-    }
-
-    public SpotifyArtist() {
-
     }
 
     public String getGenre() {

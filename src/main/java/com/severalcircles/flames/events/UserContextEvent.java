@@ -12,20 +12,17 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.Command;
-import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UserContextEvent extends ListenerAdapter implements FlamesDiscordEvent {
     public static final Map<String, FlamesUserContext> userContexts = new HashMap<>();
-    public static final List<CommandData> contextData = new LinkedList<>();
+
     public void register(JDA api) {
         userContexts.put("User Data", new UserContextData());
         Flames.commandDataList.add(Commands.context(Command.Type.USER, "User Data"));

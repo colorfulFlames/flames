@@ -32,7 +32,6 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 
-import javax.security.auth.login.LoginException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -99,8 +98,10 @@ public class Flames {
         reportHeader = String.format(reportHeader, version);
         String logName = "Flames " + version + "@" + InetAddress.getLocalHost().getHostName() + " " + Instant.now().truncatedTo(ChronoUnit.SECONDS).toString().replace(":", " ").replace("T", " T") + ".log";
         File logDir = new File(FlamesDataManager.flamesDirectory.getAbsolutePath() + "/logs");
+        //noinspection ResultOfMethodCallIgnored
         logDir.mkdir();
         File logFile = new File(logDir.getAbsolutePath() + "/" + logName);
+        //noinspection ResultOfMethodCallIgnored
         logFile.createNewFile();
         FileHandler handler = new FileHandler(logFile.getAbsolutePath());
         handler.setFormatter(new SimpleFormatter());
@@ -191,6 +192,7 @@ public class Flames {
             bugsnag.notify(new FlamesProtectException("Fatal error counter went over 5"));
             File file = new File(FlamesDataManager.flamesDirectory.getAbsolutePath() + "/logs/Flames FatalReport:" + Instant.now().toString() + ".log");
             try {
+                //noinspection ResultOfMethodCallIgnored
                 file.createNewFile();
             } catch (IOException e) {
                 Logger.getGlobal().log(Level.SEVERE, "Could this get any worse?");

@@ -30,7 +30,6 @@ public class TodayEmbed implements FlamesEmbed {
         this.user = user;
         resources = ResourceBundle.getBundle("features/TodayEmbed", flamesUser.getConfig().getLocale());
     }
-    @Override
     public MessageEmbed get() {
         String trendingEntity = "";
         int times = 0;
