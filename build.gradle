@@ -8,7 +8,7 @@ plugins {
 }
 
 mainClassName = 'com.severalcircles.flames.Flames'
-version '7.0-snapshot'
+version '7.0-snapshot-02052023'
 def jdaVersion = '5.0.0-beta.3'
 
 sourceCompatibility = targetCompatibility = 1.8
