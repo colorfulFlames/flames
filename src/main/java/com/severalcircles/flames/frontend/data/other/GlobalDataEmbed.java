@@ -29,7 +29,6 @@ public class GlobalDataEmbed implements FlamesEmbed {
     }
 
 
-    @Override
     public MessageEmbed get() {
         return new EmbedBuilder()
                 .setAuthor(resources.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())

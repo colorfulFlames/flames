@@ -20,38 +20,22 @@ import java.util.*;
 import java.util.List;
 
 public class ThanksEmbed implements FlamesEmbed {
-    @SuppressWarnings("FieldMayBeFinal")
-    private User thanked;
-    @SuppressWarnings("FieldMayBeFinal")
-    private User sender;
-    @SuppressWarnings("FieldMayBeFinal")
-    private FlamesUser flamesUserThanked;
-    @SuppressWarnings("FieldMayBeFinal")
-    private FlamesUser flamesUserSender;
-    @SuppressWarnings("FieldMayBeFinal")
-    private ResourceBundle resources;
+    private final User thanked;
+    private final User sender;
+    private final FlamesUser flamesUserThanked;
+    private final ResourceBundle resources;
     private String msg;
-    static List<String> success = new LinkedList<>();
-    public ThanksEmbed(User thanked, User sender, FlamesUser flamesUserThanked, FlamesUser flamesUserSender, String msg) {
+    static final List<String> success = new LinkedList<>();
+    public ThanksEmbed(User thanked, User sender, FlamesUser flamesUserThanked, String msg) {
         this.thanked = thanked;
         this.sender = sender;
         this.flamesUserThanked = flamesUserThanked;
-        this.flamesUserSender = flamesUserSender;
         this.msg = msg;
         resources = ResourceBundle.getBundle("features/ThanksEmbed", flamesUserThanked.getConfig().getLocale());
         if (this.msg.isEmpty()) this.msg = resources.getString("description");
 
     }
-    public ThanksEmbed(User thanked, User sender, FlamesUser flamesUserThanked, FlamesUser flamesUserSender) {
-        this.thanked = thanked;
-        this.sender = sender;
-        this.flamesUserThanked = flamesUserThanked;
-        this.flamesUserSender = flamesUserSender;
-        resources = ResourceBundle.getBundle("features/ThanksEmbed", flamesUserThanked.getConfig().getLocale());
-        this.msg = resources.getString("description");
-    }
 
-    @Override
     public MessageEmbed get() {
         if (thanked.getId().equals(sender.getId())) return new EmbedBuilder().setTitle(resources.getString("noThankSelf")).setColor(Color.red).build();
         if (!Today.thanksgivingThanks.containsKey(sender.getId())) Today.thanksgivingThanks.put(sender.getId(), new LinkedList<>());

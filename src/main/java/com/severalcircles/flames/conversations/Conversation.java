@@ -11,9 +11,12 @@ import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.consent.ConsentException;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
+import com.severalcircles.flames.frontend.today.Today;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageChannel;
+//import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
+//import net.dv8tion.jda.api.entitiesGuildMessageChannel;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.channel.middleman.GuildMessageChannel;
 
 import java.io.IOException;
 import java.time.Instant;
@@ -26,18 +29,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Conversation {
-    @SuppressWarnings("FieldMayBeFinal")
-    private Map<String, Integer> entities;
-    @SuppressWarnings("FieldMayBeFinal")
-    private MessageChannel channel;
-    @SuppressWarnings("FieldMayBeFinal")
-    private List<User> userList;
+    private final Map<String, Integer> entities;
+    private final GuildMessageChannel channel;
+    private final List<User> userList;
     private Instant expires;
     private double emotion;
     private String[] quote = {"This isn't epic yet", "Flames"};
     private double quoteScore;
     private final Map<String, FlamesUser> conversationCache;
-    public Conversation(MessageChannel channel) {
+    public Conversation (GuildMessageChannel channel) {
         this.channel = channel;
         this.entities = new HashMap<>();
         this.userList = new LinkedList<>();
@@ -51,12 +51,8 @@ public class Conversation {
         return entities;
     }
 
-    public MessageChannel getChannel() {
+    public GuildMessageChannel getChannel() {
         return channel;
-    }
-
-    public List<User> getUserList() {
-        return userList;
     }
 
     public double getEmotion() {
@@ -67,13 +63,6 @@ public class Conversation {
         return quote;
     }
 
-    public double getQuoteScore() {
-        return quoteScore;
-    }
-
-    public Instant getExpires() {
-        return expires;
-    }
     public void processMessage(Message message, FinishedAnalysis finishedAnalysis) throws ExpiredConversationException {
         boolean newFavorite = false;
         Logger.getGlobal().log(Level.INFO, "Processing Message");
@@ -81,7 +70,7 @@ public class Conversation {
         expires = Instant.now().plus(5, ChronoUnit.MINUTES);
         emotion += finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude();
         if (finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude() > quoteScore) {
-            this.quote = new String[]{message.getContentRaw() + "", message.getAuthor().getName() + ""};
+            this.quote = new String[]{message.getContentRaw(), message.getAuthor().getName()};
             this.quoteScore = finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude();
             if (Math.round(Math.random() * 10) == 6) newFavorite = true;
         }
@@ -120,6 +109,9 @@ public class Conversation {
                 if (user.getScore() > user.getFunFacts().getHighestFlamesScore()) user.getFunFacts().setHighestFlamesScore(user.getScore());
                 GlobalData.globalScore += score;
                 GlobalData.averageScore = GlobalData.globalScore / GlobalData.participants;
+                if (user.getScore() > Today.highScore) {
+                    Today.highUser = message.getAuthor().getName() + " (" + user.getScore() + ")";
+                }
             }
             conversationCache.put(element.getId(), user);
         });

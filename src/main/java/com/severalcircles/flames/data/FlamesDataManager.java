@@ -6,7 +6,6 @@ package com.severalcircles.flames.data;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.guild.FlamesGuild;
-import com.severalcircles.flames.data.guild.NewGuildException;
 import com.severalcircles.flames.data.user.*;
 import com.severalcircles.flames.data.user.consent.ConsentException;
 import com.severalcircles.flames.util.Rank;
@@ -14,6 +13,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.User;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.time.Instant;
 import java.util.Locale;
 import java.util.Objects;
@@ -46,6 +46,7 @@ public class FlamesDataManager {
         //noinspection ResultOfMethodCallIgnored
         guildDirectory.mkdir();
         try {
+            //noinspection ResultOfMethodCallIgnored
             wildfireFile.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
@@ -145,9 +146,13 @@ public class FlamesDataManager {
         File funfacts = new File(udir.getAbsolutePath() + "/funfacts.fl");
         File config1 = new File(udir.getAbsolutePath() + "/config.fl");
         File relationships = new File(udir.getAbsolutePath() + "/relationships.fl");
+        //noinspection ResultOfMethodCallIgnored
         userfl.createNewFile();
+        //noinspection ResultOfMethodCallIgnored
         stats2.createNewFile();
+        //noinspection ResultOfMethodCallIgnored
         funfacts.createNewFile();
+        //noinspection ResultOfMethodCallIgnored
         relationships.createNewFile();
         FileInputStream inputStream1 = new FileInputStream(userfl);
         FileInputStream inputStream2 = new FileInputStream(stats2);
@@ -155,39 +160,38 @@ public class FlamesDataManager {
         FileInputStream inputStream4 = new FileInputStream(config1);
         FileInputStream inputStream5 = new FileInputStream(relationships);
         Properties data = new Properties();
-        Properties statsdata = new Properties();
         Properties funfactsdata = new Properties();
         Properties configdata = new Properties();
         Properties relationshipData = new Properties();
         data.load(inputStream1);
-        statsdata.load(inputStream2);
+//        statsdata.load(inputStream2);
         funfactsdata.load(inputStream3);
         configdata.load(inputStream4);
         relationshipData.load(inputStream5);
 
-        fluser.setScore(Integer.parseInt(data.get("score") + ""));
-        fluser.setEmotion(Float.parseFloat(data.get("emotion") + ""));
+        fluser.setScore(Integer.parseInt(String.valueOf(data.get("score"))));
+        fluser.setEmotion(Float.parseFloat(String.valueOf(data.get("emotion"))));
         fluser.setDiscordId(user.getId());
-        fluser.setDataVersion(Double.parseDouble(data.get("version") + ""));
-        fluser.setConsent(Integer.parseInt(data.get("consent") + ""));
-        fluser.setStreak(Integer.parseInt(data.get("streak") + ""));
-        fluser.setLastSeen(Instant.parse(data.get("lastSeen") + ""));
+        fluser.setDataVersion(Double.parseDouble(String.valueOf(data.get("version"))));
+        fluser.setConsent(Integer.parseInt(String.valueOf(data.get("consent"))));
+        fluser.setStreak(Integer.parseInt(String.valueOf(data.get("streak"))));
+        fluser.setLastSeen(Instant.parse(String.valueOf(data.get("lastSeen"))));
 
-        funFacts.setFrenchToastMentioned(Integer.parseInt(funfactsdata.get("frenchToastScore") + ""));
-        funFacts.setBestRank(Rank.valueOf(funfactsdata.get("bestRank").toString().toUpperCase(Locale.ROOT).replace(" ", "_") + ""));
-        funFacts.setLowestFlamesScore(Integer.parseInt(funfactsdata.get("lowScore") + ""));
-        funFacts.setHighestFlamesScore(Integer.parseInt(funfactsdata.get("highScore") + ""));
-        funFacts.setSadDay(Instant.parse(funfactsdata.get("sadDay") + ""));
-        funFacts.setHappyDay(Instant.parse(funfactsdata.get("happyDay") + ""));
-        funFacts.setHighestEmotion(Float.parseFloat(funfactsdata.get("highestEmotion")+ ""));
-        funFacts.setLowestEmotion(Float.parseFloat(funfactsdata.get("lowestEmotion") + ""));
-        try {funFacts.setFavoriteQuote(funfactsdata.get("favoriteQuote") + ""); } catch (NullPointerException e) {} // It doesn't matter lol
+        funFacts.setFrenchToastMentioned(Integer.parseInt(String.valueOf(funfactsdata.get("frenchToastScore"))));
+        funFacts.setBestRank(Rank.valueOf(funfactsdata.get("bestRank").toString().toUpperCase(Locale.ROOT).replace(" ", "_")));
+        funFacts.setLowestFlamesScore(Integer.parseInt(String.valueOf(funfactsdata.get("lowScore"))));
+        funFacts.setHighestFlamesScore(Integer.parseInt(String.valueOf(funfactsdata.get("highScore"))));
+        funFacts.setSadDay(Instant.parse(String.valueOf(funfactsdata.get("sadDay"))));
+        funFacts.setHappyDay(Instant.parse(String.valueOf(funfactsdata.get("happyDay"))));
+        funFacts.setHighestEmotion(Float.parseFloat(String.valueOf(funfactsdata.get("highestEmotion"))));
+        funFacts.setLowestEmotion(Float.parseFloat(String.valueOf(funfactsdata.get("lowestEmotion"))));
+        try {funFacts.setFavoriteQuote(String.valueOf(funfactsdata.get("favoriteQuote"))); } catch (NullPointerException ignored) {} // It doesn't matter lol
         if (config.getLocale() == null) config.setLocale(Locale.getDefault());
         if (new File(udir.getAbsolutePath() + "/" + FlamesUser.latestVersion + ".flamesfile").createNewFile()) {
             new FlamesDataUpdater(fluser).run();
         }
 //        stats = new UserStats(Integer.parseInt(statsdata.get("exp") + ""), Integer.parseInt(statsdata.get("level") + ""), Integer.parseInt(statsdata.get("POW") + ""), Integer.parseInt(statsdata.get("RES") + ""), Integer.parseInt(statsdata.get("LUCK") + ""), Integer.parseInt(statsdata.get("RISE") + ""), Integer.parseInt(statsdata.get("CAR") + ""));
-        config = new UserConfig(Locale.forLanguageTag(configdata.get("locale") + ""));
+        config = new UserConfig(Locale.forLanguageTag(String.valueOf(configdata.get("locale"))));
         relationshipData.forEach((key, value) -> userRelationships.addRelationship(key.toString(), Integer.parseInt(value.toString())));
 //        fluser.setStats(stats);
         fluser.setFunFacts(funFacts);
@@ -225,59 +229,26 @@ public class FlamesDataManager {
 //        statsdata.load(inputStream2);
         funfactsdata.load(inputStream3);
 
-        fluser.setScore(Integer.parseInt(data.get("score") + ""));
-        fluser.setEmotion(Float.parseFloat(data.get("emotion") + ""));
+        fluser.setScore(Integer.parseInt(String.valueOf(data.get("score"))));
+        fluser.setEmotion(Float.parseFloat(String.valueOf(data.get("emotion"))));
         fluser.setDiscordId(user.getId());
-        fluser.setDataVersion(Double.parseDouble(data.get("version") + ""));
-        fluser.setConsent(Integer.parseInt(data.get("consent") + ""));
-        fluser.setStreak(Integer.parseInt(data.get("streak") + ""));
-        fluser.setLastSeen(Instant.parse(data.get("lastSeen") + ""));
+        fluser.setDataVersion(Double.parseDouble(String.valueOf(data.get("version"))));
+        fluser.setConsent(Integer.parseInt(String.valueOf(data.get("consent"))));
+        fluser.setStreak(Integer.parseInt(String.valueOf(data.get("streak"))));
+        fluser.setLastSeen(Instant.parse(String.valueOf(data.get("lastSeen"))));
 
-        funFacts.setFrenchToastMentioned(Integer.parseInt(funfactsdata.get("frenchToastScore") + ""));
+        funFacts.setFrenchToastMentioned(Integer.parseInt(String.valueOf(funfactsdata.get("frenchToastScore"))));
         funFacts.setBestRank(Rank.valueOf(funfactsdata.get("bestRank").toString().toUpperCase(Locale.ROOT).replace(" ", "_")));
-        funFacts.setLowestFlamesScore(Integer.parseInt(funfactsdata.get("lowScore") + ""));
-        funFacts.setHighestFlamesScore(Integer.parseInt(funfactsdata.get("highScore") + ""));
-        funFacts.setSadDay(Instant.parse(funfactsdata.get("sadDay") + ""));
-        funFacts.setHappyDay(Instant.parse(funfactsdata.get("happyDay") + ""));
-        funFacts.setHighestEmotion(Float.parseFloat(funfactsdata.get("highestEmotion")+ ""));
-        funFacts.setLowestEmotion(Float.parseFloat(funfactsdata.get("lowestEmotion") + ""));
+        funFacts.setLowestFlamesScore(Integer.parseInt(String.valueOf(funfactsdata.get("lowScore"))));
+        funFacts.setHighestFlamesScore(Integer.parseInt(String.valueOf(funfactsdata.get("highScore"))));
+        funFacts.setSadDay(Instant.parse(String.valueOf(funfactsdata.get("sadDay"))));
+        funFacts.setHappyDay(Instant.parse(String.valueOf(funfactsdata.get("happyDay"))));
+        funFacts.setHighestEmotion(Float.parseFloat(String.valueOf(funfactsdata.get("highestEmotion"))));
+        funFacts.setLowestEmotion(Float.parseFloat(String.valueOf(funfactsdata.get("lowestEmotion"))));
 
         fluser.setFunFacts(funFacts);
         if (fluser.getConsent() != 1 && !skipConsent) throw new ConsentException(fluser.getConsent(), user);
         return fluser;
     }
 
-    /**
-     * Checks if a guild has been seen before. Behaves otherwise the same as newUser.
-     */
-    public static boolean newGuild(Guild guild) throws IOException {
-        File guildDir = new File(guildDirectory.getAbsolutePath() + "/" + guild.getId());
-        File mainFile = new File(guildDir.getAbsolutePath() + "/guild.fl");
-        FlamesGuild flGuild;
-        if (guildDir.mkdir()) {
-            flGuild = new FlamesGuild(guild.getName(), guild.getId(), Instant.now(), 0, 0);
-            OutputStream os = new FileOutputStream(mainFile);
-            flGuild.createData().store(os, "Flames Guild Data");
-            return true;
-        } else return false;
-    }
-
-    /**
-     * Saves a guild to its data file.
-     */
-    public static void save(FlamesGuild guild) throws IOException {
-        File guildDir = new File(guildDirectory.getAbsolutePath() + "/" + guild.getId());
-        File mainFile = new File(guildDir.getAbsolutePath() + "/guild.fl");
-        OutputStream os = new FileOutputStream(mainFile);
-        guild.createData().store(os, "Flames Guild Data");
-    }
-    public static FlamesGuild readGuild(String id) throws IOException, NewGuildException {
-        if (newGuild(Objects.requireNonNull(Flames.api.getGuildById(id)))) throw new NewGuildException();
-        File guildDir = new File(guildDirectory.getAbsolutePath() + "/" + id);
-        File mainFile = new File(guildDir.getAbsolutePath() + "/guild.fl");
-        Properties data = new Properties();
-        InputStream is = new FileInputStream(mainFile);
-        data.load(is);
-        return new FlamesGuild(data.get("name") + "", data.get("discordId") + "", Instant.parse(data.get("joined") + ""), Integer.parseInt(data.get("score") + ""), Float.parseFloat(data.get("emotion") + ""));
-    }
 }

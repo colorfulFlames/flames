@@ -4,9 +4,8 @@
 
 package com.severalcircles.flames.external;
 
-//import jdk.incubator.http.HttpClient;
-//import jdk.incubator.http.HttpResponse;
 import com.severalcircles.flames.util.BadWordFilter;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -31,6 +30,10 @@ public class ImageSearch {
         int status = con.getResponseCode();
         con.disconnect();
         System.out.println(content);
-        return new JSONObject(content.toString()).getJSONArray("results").getJSONObject(0).getJSONObject("urls").getString("raw");
+        try {
+            return new JSONObject(content.toString()).getJSONArray("results").getJSONObject(0).getJSONObject("urls").getString("raw");
+        } catch (JSONException e) {
+            return "https://preview.redd.it/nappqljautm51.jpg?auto=webp&s=72f0c7468ef69127c1e945b160e0b9807d066de5";
+        }
     }
 }

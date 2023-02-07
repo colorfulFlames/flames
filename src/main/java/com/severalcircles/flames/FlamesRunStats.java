@@ -4,11 +4,8 @@
 
 package com.severalcircles.flames;
 
-import java.time.Instant;
-
 public class FlamesRunStats {
-    public static Instant startedAt = Instant.now();
-    public static int messageCount = 0;
-    public static int commandCount = 0;
-    public static int buttonCount = 0;
+    public static final int messageCount = 0;
+    public static final int commandCount = 0;
+    public static final int buttonCount = 0;
 }

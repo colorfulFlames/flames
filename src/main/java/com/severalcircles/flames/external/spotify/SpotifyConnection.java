@@ -68,7 +68,7 @@ public class SpotifyConnection {
         HttpURLConnection con = (HttpURLConnection) searchUrl.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("Authorization", "Bearer " + token);
-        con.setRequestProperty("Content-Length", "" + (13 + query.length()));
+        con.setRequestProperty("Content-Length", String.valueOf(13 + query.length()));
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(con.getInputStream()));
         String inputLine;

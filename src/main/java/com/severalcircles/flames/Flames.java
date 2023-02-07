@@ -22,7 +22,6 @@ import com.severalcircles.flames.frontend.info.AboutCommand;
 import com.severalcircles.flames.frontend.info.ArtistCommand;
 import com.severalcircles.flames.frontend.info.HelpCommand;
 import com.severalcircles.flames.frontend.info.TestCommand;
-import com.severalcircles.flames.frontend.info.debug.DebugCommand;
 import com.severalcircles.flames.frontend.thanks.ThanksCommand;
 import com.severalcircles.flames.frontend.today.ResetTodayRunnable;
 import com.severalcircles.flames.frontend.today.TodayCommand;
@@ -32,8 +31,8 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 
-import javax.security.auth.login.LoginException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -100,8 +99,10 @@ public class Flames {
         reportHeader = String.format(reportHeader, version);
         String logName = "Flames " + version + "@" + InetAddress.getLocalHost().getHostName() + " " + Instant.now().truncatedTo(ChronoUnit.SECONDS).toString().replace(":", " ").replace("T", " T") + ".log";
         File logDir = new File(FlamesDataManager.flamesDirectory.getAbsolutePath() + "/logs");
+        //noinspection ResultOfMethodCallIgnored
         logDir.mkdir();
         File logFile = new File(logDir.getAbsolutePath() + "/" + logName);
+        //noinspection ResultOfMethodCallIgnored
         logFile.createNewFile();
         FileHandler handler = new FileHandler(logFile.getAbsolutePath());
         handler.setFormatter(new SimpleFormatter());
@@ -136,12 +137,9 @@ public class Flames {
         Runtime.getRuntime().addShutdownHook(new ExitFlames());
         // --- Connecting to the API and Logging in to Discord ---
         try {
-            api = JDABuilder.createDefault(System.getenv("FlamesToken")).build();
+            api = JDABuilder.createDefault(System.getenv("FlamesToken"))
+                    .enableIntents(GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT).build();
             api.awaitReady();
-        } catch (LoginException e) {
-            Logger.getGlobal().log(Level.SEVERE, "Yeah that's not funny");
-            e.printStackTrace();
-            System.exit(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -160,8 +158,6 @@ public class Flames {
         commandDataList.add(Commands.slash("hi", "Collect your Daily Bonus"));
         commandMap.put("help", new HelpCommand());
         commandDataList.add(Commands.slash("help", "Get links to support resources like the support server and the documentation"));
-        commandMap.put("debug", new DebugCommand());
-        commandDataList.add(Commands.slash("debug", "Displays debugging information"));
         commandMap.put("today", new TodayCommand());
         commandDataList.add(Commands.slash("today", "Find out what Today is all about"));
         commandMap.put("locale", new LocaleCommand());
@@ -198,6 +194,7 @@ public class Flames {
             bugsnag.notify(new FlamesProtectException("Fatal error counter went over 5"));
             File file = new File(FlamesDataManager.flamesDirectory.getAbsolutePath() + "/logs/Flames FatalReport:" + Instant.now().toString() + ".log");
             try {
+                //noinspection ResultOfMethodCallIgnored
                 file.createNewFile();
             } catch (IOException e) {
                 Logger.getGlobal().log(Level.SEVERE, "Could this get any worse?");

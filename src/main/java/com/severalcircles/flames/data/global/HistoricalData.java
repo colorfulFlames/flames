@@ -4,14 +4,11 @@
 
 package com.severalcircles.flames.data.global;
 
-import com.severalcircles.flames.data.FlamesDataManager;
-
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
 
 public class HistoricalData {
-    public static final String path = FlamesDataManager.flamesDirectory.getAbsolutePath() + "/history.csv";
     static final List<String[]> data = new LinkedList<>();
 
     public static void write() throws IOException {

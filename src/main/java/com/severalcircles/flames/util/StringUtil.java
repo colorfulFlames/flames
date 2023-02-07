@@ -13,52 +13,52 @@ import net.dv8tion.jda.api.entities.User;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.Instant;
+import java.util.Calendar;
 import java.util.Date;
 
 @SuppressWarnings("deprecation")
 public class StringUtil {
     /**
-     * @return String with Instant formatted as a nice, human-readable date string.
      */
     public static int highestScore;
     public static String prettifyDate(Instant instant) {
         String prettyDate = "";
         switch (Date.from(instant).getMonth()) {
             default:
-            case 0:
+            case Calendar.JANUARY:
                 prettyDate += "January ";
                 break;
-            case 1:
+            case Calendar.FEBRUARY:
                 prettyDate += "February ";
                 break;
-            case 2:
+            case Calendar.MARCH:
                 prettyDate += "March ";
                 break;
-            case 3:
+            case Calendar.APRIL:
                 prettyDate += "April ";
                 break;
-            case 4:
+            case Calendar.MAY:
                 prettyDate += "May ";
                 break;
-            case 5:
+            case Calendar.JUNE:
                 prettyDate += "June ";
                 break;
-            case 6:
+            case Calendar.JULY:
                 prettyDate += "July ";
                 break;
-            case 7:
+            case Calendar.AUGUST:
                 prettyDate += "August ";
                 break;
-            case 8:
+            case Calendar.SEPTEMBER:
                 prettyDate += "September ";
                 break;
-            case 9:
+            case Calendar.OCTOBER:
                 prettyDate += "October ";
                 break;
-            case 10:
+            case Calendar.NOVEMBER:
                 prettyDate += "November ";
                 break;
-            case 11:
+            case Calendar.DECEMBER:
                 prettyDate += "December ";
                 break;
         }
@@ -70,7 +70,7 @@ public class StringUtil {
             return score / 1000 + "K FP";
         }
         if (score >= 1000000) return score / 1000000 + "M FP";
-        DecimalFormat df = new DecimalFormat("###,###,###");
+        DecimalFormat df = new DecimalFormat("###,###,###.###");
         return df.format(score).replace(".", " ") + " FP";
     }
     public static String getFormattedName(User user) {

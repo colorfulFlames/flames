@@ -39,7 +39,6 @@ public class UpdatedSettingsEmbed implements FlamesEmbed {
             em = new GenericErrorMessage((FlamesError) e);
         }
     }
-    @Override
     public MessageEmbed get() {
         if (em != null) return em.get();
         return new EmbedBuilder()

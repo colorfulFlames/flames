@@ -6,6 +6,7 @@ package com.severalcircles.flames.frontend.today;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.external.ImageSearch;
 import com.severalcircles.flames.external.analysis.Analysis;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import com.severalcircles.flames.util.Emotion;
@@ -16,6 +17,7 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 
 import java.awt.*;
+import java.io.IOException;
 import java.time.Instant;
 import java.util.Map;
 import java.util.Objects;
@@ -30,7 +32,6 @@ public class TodayEmbed implements FlamesEmbed {
         this.user = user;
         resources = ResourceBundle.getBundle("features/TodayEmbed", flamesUser.getConfig().getLocale());
     }
-    @Override
     public MessageEmbed get() {
         String trendingEntity = "";
         int times = 0;
@@ -43,17 +44,23 @@ public class TodayEmbed implements FlamesEmbed {
         String title;
         if (Today.isThanksgiving) title = resources.getString("title.thanksgiving");
         else title = resources.getString("title");
-        return new EmbedBuilder()
-                .setAuthor(String.format(resources.getString("author"), StringUtil.prettifyDate(Instant.now())), null, Flames.api.getSelfUser().getAvatarUrl())
-                .setTitle(title)
-                .addField(resources.getString("talkingAbout"), trendingEntity, true)
-                .addField(resources.getString("feeling"), Emotion.getEmotionString(Today.emotion, flamesUser.getConfig().getLocale()), true)
-                .addBlankField(false)
-                .addField("\"" + Today.quote[0] + "\"", "- " + Today.quote[1] + ", " + StringUtil.prettifyDate(Instant.now()), false)
-                .addBlankField(false)
-                .addField(resources.getString("allAbout"), resources.getString("tomorrowBring"), false)
-                .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(String.valueOf(Ranking.getRank(flamesUser.getScore())))), user.getAvatarUrl())
-                .setColor(Color.decode("#F1D302"))
-                .build();
+        try {
+            return new EmbedBuilder()
+                    .setAuthor(String.format(resources.getString("author"), StringUtil.prettifyDate(Instant.now())), null, Flames.api.getSelfUser().getAvatarUrl())
+                    .setTitle(title)
+                    .addField(resources.getString("talkingAbout"), trendingEntity, true)
+                    .addField(resources.getString("feeling"), Emotion.getEmotionString(Today.emotion, flamesUser.getConfig().getLocale()), true)
+                    .addField(resources.getString("highUser"), Today.highUser, true)
+                    .addBlankField(false)
+                    .addField("\"" + Today.quote[0] + "\"", "- " + Today.quote[1] + ", " + StringUtil.prettifyDate(Instant.now()), false)
+                    .addBlankField(false)
+                    .addField(resources.getString("allAbout"), resources.getString("tomorrowBring"), false)
+                    .setThumbnail(ImageSearch.searchImage(trendingEntity))
+                    .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(String.valueOf(Ranking.getRank(flamesUser.getScore())))), user.getAvatarUrl())
+                    .setColor(Color.decode("#F1D302"))
+                    .build();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

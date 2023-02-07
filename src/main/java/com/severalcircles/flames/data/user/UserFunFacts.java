@@ -6,7 +6,6 @@ package com.severalcircles.flames.data.user;
 
 import com.severalcircles.flames.data.FlamesData;
 import com.severalcircles.flames.util.Rank;
-import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;
 import java.util.Properties;
@@ -35,14 +34,14 @@ public class UserFunFacts implements FlamesData {
     public Properties createData() {
         Properties data = new Properties();
         data.put("sadDay", sadDay.toString());
-        data.put("lowestEmotion", lowestEmotion + "");
-        data.put("highestEmotion", highestEmotion + "");
+        data.put("lowestEmotion", String.valueOf(lowestEmotion));
+        data.put("highestEmotion", String.valueOf(highestEmotion));
         data.put("happyDay", happyDay.toString());
-        data.put("highScore", highestFlamesScore + "");
-        data.put("lowScore", lowestFlamesScore + "");
-        data.put("frenchToastScore", frenchToastMentioned + "");
+        data.put("highScore", String.valueOf(highestFlamesScore));
+        data.put("lowScore", String.valueOf(lowestFlamesScore));
+        data.put("frenchToastScore", String.valueOf(frenchToastMentioned));
         data.put("bestRank", bestRank.toString());
-        data.put("favoriteQuote", favoriteQuote.toString());
+        data.put("favoriteQuote", favoriteQuote);
         return data;
     }
     public UserFunFacts() {
@@ -106,10 +105,6 @@ public class UserFunFacts implements FlamesData {
 
     public void setBestRank(Rank bestRank) {
         this.bestRank = bestRank;
-    }
-
-    public int getFrenchToastMentioned() {
-        return frenchToastMentioned;
     }
 
     public void setFrenchToastMentioned(int frenchToastMentioned) {

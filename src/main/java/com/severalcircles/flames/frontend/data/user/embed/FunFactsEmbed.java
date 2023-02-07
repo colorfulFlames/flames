@@ -19,15 +19,14 @@ import java.time.Instant;
 import java.util.ResourceBundle;
 
 public class FunFactsEmbed implements FlamesEmbed {
-    ResourceBundle resources;
-    FlamesUser flamesUser;
-    User user;
+    final ResourceBundle resources;
+    final FlamesUser flamesUser;
+    final User user;
     public FunFactsEmbed(User user, FlamesUser flamesUser) {
         this.flamesUser = flamesUser;
         this.user = user;
         this.resources = ResourceBundle.getBundle("features/data/FunFactsEmbed", flamesUser.getConfig().getLocale());
     }
-    @Override
     public MessageEmbed get() {
         UserFunFacts funFacts = flamesUser.getFunFacts();
         return new EmbedBuilder()

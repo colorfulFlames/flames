@@ -31,7 +31,6 @@ public class UserDataEmbed implements FlamesEmbed {
     }
 
 
-    @Override
     public MessageEmbed get() {
         String tonext;
         if (Ranking.toNext(flamesUser.getScore()) <= 0) tonext = "?";
@@ -43,7 +42,7 @@ public class UserDataEmbed implements FlamesEmbed {
                 .addField(resources.getString("rank"), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(Ranking.getRank(flamesUser.getScore()).toString()), true)
                 .addField(resources.getString("toNext"), tonext, true)
                 .addField(resources.getString("emotion"), Emotion.getEmotionString(flamesUser.getEmotion(), flamesUser.getConfig().getLocale()), true)
-                .addField(resources.getString("globalContribution"), Math.round((flamesUser.getScore() / GlobalData.globalScore) * 100) + "%", true)
+                .addField(resources.getString("globalContribution"), Math.round(((float) flamesUser.getScore() / GlobalData.globalScore) * 100) + "%", true)
                 .setDescription(String.format(resources.getString("level")))
                 .setColor(Color.decode("#F4231F"))
                 .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(String.valueOf(Ranking.getRank(flamesUser.getScore())))), user.getAvatarUrl())

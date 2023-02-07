@@ -33,7 +33,6 @@ public class ConversationEmbed implements FlamesEmbed {
         this.conversation = conversation;
         resources = ResourceBundle.getBundle("features/data/ConversationEmbed", flamesUser.getConfig().getLocale());
     }
-    @Override
     public MessageEmbed get() {
         String trendingEntity = "";
         int times = 0;

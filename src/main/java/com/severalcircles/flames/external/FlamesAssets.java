@@ -13,45 +13,45 @@ import com.severalcircles.flames.util.Rank;
  */
 public class FlamesAssets {
     private static final String rankUrl = "https://severalcircles.com/flames/assets/icons/rank/";
-    public static final String globalDataUrl = "https://severalcircles.com/flames/assets/icons/global_data.png";
-    public static final String welcomeBackUrl = "https://severalcircles.com/flames/assets/welcomeback1.png";
+
     public static String getRankIcon(Rank rank) {
         switch (rank) {
             case APPROACHING_BRONZE:
-                return rankUrl + "approaching_bronze.png";
+                return rankUrl + "sparks.png";
 //                break;
             case BRONZE:
-                return rankUrl + "bronze.png";
+                return rankUrl + "sparks+.png";
 //                break;
             case SILVER:
-                return rankUrl + "silver.png";
+                return rankUrl + "Lights.png";
 //                break;
             case SHINING_SILVER:
-                return rankUrl + "shining_silver.png";
+                return rankUrl + "Lights+.png";
 //                break;
             case GOLD:
-                return rankUrl + "gold.png";
+                return rankUrl + "Colors.png";
 //                break;
             case BEYOND_GOLD:
-                return rankUrl + "beyond_gold.png";
+                return rankUrl + "Colors+.png";
 //                break;
             case PLATINUM:
-                return rankUrl + "platinum.png";
+                return rankUrl + "Skybreak.png";
 //                break;
             case SPARKLING_PLATINUM:
-                return rankUrl + "sparkling_platinum.png";
+                return rankUrl + "Icefall.png";
 //                break;
             case PLATINUM_SUMMIT:
-                return rankUrl + "platinum_summit.png";
+                return rankUrl + "Summit.png";
 //                break;
             case UNRANKED:
             default:
-                return rankUrl + "unranked.png";
+                return rankUrl + "Unranked.png";
 //                break;
         }
     }
     public static String getVersionIcon() {
         if (Flames.version.startsWith("6.")) return "https://www.severalcircles.com/flames/assets/versions/6.png";
+        if (Flames.version.startsWith("7.")) return "https://www.severalcircles.com/flames/assets/versions/7.0-snapshot.png";
         return "https://www.severalcircles.com/flames/assets/versions/" + Flames.version + ".png";
     }
 

@@ -35,9 +35,6 @@ public class Analysis {
         }
     }
 
-    /**
-     * @return true if message mentions french toast, else false.
-     */
     public static List<Entity> analyzeEntities(String message) throws IOException {
         boolean toast = false;
         // Instantiate the Language client com.google.cloud.language.v1.LanguageServiceClient

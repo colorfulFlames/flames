@@ -30,7 +30,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent {
-    public void register() {Flames.api.addEventListener(this);}
 
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
@@ -80,7 +79,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             }
         } else {
             Logger.getGlobal().log(Level.FINE, "New Conversation");
-            Conversation conversation = new Conversation(event.getChannel());
+            Conversation conversation = new Conversation(event.getChannel().asTextChannel());
             try {
                 conversation.processMessage(event.getMessage(), finishedAnalysis);
             } catch (ExpiredConversationException e) {

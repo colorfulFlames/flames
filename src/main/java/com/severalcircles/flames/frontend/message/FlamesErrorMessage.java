@@ -26,7 +26,6 @@ public abstract class FlamesErrorMessage implements FlamesEmbed {
         errorCode = "500-999";
 //        this.msgRef = msgRef;
     }
-    @Override
     public MessageEmbed get() {
         return new EmbedBuilder()
                 .setAuthor(String.format(resources.getString("author"), Flames.api.getSelfUser().getName()))

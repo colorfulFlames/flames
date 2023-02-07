@@ -48,20 +48,6 @@ public class FlamesUser implements FlamesData {
 
     private UserConfig config;
 
-    public FlamesUser(int score, float emotion, Instant lastSeen, int streak, String discordId, int consent, UserFunFacts funFacts, double dataVersion, UserConfig config, UserRelationships relationships) {
-        this.score = score;
-        this.emotion = emotion;
-        this.lastSeen = lastSeen;
-        this.streak = streak;
-        this.discordId = discordId;
-//        this.stats = stats;
-        this.consent = consent;
-        this.funFacts = funFacts;
-        this.dataVersion = dataVersion;
-        this.config = config;
-        this.relationships = relationships;
-    }
-
     public UserFunFacts getFunFacts() {
         return funFacts;
     }
@@ -72,13 +58,13 @@ public class FlamesUser implements FlamesData {
      */
     public Properties createData() {
         Properties data = new Properties();
-        data.put("score", score + "");
-        data.put("emotion", emotion + "");
+        data.put("score", String.valueOf(score));
+        data.put("emotion", String.valueOf(emotion));
         data.put("lastSeen", lastSeen.toString());
-        data.put("streak", streak + "");
+        data.put("streak", String.valueOf(streak));
         data.put("discordId", discordId);
-        data.put("consent", consent + "");
-        data.put("version", dataVersion + "");
+        data.put("consent", String.valueOf(consent));
+        data.put("version", String.valueOf(dataVersion));
         return data;
     }
 

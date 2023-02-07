@@ -7,6 +7,7 @@ package com.severalcircles.flames.data.global;
 import com.severalcircles.flames.data.FlamesDataManager;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,11 +30,11 @@ public class GlobalData {
         Logger.getGlobal().log(Level.FINE, "Saving global data");
         Properties properties = new Properties();
 //        properties.put("averageScore", averageScore + "");
-        properties.put("globalScore", globalScore + "");
-        properties.put("participants", participants + "");
+        properties.put("globalScore", String.valueOf(globalScore));
+        properties.put("participants", String.valueOf(participants));
         File file = new File(FlamesDataManager.flamesDirectory.getAbsolutePath() + "/global.properties");
         file.createNewFile();
-        OutputStream outputStream = new FileOutputStream(file);
+        OutputStream outputStream = Files.newOutputStream(file.toPath());
         properties.store(outputStream, "Flames Global Data File");
     }
 
@@ -44,15 +45,16 @@ public class GlobalData {
     @SuppressWarnings("deprecation")
     public static void read() throws IOException {
         File file = new File(FlamesDataManager.flamesDirectory.getAbsolutePath() + "/global.properties");
+        //noinspection ResultOfMethodCallIgnored
         file.createNewFile();
         @SuppressWarnings("deprecation") InputStream inputStream = file.toURL().openStream();
         Properties properties = new Properties();
         properties.load(inputStream);
 //        averageScore = Integer.parseInt(properties.get("averageScore") + "");
         try {
-            globalScore = Integer.parseInt(properties.get("globalScore") + "");
+            globalScore = Integer.parseInt(String.valueOf(properties.get("globalScore")));
 
-            participants = Integer.parseInt(properties.get("participants") + "");
+            participants = Integer.parseInt(String.valueOf(properties.get("participants")));
         } catch (NumberFormatException e) {
             globalScore = 1;
             participants = 1;

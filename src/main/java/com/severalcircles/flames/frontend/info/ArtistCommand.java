@@ -54,7 +54,7 @@ public class ArtistCommand implements FlamesCommand {
                 .setThumbnail(artist.getImage())
                 .setDescription("Artist on Spotify")
                 .addField("Genre", artist.getGenre(), true)
-                .addField("Followers", artist.getFollowers() + "", true)
+                .addField("Followers", String.valueOf(artist.getFollowers()), true)
                 .addField("Flames Rank", popularity, true)
                 .setTimestamp(Instant.now())
                 .setFooter("Flames", Flames.api.getSelfUser().getAvatarUrl()).build();
