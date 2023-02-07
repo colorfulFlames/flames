@@ -31,6 +31,7 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -136,7 +137,8 @@ public class Flames {
         Runtime.getRuntime().addShutdownHook(new ExitFlames());
         // --- Connecting to the API and Logging in to Discord ---
         try {
-            api = JDABuilder.createDefault(System.getenv("FlamesToken")).build();
+            api = JDABuilder.createDefault(System.getenv("FlamesToken"))
+                    .enableIntents(GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT).build();
             api.awaitReady();
         } catch (InterruptedException e) {
             e.printStackTrace();
