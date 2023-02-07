@@ -39,7 +39,7 @@ public class FunFactsEmbed implements FlamesEmbed {
                 .addField(resources.getString("highScore"), StringUtil.formatScore(funFacts.getHighestFlamesScore()), true)
                 .addField(resources.getString("lowScore"), StringUtil.formatScore(funFacts.getLowestFlamesScore()), true)
                 .setTimestamp(Instant.now())
-                .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(String.valueOf(Ranking.getRank(flamesUser.getScore())))), user.getAvatarUrl())
+                .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("scoreFormat"), flamesUser.getScore() + ""), user.getAvatarUrl())
                 .build();
     }
 }
