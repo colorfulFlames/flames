@@ -15,7 +15,7 @@ class FlamesTest {
 
     @Test
     void main() throws IOException {
-        Flames.main(null);
+        Flames.main(new String[]{});
         assertNotNull(Flames.api);
         assertNotNull(Flames.version);
         Flames.api.shutdownNow();
