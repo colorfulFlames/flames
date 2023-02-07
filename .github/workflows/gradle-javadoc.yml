@@ -31,7 +31,7 @@ jobs:
     # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
     # the publishing section of your build.gradle
     - name: Build Javadoc
-      run: gradle javadoc -Xdoclint:none
+      run: gradle javadoc
     - name: Copy Javadoc to Pages
       run: cp -R ./build/docs/javadoc/* ./docs
     - name: Commit files
