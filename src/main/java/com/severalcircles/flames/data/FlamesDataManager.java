@@ -191,7 +191,12 @@ public class FlamesDataManager {
             new FlamesDataUpdater(fluser).run();
         }
 //        stats = new UserStats(Integer.parseInt(statsdata.get("exp") + ""), Integer.parseInt(statsdata.get("level") + ""), Integer.parseInt(statsdata.get("POW") + ""), Integer.parseInt(statsdata.get("RES") + ""), Integer.parseInt(statsdata.get("LUCK") + ""), Integer.parseInt(statsdata.get("RISE") + ""), Integer.parseInt(statsdata.get("CAR") + ""));
-        config = new UserConfig(Locale.forLanguageTag(String.valueOf(configdata.get("locale"))));
+        if (configdata.get("qotdAllowed") == null | configdata.get("favQuoteAllowed") == null) {
+            configdata.put("qotdAllowed", true);
+            configdata.put("favQuoteAllowed", true);
+            System.out.println(configdata);
+        }
+        config = new UserConfig(Locale.forLanguageTag(String.valueOf(configdata.get("locale"))), Boolean.valueOf(configdata.get("qotdAllowed").toString()), Boolean.valueOf(configdata.get("favQuoteAllowed").toString()));
         relationshipData.forEach((key, value) -> userRelationships.addRelationship(key.toString(), Integer.parseInt(value.toString())));
 //        fluser.setStats(stats);
         fluser.setFunFacts(funFacts);

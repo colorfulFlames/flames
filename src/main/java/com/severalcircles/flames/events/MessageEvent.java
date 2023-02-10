@@ -53,7 +53,6 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             return;
         } catch (ConsentException e) {
             logger.log(Level.FINE, "Not processing " + user.getName() + "'s message because they haven't consented yet.");
-            e.printStackTrace();
             return;
         } catch (DataVersionException e) {
             e.printStackTrace();
@@ -90,7 +89,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             ConversationsController.activeConversations.forEach((element, index) -> System.out.println(element));
         }
         // Check quote of the day
-        if (!Today.quote[2].equals(event.getAuthor().getId())) {
+        if (!Today.quote[2].equals(event.getAuthor().getId()) && flamesUser.getConfig().isQotdAllowed()) {
             if (finishedAnalysis.getEmotion() > Today.quoteEmotion) {
                 Today.quote[0] = event.getMessage().getContentRaw();
                 Today.quote[1] = event.getAuthor().getName();

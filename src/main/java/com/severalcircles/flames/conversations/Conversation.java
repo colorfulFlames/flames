@@ -94,7 +94,7 @@ public class Conversation {
             FlamesUser user = conversationCache.get(element.getId());
             userList.forEach((member) -> user.getRelationships().addRelationship(member.getId(), 1));
             if (user.getDiscordId().equals(message.getAuthor().getId())) {
-                if (finalNewFavorite | user.getFunFacts().getFavoriteQuote().equals("I haven't said anything epic yet.")) user.getFunFacts().setFavoriteQuote(message.getContentRaw());
+                if ((finalNewFavorite | user.getFunFacts().getFavoriteQuote().equals("I haven't said anything epic yet.")) && user.getConfig().isFavQuoteAllowed()) user.getFunFacts().setFavoriteQuote(message.getContentRaw());
                 int score = (int) Math.round((finishedAnalysis.getEmotion() + (conversationCache.size() * 10)) * emotion);
                 user.setScore(user.getScore() + score);
                 user.setEmotion(user.getEmotion() + (float) emotion);

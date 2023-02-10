@@ -33,6 +33,7 @@ public class ButtonEvent extends ListenerAdapter implements FlamesDiscordEvent {
         api.addEventListener(new ButtonEvent());
         buttonActionMap.put("consentn't", new ConsentButtonAction());
         buttonActionMap.put("consent", new ConsentButtonAction());
+        buttonActionMap.put("noQotd", new ConsentButtonAction());
         buttonActionMap.put("mydata", new MyDataButtonAction());
         Logger.getGlobal().log(Level.FINE, "Registering " + MessageEvent.class.getName());
     }
