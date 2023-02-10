@@ -95,8 +95,13 @@ public class Conversation {
             userList.forEach((member) -> user.getRelationships().addRelationship(member.getId(), 1));
             if (user.getDiscordId().equals(message.getAuthor().getId())) {
                 if ((finalNewFavorite | user.getFunFacts().getFavoriteQuote().equals("I haven't said anything epic yet.")) && user.getConfig().isFavQuoteAllowed()) user.getFunFacts().setFavoriteQuote(message.getContentRaw());
-                int score = (int) Math.round((finishedAnalysis.getEmotion() + (conversationCache.size() * 10)) * emotion);
-                user.setScore(user.getScore() + score);
+                double score = Math.round(finishedAnalysis.getEmotion() * 10);
+                System.out.println(emotion);
+                if (score < 0) score *= 2.5;
+                user.setScore(user.getScore() + (int) score);
+                System.out.println(score);
+                System.out.println((int) score);
+                System.out.println(user.getScore());
                 user.setEmotion(user.getEmotion() + (float) emotion);
                 if (user.getEmotion() > user.getFunFacts().getHighestEmotion()) {
                     user.getFunFacts().setHighestEmotion(user.getEmotion());
@@ -114,6 +119,11 @@ public class Conversation {
                 }
             }
             conversationCache.put(element.getId(), user);
+            try {
+                FlamesDataManager.save(user);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         });
         conversationCache.forEach((key, value) -> {
             try {

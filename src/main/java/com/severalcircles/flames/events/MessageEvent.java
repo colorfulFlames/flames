@@ -71,6 +71,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         if (ConversationsController.activeConversations.containsKey(event.getChannel().getId())) {
             Logger.getGlobal().log(Level.FINE, "Already in conversation");
             try {
+                System.out.println(finishedAnalysis);
                 ConversationsController.activeConversations.get(event.getChannel().getId()).processMessage(event.getMessage(), finishedAnalysis);
             } catch (ExpiredConversationException e) {
                 logger.log(Level.FINE, "Conversation at " + event.getChannel().getId() + " is expired, removing it from the conversations list.");

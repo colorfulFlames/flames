@@ -31,6 +31,8 @@ public class Analysis {
             System.out.printf("Text: %s%n", message);
             System.out.printf("Sentiment: %s, %s%n", sentiment.getScore(), sentiment.getMagnitude());
 //            analyzeEntities(message);
+            language.shutdownNow();
+            while (!language.isShutdown()){}
             return sentiment;
         }
     }
@@ -52,6 +54,8 @@ public class Analysis {
             if (!entityCache.containsKey(element.getName())) entityCache.put(element.getName(), 1);
             else entityCache.put(element.getName(), entityCache.get(element.getName()) + 1);
         });
+        language.shutdownNow();
+        while (!language.isShutdown()) {}
         return response.getEntitiesList();
     }
 }
