@@ -8,14 +8,11 @@ import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.conversations.Conversation;
 import com.severalcircles.flames.conversations.ConversationsController;
 import com.severalcircles.flames.conversations.ExpiredConversationException;
-import com.severalcircles.flames.data.DataVersionException;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.data.user.consent.ConsentException;
-//import com.severalcircles.flames.data.user.wildfire.Wildfire;
+import com.severalcircles.flames.exception.ConsentException;
 import com.severalcircles.flames.external.analysis.Analysis;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
-import com.severalcircles.flames.external.dialog.DialogSession;
 import com.severalcircles.flames.frontend.today.Today;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.User;
@@ -53,9 +50,6 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             return;
         } catch (ConsentException e) {
             logger.log(Level.FINE, "Not processing " + user.getName() + "'s message because they haven't consented yet.");
-            return;
-        } catch (DataVersionException e) {
-            e.printStackTrace();
             return;
         }
 //        Wildfire.processMessage(event.getMessage());
@@ -99,19 +93,18 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             Logger.getGlobal().log(Level.FINE, "Quote of the day is now " + Arrays.toString(Today.quote));
             flamesUser.setScore(flamesUser.getScore() + 864);
         }
-        if (event.getMessage().getContentRaw().toUpperCase(Locale.ROOT).startsWith("FLAMES,")) {
-            DialogSession session = new DialogSession();
-
-            try {
-                String[] response = session.processMessage(event.getMessage().getContentRaw().replaceAll("([fF])+lames, ", ""), event.getChannel().getId()).split("~");
-                System.out.println(response[0] + "~" + response[1]);
-                if (response[1].replace("~","").contains("&")) new IntentEvent().execute(response, event);
-                event.getMessage().reply(response[0]).complete();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//        if (event.getMessage().getContentRaw().toUpperCase(Locale.ROOT).startsWith("FLAMES,")) {
+//            DialogSession session = new DialogSession();
+//
+//            try {
+//                String[] response = session.processMessage(event.getMessage().getContentRaw().replaceAll("([fF])+lames, ", ""), event.getChannel().getId()).split("~");
+//                System.out.println(response[0] + "~" + response[1]);
+////                if (response[1].replace("~","").contains("&")) new IntentEvent().execute(response, event);
+//                event.getMessage().reply(response[0]).complete();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
         }
-    }
 
     public void register(JDA api) {
         Logger.getGlobal().log(Level.FINE, "Registering " + MessageEvent.class.getName());

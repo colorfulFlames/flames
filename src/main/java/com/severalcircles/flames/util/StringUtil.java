@@ -4,13 +4,10 @@
 
 package com.severalcircles.flames.util;
 
-import com.severalcircles.flames.data.DataVersionException;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.data.user.consent.ConsentException;
 import net.dv8tion.jda.api.entities.User;
 
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.Instant;
 import java.util.Calendar;
@@ -73,7 +70,7 @@ public class StringUtil {
         FlamesUser flamesUser;
         try {
             flamesUser = FlamesDataManager.readUser(user);
-        } catch (IOException | ConsentException | DataVersionException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return user.getName();
         }

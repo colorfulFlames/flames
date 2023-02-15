@@ -5,16 +5,14 @@
 package com.severalcircles.flames.conversations;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.data.DataVersionException;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.data.user.consent.ConsentException;
+import com.severalcircles.flames.exception.ConsentException;
+import com.severalcircles.flames.exception.handle.ExceptionHandler;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
 import com.severalcircles.flames.frontend.today.Today;
 import net.dv8tion.jda.api.entities.Message;
-//import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
-//import net.dv8tion.jda.api.entitiesGuildMessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.middleman.GuildMessageChannel;
 
@@ -84,13 +82,10 @@ public class Conversation {
             if (!conversationCache.containsKey(element.getId())) {
                 try {
                     conversationCache.put(element.getId(), FlamesDataManager.readUser(element));
-                } catch (IOException | DataVersionException e) {
-                    e.printStackTrace();
-                    return;
-                } catch (ConsentException e) {
-                    return;
+            } catch (ConsentException ignored) {return;}
+                catch (Exception e) {
+                    new ExceptionHandler(e).handle();
                 }
-            }
             FlamesUser user = conversationCache.get(element.getId());
             userList.forEach((member) -> user.getRelationships().addRelationship(member.getId(), 1));
             if (user.getDiscordId().equals(message.getAuthor().getId())) {
@@ -124,7 +119,7 @@ public class Conversation {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        });
+        }
         conversationCache.forEach((key, value) -> {
             try {
                 FlamesDataManager.save(value);
@@ -134,5 +129,5 @@ public class Conversation {
             }
         });
         conversationCache.clear();
-    }
-}
+    });
+}}

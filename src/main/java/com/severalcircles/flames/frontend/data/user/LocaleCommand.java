@@ -4,12 +4,12 @@
 
 package com.severalcircles.flames.frontend.data.user;
 
-import com.severalcircles.flames.frontend.FlamesCommand;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.UserSetting;
-import com.severalcircles.flames.frontend.BadArgumentsException;
-import com.severalcircles.flames.frontend.message.fourhundred.BadArgumentsErrorMessage;
+import com.severalcircles.flames.exception.FlamesHandlerEmbed;
+import com.severalcircles.flames.exception.user.BadArgumentsException;
+import com.severalcircles.flames.frontend.FlamesCommand;
 import com.severalcircles.flames.frontend.message.twohundred.UpdatedSettingsEmbed;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
@@ -35,7 +35,7 @@ public class LocaleCommand implements FlamesCommand {
                 newLocale = Locale.forLanguageTag("tra");
                 break;
             default:
-                event.replyEmbeds(new BadArgumentsErrorMessage(new BadArgumentsException("Locale must be one of `en,tra,es`"), event.getUser()).get()).complete();
+                event.replyEmbeds(new FlamesHandlerEmbed(new BadArgumentsException(sender,"Locale must be en, es, or tra.", event.getUser())).get()).complete();
                 return;
         }
         sender.getConfig().setLocale(newLocale);

@@ -9,6 +9,7 @@ import com.bugsnag.Bugsnag;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.events.*;
+import com.severalcircles.flames.exception.FlamesException;
 import com.severalcircles.flames.external.spotify.ReconnectRunnable;
 import com.severalcircles.flames.external.spotify.SpotifyConnection;
 import com.severalcircles.flames.frontend.FlamesCommand;
@@ -71,7 +72,7 @@ public class Flames {
      */
     public static Bugsnag bugsnag;
     static int fatalErrorCounter;
-
+    public static boolean runningDebug = false;
     public static ResourceBundle getCommonRsc(Locale locale) {
         return ResourceBundle.getBundle("Common", locale);
     }
@@ -95,6 +96,8 @@ public class Flames {
         InputStream is = Flames.class.getClassLoader().getResourceAsStream("version.properties");
         properties.load(is);
         version = properties.getProperty("version");
+        if (args.length > 0) runningDebug = args[0].equals("--debug");
+        if (runningDebug) Logger.getGlobal().info("Running in debugging mode.");
         FlamesDataManager.prepare();
         reportHeader = String.format(reportHeader, version);
         String logName = "Flames " + version + "@" + InetAddress.getLocalHost().getHostName() + " " + Instant.now().truncatedTo(ChronoUnit.SECONDS).toString().replace(":", " ").replace("T", " T") + ".log";
@@ -180,7 +183,7 @@ public class Flames {
         new MessageEvent().register(api);
         new ButtonEvent().register(api);
         new SelectMenuEvent().register(api);
-        new IntentEvent().register();
+//        new IntentEvent().register();
         Logger.getGlobal().info("Done loading. Enjoy!");
     }
 
@@ -191,7 +194,17 @@ public class Flames {
         fatalErrorCounter++;
         if (fatalErrorCounter > 10) {
             Logger.getGlobal().log(Level.SEVERE, "Flames has detected a recurring fatal problem. To protect Flames' data, it will now exit. There may be stack traces above with more information.");
-            bugsnag.notify(new FlamesProtectException("Fatal error counter went over 5"));
+            bugsnag.notify(new FlamesException("Fatal error counter went over 5") {
+                @Override
+                public String getCode() {
+                    return null;
+                }
+
+                @Override
+                public ResourceBundle getRsc(Locale locale) {
+                    return null;
+                }
+            });
             File file = new File(FlamesDataManager.flamesDirectory.getAbsolutePath() + "/logs/Flames FatalReport:" + Instant.now().toString() + ".log");
             try {
                 //noinspection ResultOfMethodCallIgnored

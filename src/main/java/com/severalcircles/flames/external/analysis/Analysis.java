@@ -32,6 +32,7 @@ public class Analysis {
             System.out.printf("Sentiment: %s, %s%n", sentiment.getScore(), sentiment.getMagnitude());
 //            analyzeEntities(message);
             language.shutdownNow();
+            //noinspection StatementWithEmptyBody
             while (!language.isShutdown()){}
             return sentiment;
         }
@@ -55,6 +56,7 @@ public class Analysis {
             else entityCache.put(element.getName(), entityCache.get(element.getName()) + 1);
         });
         language.shutdownNow();
+        //noinspection StatementWithEmptyBody
         while (!language.isShutdown()) {}
         return response.getEntitiesList();
     }

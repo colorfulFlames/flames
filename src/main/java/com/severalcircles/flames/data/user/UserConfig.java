@@ -51,8 +51,8 @@ public class UserConfig implements FlamesData {
     public Properties createData() {
         Properties properties = new Properties();
         properties.put("locale", this.locale.toLanguageTag());
-        properties.put("qotdAllowed", this.qotdAllowed + "");
-        properties.put("favQuoteAllowed", this.favQuoteAllowed + "");
+        properties.put("qotdAllowed", String.valueOf(this.qotdAllowed));
+        properties.put("favQuoteAllowed", String.valueOf(this.favQuoteAllowed));
         return properties;
     }
 }

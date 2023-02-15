@@ -6,8 +6,10 @@ package com.severalcircles.flames.frontend.thanks;
 
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.exception.FlamesMetaException;
+import com.severalcircles.flames.exception.handle.ExceptionHandler;
+import com.severalcircles.flames.exception.handle.FlamesRuntimeExceptionHandler;
 import com.severalcircles.flames.frontend.FlamesEmbed;
-import com.severalcircles.flames.frontend.message.fivehundred.GenericErrorMessage;
 import com.severalcircles.flames.frontend.today.Today;
 import com.severalcircles.flames.util.StringUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -16,8 +18,10 @@ import net.dv8tion.jda.api.entities.User;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.*;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ResourceBundle;
+
 
 public class ThanksEmbed implements FlamesEmbed {
     private final User thanked;
@@ -37,7 +41,7 @@ public class ThanksEmbed implements FlamesEmbed {
     }
 
     public MessageEmbed get() {
-        if (thanked.getId().equals(sender.getId())) return new EmbedBuilder().setTitle(resources.getString("noThankSelf")).setColor(Color.red).build();
+        if (thanked.getId().equals(sender.getId())) return new FlamesRuntimeExceptionHandler(new FlamesMetaException("You cannot thank yourself."), this.getClass()).handleThenGetFrontend();
         if (!Today.thanksgivingThanks.containsKey(sender.getId())) Today.thanksgivingThanks.put(sender.getId(), new LinkedList<>());
         if ((!Today.isThanksgiving && Today.thanks.contains(sender.getId())) | (Today.isThanksgiving && Today.thanksgivingThanks.get(sender.getId()).contains(thanked.getId()))) {
             return new EmbedBuilder().setTitle(String.format(resources.getString("alreadyThanked"), sender.getName())).setColor(Color.red).build();
@@ -48,7 +52,7 @@ public class ThanksEmbed implements FlamesEmbed {
             FlamesDataManager.save(flamesUserThanked);
         } catch (IOException e) {
             e.printStackTrace();
-            return new GenericErrorMessage(e).get();
+            return new ExceptionHandler(e).handleThenGetFrontend();
         }
         Today.thanks.add(sender.getId());
         List<String> thasnked;

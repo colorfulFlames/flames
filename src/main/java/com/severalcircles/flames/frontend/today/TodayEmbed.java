@@ -10,7 +10,6 @@ import com.severalcircles.flames.external.ImageSearch;
 import com.severalcircles.flames.external.analysis.Analysis;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import com.severalcircles.flames.util.Emotion;
-import com.severalcircles.flames.util.Ranking;
 import com.severalcircles.flames.util.StringUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -56,7 +55,7 @@ public class TodayEmbed implements FlamesEmbed {
                     .addBlankField(false)
                     .addField(resources.getString("allAbout"), resources.getString("tomorrowBring"), false)
                     .setThumbnail(ImageSearch.searchImage(trendingEntity))
-                    .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("scoreFormat"), flamesUser.getScore() + ""), user.getAvatarUrl())
+                    .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("scoreFormat"), flamesUser.getScore()), user.getAvatarUrl())
                     .setColor(Color.decode("#F1D302"))
                     .build();
         } catch (IOException e) {
