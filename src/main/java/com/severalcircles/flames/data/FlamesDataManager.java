@@ -5,15 +5,12 @@
 package com.severalcircles.flames.data;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.data.guild.FlamesGuild;
 import com.severalcircles.flames.data.user.*;
-import com.severalcircles.flames.data.user.consent.ConsentException;
+import com.severalcircles.flames.exception.ConsentException;
 import com.severalcircles.flames.util.Rank;
-import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.User;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.time.Instant;
 import java.util.Locale;
 import java.util.Objects;
@@ -131,7 +128,7 @@ public class FlamesDataManager {
      * @return A FlamesUser created from the data file
      * @throws ConsentException If the user hasn't consented yet won't return data
      */
-    public static FlamesUser readUser(User user) throws IOException, ConsentException, DataVersionException {
+    public static FlamesUser readUser(User user) throws IOException, ConsentException, UnsupportedOperationException {
         FlamesUser fluser = new FlamesUser();
 //        UserStats stats = new UserStats();
         UserFunFacts funFacts = new UserFunFacts();
@@ -187,11 +184,13 @@ public class FlamesDataManager {
         funFacts.setLowestEmotion(Float.parseFloat(String.valueOf(funfactsdata.get("lowestEmotion"))));
         try {funFacts.setFavoriteQuote(String.valueOf(funfactsdata.get("favoriteQuote"))); } catch (NullPointerException ignored) {} // It doesn't matter lol
         if (config.getLocale() == null) config.setLocale(Locale.getDefault());
-        if (new File(udir.getAbsolutePath() + "/" + FlamesUser.latestVersion + ".flamesfile").createNewFile()) {
-            new FlamesDataUpdater(fluser).run();
-        }
 //        stats = new UserStats(Integer.parseInt(statsdata.get("exp") + ""), Integer.parseInt(statsdata.get("level") + ""), Integer.parseInt(statsdata.get("POW") + ""), Integer.parseInt(statsdata.get("RES") + ""), Integer.parseInt(statsdata.get("LUCK") + ""), Integer.parseInt(statsdata.get("RISE") + ""), Integer.parseInt(statsdata.get("CAR") + ""));
-        config = new UserConfig(Locale.forLanguageTag(String.valueOf(configdata.get("locale"))));
+        if (configdata.get("qotdAllowed") == null | configdata.get("favQuoteAllowed") == null) {
+            configdata.put("qotdAllowed", true);
+            configdata.put("favQuoteAllowed", true);
+            System.out.println(configdata);
+        }
+        config = new UserConfig(Locale.forLanguageTag(String.valueOf(configdata.get("locale"))), Boolean.parseBoolean(configdata.get("qotdAllowed").toString()), Boolean.parseBoolean(configdata.get("favQuoteAllowed").toString()));
         relationshipData.forEach((key, value) -> userRelationships.addRelationship(key.toString(), Integer.parseInt(value.toString())));
 //        fluser.setStats(stats);
         fluser.setFunFacts(funFacts);

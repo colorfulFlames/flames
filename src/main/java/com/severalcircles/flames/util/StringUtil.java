@@ -4,13 +4,10 @@
 
 package com.severalcircles.flames.util;
 
-import com.severalcircles.flames.data.DataVersionException;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.data.user.consent.ConsentException;
 import net.dv8tion.jda.api.entities.User;
 
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.Instant;
 import java.util.Calendar;
@@ -66,10 +63,6 @@ public class StringUtil {
         return prettyDate;
     }
     public static String formatScore(int score) {
-        if (score > 1000 && score < 1000000) {
-            return score / 1000 + "K FP";
-        }
-        if (score >= 1000000) return score / 1000000 + "M FP";
         DecimalFormat df = new DecimalFormat("###,###,###.###");
         return df.format(score).replace(".", " ") + " FP";
     }
@@ -77,7 +70,7 @@ public class StringUtil {
         FlamesUser flamesUser;
         try {
             flamesUser = FlamesDataManager.readUser(user);
-        } catch (IOException | ConsentException | DataVersionException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return user.getName();
         }

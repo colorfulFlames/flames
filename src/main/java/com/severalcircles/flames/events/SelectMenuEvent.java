@@ -4,10 +4,9 @@
 
 package com.severalcircles.flames.events;
 
-import com.severalcircles.flames.data.DataVersionException;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.data.user.consent.ConsentException;
+import com.severalcircles.flames.exception.ConsentException;
 import com.severalcircles.flames.frontend.data.user.UserDataDropdown;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.interaction.component.GenericSelectMenuInteractionEvent;
@@ -30,13 +29,12 @@ public class SelectMenuEvent extends ListenerAdapter implements FlamesDiscordEve
         FlamesUser flamesUser;
         try {
             flamesUser = FlamesDataManager.readUser(event.getUser());
-        } catch (IOException | DataVersionException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             return;
         } catch (ConsentException e) {
             e.printStackTrace();
-            //noinspection ResultOfMethodCallIgnored
-            event.reply("Please agree to the consent prompt first.");
+            event.reply("Please agree to the consent prompt first.").complete();
             return;
         }
         String[] menuInputData = event.getValues().toString().replace("[", "").replace("]", "").split(":");

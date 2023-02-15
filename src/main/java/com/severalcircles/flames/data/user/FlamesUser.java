@@ -14,8 +14,6 @@ import java.util.Properties;
  */
 public class FlamesUser implements FlamesData {
 
-    public static final double latestVersion = 2.2;
-
     private int score;
     private float emotion;
     private Instant lastSeen;
@@ -32,10 +30,6 @@ public class FlamesUser implements FlamesData {
 
     public void setRelationships(UserRelationships relationships) {
         this.relationships = relationships;
-    }
-
-    public double getDataVersion() {
-        return dataVersion;
     }
 
     public UserConfig getConfig() {

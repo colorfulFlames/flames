@@ -4,14 +4,11 @@
 
 package com.severalcircles.flames.frontend.data.user;
 
-import com.severalcircles.flames.FlamesError;
-import com.severalcircles.flames.data.DataVersionException;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.data.user.consent.ConsentException;
+import com.severalcircles.flames.exception.ConsentException;
 import com.severalcircles.flames.frontend.FlamesCommand;
 import com.severalcircles.flames.frontend.data.user.embed.GetAlongEmbed;
-import com.severalcircles.flames.frontend.message.fourhundred.NotFlamesUserErrorMessage;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
@@ -25,13 +22,13 @@ public class GetAlongCommand implements FlamesCommand {
         User victim = Objects.requireNonNull(event.getOption("user")).getAsUser();
         try {
             FlamesUser flvictim = FlamesDataManager.readUser(victim);
-        } catch (IOException | DataVersionException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         } catch (ConsentException e) {
-            event.replyEmbeds(new NotFlamesUserErrorMessage(e).get()).setEphemeral(true).complete();
+            event.replyEmbeds(e.getHandler().handleThenGetFrontend()).complete();
             e.printStackTrace();
         }
-        int score = sender.getRelationships().getRelationships().get(victim);
+        @SuppressWarnings("SuspiciousMethodCalls") int score = sender.getRelationships().getRelationships().get(victim);
         event.replyEmbeds(new GetAlongEmbed(event.getUser(), sender, victim, score).get()).complete();
     }
 }

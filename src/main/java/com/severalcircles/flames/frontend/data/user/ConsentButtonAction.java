@@ -27,17 +27,22 @@ public class ConsentButtonAction implements FlamesButtonAction {
                 .setAuthor("Thank You", event.getUser().getAvatarUrl())
                 .setTitle("Welcome to Flames, " + event.getUser().getName())
                 .setDescription("We're so happy you finally made it.")
+                    .addField("One last question...", "Sometimes, you might say something that Flames thinks is pretty cool, and that message may be viewable by others in Today. If you don't want that, you can opt out using the button below.", true)
                 .setFooter("Flames").build();
 //        event.getMessage().delete();
-        event.editMessageEmbeds(thanks).complete();
+        event.editMessageEmbeds(thanks).setActionRow(net.dv8tion.jda.api.interactions.components.buttons.Button.danger("noQotd", "Do not use my messages as Quote of the Day")).complete();
 //            Consent.welcomeToFlames(event.getUser());
             GlobalData.participants++;
             GlobalData.write();
             user.setConsent(1);
-        } else {
+        } else if (event.getComponentId().equals("consentn't")) {
             event.editMessage("Alright. Let me know if you change your mind.").queue();
 //        FlamesUser user;
         user.setConsent(2);
+        } else if (event.getComponentId().equals("noQotd")) {
+            event.editMessage("Alright, I won't use your messages as Quote of the Day.").complete();
+            user.getConfig().setFavQuoteAllowed(false);
+            user.getConfig().setQotdAllowed(false);
         }
         FlamesDataManager.save(user);
     }

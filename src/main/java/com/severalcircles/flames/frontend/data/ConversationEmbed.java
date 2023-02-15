@@ -10,7 +10,6 @@ import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.external.ImageSearch;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import com.severalcircles.flames.util.Emotion;
-import com.severalcircles.flames.util.Ranking;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
@@ -52,7 +51,7 @@ public class ConversationEmbed implements FlamesEmbed {
                     .addBlankField(false)
                     .addField("\"" + conversation.getQuote()[0] + "\"", " - " + conversation.getQuote()[1], false)
                     .addBlankField(false)
-                    .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(String.valueOf(Ranking.getRank(flamesUser.getScore())))), user.getAvatarUrl())
+                    .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("scoreFormat"), flamesUser.getScore()), user.getAvatarUrl())
                     .build();
         } catch (IOException | JSONException e) {
             e.printStackTrace();
@@ -66,7 +65,7 @@ public class ConversationEmbed implements FlamesEmbed {
                     .addBlankField(false)
                     .addField("\"" + conversation.getQuote()[0] + "\"", " - " + conversation.getQuote()[1], false)
                     .addBlankField(false)
-                    .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("userFooter"), user.getName(), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(String.valueOf(Ranking.getRank(flamesUser.getScore())))), user.getAvatarUrl())
+                    .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("scoreFormat"), flamesUser.getScore()), user.getAvatarUrl())
                     .build();
         }
     }

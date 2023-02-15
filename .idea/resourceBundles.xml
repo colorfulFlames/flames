@@ -8,10 +8,22 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/error/NotFlamesUserMessage_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/error/NotFlamesUserMessage_es.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/error/NotFlamesUserMessage_tra.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/features/AboutEmbed.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/features/AboutEmbed_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/features/AboutEmbed_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/features/AboutEmbed_tra.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/exceptions/BadArgumentsException.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/exceptions/BadArgumentsException_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/exceptions/BadArgumentsException_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/exceptions/BadArgumentsException_tra.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/exceptions/ConsentException.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/exceptions/ConsentException_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/exceptions/ConsentException_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/exceptions/ConsentException_tra.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/exceptions/FlamesMetaException.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/exceptions/FlamesMetaException_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/exceptions/FlamesMetaException_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/exceptions/FlamesMetaException_tra.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/exceptions/Generic.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/exceptions/Generic_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/exceptions/Generic_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/exceptions/Generic_tra.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/DebugEmbed.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/DebugEmbed_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/DebugEmbed_es.properties" />
@@ -24,7 +36,6 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/features/ThanksEmbed.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/ThanksEmbed_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/ThanksEmbed_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/features/TodayEmbed.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/TodayEmbed_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/TodayEmbed_es.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/ConversationEmbed.properties" />
@@ -123,7 +134,6 @@
       <base-name>ThanksEmbed</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/TodayEmbed.properties" />
       <file value="file://$PROJECT_DIR$/src/main/resources/features/TodayEmbed_en.properties" />
       <file value="file://$PROJECT_DIR$/src/main/resources/features/TodayEmbed_es.properties" />
       <file value="file://$PROJECT_DIR$/src/main/resources/features/TodayEmbed_tra.properties" />
@@ -158,11 +168,32 @@
       <base-name>NotFlamesUserMessage</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/AboutEmbed.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/AboutEmbed_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/AboutEmbed_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/AboutEmbed_tra.properties" />
-      <base-name>AboutEmbed</base-name>
+      <file value="file://$PROJECT_DIR$/src/main/resources/exceptions/Generic.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/exceptions/Generic_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/exceptions/Generic_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/exceptions/Generic_tra.properties" />
+      <base-name>Generic</base-name>
+    </custom-resource-bundle>
+    <custom-resource-bundle>
+      <file value="file://$PROJECT_DIR$/src/main/resources/exceptions/BadArgumentsException.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/exceptions/BadArgumentsException_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/exceptions/BadArgumentsException_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/exceptions/BadArgumentsException_tra.properties" />
+      <base-name>BadArgumentsException</base-name>
+    </custom-resource-bundle>
+    <custom-resource-bundle>
+      <file value="file://$PROJECT_DIR$/src/main/resources/exceptions/FlamesMetaException.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/exceptions/FlamesMetaException_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/exceptions/FlamesMetaException_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/exceptions/FlamesMetaException_tra.properties" />
+      <base-name>FlamesMetaException</base-name>
+    </custom-resource-bundle>
+    <custom-resource-bundle>
+      <file value="file://$PROJECT_DIR$/src/main/resources/exceptions/ConsentException.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/exceptions/ConsentException_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/exceptions/ConsentException_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/exceptions/ConsentException_tra.properties" />
+      <base-name>ConsentException</base-name>
     </custom-resource-bundle>
   </component>
 </project>
