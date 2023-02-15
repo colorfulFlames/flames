@@ -5,7 +5,7 @@
 package com.severalcircles.flames.frontend.today;
 
 import com.severalcircles.flames.external.analysis.Analysis;
-import com.severalcircles.flames.frontend.today.qotd.QOTD;
+//import com.severalcircles.flames.frontend.today.qotd.QOTD;
 
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
@@ -30,6 +30,6 @@ public class ResetTodayRunnable implements Runnable {
         System.out.println(Calendar.getInstance().toInstant().truncatedTo(ChronoUnit.DAYS).compareTo(thanksgiving.toInstant().truncatedTo(ChronoUnit.DAYS)));
         if (Calendar.getInstance().toInstant().truncatedTo(ChronoUnit.DAYS).compareTo(thanksgiving.toInstant().truncatedTo(ChronoUnit.DAYS)) == 0) Today.isThanksgiving = true;
         Today.thanksgivingThanks = new HashMap<>();
-        QOTD.nextQuestion();
+//        QOTD.nextQuestion();
     }
 }
