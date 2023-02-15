@@ -8,7 +8,6 @@ import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import com.severalcircles.flames.frontend.today.Today;
-import com.severalcircles.flames.util.Ranking;
 import com.severalcircles.flames.util.StringUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -53,7 +52,7 @@ public class WelcomeBackEmbed implements FlamesEmbed {
                 .addField(resources.getString("score"), StringUtil.formatScore(flamesUser.getScore()), true)
                 .setDescription(resources.getString("description"))
                 .setColor(Color.decode("#D9581C"))
-                .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("scoreFormat"), flamesUser.getScore() + ""), user.getAvatarUrl())
+                .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("scoreFormat"), flamesUser.getScore()), user.getAvatarUrl())
                 .build();
     }
 }

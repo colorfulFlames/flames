@@ -4,18 +4,14 @@
 
 package com.severalcircles.flames.events;
 
-import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.FlamesError;
-import com.severalcircles.flames.data.DataVersionException;
 import com.severalcircles.flames.data.FlamesDataManager;
-import com.severalcircles.flames.data.user.consent.Consent;
-import com.severalcircles.flames.data.user.consent.ConsentException;
+import com.severalcircles.flames.exception.FlamesException;
+import com.severalcircles.flames.exception.handle.ExceptionHandler;
+import com.severalcircles.flames.exception.handle.FlamesExceptionHandler;
 import com.severalcircles.flames.frontend.FlamesButtonAction;
 import com.severalcircles.flames.frontend.data.user.ConsentButtonAction;
 import com.severalcircles.flames.frontend.data.user.MyDataButtonAction;
-import com.severalcircles.flames.frontend.message.fourhundred.DataVersionErrorMessage;
 import net.dv8tion.jda.api.JDA;
-//import net.dv8tion.jda.api.events.interaction.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
@@ -45,9 +41,10 @@ public class ButtonEvent extends ListenerAdapter implements FlamesDiscordEvent {
         if (event.getComponentId().equals("consent") | event.getComponentId().equals("consentn't")) {
             try {
                 new ConsentButtonAction().execute(event, FlamesDataManager.readUser(event.getUser(), true));
-            } catch (IOException | ConsentException e) {
-                e.printStackTrace();
-                Flames.incrementErrorCount();
+            } catch (FlamesException e) {
+                event.replyEmbeds(new FlamesExceptionHandler(e).handleThenGetFrontend()).complete();
+            } catch (Exception e) {
+                event.replyEmbeds(new ExceptionHandler(e).handleThenGetFrontend()).complete();
             }
             return;
         }
@@ -57,18 +54,10 @@ public class ButtonEvent extends ListenerAdapter implements FlamesDiscordEvent {
                 try {
                     System.out.println(1);
                     buttonActionMap.get(event.getComponentId()).execute(event, FlamesDataManager.readUser(event.getUser()));
+                } catch (FlamesException e) {
+                    event.replyEmbeds(e.getHandler().handleThenGetFrontend()).complete();
                 } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (IllegalStateException e) {
-                    Logger.getGlobal().log(Level.INFO, "I don't care anymore");
-                } catch (ConsentException e) {
-                    if (e.consentLevel == 1) {
-                        Consent.getConsent(event.getUser());
-                    }
-                } catch (DataVersionException e) {
-                    event.replyEmbeds(new DataVersionErrorMessage(e).get()).complete();
-                    e.printStackTrace();
-                    return;
+                    event.replyEmbeds(new ExceptionHandler(e).handleThenGetFrontend()).complete();
                 }
             }
         }

@@ -8,7 +8,6 @@ import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.UserFunFacts;
 import com.severalcircles.flames.frontend.FlamesEmbed;
-import com.severalcircles.flames.util.Ranking;
 import com.severalcircles.flames.util.StringUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -39,7 +38,7 @@ public class FunFactsEmbed implements FlamesEmbed {
                 .addField(resources.getString("highScore"), StringUtil.formatScore(funFacts.getHighestFlamesScore()), true)
                 .addField(resources.getString("lowScore"), StringUtil.formatScore(funFacts.getLowestFlamesScore()), true)
                 .setTimestamp(Instant.now())
-                .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("scoreFormat"), flamesUser.getScore() + ""), user.getAvatarUrl())
+                .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("scoreFormat"), flamesUser.getScore()), user.getAvatarUrl())
                 .build();
     }
 }

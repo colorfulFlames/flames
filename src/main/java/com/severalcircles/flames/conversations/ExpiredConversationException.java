@@ -4,11 +4,23 @@
 
 package com.severalcircles.flames.conversations;
 
-import com.severalcircles.flames.FlamesError;
+import com.severalcircles.flames.exception.FlamesRuntimeException;
 
-public class ExpiredConversationException extends Exception implements FlamesError {
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+public class ExpiredConversationException extends FlamesRuntimeException {
+    public ExpiredConversationException() {
+        super("");
+    }
+
     @Override
     public String getCode() {
         return "406-010";
+    }
+
+    @Override
+    public ResourceBundle getRsc(Locale locale) {
+        return null;
     }
 }
