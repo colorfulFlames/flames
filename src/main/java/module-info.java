@@ -10,5 +10,6 @@ module FlamesPlus.main {
     requires java.logging;
     requires org.json;
     requires java.desktop;
+    requires annotations;
 
 }
