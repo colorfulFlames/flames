@@ -25,7 +25,6 @@ public class FlamesInteractionManager extends FlamesManager {
     @Override
     public void prepare() {
         commandInteractionList.add(new BasedCommand());
-        commandInteractionList.add(new OfInCommand());
         commandInteractionList.add(new CaptionThisCommand());
         commandInteractionList.forEach(command -> {
             commandDataList.add(Commands.slash(command.getClass().getAnnotation(FlamesCommand.class).name(), command.getClass().getAnnotation(FlamesCommand.class).description()));
