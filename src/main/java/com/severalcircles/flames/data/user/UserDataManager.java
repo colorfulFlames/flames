@@ -61,7 +61,8 @@ public class UserDataManager extends FlamesManager {
                 null,
                 Locale.forLanguageTag(properties.getProperty("locale")),
                 Integer.parseInt(properties.getProperty("consent")),
-                Boolean.parseBoolean(properties.getProperty("quoteConsent")));
+                Boolean.parseBoolean(properties.getProperty("quoteConsent")),
+                Instant.parse(properties.getProperty("lastBonus")));
         fluser.setFavoriteQuote(FlamesQuote.valueOf(properties.getProperty("favoriteQuote"), fluser));}
         catch (NullPointerException e) {
             fluser = dataDefault(user);
@@ -83,7 +84,8 @@ public class UserDataManager extends FlamesManager {
                 null,
                 Locale.forLanguageTag("en-US"),
                 1,
-                true);
+                true,
+                Instant.now());
     }
     public static FlamesUser dataDefault(User user) {
         return new FlamesUser(
@@ -98,6 +100,7 @@ public class UserDataManager extends FlamesManager {
                 null,
                 Locale.forLanguageTag("en-US"),
                 0,
-                false);
+                false,
+                Instant.now());
     }
 }

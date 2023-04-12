@@ -17,6 +17,7 @@ import java.util.logging.Level;
 
 public class SystemDataManager extends FlamesManager {
     private static final File config = new File("flames.properties");
+//    private static final File secureSave = new File(System.getProperty("user.dir") + "/Flames/secure/securesave.sflp");
     private static File flamesDirectory;
     private static final Properties flamesConfig = new Properties();
     @Override
@@ -42,6 +43,11 @@ public class SystemDataManager extends FlamesManager {
             flamesDirectory.mkdir();
             Flames.getFlogger().config("Created Flames directory at " + flamesDirectory.getAbsolutePath());
         }
+//        if (!secureSave.exists()) {
+//            secureSave.createNewFile();
+//            Flames.getFlogger().config("Created secure save data at " + secureSave.getAbsolutePath());
+//        }
+
         Flames.getFlogger().fine("System Data prepared.");
     }
     public void cleanFlamesFiles() {

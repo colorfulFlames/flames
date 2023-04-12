@@ -89,6 +89,7 @@ public class Flames {
         });
         flogger.info("Starting secondary managers");
         managers2.add(new UserDataManager());
+//        managers2.add(TodayManager.newDay());
         managers2.forEach(manager -> {
             try {
                 manager.prepare();
@@ -123,7 +124,7 @@ public class Flames {
 // ------------------------
 // Why is there a microwave
 // A poem by Several Circles
-// ------------------------
+// -----------------------
 // why do they call it an oven when it's clearly a microwave
 // of in the cold food
 // of out the hot food

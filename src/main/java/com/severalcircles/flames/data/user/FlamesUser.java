@@ -4,6 +4,7 @@
 
 package com.severalcircles.flames.data.user;
 
+import com.severalcircles.flames.system.exception.AlreadyCollectedException;
 import net.dv8tion.jda.api.entities.User;
 
 import java.time.Instant;
@@ -22,8 +23,10 @@ public class FlamesUser {
     private Locale locale;
     private int consent;
     private boolean quoteConsent;
+    private Instant lastBonus;
+    private double bonusMultiplier;
 
-    public FlamesUser(User discordUser, double score, Rank rank, double highScore, double lowScore, double emotion, Instant happyDay, Instant sadDay, FlamesQuote favoriteQuote, Locale locale, int consent, boolean quoteConsent) {
+    public FlamesUser(User discordUser, double score, Rank rank, double highScore, double lowScore, double emotion, Instant happyDay, Instant sadDay, FlamesQuote favoriteQuote, Locale locale, int consent, boolean quoteConsent, Instant lastBonus, double bonusMultiplier) {
         this.discordUser = discordUser;
         this.score = score;
         this.rank = rank;
@@ -36,6 +39,8 @@ public class FlamesUser {
         this.locale = locale;
         this.consent = consent;
         this.quoteConsent = quoteConsent;
+        this.lastBonus = lastBonus;
+        this.bonusMultiplier = bonusMultiplier;
     }
 
     public User getDiscordUser() {
@@ -122,5 +127,19 @@ public class FlamesUser {
 
     public void setQuoteConsent(boolean quoteConsent) {
         this.quoteConsent = quoteConsent;
+    }
+
+    public Instant getLastBonus() {
+        return lastBonus;
+    }
+
+    public void setLastBonus(Instant lastBonus) {
+        this.lastBonus = lastBonus;
+    }
+    public double collectBonus() throws AlreadyCollectedException {
+        if (Instant.now().isBefore(lastBonus.plusSeconds(60 * 60 * 24 * 7))) throw new AlreadyCollectedException("You've already collected your bonus for this week!");
+        double bonus = 100 * bonusMultiplier;
+        bonusMultiplier += 0.1;
+        return bonus;
     }
 }
