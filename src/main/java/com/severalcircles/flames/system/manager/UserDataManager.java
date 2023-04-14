@@ -111,7 +111,7 @@ public class UserDataManager extends FlamesManager {
                 Instant.now(),
                 null,
                 Locale.forLanguageTag("en-US"),
-                0,
+                1,
                 false,
                 Instant.now(),1);
     }

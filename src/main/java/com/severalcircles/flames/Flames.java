@@ -69,6 +69,7 @@ public class Flames {
             System.exit(1);
         } catch (Exception e) {
             Flames.getFlogger().severe(e.getMessage() + " [" + MessageCodes.generateCodeError(new FlamesConnectException(e.getMessage())) + "]");
+            System.exit(1);
         }
         flogger.fine("Flames is now online!");
         flogger.resetLastClass();

@@ -8,6 +8,7 @@ import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import com.severalcircles.flames.frontend.FlamesExceptionEmbed;
 import com.severalcircles.flames.system.exception.flames.FlamesException;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -30,5 +31,8 @@ public class FlamesExceptionHandler {
         } else {
             exceptionCounts.put((Class<FlamesException>) e.getClass(), 1);
         }
+    }
+    public MessageEmbed handle() {
+        return new FlamesExceptionEmbed(Locale.ROOT, e).get();
     }
 }
