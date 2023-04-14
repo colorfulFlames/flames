@@ -2,19 +2,20 @@
  * Copyright (c) 2023 Several Circles
  */
 
-package com.severalcircles.flames.data.user;
+package com.severalcircles.flames.system.manager;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.FlamesManager;
+import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.system.exception.ExceptionID;
 import com.severalcircles.flames.frontend.ConsentEmbed;
-import com.severalcircles.flames.system.exception.ConsentException;
+import com.severalcircles.flames.system.exception.flames.ConsentException;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 
 import java.awt.*;
 import java.util.Locale;
-
+@ExceptionID("913")
 public class ConsentManager extends FlamesManager {
     @Override
     public void prepare() {

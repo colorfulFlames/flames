@@ -4,7 +4,7 @@
 
 package com.severalcircles.flames.data.user;
 
-import com.severalcircles.flames.system.exception.AlreadyCollectedException;
+import com.severalcircles.flames.system.exception.flames.AlreadyCollectedException;
 import net.dv8tion.jda.api.entities.User;
 
 import java.time.Instant;

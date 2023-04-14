@@ -5,17 +5,18 @@
 package com.severalcircles.flames.events;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.data.user.ConsentManager;
-import com.severalcircles.flames.data.user.UserDataManager;
-import com.severalcircles.flames.interactions.FlamesInteractionManager;
-import com.severalcircles.flames.system.exception.ConsentException;
+import com.severalcircles.flames.system.exception.ExceptionID;
+import com.severalcircles.flames.system.manager.ConsentManager;
+import com.severalcircles.flames.system.manager.UserDataManager;
+import com.severalcircles.flames.system.manager.FlamesInteractionManager;
+import com.severalcircles.flames.system.exception.flames.ConsentException;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-
+@ExceptionID("601")
 public class InteractionEvents extends ListenerAdapter {
     @Override
     public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {

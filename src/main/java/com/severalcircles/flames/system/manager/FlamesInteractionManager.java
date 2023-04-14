@@ -2,14 +2,14 @@
  * Copyright (c) 2023 Several Circles
  */
 
-package com.severalcircles.flames.interactions;
+package com.severalcircles.flames.system.manager;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.FlamesManager;
 import com.severalcircles.flames.interactions.button.ConsentButtons;
 import com.severalcircles.flames.interactions.button.FlamesButtonInteraction;
 import com.severalcircles.flames.interactions.slash.*;
-import com.severalcircles.flames.system.exception.NoCommandException;
+import com.severalcircles.flames.system.exception.ExceptionID;
+import com.severalcircles.flames.system.exception.runtime.NoCommandException;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@ExceptionID("930")
 public class FlamesInteractionManager extends FlamesManager {
     private static final List<FlamesSlashCommand> commandInteractionList = new ArrayList<>();
     private static final List<SlashCommandData> commandDataList = new ArrayList<>();

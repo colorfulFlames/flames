@@ -2,19 +2,24 @@
  * Copyright (c) 2023 Several Circles
  */
 
-package com.severalcircles.flames.data.user;
+package com.severalcircles.flames.system.manager;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.FlamesManager;
-import com.severalcircles.flames.data.SystemDataManager;
-import com.severalcircles.flames.system.exception.ConsentException;
+import com.severalcircles.flames.data.user.FlamesQuote;
+import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.data.user.Rank;
+import com.severalcircles.flames.system.exception.ExceptionID;
+import com.severalcircles.flames.system.exception.flames.ConsentException;
+import com.severalcircles.flames.system.exception.java.FlamesDataException;
+import com.severalcircles.flames.system.reports.FlamesReport;
+import com.severalcircles.flames.system.reports.NewFlamesUserReport;
 import net.dv8tion.jda.api.entities.User;
 
 import java.io.*;
 import java.time.Instant;
 import java.util.Locale;
 import java.util.Properties;
-
+@ExceptionID("912")
 public class UserDataManager extends FlamesManager {
     private static final File userDataDir = new File(SystemDataManager.getFlamesDirectory().getAbsolutePath() + "/users");
     @Override
@@ -46,6 +51,13 @@ public class UserDataManager extends FlamesManager {
         File userFile = new File(userDataDir.getAbsolutePath() + "/" + user.getId() + ".flp");
         if (userFile.createNewFile()) {
             Flames.getFlogger().fine("Created user data file for " + user.getAsTag() + " at " + userFile.getAbsolutePath());
+            try {
+                FlamesReport nur = new NewFlamesUserReport(user);
+                nur.run();
+                FlamesReportManager.saveReport(nur);
+            } catch (FlamesDataException ex) {
+                throw new RuntimeException(ex);
+            }
         }
         properties.load(new FileInputStream(userFile));
         FlamesUser fluser;
@@ -62,7 +74,7 @@ public class UserDataManager extends FlamesManager {
                 Locale.forLanguageTag(properties.getProperty("locale")),
                 Integer.parseInt(properties.getProperty("consent")),
                 Boolean.parseBoolean(properties.getProperty("quoteConsent")),
-                Instant.parse(properties.getProperty("lastBonus")));
+                Instant.parse(properties.getProperty("lastBonus")),Double.parseDouble(properties.getProperty("bonusMultiplier")));
         fluser.setFavoriteQuote(FlamesQuote.valueOf(properties.getProperty("favoriteQuote"), fluser));}
         catch (NullPointerException e) {
             fluser = dataDefault(user);
@@ -85,7 +97,7 @@ public class UserDataManager extends FlamesManager {
                 Locale.forLanguageTag("en-US"),
                 1,
                 true,
-                Instant.now());
+                Instant.now(), 1);
     }
     public static FlamesUser dataDefault(User user) {
         return new FlamesUser(
@@ -101,6 +113,6 @@ public class UserDataManager extends FlamesManager {
                 Locale.forLanguageTag("en-US"),
                 0,
                 false,
-                Instant.now());
+                Instant.now(),1);
     }
 }

@@ -4,6 +4,9 @@
 
 package com.severalcircles.flames.frontend;
 
+import com.severalcircles.flames.system.exception.ExceptionID;
+
+@ExceptionID("702")
 public enum DayPart {
     EARLY_MORNING(4, 6), MORNING(7, 11), AFTERNOON(12, 5), EVENING(6, 9), NIGHT(10, 12), MIDNIGHT(1, 3);
     private final double hourStart;

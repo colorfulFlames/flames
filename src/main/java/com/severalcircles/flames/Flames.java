@@ -4,10 +4,10 @@
 
 package com.severalcircles.flames;
 
-import com.severalcircles.flames.data.SystemDataManager;
-import com.severalcircles.flames.data.user.UserDataManager;
-import com.severalcircles.flames.events.EventManager;
-import com.severalcircles.flames.interactions.FlamesInteractionManager;
+import com.severalcircles.flames.system.manager.*;
+import com.severalcircles.flames.system.exception.ExceptionID;
+import com.severalcircles.flames.system.exception.java.FlamesConnectException;
+import com.severalcircles.flames.system.exception.MessageCodes;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -23,6 +23,7 @@ import java.util.*;
  * @version 8
  * @since Flames Flames 2
  */
+@ExceptionID("501")
 public class Flames {
     private static JDA api;
     private static final FLogger flogger = new FLogger();
@@ -39,6 +40,7 @@ public class Flames {
      */
     public static void main(String[] args) {
         flogger.finest("Secret message for the devs: I'm a flamingo.");
+//        flogger.severe(MessageCodes.generateCodeError(new FlamesException("Based")));
         try {
             InputStream is = Flames.class.getClassLoader().getResourceAsStream("version.properties");
             versionProp.load(is);
@@ -65,6 +67,8 @@ public class Flames {
         } catch (IllegalArgumentException e) {
             getFlogger().severe("FlamesToken environment variable not found. Please set the FlamesToken environment variable to your bot's token.");
             System.exit(1);
+        } catch (Exception e) {
+            Flames.getFlogger().severe(e.getMessage() + " [" + MessageCodes.generateCodeError(new FlamesConnectException(e.getMessage())) + "]");
         }
         flogger.fine("Flames is now online!");
         flogger.resetLastClass();
@@ -89,6 +93,7 @@ public class Flames {
         });
         flogger.info("Starting secondary managers");
         managers2.add(new UserDataManager());
+        managers2.add(new FlamesReportManager());
 //        managers2.add(TodayManager.newDay());
         managers2.forEach(manager -> {
             try {

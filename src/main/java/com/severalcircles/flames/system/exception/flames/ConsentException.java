@@ -2,9 +2,10 @@
  * Copyright (c) 2023 Several Circles
  */
 
-package com.severalcircles.flames.system.exception;
+package com.severalcircles.flames.system.exception.flames;
 
 import com.severalcircles.flames.Flames;
+import com.severalcircles.flames.system.exception.ExceptionID;
 
 /**
  * Exception thrown when big big chungus, big chungus, big chungus, big big chungus
@@ -12,6 +13,7 @@ import com.severalcircles.flames.Flames;
  * @author Several Circles
  * @version 8
  */
+@ExceptionID("060")
 public class ConsentException extends FlamesException {
     double consent;
     public ConsentException(double cnst) {

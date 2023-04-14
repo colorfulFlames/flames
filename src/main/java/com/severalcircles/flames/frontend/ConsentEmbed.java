@@ -4,6 +4,7 @@
 
 package com.severalcircles.flames.frontend;
 
+import com.severalcircles.flames.system.exception.ExceptionID;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 
@@ -15,6 +16,7 @@ import java.util.Locale;
  * @version 8
  * @since Flames 8
  */
+@ExceptionID("701")
 @Embed(name = "Consent")
 public class ConsentEmbed extends FlamesEmbed {
 

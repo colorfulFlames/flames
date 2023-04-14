@@ -2,11 +2,16 @@
  * Copyright (c) 2023 Several Circles
  */
 
-package com.severalcircles.flames.events;
+package com.severalcircles.flames.system.manager;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.FlamesManager;
+import com.severalcircles.flames.events.InteractionEvents;
+import com.severalcircles.flames.events.MessageEvent;
+import com.severalcircles.flames.events.StatusChange;
+import com.severalcircles.flames.system.manager.FlamesManager;
+import com.severalcircles.flames.system.exception.ExceptionID;
 
+@ExceptionID("920")
 public class EventManager extends FlamesManager {
     @Override
     public void prepare() {

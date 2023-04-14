@@ -2,13 +2,16 @@
  * Copyright (c) 2023 Several Circles
  */
 
-package com.severalcircles.flames.conversations;
+package com.severalcircles.flames.system.manager;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.FlamesManager;
+import com.severalcircles.flames.conversations.Analysis;
+import com.severalcircles.flames.conversations.AnalysisScore;
+import com.severalcircles.flames.conversations.Conversation;
+import com.severalcircles.flames.conversations.ConversationEntity;
 import com.severalcircles.flames.data.user.FlamesQuote;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.data.user.UserDataManager;
+import com.severalcircles.flames.system.exception.ExceptionID;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 
@@ -17,7 +20,7 @@ import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
-
+@ExceptionID("940")
 public class ConversationManager extends FlamesManager {
     // Map of channel ID to conversation
     public static Map<String, Conversation> conversations = new HashMap<>();
