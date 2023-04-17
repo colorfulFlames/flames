@@ -2,8 +2,11 @@
  * Copyright (c) 2023 Several Circles
  */
 
-package com.severalcircles.flames.system.exception;
+package com.severalcircles.flames.system.exception.runtime;
 
+import com.severalcircles.flames.system.exception.ExceptionID;
+
+@ExceptionID("030")
 public class FlamesRuntimeException extends RuntimeException {
     /**
      * You've heard of a FlamesException. Now, get ready for the FlamesRuntimeException. It's like a FlamesException, but it's a runtime exception. It's a FlamesRuntimeException, and it lives in a world of piss and vinegar.

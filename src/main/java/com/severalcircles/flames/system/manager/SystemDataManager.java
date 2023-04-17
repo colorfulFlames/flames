@@ -2,11 +2,11 @@
  * Copyright (c) 2023 Several Circles
  */
 
-package com.severalcircles.flames.data;
+package com.severalcircles.flames.system.manager;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.FlamesManager;
-import com.severalcircles.flames.system.exception.FlamesConfigurationException;
+import com.severalcircles.flames.system.exception.ExceptionID;
+import com.severalcircles.flames.system.exception.flames.FlamesConfigurationException;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,7 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
-
+@ExceptionID("911")
 public class SystemDataManager extends FlamesManager {
     private static final File config = new File("flames.properties");
 //    private static final File secureSave = new File(System.getProperty("user.dir") + "/Flames/secure/securesave.sflp");

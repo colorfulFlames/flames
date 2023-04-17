@@ -4,6 +4,7 @@
 
 package com.severalcircles.flames.frontend;
 
+import com.severalcircles.flames.system.exception.ExceptionID;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 
@@ -15,6 +16,7 @@ import java.util.Locale;
  * @version 8
  * @since Flames 8
  */
+@ExceptionID("701")
 @Embed(name = "Consent")
 public class ConsentEmbed extends FlamesEmbed {
 
@@ -25,7 +27,7 @@ public class ConsentEmbed extends FlamesEmbed {
     @Override
     public MessageEmbed get() {
         return new EmbedBuilder()
-                .setTitle(local.getString("title"), "https://flames.severalcircles.com/privacy-policy")
+                .setTitle(local.getString("title.user"), "https://flames.severalcircles.com/privacy-policy")
                 .setDescription(local.getString("description"))
                 .addField(local.getString("helpful1title"), local.getString("helpful1text"), false)
                 .addField(local.getString("helpful2title"), local.getString("helpful2text"), true)

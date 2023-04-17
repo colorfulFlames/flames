@@ -6,6 +6,6 @@
  * @author Several Circles
  * @version 8
  * @since Flames 8
- * @see com.severalcircles.flames.system.exception.FlamesException
+ * @see com.severalcircles.flames.system.exception.flames.FlamesException
  */
 package com.severalcircles.flames.system.exception;

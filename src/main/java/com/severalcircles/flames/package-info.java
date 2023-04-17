@@ -7,4 +7,7 @@
  * @version 8
  * @since Flames 2
  */
+@ExceptionID("000")
 package com.severalcircles.flames;
+
+import com.severalcircles.flames.system.exception.ExceptionID;

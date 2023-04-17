@@ -4,6 +4,8 @@
 
 package com.severalcircles.flames;
 
+import com.severalcircles.flames.system.exception.ExceptionID;
+
 import java.util.logging.Level;
 
 /**
@@ -13,6 +15,7 @@ import java.util.logging.Level;
  * @version 8
  * @since Flames 8
  */
+@ExceptionID(value = "502")
 @SuppressWarnings("SameReturnValue")
 public class FLogger {
     public static final String ANSI_RESET = "\u001B[0m";

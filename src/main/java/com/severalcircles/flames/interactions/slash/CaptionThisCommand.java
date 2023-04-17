@@ -6,7 +6,8 @@ package com.severalcircles.flames.interactions.slash;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.conversations.Conversation;
-import com.severalcircles.flames.conversations.ConversationManager;
+import com.severalcircles.flames.system.exception.ExceptionID;
+import com.severalcircles.flames.system.manager.ConversationManager;
 import com.severalcircles.flames.conversations.external.Tenor;
 import com.severalcircles.flames.data.user.FlamesUser;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -17,7 +18,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicReference;
-
+@ExceptionID("810")
 @FlamesCommand(name = "captionthis", description = "Captions this conversation")
 public class CaptionThisCommand extends FlamesSlashCommand {
     @Override

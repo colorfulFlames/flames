@@ -2,7 +2,9 @@
  * Copyright (c) 2023 Several Circles
  */
 
-package com.severalcircles.flames;
+package com.severalcircles.flames.system.manager;
+
+import com.severalcircles.flames.system.exception.ExceptionID;
 
 import java.io.IOException;
 
@@ -12,6 +14,7 @@ import java.io.IOException;
  * @version 8
  * @since Flames 8
  */
+@ExceptionID("900")
 public abstract class FlamesManager {
     /**
      * Prepares the manager for use.

@@ -6,6 +6,7 @@ package com.severalcircles.flames.interactions.button;
 
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.frontend.DayPart;
+import com.severalcircles.flames.system.exception.ExceptionID;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.buttons.ButtonInteraction;
 import net.dv8tion.jda.api.interactions.components.text.TextInput;
@@ -13,7 +14,7 @@ import net.dv8tion.jda.api.interactions.components.text.TextInputStyle;
 import net.dv8tion.jda.api.interactions.modals.Modal;
 
 import java.util.ResourceBundle;
-
+@ExceptionID("820")
 public class AnswerQuestionButton extends FlamesButtonInteraction {
     private DayPart dayPart;
     public AnswerQuestionButton(DayPart dayPart) {
