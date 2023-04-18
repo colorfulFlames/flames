@@ -51,7 +51,7 @@ public class FlamesInteractionManager extends FlamesManager {
     public static FlamesSlashCommand getCommandInteraction(String name) {
         for (FlamesSlashCommand command : commandInteractionList) {
             Flames.getFlogger().fine("Checking command " + command.getClass().getAnnotation(FlamesCommand.class).name() + " for name " + name);
-            Flames.getFlogger().fine("" + command.getClass().getAnnotation(FlamesCommand.class).name().equals(name));
+            Flames.getFlogger().fine(String.valueOf(command.getClass().getAnnotation(FlamesCommand.class).name().equals(name)));
             if (command.getClass().getAnnotation(FlamesCommand.class).name().equals(name)) return command;
         }
         throw new NoCommandException("No command with name " + name + " found.");

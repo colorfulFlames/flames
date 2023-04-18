@@ -25,21 +25,9 @@ public class InteractionEvents extends ListenerAdapter {
         super.onSlashCommandInteraction(event);
         Flames.getFlogger().fine("Received slash command interaction " + event.getName());
         if (event.getName().equals("consent")) {
-            try {
                 new ConsentCommand().execute(event, new UserDataManager().loadUser(event.getUser(), true));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (ConsentException e) {
-                throw new RuntimeException(e);
-            }
         }
-        try {
             FlamesInteractionManager.getCommandInteraction(event.getName()).execute(event, new UserDataManager().loadUser(event.getUser(), false));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ConsentException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
@@ -47,29 +35,18 @@ public class InteractionEvents extends ListenerAdapter {
         super.onButtonInteraction(event);
         Flames.getFlogger().fine("Received button interaction " + event.getComponentId());
         if (event.getComponentId().equals("noQuotes") | event.getComponentId().equals("decline") | event.getComponentId().equals("consent")) {
-            try {
                 new ConsentButtons().execute(event, new UserDataManager().loadUser(event.getUser(), true));
-            } catch (IOException | ConsentException e) {
-                e.printStackTrace();
-            }
+
         }
-        try {
             FlamesInteractionManager.getButtonInteraction(event.getComponentId()).execute(event, new UserDataManager().loadUser(event.getUser(), false));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ConsentException ignored) {
-        }
     }
 
     @Override
     public void onModalInteraction(@NotNull ModalInteractionEvent event) {
         super.onModalInteraction(event);
         Flames.getFlogger().fine("Received modal interaction " + event.getModalId());
-        try {
             FlamesInteractionManager.getModalInteraction(event.getModalId()).execute(event, new UserDataManager().loadUser(event.getUser(), false));
-        } catch (IOException | ConsentException e) {
-            throw new RuntimeException(e);
-        }
+
 
     }
 }

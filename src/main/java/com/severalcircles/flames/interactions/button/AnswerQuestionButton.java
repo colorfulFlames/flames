@@ -16,7 +16,7 @@ import net.dv8tion.jda.api.interactions.modals.Modal;
 import java.util.ResourceBundle;
 @ExceptionID("820")
 public class AnswerQuestionButton extends FlamesButtonInteraction {
-    private DayPart dayPart;
+    private final DayPart dayPart;
     public AnswerQuestionButton(DayPart dayPart) {
         this.dayPart = dayPart;
     }

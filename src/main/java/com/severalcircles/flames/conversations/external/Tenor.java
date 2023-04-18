@@ -32,7 +32,7 @@ public class Tenor {
         // get search results
         JSONObject results = getSearchResults("hello", 10);
         if (results != null) {
-            System.out.println(results.toString());
+            System.out.println(results);
         }
         Flames.getFlogger().fine(extractUrls(results.toString()).toString());
     }

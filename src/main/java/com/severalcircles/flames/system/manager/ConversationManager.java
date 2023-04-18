@@ -42,11 +42,8 @@ public class ConversationManager extends FlamesManager {
                 conversation.getParticipationMap().forEach((user, participation) -> {
                     user.addScore(conversation.getScore() / conversation.getParticipationMap().size());
                     user.addEmotion(conversation.getEmotion() / conversation.getParticipationMap().size());
-                    try {
                         udm.saveUser(user);
-                    } catch (IOException e) {
-
-                    }});
+                    });
                 conversations.remove(channel);
             }
         });
