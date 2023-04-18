@@ -140,6 +140,7 @@ public class FlamesUser {
         if (Instant.now().isBefore(lastBonus.plusSeconds(60 * 60 * 24 * 7))) throw new AlreadyCollectedException("You've already collected your bonus for this week!");
         double bonus = 100 * bonusMultiplier;
         bonusMultiplier += 0.1;
+        lastBonus = Instant.now();
         return bonus;
     }
     public double getBonusMultiplier() {

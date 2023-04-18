@@ -33,6 +33,7 @@ public class FlamesInteractionManager extends FlamesManager {
         commandInteractionList.add(new BasedCommand());
         commandInteractionList.add(new CaptionThisCommand());
         commandInteractionList.add(new QuestionCommand());
+        commandInteractionList.add(new HiCommand());
         commandInteractionList.forEach(command -> {
             SlashCommandData data = Commands.slash(command.getClass().getAnnotation(FlamesCommand.class).name(), command.getClass().getAnnotation(FlamesCommand.class).description());
             for (FlamesCommandOption option : command.getClass().getAnnotation(FlamesCommand.class).options()) {

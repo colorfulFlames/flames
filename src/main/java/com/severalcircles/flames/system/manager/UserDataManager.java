@@ -142,6 +142,6 @@ public class UserDataManager extends FlamesManager {
                 Locale.forLanguageTag("en-US"),
                 1,
                 false,
-                Instant.now(),1);
+                Instant.ofEpochMilli(0),1);
     }
 }
