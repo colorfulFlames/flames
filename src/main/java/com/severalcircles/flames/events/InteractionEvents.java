@@ -6,14 +6,10 @@ package com.severalcircles.flames.events;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.system.exception.ExceptionID;
-import com.severalcircles.flames.system.exception.FlamesExceptionHandler;
-import com.severalcircles.flames.system.exception.flames.FlamesException;
-import com.severalcircles.flames.system.exception.runtime.FlamesRuntimeException;
 import com.severalcircles.flames.system.manager.ConsentManager;
 import com.severalcircles.flames.system.manager.UserDataManager;
 import com.severalcircles.flames.system.manager.FlamesInteractionManager;
 import com.severalcircles.flames.system.exception.flames.ConsentException;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;

@@ -7,7 +7,6 @@ package com.severalcircles.flames.system.manager;
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.system.exception.ExceptionID;
 import com.severalcircles.flames.system.exception.java.FlamesDataException;
-import com.severalcircles.flames.system.reports.ExceptionReport;
 import com.severalcircles.flames.system.reports.FlamesReport;
 import com.severalcircles.flames.system.reports.RecurringReport;
 
@@ -33,7 +32,7 @@ public class FlamesReportManager extends FlamesManager {
         if (reportDir.mkdir()) {
             Flames.getFlogger().fine("Created report directory.");
         }
-        recurringReports.add(new ExceptionReport());
+//        recurringReports.add(new ExceptionReport());
         recurringReports.forEach(report -> {
             if (report.getClass().isAnnotationPresent(RecurringReport.class)) {
                 RecurringReport recurringReportAnnotation = report.getClass().getAnnotation(RecurringReport.class);

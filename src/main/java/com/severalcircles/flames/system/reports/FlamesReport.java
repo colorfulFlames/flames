@@ -5,7 +5,6 @@
 package com.severalcircles.flames.system.reports;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.system.exception.FlamesExceptionHandler;
 import com.severalcircles.flames.system.exception.java.FlamesDataException;
 import com.severalcircles.flames.system.manager.FlamesReportManager;
 
@@ -19,7 +18,7 @@ public abstract class FlamesReport extends TimerTask {
         try {
             FlamesReportManager.saveReport(this);
         } catch (FlamesDataException e) {
-            new FlamesExceptionHandler(e);
+
         }
     }
     public abstract Map<String, String> getReport();
