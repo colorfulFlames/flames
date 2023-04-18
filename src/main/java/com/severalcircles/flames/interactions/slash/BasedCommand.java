@@ -17,10 +17,6 @@ public class BasedCommand extends FlamesSlashCommand {
 
     @Override
     public void execute(SlashCommandInteraction interaction, FlamesUser user) {
-        try {
             interaction.reply(FlamesQuestionManager.getAnswer("based")).queue();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

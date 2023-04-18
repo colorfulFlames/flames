@@ -34,9 +34,13 @@ public class FlamesQuestionManager extends FlamesManager {
         properties.store(new FileWriter(questionFile), "Questions answered");
     }
 
-    public static String getAnswer(String question) throws IOException {
+    public static String getAnswer(String question) {
         Properties properties = new Properties();
-        properties.load(new FileReader(questionFile));
+        try {
+            properties.load(new FileReader(questionFile));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         List<String> answers = new LinkedList<>();
         properties.forEach((key, value) -> {
             if (key.toString().startsWith(question)) {
@@ -46,7 +50,8 @@ public class FlamesQuestionManager extends FlamesManager {
         return answers.get((int) (Math.random() * answers.size()));
     }
     public static String getQuestion() {
-        int i = new Random().nextInt(questions.size());
+        Flames.getFlogger().finest(questions.toString());
+        int i = new Random().nextInt(Math.abs(questions.size()));
         return questions.get(i);
     }
 }
