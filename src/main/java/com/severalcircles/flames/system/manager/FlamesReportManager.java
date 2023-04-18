@@ -9,6 +9,7 @@ import com.severalcircles.flames.system.exception.ExceptionID;
 import com.severalcircles.flames.system.exception.java.FlamesDataException;
 import com.severalcircles.flames.system.reports.FlamesReport;
 import com.severalcircles.flames.system.reports.RecurringReport;
+import com.severalcircles.flames.system.reports.StaticReport;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -46,7 +47,12 @@ public class FlamesReportManager extends FlamesManager {
     public static void saveReport(FlamesReport report) throws FlamesDataException {
         Properties properties = new Properties();
         properties.putAll(report.getReport());
-        File file = new File(reportDir.getAbsolutePath() + "/" + report.getClass().getAnnotation(RecurringReport.class).name() + " " + Instant.now().get(ChronoField.NANO_OF_SECOND) + ".flr");
+        File file;
+        try {
+            file = new File(reportDir.getAbsolutePath() + "/" + report.getClass().getAnnotation(RecurringReport.class).name() + " " + Instant.now().get(ChronoField.NANO_OF_SECOND) + ".flr");
+        } catch (NullPointerException e) {
+            file = new File(reportDir.getAbsolutePath() + "/" + report.getClass().getAnnotation(StaticReport.class).name() + " " + Instant.now().get(ChronoField.NANO_OF_SECOND) + ".flr");
+        }
         try {
             if (file.createNewFile()) {
                 Flames.getFlogger().finest("Created report file for " + report.getClass().getSimpleName() + ".");

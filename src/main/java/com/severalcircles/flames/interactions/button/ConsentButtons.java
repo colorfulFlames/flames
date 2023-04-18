@@ -29,6 +29,7 @@ public class ConsentButtons extends FlamesButtonInteraction {
                 user.setConsent(2);
                 interaction.reply("You're all set. Flames won't process any of your messages or collect any data from you.").setEphemeral(true).queue();
             }
+
         }
         try {
             new UserDataManager().saveUser(user);
