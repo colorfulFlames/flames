@@ -12,9 +12,7 @@ public class MessageCodes {
     public static String generateCodeError(FlamesException e) {
         String code = "";
         code += PREFIX;
-            for (StackTraceElement stackTraceElement : e.getStackTrace()) {
-                Flames.getFlogger().severe(e.getClass().getSimpleName());
-            }
+        e.printStackTrace();
         try {
             Flames.getFlogger().finest(Class.forName(e.getStackTrace()[0].getClassName()).getName());
         } catch (ClassNotFoundException ex) {
@@ -27,6 +25,7 @@ public class MessageCodes {
         }
         code += "-";
         code += e.getClass().getAnnotation(ExceptionID.class).value();
+        Flames.getFlogger().severe(code + ": " + e.getMessage());
         return code;
     }
 }

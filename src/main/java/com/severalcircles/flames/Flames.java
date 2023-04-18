@@ -95,6 +95,7 @@ public class Flames {
         flogger.info("Starting secondary managers");
         managers2.add(new UserDataManager());
         managers2.add(new FlamesReportManager());
+        managers2.add(new FlamesQuestionManager());
 //        managers2.add(TodayManager.newDay());
         managers2.forEach(manager -> {
             try {

@@ -8,23 +8,29 @@ import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.user.FlamesUser;
 
 import java.io.*;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 public class FlamesQuestionManager extends FlamesManager {
     public static final File questionFile = new File(SystemDataManager.getFlamesDirectory().getAbsolutePath() + "/questions.flp");
-
+    private static final List<String> questions = new LinkedList<>();
     @Override
     public void prepare() throws IOException {
-        if (questionFile.mkdir()) {
+        if (questionFile.createNewFile()) {
             Flames.getFlogger().fine("Created question file");
         }
+        ResourceBundle questions = ResourceBundle.getBundle("strings/Questions");
+        questions.keySet().forEach(key -> {
+            if (!key.equals("answer")) {
+                this.questions.add(key);
+            }
+        });
     }
 
-    public static void answerQuestion(String question, String answer, FlamesUser user) throws IOException {
+    public static void answerQuestion(String id, String answer, FlamesUser user) throws IOException {
         Properties properties = new Properties();
-        properties.setProperty(question + "." + user.getDiscordUser().getId(), answer);
+        properties.load(new FileReader(questionFile));
+        id = id.replace("question:", "");
+        properties.setProperty(id, answer);
         properties.store(new FileWriter(questionFile), "Questions answered");
     }
 
@@ -38,5 +44,9 @@ public class FlamesQuestionManager extends FlamesManager {
             }
         });
         return answers.get((int) (Math.random() * answers.size()));
+    }
+    public static String getQuestion() {
+        int i = new Random().nextInt(questions.size());
+        return questions.get(i);
     }
 }

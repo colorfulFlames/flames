@@ -50,7 +50,7 @@ public class UserDataManager extends FlamesManager {
         properties.store(os, "Flames User Data for " + user.getDiscordUser().getAsTag());
         os.close();
     }
-    public FlamesUser loadUser(User user) throws IOException, ConsentException {
+    public FlamesUser loadUser(User user, boolean overrideConsent) throws IOException, ConsentException {
         Properties properties = new Properties();
         File userFile = new File(userDataDir.getAbsolutePath() + "/" + user.getId() + ".flp");
         if (userFile.createNewFile()) {
@@ -59,8 +59,12 @@ public class UserDataManager extends FlamesManager {
                 FlamesReport nur = new NewFlamesUserReport(user);
                 nur.run();
                 FlamesReportManager.saveReport(nur);
-            } catch (FlamesDataException ex) {
-                throw new RuntimeException(ex);
+                Flames.getFlogger().finest("Consent Override: " + overrideConsent);
+                if (!overrideConsent) {
+                    throw new ConsentException(0);
+                }
+            } catch (FlamesDataException e) {
+                e.printStackTrace();
             }
         }
         properties.load(new FileInputStream(userFile));

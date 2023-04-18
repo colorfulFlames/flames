@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.entities.User;
 
 import java.util.HashMap;
 import java.util.Map;
-
+@StaticReport(name = "newUser")
 public class NewFlamesUserReport extends FlamesReport {
     User user;
     public NewFlamesUserReport(User user) {
