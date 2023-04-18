@@ -43,17 +43,17 @@ public   enum DayPart {
     public Color getColor() {
         switch (this) {
             case EARLY_MORNING:
-                return Color.CYAN;
+                return Color.decode("#63AA63");
             case MORNING:
-                return Color.pink;
+                return Color.decode("#A73A51");
             case AFTERNOON:
-                return Color.blue;
+                return Color.decode("#37AECD");
             case EVENING:
-                return Color.ORANGE;
+                return Color.decode("#ED6A3D");
             case NIGHT:
-                return Color.magenta;
+                return Color.decode("#581B4E");
             case MIDNIGHT:
-                return Color.darkGray;
+                return Color.decode("#1A1F3A");
             default:
                 return Color.BLACK;
         }
