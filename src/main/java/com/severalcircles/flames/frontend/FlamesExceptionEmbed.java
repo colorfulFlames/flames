@@ -25,6 +25,11 @@ public class FlamesExceptionEmbed extends FlamesEmbed{
         this.e = e;
         code = MessageCodes.generateCodeError(e);
     }
+    public FlamesExceptionEmbed(Locale locale, Exception e) {
+        super(locale);
+        this.e = new FlamesException(e.getMessage());
+        code = e.getClass().getSimpleName();
+    }
 
     @Override
     public MessageEmbed get() {
