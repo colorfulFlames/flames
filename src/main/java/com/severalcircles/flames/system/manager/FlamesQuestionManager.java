@@ -21,7 +21,7 @@ public class FlamesQuestionManager extends FlamesManager {
         ResourceBundle questions = ResourceBundle.getBundle("strings/Questions");
         questions.keySet().forEach(key -> {
             if (!key.equals("answer")) {
-                this.questions.add(key);
+                FlamesQuestionManager.questions.add(key);
             }
         });
     }

@@ -31,11 +31,7 @@ public class ConsentButtons extends FlamesButtonInteraction {
             }
 
         }
-        try {
-            new UserDataManager().saveUser(user);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        new UserDataManager().saveUser(user);
     }
 
 }

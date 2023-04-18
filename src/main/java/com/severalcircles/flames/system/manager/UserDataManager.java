@@ -8,6 +8,7 @@ import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.user.FlamesQuote;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.Rank;
+import com.severalcircles.flames.frontend.ConsentEmbed;
 import com.severalcircles.flames.system.exception.ExceptionID;
 import com.severalcircles.flames.system.exception.flames.ConsentException;
 import com.severalcircles.flames.system.exception.java.FlamesDataException;
@@ -30,7 +31,7 @@ public class UserDataManager extends FlamesManager {
 
 
     }
-    public void saveUser(FlamesUser user) throws IOException {
+    public void saveUser(FlamesUser user) {
         Properties properties = new Properties();
         Flames.getFlogger().fine(user.toString());
         properties.setProperty("score", String.valueOf(user.getScore()));
@@ -46,28 +47,44 @@ public class UserDataManager extends FlamesManager {
         properties.setProperty("lastBonus", String.valueOf(user.getLastBonus()));
         properties.setProperty("bonusMultiplier", String.valueOf(user.getBonusMultiplier()));
         Flames.getFlogger().fine(properties.toString());
-        FileOutputStream os = new FileOutputStream(userDataDir.getAbsolutePath() + "/" + user.getDiscordUser().getId() + ".flp");
-        properties.store(os, "Flames User Data for " + user.getDiscordUser().getAsTag());
-        os.close();
+        FileOutputStream os = null;
+        try {
+            os = new FileOutputStream(userDataDir.getAbsolutePath() + "/" + user.getDiscordUser().getId() + ".flp");
+            properties.store(os, "Flames User Data for " + user.getDiscordUser().getAsTag());
+            os.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
-    public FlamesUser loadUser(User user, boolean overrideConsent) throws IOException, ConsentException {
+    public FlamesUser loadUser(User user, boolean overrideConsent) {
         Properties properties = new Properties();
         File userFile = new File(userDataDir.getAbsolutePath() + "/" + user.getId() + ".flp");
-        if (userFile.createNewFile()) {
-            Flames.getFlogger().fine("Created user data file for " + user.getAsTag() + " at " + userFile.getAbsolutePath());
-            try {
-                FlamesReport nur = new NewFlamesUserReport(user);
-                nur.run();
-                FlamesReportManager.saveReport(nur);
-                Flames.getFlogger().finest("Consent Override: " + overrideConsent);
-                if (!overrideConsent) {
-                    throw new ConsentException(0);
+        try {
+            if (userFile.createNewFile()) {
+                Flames.getFlogger().fine("Created user data file for " + user.getAsTag() + " at " + userFile.getAbsolutePath());
+                try {
+                    FlamesReport nur = new NewFlamesUserReport(user);
+                    nur.run();
+                    FlamesReportManager.saveReport(nur);
+                    Flames.getFlogger().finest("Consent Override: " + overrideConsent);
+                    if (!overrideConsent) {
+                        throw new ConsentException(0);
+                    }
+                } catch (FlamesDataException e) {
+                    e.printStackTrace();
                 }
-            } catch (FlamesDataException e) {
-                e.printStackTrace();
             }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ConsentException e) {
+            new ConsentEmbed(Locale.ROOT).sendTo(user);
         }
-        properties.load(new FileInputStream(userFile));
+        try {
+            properties.load(new FileInputStream(userFile));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         FlamesUser fluser;
         try { fluser = new FlamesUser(
                 user,
@@ -87,7 +104,11 @@ public class UserDataManager extends FlamesManager {
         catch (NullPointerException e) {
             fluser = dataDefault(user);
             saveUser(fluser);
-            throw new ConsentException(fluser.getConsent());
+            try {
+                throw new ConsentException(fluser.getConsent());
+            } catch (ConsentException ex) {
+                new ConsentEmbed(Locale.ROOT).sendTo(user);
+            }
         }
         return fluser;
     }

@@ -27,17 +27,8 @@ public class MessageEvent extends ListenerAdapter {
         super.onMessageReceived(event);
         if (event.getAuthor().isBot()) return;
         FlamesUser flamesUser = null;
-        try {
-            Flames.getFlogger().fine("Trying to load user " + event.getAuthor().getAsTag());
-            flamesUser = new UserDataManager().loadUser(event.getAuthor(), false);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ConsentException e) {
-            e.printStackTrace();
-            if (e.getConsent() == 2) return;
-            new ConsentEmbed(Locale.ROOT).sendTo(event.getAuthor());
-//            event.getAuthor().openPrivateChannel().complete().sendMessage("Welcome to Flames. Participation in " + event.getGuild().getName() + " constitutes consent to the Flames Privacy Policy. You can read more and opt out at any time by running the /consent command.").queue();
-        }
+        Flames.getFlogger().fine("Trying to load user " + event.getAuthor().getAsTag());
+        flamesUser = new UserDataManager().loadUser(event.getAuthor(), false);
         Flames.getFlogger().finest("User " + event.getAuthor().getAsTag() + " loaded successfully.");
         ConversationManager.processMessage(event.getChannel(), event.getMessage(), flamesUser);
     }
