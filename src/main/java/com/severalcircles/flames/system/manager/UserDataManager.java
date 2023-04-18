@@ -32,6 +32,7 @@ public class UserDataManager extends FlamesManager {
     }
     public void saveUser(FlamesUser user) throws IOException {
         Properties properties = new Properties();
+        Flames.getFlogger().fine(user.toString());
         properties.setProperty("score", String.valueOf(user.getScore()));
         properties.setProperty("rank", String.valueOf(user.getRank()));
         properties.setProperty("highScore", String.valueOf(user.getHighScore()));
@@ -42,6 +43,9 @@ public class UserDataManager extends FlamesManager {
         properties.setProperty("favoriteQuote", String.valueOf(user.getFavoriteQuote()));
         properties.setProperty("locale", String.valueOf(user.getLocale()));
         properties.setProperty("consent", String.valueOf(user.getConsent()));
+        properties.setProperty("lastBonus", String.valueOf(user.getLastBonus()));
+        properties.setProperty("bonusMultiplier", String.valueOf(user.getBonusMultiplier()));
+        Flames.getFlogger().fine(properties.toString());
         FileOutputStream os = new FileOutputStream(userDataDir.getAbsolutePath() + "/" + user.getDiscordUser().getId() + ".flp");
         properties.store(os, "Flames User Data for " + user.getDiscordUser().getAsTag());
         os.close();
