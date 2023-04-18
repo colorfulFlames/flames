@@ -142,4 +142,25 @@ public class FlamesUser {
         bonusMultiplier += 0.1;
         return bonus;
     }
+    public double getBonusMultiplier() {
+        return bonusMultiplier;
+    }
+    public String toString() {
+        return "FlamesUser{" +
+                "discordUser=" + discordUser +
+                ", score=" + score +
+                ", rank=" + rank +
+                ", highScore=" + highScore +
+                ", lowScore=" + lowScore +
+                ", emotion=" + emotion +
+                ", happyDay=" + happyDay +
+                ", sadDay=" + sadDay +
+                ", favoriteQuote=" + favoriteQuote +
+                ", locale=" + locale +
+                ", consent=" + consent +
+                ", quoteConsent=" + quoteConsent +
+                ", lastBonus=" + lastBonus +
+                ", bonusMultiplier=" + bonusMultiplier +
+                '}';
+    }
 }

@@ -12,6 +12,8 @@ import com.severalcircles.flames.conversations.ConversationEntity;
 import com.severalcircles.flames.data.user.FlamesQuote;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.system.exception.ExceptionID;
+import com.severalcircles.flames.system.exception.FlamesExceptionHandler;
+import com.severalcircles.flames.system.exception.java.FlamesDataException;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 
@@ -44,7 +46,7 @@ public class ConversationManager extends FlamesManager {
                     try {
                         udm.saveUser(user);
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        new FlamesExceptionHandler(new FlamesDataException("Failed to save user " + user + " after conversation ended"));
                     }});
                 conversations.remove(channel);
             }
