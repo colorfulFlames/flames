@@ -4,8 +4,11 @@
 
 package com.severalcircles.flames.system.exception.flames;
 
+import com.severalcircles.flames.frontend.FlamesEmbed;
+import com.severalcircles.flames.frontend.FlamesExceptionEmbed;
 import com.severalcircles.flames.system.exception.ExceptionID;
-import com.severalcircles.flames.system.exception.FlamesExceptionHandler;
+
+import java.util.Locale;
 
 @ExceptionID("040")
 public class FlamesException extends Exception {
@@ -22,7 +25,7 @@ public class FlamesException extends Exception {
     public FlamesException(String message) {
         super(message);
     }
-    public FlamesExceptionHandler getHandler() {
-        return new FlamesExceptionHandler(this);
+    public FlamesEmbed getEmbed() {
+        return new FlamesExceptionEmbed(Locale.ROOT, this);
     }
 }
