@@ -4,6 +4,7 @@
 
 package com.severalcircles.flames.frontend;
 
+import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.system.exception.ExceptionID;
 import com.severalcircles.flames.system.manager.FlamesQuestionManager;
@@ -11,6 +12,10 @@ import com.severalcircles.flames.system.manager.UserDataManager;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.Locale;
 @ExceptionID("704")
 @Embed(name = "WelcomeBack")
@@ -28,15 +33,19 @@ public class WelcomeBackEmbed extends FlamesEmbed {
     public MessageEmbed get(double bonus, FlamesUser user) {
         EmbedBuilder builder = new EmbedBuilder();
         DayPart part = DayPart.getPart();
+//        Instant now = Instant.now();
+//        LocalDateTime ldt = LocalDateTime.ofInstant(now, ZoneId.ofOffset("UTC", ZoneOffset.UTC));
         try {
             builder.setAuthor(String.format(FlamesQuestionManager.getAnswer("welcomeback." + part), user.getDiscordUser().getName()));
-        } catch (NullPointerException e) {
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
             builder.setAuthor(local.getString("defaultMessage." + part));
         }
         builder.setColor(part.getColor());
         builder.setTitle(local.getString("title"));
         builder.setDescription(local.getString("description"));
         builder.addField(local.getString("bonus"), String.valueOf(bonus), true);
+        builder.addField(local.getString("yourScore"), String.valueOf(user.getScore()), true);
+        builder.setImage("https://severalcircles.com/flames/assets/welcome/" + part + ".png");
         return builder.build();
     }
 }

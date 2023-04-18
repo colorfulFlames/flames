@@ -4,6 +4,7 @@
 
 package com.severalcircles.flames.frontend;
 
+import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.system.exception.ExceptionID;
 
 import java.awt.*;
@@ -11,8 +12,8 @@ import java.time.Instant;
 import java.time.ZoneId;
 
 @ExceptionID("702")
-public enum DayPart {
-    EARLY_MORNING(4, 6), MORNING(7, 11), AFTERNOON(12, 5), EVENING(6, 9), NIGHT(10, 12), MIDNIGHT(1, 3);
+public   enum DayPart {
+    EARLY_MORNING(4, 6), MORNING(7, 11), AFTERNOON(12, 18), EVENING(19, 21), NIGHT(22, 23), MIDNIGHT(0, 3);
     private final double hourStart;
     private final double hourFinish;
 
@@ -23,7 +24,9 @@ public enum DayPart {
 
     public static DayPart getPart() {
         double hour = Instant.now().atZone(ZoneId.of("America/New_York")).getHour();
+        Flames.getFlogger().finest(hour + " o'clock");
         for (DayPart part : DayPart.values()) {
+            Flames.getFlogger().finest("Checking " + part + " (" + part.getHourStart() + " - " + part.getHourFinish() + ")");
             if (hour >= part.getHourStart() && hour <= part.getHourFinish()) return part;
         }
         return null;
