@@ -2,16 +2,16 @@
 //file:noinspection GroovyUnusedAssignment
 plugins {
     id'application'
-    id'com.github.johnrengelman.shadow' version '5.2.0'
+    id'com.github.johnrengelman.shadow' version '8.0.0'
     //noinspection GroovyAssignabilityCheck
     id 'java'
 }
 
 mainClassName = 'com.severalcircles.flames.Flames'
 version '8x'
-def jdaVersion = '5.0.0-beta.6'
+def jdaVersion = '5.0.0-beta.8'
 
-sourceCompatibility = targetCompatibility = 1.8
+sourceCompatibility = targetCompatibility = 1.20
 group 'com.severalcircles.flames'
 
 repositories {
