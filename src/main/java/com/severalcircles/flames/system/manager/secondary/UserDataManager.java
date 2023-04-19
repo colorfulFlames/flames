@@ -2,7 +2,7 @@
  * Copyright (c) 2023 Several Circles
  */
 
-package com.severalcircles.flames.system.manager;
+package com.severalcircles.flames.system.manager.secondary;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.user.FlamesQuote;
@@ -12,6 +12,8 @@ import com.severalcircles.flames.frontend.ConsentEmbed;
 import com.severalcircles.flames.system.exception.ExceptionID;
 import com.severalcircles.flames.system.exception.flames.ConsentException;
 import com.severalcircles.flames.system.exception.java.FlamesDataException;
+import com.severalcircles.flames.system.manager.FlamesManager;
+import com.severalcircles.flames.system.manager.primary.SystemDataManager;
 import com.severalcircles.flames.system.reports.FlamesReport;
 import com.severalcircles.flames.system.reports.NewFlamesUserReport;
 import net.dv8tion.jda.api.entities.User;
@@ -41,11 +43,13 @@ public class UserDataManager extends FlamesManager {
         properties.setProperty("emotion", String.valueOf(user.getEmotion()));
         properties.setProperty("happyDay", String.valueOf(user.getHappyDay()));
         properties.setProperty("sadDay", String.valueOf(user.getSadDay()));
-        properties.setProperty("favoriteQuote", String.valueOf(user.getFavoriteQuote()));
+        properties.setProperty("favoriteQuote", user.getFavoriteQuote().message());
         properties.setProperty("locale", String.valueOf(user.getLocale()));
         properties.setProperty("consent", String.valueOf(user.getConsent()));
         properties.setProperty("lastBonus", String.valueOf(user.getLastBonus()));
         properties.setProperty("bonusMultiplier", String.valueOf(user.getBonusMultiplier()));
+        properties.setProperty("messages", String.valueOf(user.getMessages()));
+        properties.setProperty("conversations", String.valueOf(user.getConversations()));
         Flames.getFlogger().fine(properties.toString());
         FileOutputStream os = null;
         try {
@@ -89,7 +93,7 @@ public class UserDataManager extends FlamesManager {
         try { fluser = new FlamesUser(
                 user,
                 Double.parseDouble(properties.getProperty("score")),
-                Rank.valueOf(properties.getProperty("rank")),
+                null,
                 Double.parseDouble(properties.getProperty("highScore")),
                 Double.parseDouble(properties.getProperty("lowScore")),
                 Double.parseDouble(properties.getProperty("emotion")),
@@ -99,9 +103,12 @@ public class UserDataManager extends FlamesManager {
                 Locale.forLanguageTag(properties.getProperty("locale")),
                 Integer.parseInt(properties.getProperty("consent")),
                 Boolean.parseBoolean(properties.getProperty("quoteConsent")),
-                Instant.parse(properties.getProperty("lastBonus")),Double.parseDouble(properties.getProperty("bonusMultiplier")));
-        fluser.setFavoriteQuote(FlamesQuote.valueOf(properties.getProperty("favoriteQuote"), fluser));}
-        catch (NullPointerException e) {
+                Instant.parse(properties.getProperty("lastBonus")),Double.parseDouble(properties.getProperty("bonusMultiplier")),
+                Integer.parseInt(properties.getProperty("conversations")), Integer.parseInt(properties.getProperty("messages")));
+        fluser.setFavoriteQuote(new FlamesQuote(properties.getProperty("favoriteQuote"), fluser));
+        fluser.getRank();
+        }
+        catch (NullPointerException | NumberFormatException e) {
             fluser = dataDefault(user);
             saveUser(fluser);
             try {
@@ -126,10 +133,10 @@ public class UserDataManager extends FlamesManager {
                 Locale.forLanguageTag("en-US"),
                 1,
                 true,
-                Instant.now(), 1);
+                Instant.now(), 1,0,0);
     }
     public static FlamesUser dataDefault(User user) {
-        return new FlamesUser(
+        FlamesUser flamesUser = new FlamesUser(
                 user,
                 0,
                 Rank.UNRANKED,
@@ -142,6 +149,8 @@ public class UserDataManager extends FlamesManager {
                 Locale.forLanguageTag("en-US"),
                 1,
                 false,
-                Instant.ofEpochMilli(0),1);
+                Instant.ofEpochMilli(0),1,0,0);
+        flamesUser.setFavoriteQuote(new FlamesQuote("", flamesUser));
+        return flamesUser;
     }
 }

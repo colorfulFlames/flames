@@ -2,11 +2,13 @@
  * Copyright (c) 2023 Several Circles
  */
 
-package com.severalcircles.flames.interactions.slash;
+package com.severalcircles.flames.interactions.slash.data;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.system.manager.FlamesQuestionManager;
+import com.severalcircles.flames.interactions.slash.FlamesCommand;
+import com.severalcircles.flames.interactions.slash.FlamesSlashCommand;
+import com.severalcircles.flames.system.manager.secondary.FlamesQuestionManager;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.text.TextInput;

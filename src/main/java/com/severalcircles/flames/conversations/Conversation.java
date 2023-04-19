@@ -6,6 +6,7 @@ package com.severalcircles.flames.conversations;
 
 import com.severalcircles.flames.data.user.FlamesQuote;
 import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.system.manager.secondary.UserDataManager;
 import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 
 import java.time.Instant;
@@ -70,7 +71,9 @@ public class Conversation {
         if (participationMap.containsKey(user)) {
             participationMap.put(user, participationMap.get(user) + 1);
         } else {
+            user.addConversation();
             participationMap.put(user, 1);
+            new UserDataManager().saveUser(user);
         }
     }
     public Instant getStarted() {

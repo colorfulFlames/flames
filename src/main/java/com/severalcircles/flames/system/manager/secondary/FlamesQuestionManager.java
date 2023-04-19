@@ -2,10 +2,12 @@
  * Copyright (c) 2023 Several Circles
  */
 
-package com.severalcircles.flames.system.manager;
+package com.severalcircles.flames.system.manager.secondary;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.system.manager.FlamesManager;
+import com.severalcircles.flames.system.manager.primary.SystemDataManager;
 
 import java.io.*;
 import java.util.*;

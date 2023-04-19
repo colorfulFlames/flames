@@ -4,7 +4,9 @@
 
 package com.severalcircles.flames.data.user;
 
+import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.system.exception.flames.AlreadyCollectedException;
+import com.severalcircles.flames.system.reports.FlamesReport;
 import net.dv8tion.jda.api.entities.User;
 
 import java.time.Instant;
@@ -13,7 +15,7 @@ import java.util.Locale;
 public class FlamesUser {
     private final User discordUser;
     private double score;
-    private final Rank rank;
+    private Rank rank;
     private double highScore;
     private double lowScore;
     private double emotion;
@@ -25,8 +27,10 @@ public class FlamesUser {
     private boolean quoteConsent;
     private Instant lastBonus;
     private double bonusMultiplier;
+    private int conversations;
+    private int messages;
 
-    public FlamesUser(User discordUser, double score, Rank rank, double highScore, double lowScore, double emotion, Instant happyDay, Instant sadDay, FlamesQuote favoriteQuote, Locale locale, int consent, boolean quoteConsent, Instant lastBonus, double bonusMultiplier) {
+    public FlamesUser(User discordUser, double score, Rank rank, double highScore, double lowScore, double emotion, Instant happyDay, Instant sadDay, FlamesQuote favoriteQuote, Locale locale, int consent, boolean quoteConsent, Instant lastBonus, double bonusMultiplier, int conversations, int messages) {
         this.discordUser = discordUser;
         this.score = score;
         this.rank = rank;
@@ -41,6 +45,8 @@ public class FlamesUser {
         this.quoteConsent = quoteConsent;
         this.lastBonus = lastBonus;
         this.bonusMultiplier = bonusMultiplier;
+        this.conversations = conversations;
+        this.messages = messages;
     }
 
     public User getDiscordUser() {
@@ -52,7 +58,9 @@ public class FlamesUser {
     }
 
     public Rank getRank() {
-        return rank;
+        this.rank = FlamesRank.getRank(score);
+        Flames.getFlogger().finest("User " + discordUser.getName() + " has a rank of " + this.rank.toString());
+        return this.rank;
     }
 
     public double getHighScore() {
@@ -145,5 +153,19 @@ public class FlamesUser {
     }
     public double getBonusMultiplier() {
         return bonusMultiplier;
+    }
+    public void addConversation() {
+        conversations++;
+    }
+    public void addMessage() {
+        messages++;
+    }
+
+    public int getConversations() {
+        return conversations;
+    }
+
+    public int getMessages() {
+        return messages;
     }
 }

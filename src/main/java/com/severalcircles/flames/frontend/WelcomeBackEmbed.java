@@ -4,18 +4,13 @@
 
 package com.severalcircles.flames.frontend;
 
-import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.system.exception.ExceptionID;
-import com.severalcircles.flames.system.manager.FlamesQuestionManager;
-import com.severalcircles.flames.system.manager.UserDataManager;
+import com.severalcircles.flames.system.manager.secondary.FlamesQuestionManager;
+import com.severalcircles.flames.system.manager.secondary.UserDataManager;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.util.Locale;
 @ExceptionID("704")
 @Embed(name = "WelcomeBack")
@@ -38,7 +33,7 @@ public class WelcomeBackEmbed extends FlamesEmbed {
         try {
             builder.setAuthor(String.format(FlamesQuestionManager.getAnswer("welcomeback." + part), user.getDiscordUser().getName()));
         } catch (NullPointerException | IndexOutOfBoundsException e) {
-            builder.setAuthor(local.getString("defaultMessage." + part));
+            builder.setAuthor(String.format(local.getString("defaultMessage." + part), user.getDiscordUser().getName()));
         }
         builder.setColor(part.getColor());
         builder.setTitle(local.getString("title"));

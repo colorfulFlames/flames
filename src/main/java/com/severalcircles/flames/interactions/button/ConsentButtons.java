@@ -6,10 +6,9 @@ package com.severalcircles.flames.interactions.button;
 
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.system.exception.ExceptionID;
-import com.severalcircles.flames.system.manager.UserDataManager;
+import com.severalcircles.flames.system.manager.secondary.UserDataManager;
 import net.dv8tion.jda.api.interactions.components.buttons.ButtonInteraction;
 
-import java.io.IOException;
 @ExceptionID("820")
 public class ConsentButtons extends FlamesButtonInteraction {
     @Override
