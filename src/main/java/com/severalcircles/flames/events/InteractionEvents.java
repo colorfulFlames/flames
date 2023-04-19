@@ -6,28 +6,22 @@ package com.severalcircles.flames.events;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.interactions.button.ConsentButtons;
-import com.severalcircles.flames.interactions.slash.ConsentCommand;
 import com.severalcircles.flames.system.exception.ExceptionID;
-import com.severalcircles.flames.system.manager.UserDataManager;
-import com.severalcircles.flames.system.manager.FlamesInteractionManager;
-import com.severalcircles.flames.system.exception.flames.ConsentException;
+import com.severalcircles.flames.system.manager.secondary.UserDataManager;
+import com.severalcircles.flames.system.manager.primary.FlamesInteractionManager;
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
 @ExceptionID("601")
 public class InteractionEvents extends ListenerAdapter {
     @Override
     public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
         super.onSlashCommandInteraction(event);
         Flames.getFlogger().fine("Received slash command interaction " + event.getName());
-        if (event.getName().equals("consent")) {
-                new ConsentCommand().execute(event, new UserDataManager().loadUser(event.getUser(), true));
-        }
-            FlamesInteractionManager.getCommandInteraction(event.getName()).execute(event, new UserDataManager().loadUser(event.getUser(), false));
+        FlamesInteractionManager.getCommandInteraction(event.getName()).execute(event, new UserDataManager().loadUser(event.getUser(), false));
     }
 
     @Override

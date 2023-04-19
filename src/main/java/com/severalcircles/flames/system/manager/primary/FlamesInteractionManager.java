@@ -2,7 +2,7 @@
  * Copyright (c) 2023 Several Circles
  */
 
-package com.severalcircles.flames.system.manager;
+package com.severalcircles.flames.system.manager.primary;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.interactions.button.ConsentButtons;
@@ -10,8 +10,12 @@ import com.severalcircles.flames.interactions.button.FlamesButtonInteraction;
 import com.severalcircles.flames.interactions.modal.FlamesModalInteraction;
 import com.severalcircles.flames.interactions.modal.QuestionModal;
 import com.severalcircles.flames.interactions.slash.*;
+import com.severalcircles.flames.interactions.slash.data.HiCommand;
+import com.severalcircles.flames.interactions.slash.data.MyDataCommand;
+import com.severalcircles.flames.interactions.slash.data.QuestionCommand;
 import com.severalcircles.flames.system.exception.ExceptionID;
 import com.severalcircles.flames.system.exception.runtime.NoCommandException;
+import com.severalcircles.flames.system.manager.FlamesManager;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 
@@ -34,6 +38,7 @@ public class FlamesInteractionManager extends FlamesManager {
         commandInteractionList.add(new CaptionThisCommand());
         commandInteractionList.add(new QuestionCommand());
         commandInteractionList.add(new HiCommand());
+        commandInteractionList.add(new MyDataCommand());
         commandInteractionList.forEach(command -> {
             SlashCommandData data = Commands.slash(command.getClass().getAnnotation(FlamesCommand.class).name(), command.getClass().getAnnotation(FlamesCommand.class).description());
             for (FlamesCommandOption option : command.getClass().getAnnotation(FlamesCommand.class).options()) {

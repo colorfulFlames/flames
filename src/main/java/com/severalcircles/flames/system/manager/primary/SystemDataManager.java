@@ -2,11 +2,12 @@
  * Copyright (c) 2023 Several Circles
  */
 
-package com.severalcircles.flames.system.manager;
+package com.severalcircles.flames.system.manager.primary;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.system.exception.ExceptionID;
 import com.severalcircles.flames.system.exception.flames.FlamesConfigurationException;
+import com.severalcircles.flames.system.manager.FlamesManager;
 
 import java.io.File;
 import java.io.FileInputStream;

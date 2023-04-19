@@ -4,11 +4,10 @@
 
 package com.severalcircles.flames.interactions.modal;
 
-import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.frontend.FlamesExceptionEmbed;
 import com.severalcircles.flames.system.exception.java.FlamesDataException;
-import com.severalcircles.flames.system.manager.FlamesQuestionManager;
+import com.severalcircles.flames.system.manager.secondary.FlamesQuestionManager;
 import net.dv8tion.jda.api.interactions.modals.ModalInteraction;
 
 import java.io.IOException;

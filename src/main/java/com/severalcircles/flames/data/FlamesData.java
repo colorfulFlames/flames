@@ -12,4 +12,7 @@ private static double averageScore = 0;
     public static void setAverageScore(double averageScore) {
         FlamesData.averageScore = averageScore;
     }
+    public static void addScore(double score) {
+        averageScore = (averageScore + score) / 2;
+    }
 }

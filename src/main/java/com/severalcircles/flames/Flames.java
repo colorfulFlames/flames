@@ -8,6 +8,13 @@ import com.severalcircles.flames.system.manager.*;
 import com.severalcircles.flames.system.exception.ExceptionID;
 import com.severalcircles.flames.system.exception.java.FlamesConnectException;
 import com.severalcircles.flames.system.exception.MessageCodes;
+import com.severalcircles.flames.system.manager.primary.EventManager;
+import com.severalcircles.flames.system.manager.primary.FlamesInteractionManager;
+import com.severalcircles.flames.system.manager.primary.FlamesManagerManager;
+import com.severalcircles.flames.system.manager.primary.SystemDataManager;
+import com.severalcircles.flames.system.manager.secondary.FlamesQuestionManager;
+import com.severalcircles.flames.system.manager.secondary.FlamesReportManager;
+import com.severalcircles.flames.system.manager.secondary.UserDataManager;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -73,45 +80,13 @@ public class Flames {
         }
         flogger.fine("Flames is now online!");
         flogger.resetLastClass();
-        flogger.info("Starting primary managers");
-        managers.add(new SystemDataManager());
-        managers.add(new EventManager());
-        managers.add(new FlamesInteractionManager());
-        managers.forEach(manager -> {
-            try {
-                manager.prepare();
-            } catch (IOException e) {
-                getFlogger().severe("Failed to prepare primary manager " + manager.getClass().getName());
-                getFlogger().severe("""
-                        A couple of things to try:
-                        - Make sure you have permission to write to the directory Flames is in.
-                        - If the name of the data manager does not contain "com.severalcircles", you should not run this JAR file. This data manager does not belong to Flames.
-                        - Make sure you have enough disk space to run Flames. Flames needs at least 1 MB of free space to run. More is better, of course.""");
-                System.exit(1);
-            }
-            getFlogger().fine("Prepared primary manager " + manager.getClass().getName());
-
-        });
-        flogger.info("Starting secondary managers");
-        managers2.add(new UserDataManager());
-        managers2.add(new FlamesReportManager());
-        managers2.add(new FlamesQuestionManager());
-//        managers2.add(TodayManager.newDay());
-        managers2.forEach(manager -> {
-            try {
-                manager.prepare();
-            } catch (IOException e) {
-                getFlogger().severe("Failed to prepare secondary manager " + manager.getClass().getName());
-                getFlogger().severe("""
-                        A couple of things to try:
-                        - Make sure you have permission to write to the directory Flames is in.
-                        - If the name of the data manager does not contain "com.severalcircles", you should not run this JAR file. This data manager does not belong to Flames.
-                        - Make sure you have enough disk space to run Flames. Flames needs at least 1 MB of free space to run. More is better, of course.""");
-                System.exit(1);
-            }
-            getFlogger().fine("Prepared secondary manager " + manager.getClass().getName());
-
-        });
+        flogger.info("Starting managers");
+        try {
+            new FlamesManagerManager().prepare();
+        } catch (IOException e) {
+            flogger.severe("FlamesManagerManager failed to manage the managers, and so the managers that FlamesManagerManager manages can't manage the things that said managers need to manage. Whoops!");
+            System.exit(1);
+        }
         new SystemDataManager().cleanFlamesFiles();
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
