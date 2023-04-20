@@ -20,8 +20,10 @@ import java.util.ResourceBundle;
 @ExceptionID("700")
 public abstract class FlamesEmbed {
     ResourceBundle local;
+    Locale locale;
     public FlamesEmbed(Locale locale) {
         local = ResourceBundle.getBundle("strings/" + this.getClass().getAnnotation(Embed.class).name(), locale);
+        this.locale = locale;
     }
     public abstract MessageEmbed get();
 }

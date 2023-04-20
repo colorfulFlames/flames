@@ -30,7 +30,7 @@ public class CaptionThisCommand extends FlamesSlashCommand {
         }
 //        AtomicReference<Integer> i = new AtomicReference<>(0);
         AtomicReference<String> tp = new AtomicReference<>("");
-        tp.set(conversation.getTopics().keySet().stream().toList().get(new Random().nextInt(conversation.getTopics().keySet().size())).name().substring(0, Math.min(conversation.getTopics().keySet().size(), 256)));
+        tp.set(conversation.getTopics().keySet().stream().toList().get(new Random().nextInt(conversation.getTopics().keySet().size())).substring(0, Math.min(conversation.getTopics().keySet().size(), 256)));
         List<String> urls = Tenor.extractUrls(Objects.requireNonNull(Tenor.getSearchResults(tp.get().replace(" ", "%20"), 10)).toString());
         String url = urls.get(new Random().nextInt(urls.size()));
         int attempts = 1;
