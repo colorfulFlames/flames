@@ -11,12 +11,13 @@ import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 
 import java.time.Instant;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Conversation {
     private double emotion;
     private double score;
-    private final Map<ConversationEntity, Integer> topics;
+    private final Map<String, Integer> topics;
     private final Map<FlamesUser, Integer> participationMap;
     private final Instant started;
     private Instant expires;
@@ -51,16 +52,19 @@ public class Conversation {
         this.score += score;
     }
 
-    public Map<ConversationEntity, Integer> getTopics() {
+    public Map<String, Integer> getTopics() {
         return topics;
     }
 
-    public void addTopic(ConversationEntity topic) {
+    public void addTopic(String topic) {
         if (topics.containsKey(topic)) {
             topics.put(topic, topics.get(topic) + 1);
         } else {
             topics.put(topic, 1);
         }
+    }
+    public void addTopics(List<String> topics) {
+        topics.forEach(this::addTopic);
     }
 
     public Map<FlamesUser, Integer> getParticipationMap() {

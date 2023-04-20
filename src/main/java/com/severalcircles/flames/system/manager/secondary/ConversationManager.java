@@ -9,7 +9,6 @@ import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.conversations.Analysis;
 import com.severalcircles.flames.conversations.AnalysisScore;
 import com.severalcircles.flames.conversations.Conversation;
-import com.severalcircles.flames.conversations.ConversationEntity;
 import com.severalcircles.flames.data.FlamesData;
 import com.severalcircles.flames.data.user.FlamesQuote;
 import com.severalcircles.flames.data.user.FlamesUser;
@@ -64,7 +63,7 @@ public class ConversationManager extends FlamesManager {
                 conversation.addParticipation(user);
                 conversation.addEmotion(score.get().emotion());
                 conversation.addScore(score.get().score());
-                conversation.addTopic(new ConversationEntity(message.getContentRaw(), message.getAuthor().getId()));
+                conversation.addTopics(Analysis.analyzeEntities(message.getContentRaw()));
                 Flames.getFlogger().finest("Conversation: " + conversation);
                 Flames.getFlogger().finest("Conversation topics: \n" + conversation.getTopics());
                 Flames.getFlogger().finest("Conversation participation: \n" + conversation.getParticipationMap());
