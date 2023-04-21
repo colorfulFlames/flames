@@ -35,7 +35,7 @@ public class ConversationManager extends FlamesManager {
             public void run() {
                 removedExpiredConversations();
             }
-        }, 0, 1000 * 60 * 5);
+        }, 0, 1000 * 60);
     }
     public static void removedExpiredConversations() {
         UserDataManager udm = new UserDataManager();

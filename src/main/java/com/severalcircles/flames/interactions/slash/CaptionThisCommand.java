@@ -23,6 +23,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class CaptionThisCommand extends FlamesSlashCommand {
     @Override
     public void execute(SlashCommandInteraction interaction, FlamesUser user) {
+//        interaction.deferReply().complete();
         Conversation conversation = ConversationManager.conversations.get(interaction.getChannel().getId());
         if (conversation == null) {
             interaction.replyEmbeds(new EmbedBuilder().setTitle("No conversation").setDescription("There is no conversation in this channel.").build()).complete();

@@ -99,6 +99,12 @@ public class FlamesUser {
     }
     public void addScore(double score) {
         this.score += score;
+        if (score > highScore) {
+            highScore = score;
+        }
+        if (score < lowScore) {
+            lowScore = score;
+        }
     }
 
     public void setHighScore(double highScore) {

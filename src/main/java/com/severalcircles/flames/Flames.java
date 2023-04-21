@@ -102,6 +102,10 @@ public class Flames {
     public static FLogger getFlogger() {
         return flogger;
     }
+
+    public static String getVersion() {
+        return version;
+    }
 }
 // ------------------------
 // Why is there a microwave

@@ -33,6 +33,7 @@ public class Conversation {
         started = Instant.now();
         expires = started.plusSeconds(60 * 5);
         this.channel = channel;
+        this.favoriteQuote = new FlamesQuote("This isn't epic yet.", UserDataManager.flames());
 
     }
 
