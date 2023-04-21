@@ -61,7 +61,7 @@ public class UserDataManager extends FlamesManager {
         }
 
     }
-    public FlamesUser loadUser(User user, boolean overrideConsent) {
+    public FlamesUser loadUserThrowConsent(User user) throws ConsentException {
         Properties properties = new Properties();
         File userFile = new File(userDataDir.getAbsolutePath() + "/" + user.getId() + ".flp");
         try {
@@ -71,10 +71,60 @@ public class UserDataManager extends FlamesManager {
                     FlamesReport nur = new NewFlamesUserReport(user);
                     nur.run();
                     FlamesReportManager.saveReport(nur);
-                    Flames.getFlogger().finest("Consent Override: " + overrideConsent);
-                    if (!overrideConsent) {
-                        throw new ConsentException(0);
-                    }
+                    throw new ConsentException(0);
+                } catch (FlamesDataException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            properties.load(new FileInputStream(userFile));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        FlamesUser fluser;
+        try { fluser = new FlamesUser(
+                user,
+                Double.parseDouble(properties.getProperty("score")),
+                null,
+                Double.parseDouble(properties.getProperty("highScore")),
+                Double.parseDouble(properties.getProperty("lowScore")),
+                Double.parseDouble(properties.getProperty("emotion")),
+                Instant.parse(properties.getProperty("happyDay")),
+                Instant.parse(properties.getProperty("sadDay")),
+                null,
+                Locale.forLanguageTag(properties.getProperty("locale")),
+                Integer.parseInt(properties.getProperty("consent")),
+                Boolean.parseBoolean(properties.getProperty("quoteConsent")),
+                Instant.parse(properties.getProperty("lastBonus")),Double.parseDouble(properties.getProperty("bonusMultiplier")),
+                Integer.parseInt(properties.getProperty("conversations")), Integer.parseInt(properties.getProperty("messages")));
+            fluser.setFavoriteQuote(new FlamesQuote(properties.getProperty("favoriteQuote"), fluser));
+            fluser.getRank();
+        }
+        catch (NullPointerException | NumberFormatException e) {
+            fluser = dataDefault(user);
+            saveUser(fluser);
+            try {
+                throw new ConsentException(fluser.getConsent());
+            } catch (ConsentException ex) {
+                new ConsentEmbed(Locale.ROOT).sendTo(user);
+            }
+        }
+        return fluser;
+    }
+    public FlamesUser loadUser(User user) {
+        Properties properties = new Properties();
+        File userFile = new File(userDataDir.getAbsolutePath() + "/" + user.getId() + ".flp");
+        try {
+            if (userFile.createNewFile()) {
+                Flames.getFlogger().fine("Created user data file for " + user.getAsTag() + " at " + userFile.getAbsolutePath());
+                try {
+                    FlamesReport nur = new NewFlamesUserReport(user);
+                    nur.run();
+                    FlamesReportManager.saveReport(nur);
+                    throw new ConsentException(0);
                 } catch (FlamesDataException e) {
                     e.printStackTrace();
                 }

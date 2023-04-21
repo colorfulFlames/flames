@@ -21,7 +21,7 @@ public class MessageEvent extends ListenerAdapter {
         if (event.getAuthor().isBot()) return;
         FlamesUser flamesUser = null;
         Flames.getFlogger().fine("Trying to load user " + event.getAuthor().getAsTag());
-        flamesUser = new UserDataManager().loadUser(event.getAuthor(), false);
+        flamesUser = new UserDataManager().loadUser(event.getAuthor());
         Flames.getFlogger().finest("User " + event.getAuthor().getAsTag() + " loaded successfully.");
         ConversationManager.processMessage(event.getChannel(), event.getMessage(), flamesUser);
     }
