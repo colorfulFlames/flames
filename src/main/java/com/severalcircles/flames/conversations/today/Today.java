@@ -24,6 +24,7 @@ public class Today {
     static FlamesQuote quote = new FlamesQuote("No quote found", UserDataManager.flames());
     static double quoteScore = 0;
     static double emotion = 0;
+    public static List<String> thanks = new LinkedList<>();
     static FlamesUser highUser = UserDataManager.flames();
     static {
         int msToMidnight = (int) (Instant.now().until(Instant.now().plusSeconds(60 * 60 * 24).truncatedTo(ChronoUnit.DAYS), ChronoUnit.SECONDS) * 1000);

@@ -21,7 +21,7 @@ public class InteractionEvents extends ListenerAdapter {
     public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
         super.onSlashCommandInteraction(event);
         Flames.getFlogger().fine("Received slash command interaction " + event.getName());
-        FlamesInteractionManager.getCommandInteraction(event.getName()).execute(event, new UserDataManager().loadUser(event.getUser(), false));
+        FlamesInteractionManager.getCommandInteraction(event.getName()).execute(event, new UserDataManager().loadUser(event.getUser()));
     }
 
     @Override
@@ -29,17 +29,17 @@ public class InteractionEvents extends ListenerAdapter {
         super.onButtonInteraction(event);
         Flames.getFlogger().fine("Received button interaction " + event.getComponentId());
         if (event.getComponentId().equals("noQuotes") | event.getComponentId().equals("decline") | event.getComponentId().equals("consent")) {
-                new ConsentButtons().execute(event, new UserDataManager().loadUser(event.getUser(), true));
+                new ConsentButtons().execute(event, new UserDataManager().loadUser(event.getUser()));
 
         }
-            FlamesInteractionManager.getButtonInteraction(event.getComponentId()).execute(event, new UserDataManager().loadUser(event.getUser(), false));
+            FlamesInteractionManager.getButtonInteraction(event.getComponentId()).execute(event, new UserDataManager().loadUser(event.getUser()));
     }
 
     @Override
     public void onModalInteraction(@NotNull ModalInteractionEvent event) {
         super.onModalInteraction(event);
         Flames.getFlogger().fine("Received modal interaction " + event.getModalId());
-            FlamesInteractionManager.getModalInteraction(event.getModalId()).execute(event, new UserDataManager().loadUser(event.getUser(), false));
+            FlamesInteractionManager.getModalInteraction(event.getModalId()).execute(event, new UserDataManager().loadUser(event.getUser()));
 
 
     }
