@@ -25,6 +25,8 @@ jobs:
       uses: gradle/gradle-build-action@v2
       with:
         gradle-version: 8.1
+    - name: Check Java Version
+      run: java -version
     - name: Build with Gradle
       run: gradle build
 
