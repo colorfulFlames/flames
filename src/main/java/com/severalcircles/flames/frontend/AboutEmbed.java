@@ -24,8 +24,9 @@ public class AboutEmbed extends FlamesEmbed {
                 .setTitle(Flames.getApi().getSelfUser().getName())
                 .setDescription(local.getString("description"))
                 .setImage(local.getString("image"))
+                .setThumbnail("https://www.severalcircles.com/flames/assets/apps/about.png")
                 .addField(local.getString("version") + " " + Flames.getVersion(), local.getString("version.date"), true)
-                .setColor(Color.RED)
+                .setColor(0x0E0E0E)
                 .build();
     }
 }

@@ -9,6 +9,7 @@ import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.conversations.Analysis;
 import com.severalcircles.flames.conversations.AnalysisScore;
 import com.severalcircles.flames.conversations.Conversation;
+import com.severalcircles.flames.conversations.today.Today;
 import com.severalcircles.flames.data.user.FlamesQuote;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.system.exception.ExceptionID;
@@ -46,6 +47,10 @@ public class ConversationManager extends FlamesManager {
                     user.addEmotion(conversation.getEmotion() / conversation.getParticipationMap().size());
                         udm.saveUser(user);
                     });
+                conversation.getTopics().forEach((topic, score) -> {
+                    Today.addTopic(topic);
+                });
+                Today.addEmotion(conversation.getEmotion());
                 conversations.remove(channel);
             }
         });
@@ -77,6 +82,7 @@ public class ConversationManager extends FlamesManager {
             user.addMessage();
             Sentiment s = Analysis.analyze(user.getFavoriteQuote().message());
             AnalysisScore as = new AnalysisScore(s);
+            Today.checkQuote(new FlamesQuote(message.getContentRaw(), user), score.get().score());
             if (score.get().emotion() > as.emotion() | new Random().nextInt(1000) == 69) user.setFavoriteQuote(new FlamesQuote(message.getContentRaw(), user));
             FlamesDataManager.addGloabalScore(score.get().score());
             new UserDataManager().saveUser(user);

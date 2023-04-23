@@ -16,8 +16,9 @@ import java.util.Locale;
 
 public class StringUtil {
     public static String formatScore(double score) {
+        score = Math.round(score);
         DecimalFormat formatter = new DecimalFormat("#,###");
-        return String.format("%s fp", formatter.format(score));
+        return String.format("%s FP", formatter.format(score));
     }
     public static String prettyDate(Instant instant, Locale locale) {
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/YYYY", locale);

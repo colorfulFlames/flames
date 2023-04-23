@@ -10,6 +10,7 @@ import com.severalcircles.flames.interactions.button.FlamesButtonInteraction;
 import com.severalcircles.flames.interactions.modal.FlamesModalInteraction;
 import com.severalcircles.flames.interactions.modal.QuestionModal;
 import com.severalcircles.flames.interactions.slash.*;
+import com.severalcircles.flames.interactions.slash.data.GlobalDataCommand;
 import com.severalcircles.flames.interactions.slash.data.HiCommand;
 import com.severalcircles.flames.interactions.slash.data.MyDataCommand;
 import com.severalcircles.flames.interactions.slash.data.QuestionCommand;
@@ -42,6 +43,7 @@ public class FlamesInteractionManager extends FlamesManager {
         commandInteractionList.add(new TodayCommand());
         commandInteractionList.add(new ThanksCommand());
         commandInteractionList.add(new AboutCommand());
+        commandInteractionList.add(new GlobalDataCommand());
         commandInteractionList.forEach(command -> {
             SlashCommandData data = Commands.slash(command.getClass().getAnnotation(FlamesCommand.class).name(), command.getClass().getAnnotation(FlamesCommand.class).description());
             for (FlamesCommandOption option : command.getClass().getAnnotation(FlamesCommand.class).options()) {

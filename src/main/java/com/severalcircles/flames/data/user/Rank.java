@@ -4,6 +4,7 @@
 
 package com.severalcircles.flames.data.user;
 
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public enum Rank {
@@ -14,7 +15,7 @@ public enum Rank {
 
     Rank(FlamesRank rank) {
         this.rank = rank;
-        rsc = ResourceBundle.getBundle("ranks");
+        rsc = ResourceBundle.getBundle("strings/Rank");
 
     }
 
@@ -25,7 +26,9 @@ public enum Rank {
     public ResourceBundle getRsc() {
         return rsc;
     }
-
+    public String getName() {
+        return rsc.getString(this.name());
+    }
     public Rank getNext() {
         switch (this) {
             case UNRANKED -> {
