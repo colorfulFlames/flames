@@ -28,7 +28,7 @@ import java.util.*;
  * The main class of Flames. This class is responsible for starting the bot and initializing the managers.
  * @author Several Circles
  * @version 8
- * @since Flames Flames 2
+ * @since Flames 2
  */
 @ExceptionID("501")
 public class Flames {
@@ -95,6 +95,7 @@ public class Flames {
                 flogger.info("Flames has been running for " + uptime + " hours.");
             }
         },0, 1000 * 60 * 60);
+        if (args.length > 0) api.shutdownNow();
     }
     public static JDA getApi() {
         return api;

@@ -15,7 +15,7 @@ public class EventManager extends FlamesManager {
     @Override
     public void prepare() {
         Flames.getFlogger().fine("Preparing event listeners");
-        Flames.getApi().addEventListener(new StatusChange());
+//        Flames.getApi().addEventListener(new StatusChange());
         Flames.getApi().addEventListener(new InteractionEvents());
         Flames.getApi().addEventListener(new MessageEvent());
 //        Flames.getFlogger().finest("Added StatusChange listener");
