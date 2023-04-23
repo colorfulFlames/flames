@@ -15,6 +15,12 @@ import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Handles interactions with the bot, like Slash Commands and Buttons.
+ * @author Several Circles
+ * @version 8
+ * @since Flames 8
+ */
 @ExceptionID("601")
 public class InteractionEvents extends ListenerAdapter {
     @Override

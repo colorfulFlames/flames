@@ -14,6 +14,12 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Analysis class for analyzing messages and returning sentiment and entities.
+ * @author Several Circles
+ * @version 8
+ * @since Flames 2
+ */
 public class Analysis {
     public static Sentiment analyze(String text) {
         try (LanguageServiceClient language = LanguageServiceClient.create()) {

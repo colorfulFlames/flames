@@ -14,6 +14,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A conversation is a collection of messages that are analyzed for sentiment and emotion. It lasts for 5 minutes, and then its score is divided among the participants.
+ * @author Several Circles
+ * @version 8
+ * @since Flames 6
+ */
 public class Conversation {
     private double emotion;
     private double score;

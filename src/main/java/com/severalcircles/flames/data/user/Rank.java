@@ -6,7 +6,13 @@ package com.severalcircles.flames.data.user;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
-
+/**
+ * Enum for storing the rank of a FlamesUser.
+ * @author Several Circles
+ * @version 8
+ * @since Flames 8
+ * @see FlamesRank
+ */
 public enum Rank {
     UNRANKED(new FlamesRank(0, 0f)), SPARKS(new FlamesRank(1, 0.5f)), SPARKS_PLUS(new FlamesRank(1, 0.75f)), LIGHTS(new FlamesRank(2, 1f)), LIGHTS_PLUS(new FlamesRank(2, 5f)), COLORS(new FlamesRank(3, 10f)), COLORS_PLUS(new FlamesRank(4, 20f)), SKYBREAK(new FlamesRank(5, 40f)), ICEFALL(new FlamesRank(6, 75f)), SUMMIT(new FlamesRank(6, 100f));
     FlamesRank rank;

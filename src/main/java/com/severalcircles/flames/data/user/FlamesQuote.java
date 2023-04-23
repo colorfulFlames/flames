@@ -4,6 +4,14 @@
 
 package com.severalcircles.flames.data.user;
 
+/**
+ * FlamesQuote class for storing a quote made by a FlamesUser.
+ * @param message
+ * @param user
+ * @author Several Circles
+ * @version 8
+ * @since Flames 8
+ */
 public record FlamesQuote(
         String message,
         FlamesUser user

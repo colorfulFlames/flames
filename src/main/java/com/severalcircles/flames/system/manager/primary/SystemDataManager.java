@@ -3,6 +3,12 @@
  */
 
 package com.severalcircles.flames.system.manager.primary;
+/**
+ * This manager manages the Flames configuration and the Flames directory.
+ * @author Several Circles
+ * @version 8
+ * @since Flames 8
+ */
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.system.exception.ExceptionID;

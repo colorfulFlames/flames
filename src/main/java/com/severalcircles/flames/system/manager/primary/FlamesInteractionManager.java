@@ -25,7 +25,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
-
+/**
+ * Manages interactions with the bot, like Slash Commands and Buttons.
+ * @author Several Circles
+ * @version 8
+ * @since Flames 8
+ */
 @ExceptionID("930")
 public class FlamesInteractionManager extends FlamesManager {
     private static final List<FlamesSlashCommand> commandInteractionList = new ArrayList<>();

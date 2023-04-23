@@ -12,6 +12,12 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * This manager is primarily responsible for managing, specifically for managing managers. It tries its best to manage the managers in the correct order so that the managers can manage properly.
+ * @author Several Circles
+ * @version 8
+ * @since Flames 8
+ */
 public class FlamesManagerManager extends FlamesManager {
     static final List<FlamesManager> managers = new LinkedList<>();
     static final List<FlamesManager> managers2 = new LinkedList<>();

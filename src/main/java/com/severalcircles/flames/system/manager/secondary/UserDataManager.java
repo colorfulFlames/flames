@@ -3,6 +3,12 @@
  */
 
 package com.severalcircles.flames.system.manager.secondary;
+/**
+ * This manager is responsible for managing user data. It is responsible for creating and loading user data, as well as saving it.
+ * @author Several Circles
+ * @version 8
+ * @since Flames 8
+ */
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.user.FlamesQuote;

@@ -3,6 +3,12 @@
  */
 
 package com.severalcircles.flames.system.manager.secondary;
+/**
+ * This manager is responsible for managing reports. It is responsible for creating and managing the reports that are used in the bot.
+ * @author Several Circles
+ * @version 8
+ * @since Flames 8
+ */
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.system.exception.ExceptionID;

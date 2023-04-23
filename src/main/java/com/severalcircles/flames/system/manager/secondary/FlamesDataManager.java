@@ -13,6 +13,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * This manager is responsible for managing the global data of Flames. This includes the average score of Flames, the global score of Flames, and the global score of Flames.
+ * @author Several Circles
+ * @version 8
+ * @since Flames 8
+ */
 public class FlamesDataManager extends FlamesManager {
     public static final File dataFile = new File(SystemDataManager.getFlamesDirectory().getAbsolutePath() + "/global.flp");
 private static double averageScore = 0;

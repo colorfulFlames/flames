@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * Today is a class that stores data about the current day. Today, we're talking about Flames, and we're feeling a certain way.
  * @author Several Circles
  * @version 8
- * @since 4.4
+ * @since Flames 4
  */
 public class Today {
     static Map<String, Integer> topics = new HashMap<>();

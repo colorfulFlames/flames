@@ -10,6 +10,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * FlamesRank class for storing a rank and its multiplier.
+ * @param level
+ * @param multiplier
+ * @author Several Circles
+ * @version 8
+ * @since Flames 8
+ * @see Rank
+ */
 public record FlamesRank(
             int level,
             float multiplier

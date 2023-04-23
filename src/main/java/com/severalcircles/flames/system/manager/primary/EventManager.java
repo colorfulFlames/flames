@@ -7,7 +7,6 @@ package com.severalcircles.flames.system.manager.primary;
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.events.InteractionEvents;
 import com.severalcircles.flames.events.MessageEvent;
-import com.severalcircles.flames.events.StatusChange;
 import com.severalcircles.flames.system.manager.FlamesManager;
 import com.severalcircles.flames.system.exception.ExceptionID;
 

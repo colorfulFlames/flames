@@ -83,6 +83,7 @@ public class ConversationManager extends FlamesManager {
             Sentiment s = Analysis.analyze(user.getFavoriteQuote().message());
             AnalysisScore as = new AnalysisScore(s);
             Today.checkQuote(new FlamesQuote(message.getContentRaw(), user), score.get().score());
+            Today.checkUser(user);
             if (score.get().emotion() > as.emotion() | new Random().nextInt(1000) == 69) user.setFavoriteQuote(new FlamesQuote(message.getContentRaw(), user));
             FlamesDataManager.addGloabalScore(score.get().score());
             new UserDataManager().saveUser(user);

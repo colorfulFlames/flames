@@ -12,6 +12,12 @@ import com.severalcircles.flames.system.manager.primary.SystemDataManager;
 import java.io.*;
 import java.util.*;
 
+/**
+ * This manager is responsible for managing questions and answers. It is used to answer questions and get answers to questions.
+ * @author Several Circles
+ * @version 8
+ * @since Flames 8
+ */
 public class FlamesQuestionManager extends FlamesManager {
     public static final File questionFile = new File(SystemDataManager.getFlamesDirectory().getAbsolutePath() + "/questions.flp");
     private static final List<String> questions = new LinkedList<>();

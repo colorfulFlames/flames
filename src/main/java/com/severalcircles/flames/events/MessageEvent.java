@@ -13,6 +13,12 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Handles messages sent that Flames can see.
+ * @author Several Circles
+ * @version 8
+ * @since Flames 2
+ */
 @ExceptionID("602")
 public class MessageEvent extends ListenerAdapter {
     @Override

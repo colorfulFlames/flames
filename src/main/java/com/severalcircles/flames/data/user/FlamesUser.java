@@ -12,6 +12,12 @@ import net.dv8tion.jda.api.entities.User;
 import java.time.Instant;
 import java.util.Locale;
 
+/**
+ * FlamesUser class for storing user data.
+ * @author Several Circles
+ * @version 8
+ * @since Flames 2
+ */
 public class FlamesUser {
     private final User discordUser;
     private double score;

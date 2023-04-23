@@ -6,7 +6,12 @@ package com.severalcircles.flames.conversations;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
-
+/**
+ * EmotionLevel enum for storing emotion levels.
+ * @author Several Circles
+ * @version 8
+ * @since Flames 8
+ */
 public enum EmotionLevel {
     VERY_LOW(-9999, -5), LOW(-5, -1), NEUTRAL(-1, 1), HIGH(1, 5), VERY_HIGH(5, 9999);
     private final double lowBound;
