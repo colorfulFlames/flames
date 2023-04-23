@@ -6,10 +6,7 @@ package com.severalcircles.flames.system.manager.primary;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.system.manager.FlamesManager;
-import com.severalcircles.flames.system.manager.secondary.ConversationManager;
-import com.severalcircles.flames.system.manager.secondary.FlamesQuestionManager;
-import com.severalcircles.flames.system.manager.secondary.FlamesReportManager;
-import com.severalcircles.flames.system.manager.secondary.UserDataManager;
+import com.severalcircles.flames.system.manager.secondary.*;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -29,6 +26,7 @@ public class FlamesManagerManager extends FlamesManager {
         managers2.add(new ConversationManager());
         managers2.add(new FlamesQuestionManager());
         managers2.add(new UserDataManager());
+        managers2.add(new FlamesDataManager());
 
         for (FlamesManager manager : managers) {
             Flames.getFlogger().fine("Preparing [1]" + manager.getClass().getSimpleName());

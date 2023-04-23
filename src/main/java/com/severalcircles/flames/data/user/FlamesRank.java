@@ -4,7 +4,7 @@
 
 package com.severalcircles.flames.data.user;
 
-import com.severalcircles.flames.data.FlamesData;
+import com.severalcircles.flames.system.manager.secondary.FlamesDataManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +15,7 @@ public record FlamesRank(
             float multiplier
     ) {
         public static double getThreshold(Rank rank) {
-            return rank.getRank().multiplier() * FlamesData.getAverageScore();
+            return rank.getRank().multiplier() * FlamesDataManager.getAverageScore();
         }
         public static boolean checkRankUp(FlamesUser user) {
             return user.getScore() > getThreshold(user.getRank().getNext());
@@ -27,7 +27,7 @@ public record FlamesRank(
             Map<Rank, Double> thresholds = new HashMap<>();
             AtomicReference<Rank> rank = new AtomicReference<>();
             for (Rank rnk : Rank.values()) {
-                thresholds.put(rnk, rnk.getRank().multiplier() * FlamesData.getAverageScore());
+                thresholds.put(rnk, rnk.getRank().multiplier() * FlamesDataManager.getAverageScore());
             }
             thresholds.forEach((rnk, threshold) -> {
                 if (score > threshold) {

@@ -9,7 +9,6 @@ import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.conversations.Analysis;
 import com.severalcircles.flames.conversations.AnalysisScore;
 import com.severalcircles.flames.conversations.Conversation;
-import com.severalcircles.flames.data.FlamesData;
 import com.severalcircles.flames.data.user.FlamesQuote;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.system.exception.ExceptionID;
@@ -59,7 +58,7 @@ public class ConversationManager extends FlamesManager {
         conversations.forEach((channelID, conversation) -> {
             if (channelID.equals(channel.getId())) {
                 score.set(new AnalysisScore(Analysis.analyze(message.getContentRaw())));
-                FlamesData.addScore(score.get().score());
+                FlamesDataManager.addScore(score.get().score());
                 conversation.addParticipation(user);
                 conversation.addEmotion(score.get().emotion());
                 conversation.addScore(score.get().score());
@@ -79,6 +78,7 @@ public class ConversationManager extends FlamesManager {
             Sentiment s = Analysis.analyze(user.getFavoriteQuote().message());
             AnalysisScore as = new AnalysisScore(s);
             if (score.get().emotion() > as.emotion() | new Random().nextInt(1000) == 69) user.setFavoriteQuote(new FlamesQuote(message.getContentRaw(), user));
+            FlamesDataManager.addGloabalScore(score.get().score());
             new UserDataManager().saveUser(user);
         });
     }
