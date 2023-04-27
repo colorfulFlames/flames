@@ -39,7 +39,8 @@ public class ConversationManager extends FlamesManager {
     }
     public static void removedExpiredConversations() {
         UserDataManager udm = new UserDataManager();
-        conversations.forEach((channel, conversation) -> {
+        Map <String,Conversation> cnvs = new HashMap<>(conversations);
+        cnvs.forEach((channel, conversation) -> {
             if (conversation.getExpires().isBefore(Instant.now())) {
                 Flames.getFlogger().fine("Removing expired conversation from channel " + channel);
                 conversation.getParticipationMap().forEach((user, participation) -> {
