@@ -24,6 +24,7 @@ public class ThanksCommand extends FlamesSlashCommand {
         try {
             thankee = new UserDataManager().loadUserThrowConsent(interaction.getOption("user").getAsUser());
         } catch (ConsentException e) {
+            Flames.getFlogger().warning("User " + interaction.getOption("user").getAsUser().getId() + " has not consented to data collection.");
             interaction.replyEmbeds(e.getEmbed().get()).setEphemeral(true).queue();
         }
         if (thankee == null) return;
