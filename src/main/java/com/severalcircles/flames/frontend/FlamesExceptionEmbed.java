@@ -15,6 +15,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.Locale;
+import java.util.MissingResourceException;
 
 @ExceptionID("703")
 @Embed(name="FlamesException")
@@ -38,18 +39,24 @@ public class FlamesExceptionEmbed extends FlamesEmbed{
         String description;
         try {
             description = local.getString("description." + e.getClass().getSimpleName());
-        } catch (NullPointerException ignored) {
+        } catch (MissingResourceException ignored) {
             description = e.getMessage();
         }
         String helpfultitle = local.getString("helpful.title." + e.getClass().getSimpleName());
         try {
             helpfultitle = local.getString("helpful.title." + e.getClass().getSimpleName());
-        } catch(NullPointerException ignored) {
+        } catch(MissingResourceException ignored) {
             helpfultitle = local.getString("helpful.title.default");
-        }String helpfuldesc = local.getString("helpful.description." + e.getClass().getSimpleName());
+        }
+        String helpfuldesc;
+        try {
+            helpfuldesc = local.getString("helpful.description." + e.getClass().getSimpleName());
+        } catch (MissingResourceException ignored) {
+            helpfuldesc = local.getString("helpful.description.default");
+        }
         try {
             helpfultitle = local.getString("helpful.description." + e.getClass().getSimpleName());
-        } catch(NullPointerException ignored) {
+        } catch(MissingResourceException ignored) {
             helpfultitle = local.getString("helpful.description.default");
         }
 
