@@ -44,6 +44,7 @@ dependencies {
     implementation 'org.slf4j:slf4j-log4j12:1.7.29'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     implementation 'org.json:json:20220320'
+    implementation 'org.reflections:reflections:0.10.2'
 }
 sourceCompatibility = JavaVersion.VERSION_16
 targetCompatibility = JavaVersion.VERSION_16

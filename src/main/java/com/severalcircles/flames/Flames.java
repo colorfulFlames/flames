@@ -19,6 +19,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
+import org.reflections.Reflections;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,8 +37,7 @@ public class Flames {
     private static final FLogger flogger = new FLogger();
     private static final Properties versionProp = new Properties();
     private static String version;
-    private static final List<FlamesManager> managers = new ArrayList<>();
-    private static final List<FlamesManager> managers2 = new ArrayList<>();
+    public static final Reflections reflections = new Reflections("com.severalcircles.flames");
     private static int uptime = -1;
     /**
      * The main method of Flames. This method is responsible for starting the bot and initializing the managers.

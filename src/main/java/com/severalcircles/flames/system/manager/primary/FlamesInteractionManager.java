@@ -20,10 +20,7 @@ import com.severalcircles.flames.system.manager.FlamesManager;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 /**
  * Manages interactions with the bot, like Slash Commands and Buttons.
@@ -40,15 +37,29 @@ public class FlamesInteractionManager extends FlamesManager {
 
     @Override
     public void prepare() {
-        commandInteractionList.add(new BasedCommand());
-        commandInteractionList.add(new CaptionThisCommand());
-        commandInteractionList.add(new QuestionCommand());
-        commandInteractionList.add(new HiCommand());
-        commandInteractionList.add(new MyDataCommand());
-        commandInteractionList.add(new TodayCommand());
-        commandInteractionList.add(new ThanksCommand());
-        commandInteractionList.add(new AboutCommand());
-        commandInteractionList.add(new GlobalDataCommand());
+//        commandInteractionList.add(new BasedCommand());
+//        commandInteractionList.add(new CaptionThisCommand());
+//        commandInteractionList.add(new QuestionCommand());
+//        commandInteractionList.add(new HiCommand());
+//        commandInteractionList.add(new MyDataCommand());
+//        commandInteractionList.add(new TodayCommand());
+//        commandInteractionList.add(new ThanksCommand());
+//        commandInteractionList.add(new AboutCommand());
+//        commandInteractionList.add(new GlobalDataCommand());
+        Set<Class<?>> commands = Flames.reflections.getTypesAnnotatedWith(FlamesCommand.class);
+        Set <Class<FlamesSlashCommand>> safeCommands = new HashSet<>();
+        commands.forEach(command -> {
+            try {safeCommands.add((Class<FlamesSlashCommand>) command);} catch (ClassCastException e) {Flames.getFlogger().severe("Class " + command.getName() + " is annotated with FlamesCommand but is not extending FlamesSlashCommand.");}
+        });
+        safeCommands.forEach(command -> {
+            try {
+                commandInteractionList.add(command.getDeclaredConstructor().newInstance());
+                Flames.getFlogger().fine("Command " + command.getName() + " is valid.");
+            } catch (Exception e) {
+                Flames.getFlogger().severe("Failed to instantiate command " + command.getName());
+                e.printStackTrace();
+            }
+        });
         commandInteractionList.forEach(command -> {
             SlashCommandData data = Commands.slash(command.getClass().getAnnotation(FlamesCommand.class).name(), command.getClass().getAnnotation(FlamesCommand.class).description());
             for (FlamesCommandOption option : command.getClass().getAnnotation(FlamesCommand.class).options()) {
