@@ -8,7 +8,7 @@ import com.severalcircles.flames.Util;
 import com.severalcircles.flames.conversations.Conversation;
 import com.severalcircles.flames.conversations.EmotionLevel;
 import com.severalcircles.flames.conversations.external.Tenor;
-import com.severalcircles.flames.system.manager.secondary.ConversationManager;
+import com.severalcircles.flames.conversations.ConversationManager;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;

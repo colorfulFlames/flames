@@ -6,7 +6,7 @@ package com.severalcircles.flames.system.reports;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.system.exception.java.FlamesDataException;
-import com.severalcircles.flames.system.manager.secondary.FlamesReportManager;
+import com.severalcircles.flames.system.FlamesReportManager;
 
 import java.util.Map;
 import java.util.TimerTask;

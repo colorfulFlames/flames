@@ -6,7 +6,7 @@ package com.severalcircles.flames.conversations;
 
 import com.severalcircles.flames.data.user.FlamesQuote;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.system.manager.secondary.UserDataManager;
+import com.severalcircles.flames.data.UserDataManager;
 import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 
 import java.time.Instant;

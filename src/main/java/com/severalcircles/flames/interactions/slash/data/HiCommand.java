@@ -10,7 +10,7 @@ import com.severalcircles.flames.interactions.slash.FlamesCommand;
 import com.severalcircles.flames.interactions.slash.FlamesSlashCommand;
 import com.severalcircles.flames.system.exception.ExceptionID;
 import com.severalcircles.flames.system.exception.flames.AlreadyCollectedException;
-import com.severalcircles.flames.system.manager.secondary.UserDataManager;
+import com.severalcircles.flames.data.UserDataManager;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 @FlamesCommand(name = "hi", description = "Collect your daily bonus")
 @ExceptionID("810")

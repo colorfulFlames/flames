@@ -2,7 +2,7 @@
  * Copyright (c) 2023 Several Circles
  */
 
-package com.severalcircles.flames.system.manager;
+package com.severalcircles.flames.system;
 
 import com.severalcircles.flames.system.exception.ExceptionID;
 

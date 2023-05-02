@@ -2,7 +2,7 @@
  * Copyright (c) 2023 Several Circles
  */
 
-package com.severalcircles.flames.system.manager.primary;
+package com.severalcircles.flames.data;
 /**
  * This manager manages the Flames configuration and the Flames directory.
  * @author Several Circles
@@ -11,9 +11,10 @@ package com.severalcircles.flames.system.manager.primary;
  */
 
 import com.severalcircles.flames.Flames;
+import com.severalcircles.flames.system.Manager;
 import com.severalcircles.flames.system.exception.ExceptionID;
 import com.severalcircles.flames.system.exception.flames.FlamesConfigurationException;
-import com.severalcircles.flames.system.manager.FlamesManager;
+import com.severalcircles.flames.system.FlamesManager;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
+@Manager(priority = Integer.MAX_VALUE)
 @ExceptionID("911")
 public class SystemDataManager extends FlamesManager {
     private static final File config = new File("flames.properties");

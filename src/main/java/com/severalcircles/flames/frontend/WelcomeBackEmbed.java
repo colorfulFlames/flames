@@ -6,8 +6,7 @@ package com.severalcircles.flames.frontend;
 
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.system.exception.ExceptionID;
-import com.severalcircles.flames.system.manager.secondary.FlamesQuestionManager;
-import com.severalcircles.flames.system.manager.secondary.UserDataManager;
+import com.severalcircles.flames.data.UserDataManager;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 

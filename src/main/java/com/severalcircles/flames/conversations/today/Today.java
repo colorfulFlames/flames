@@ -6,7 +6,7 @@ package com.severalcircles.flames.conversations.today;
 
 import com.severalcircles.flames.data.user.FlamesQuote;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.system.manager.secondary.UserDataManager;
+import com.severalcircles.flames.data.UserDataManager;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;

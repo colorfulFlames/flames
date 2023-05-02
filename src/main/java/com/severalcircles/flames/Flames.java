@@ -4,17 +4,12 @@
 
 package com.severalcircles.flames;
 
-import com.severalcircles.flames.system.manager.*;
+import com.severalcircles.flames.system.Manager;
 import com.severalcircles.flames.system.exception.ExceptionID;
 import com.severalcircles.flames.system.exception.java.FlamesConnectException;
 import com.severalcircles.flames.system.exception.MessageCodes;
-import com.severalcircles.flames.system.manager.primary.EventManager;
-import com.severalcircles.flames.system.manager.primary.FlamesInteractionManager;
-import com.severalcircles.flames.system.manager.primary.FlamesManagerManager;
-import com.severalcircles.flames.system.manager.primary.SystemDataManager;
-import com.severalcircles.flames.system.manager.secondary.FlamesQuestionManager;
-import com.severalcircles.flames.system.manager.secondary.FlamesReportManager;
-import com.severalcircles.flames.system.manager.secondary.UserDataManager;
+import com.severalcircles.flames.system.FlamesManager;
+import com.severalcircles.flames.data.SystemDataManager;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -23,6 +18,7 @@ import org.reflections.Reflections;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 /**
@@ -81,13 +77,8 @@ public class Flames {
         flogger.fine("Flames is now online!");
         flogger.resetLastClass();
         flogger.info("Starting managers");
-        try {
-            new FlamesManagerManager().prepare();
-        } catch (IOException e) {
-            flogger.severe("FlamesManagerManager failed to manage the managers, and so the managers that FlamesManagerManager manages can't manage the things that said managers need to manage. Whoops!");
-            System.exit(1);
-        }
-        new SystemDataManager().cleanFlamesFiles();
+        prepareManagers();
+//        new SystemDataManager().cleanFlamesFiles();
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -106,6 +97,31 @@ public class Flames {
 
     public static String getVersion() {
         return version;
+    }
+    private static void prepareManagers() {
+        Set<Class<? extends FlamesManager>> managers = new HashSet<>();
+        for (Class<? extends FlamesManager> aClass : reflections.getSubTypesOf(FlamesManager.class)) {
+            managers.add(aClass);
+            flogger.fine("Found manager " + aClass.getName());
+        }
+        SortedMap<Integer, Class<? extends FlamesManager>> priorityMap = new TreeMap<>(Collections.reverseOrder());
+        for (Class<? extends FlamesManager> manager : managers) if (manager.isAnnotationPresent(Manager.class)) priorityMap.put(manager.getAnnotation(Manager.class).priority(), manager);
+        priorityMap.forEach((k, v) -> {
+            flogger.info("Starting manager " + v.getName());
+            FlamesManager manager;
+            try {
+                manager = v.getDeclaredConstructor().newInstance();
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                     NoSuchMethodException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                manager.prepare();
+            } catch (IOException e) {
+                flogger.severe("Failed to prepare manager " + v.getClass().getName() + ".");
+                e.printStackTrace();
+            }
+        });
     }
 }
 // ------------------------

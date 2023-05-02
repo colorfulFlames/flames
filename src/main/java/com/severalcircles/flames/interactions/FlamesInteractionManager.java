@@ -2,7 +2,7 @@
  * Copyright (c) 2023 Several Circles
  */
 
-package com.severalcircles.flames.system.manager.primary;
+package com.severalcircles.flames.interactions;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.interactions.button.ConsentButtons;
@@ -10,13 +10,9 @@ import com.severalcircles.flames.interactions.button.FlamesButtonInteraction;
 import com.severalcircles.flames.interactions.modal.FlamesModalInteraction;
 import com.severalcircles.flames.interactions.modal.QuestionModal;
 import com.severalcircles.flames.interactions.slash.*;
-import com.severalcircles.flames.interactions.slash.data.GlobalDataCommand;
-import com.severalcircles.flames.interactions.slash.data.HiCommand;
-import com.severalcircles.flames.interactions.slash.data.MyDataCommand;
-import com.severalcircles.flames.interactions.slash.data.QuestionCommand;
 import com.severalcircles.flames.system.exception.ExceptionID;
 import com.severalcircles.flames.system.exception.runtime.NoCommandException;
-import com.severalcircles.flames.system.manager.FlamesManager;
+import com.severalcircles.flames.system.FlamesManager;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 
