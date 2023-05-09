@@ -5,7 +5,7 @@
 package com.severalcircles.flames.frontend;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.StringUtil;
+import com.severalcircles.flames.Util;
 import com.severalcircles.flames.data.user.FlamesUser;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -39,7 +39,7 @@ public class ThanksEmbed extends FlamesEmbed{
                 .setTitle(String.format(local.getString("title"), thankee.getDiscordUser().getName()))
                 .setThumbnail(thanker.getDiscordUser().getAvatarUrl())
                 .setImage(local.getString("image"))
-                .addField(local.getString("bonus"), StringUtil.formatScore(Double.parseDouble(values.getString("bonus"))), true)
+                .addField(local.getString("bonus"), Util.formatScore(Double.parseDouble(values.getString("bonus"))), true)
                 .setDescription(msg)
                 .build();
         return embed;

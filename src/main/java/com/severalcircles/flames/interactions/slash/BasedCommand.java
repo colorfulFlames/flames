@@ -6,7 +6,7 @@ package com.severalcircles.flames.interactions.slash;
 
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.system.exception.ExceptionID;
-import com.severalcircles.flames.system.manager.secondary.FlamesQuestionManager;
+import com.severalcircles.flames.frontend.FlamesQuestionManager;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 
 @ExceptionID("810")

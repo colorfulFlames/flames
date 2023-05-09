@@ -2,7 +2,7 @@
  * Copyright (c) 2023 Several Circles
  */
 
-package com.severalcircles.flames.system.manager.secondary;
+package com.severalcircles.flames.data;
 /**
  * This manager is responsible for managing user data. It is responsible for creating and loading user data, as well as saving it.
  * @author Several Circles
@@ -15,11 +15,12 @@ import com.severalcircles.flames.data.user.FlamesQuote;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.Rank;
 import com.severalcircles.flames.frontend.ConsentEmbed;
+import com.severalcircles.flames.system.FlamesReportManager;
+import com.severalcircles.flames.system.Manager;
 import com.severalcircles.flames.system.exception.ExceptionID;
 import com.severalcircles.flames.system.exception.flames.ConsentException;
 import com.severalcircles.flames.system.exception.java.FlamesDataException;
-import com.severalcircles.flames.system.manager.FlamesManager;
-import com.severalcircles.flames.system.manager.primary.SystemDataManager;
+import com.severalcircles.flames.system.FlamesManager;
 import com.severalcircles.flames.system.reports.FlamesReport;
 import com.severalcircles.flames.system.reports.NewFlamesUserReport;
 import net.dv8tion.jda.api.entities.User;
@@ -28,6 +29,7 @@ import java.io.*;
 import java.time.Instant;
 import java.util.Locale;
 import java.util.Properties;
+@Manager(priority = 50)
 @ExceptionID("912")
 public class UserDataManager extends FlamesManager {
     private static final File userDataDir = new File(SystemDataManager.getFlamesDirectory().getAbsolutePath() + "/users");

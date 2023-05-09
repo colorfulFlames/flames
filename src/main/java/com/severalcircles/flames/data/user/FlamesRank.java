@@ -4,7 +4,7 @@
 
 package com.severalcircles.flames.data.user;
 
-import com.severalcircles.flames.system.manager.secondary.FlamesDataManager;
+import com.severalcircles.flames.data.FlamesDataManager;
 
 import java.util.HashMap;
 import java.util.Map;

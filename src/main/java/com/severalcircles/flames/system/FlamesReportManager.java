@@ -2,7 +2,7 @@
  * Copyright (c) 2023 Several Circles
  */
 
-package com.severalcircles.flames.system.manager.secondary;
+package com.severalcircles.flames.system;
 /**
  * This manager is responsible for managing reports. It is responsible for creating and managing the reports that are used in the bot.
  * @author Several Circles
@@ -13,8 +13,7 @@ package com.severalcircles.flames.system.manager.secondary;
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.system.exception.ExceptionID;
 import com.severalcircles.flames.system.exception.java.FlamesDataException;
-import com.severalcircles.flames.system.manager.FlamesManager;
-import com.severalcircles.flames.system.manager.primary.SystemDataManager;
+import com.severalcircles.flames.data.SystemDataManager;
 import com.severalcircles.flames.system.reports.FlamesReport;
 import com.severalcircles.flames.system.reports.RecurringReport;
 import com.severalcircles.flames.system.reports.StaticReport;
@@ -28,6 +27,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Timer;
+@Manager(priority = 12)
 @ExceptionID("950")
 public class FlamesReportManager extends FlamesManager {
     public static final File reportDir = new File(SystemDataManager.getFlamesDirectory().getAbsolutePath() + "/reports");

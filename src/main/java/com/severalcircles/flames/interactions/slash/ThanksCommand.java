@@ -9,7 +9,7 @@ import com.severalcircles.flames.conversations.today.Today;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.frontend.ThanksEmbed;
 import com.severalcircles.flames.system.exception.flames.ConsentException;
-import com.severalcircles.flames.system.manager.secondary.UserDataManager;
+import com.severalcircles.flames.data.UserDataManager;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 @FlamesCommand(name = "thanks", description = "Thank someone for any reason, or just because you feel like it.", options = { @FlamesCommandOption(name = "user", description = "The user you want to thank.", type = OptionType.USER, required = true), @FlamesCommandOption(name = "message", description = "A message to send with your thanks.", type = OptionType.STRING, required = false)})

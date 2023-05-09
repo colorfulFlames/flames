@@ -5,11 +5,10 @@
 package com.severalcircles.flames.frontend;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.system.manager.secondary.FlamesDataManager;
+import com.severalcircles.flames.data.FlamesDataManager;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 
-import java.awt.*;
 import java.util.Locale;
 @Embed(name = "GlobalData")
 public class GlobalDataEmbed extends FlamesEmbed{

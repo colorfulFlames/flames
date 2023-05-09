@@ -5,7 +5,7 @@
 package com.severalcircles.flames.frontend;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.StringUtil;
+import com.severalcircles.flames.Util;
 import com.severalcircles.flames.conversations.EmotionLevel;
 import com.severalcircles.flames.conversations.today.Today;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -24,7 +24,7 @@ public class TodayEmbed extends FlamesEmbed{
     @Override
     public MessageEmbed get() {
         MessageEmbed embed = new EmbedBuilder()
-                .setAuthor(String.format(local.getString("author"), StringUtil.prettyDate(Instant.now(), locale)), null, Flames.getApi().getSelfUser().getAvatarUrl())
+                .setAuthor(String.format(local.getString("author"), Util.prettyDate(Instant.now(), locale)), null, Flames.getApi().getSelfUser().getAvatarUrl())
                 .setTitle(local.getString("title"))
                 .addField(local.getString("talkingAbout"), Today.getTopTopic(), true)
                 .addField(local.getString("feeling"), EmotionLevel.getLevel(Today.getEmotion()).getName(this.locale), true)

@@ -2,12 +2,13 @@
  * Copyright (c) 2023 Several Circles
  */
 
-package com.severalcircles.flames.system.manager.secondary;
+package com.severalcircles.flames.frontend;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.system.manager.FlamesManager;
-import com.severalcircles.flames.system.manager.primary.SystemDataManager;
+import com.severalcircles.flames.system.FlamesManager;
+import com.severalcircles.flames.data.SystemDataManager;
+import com.severalcircles.flames.system.Manager;
 
 import java.io.*;
 import java.util.*;
@@ -18,6 +19,7 @@ import java.util.*;
  * @version 8
  * @since Flames 8
  */
+@Manager(priority = 3)
 public class FlamesQuestionManager extends FlamesManager {
     public static final File questionFile = new File(SystemDataManager.getFlamesDirectory().getAbsolutePath() + "/questions.flp");
     private static final List<String> questions = new LinkedList<>();
