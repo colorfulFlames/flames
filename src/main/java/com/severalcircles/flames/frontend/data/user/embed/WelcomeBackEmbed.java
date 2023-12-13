@@ -33,24 +33,42 @@ public class WelcomeBackEmbed implements FlamesEmbed {
     public MessageEmbed get() {
         Date now = Date.from(Instant.now());
         String timeMessage;
-        if (Today.isThanksgiving) timeMessage = resources.getString("author.thanksgiving");
+        String img = "https://severalcircles.com/flames/assets/welcome/";
+            if (now.getHours() < 6) {
+                timeMessage = resources.getString("author.earlymorning");
+                img += "EARLY_MORNING.png";
+            }
         else //noinspection deprecation
-            if (now.getHours() < 6) timeMessage = resources.getString("author.earlymorning");
+            if (now.getHours() < 12) {
+                timeMessage = resources.getString("author.morning");
+                img += "MORNING.png";
+            }
         else //noinspection deprecation
-            if (now.getHours() < 12) timeMessage = resources.getString("author.morning");
+            if (now.getHours() < 15) {
+                timeMessage = resources.getString("author.earlyafternoon");
+                img += "AFTERNOON.png";
+            }
         else //noinspection deprecation
-            if (now.getHours() < 15) timeMessage = resources.getString("author.earlyafternoon");
+                if (now.getHours() < 18) {
+                    timeMessage = resources.getString("author.lateafternoon");
+                    img += "AFTERNOON.png";
+                }
         else //noinspection deprecation
-                if (now.getHours() < 18) timeMessage = resources.getString("author.lateafternoon");
-        else //noinspection deprecation
-            if (now.getHours() < 21) timeMessage = resources.getString("author.evening");
-        else timeMessage = resources.getString("author.night");
+            if (now.getHours() < 21) {
+                timeMessage = resources.getString("author.evening");
+                img += "EVENING.png";
+            }
+        else {
+                timeMessage = resources.getString("author.night");
+                img += "NIGHT.png";
+            }
         return new EmbedBuilder()
                 .setAuthor(String.format(timeMessage, user.getName()), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setTitle(resources.getString("title"))
                 .addField(resources.getString("dailyBonus"), StringUtil.formatScore(dailyBonus), true)
                 .addField(resources.getString("score"), StringUtil.formatScore(flamesUser.getScore()), true)
                 .setDescription(resources.getString("description"))
+                .setImage(img)
                 .setColor(Color.decode("#D9581C"))
                 .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("scoreFormat"), flamesUser.getScore()), user.getAvatarUrl())
                 .build();
