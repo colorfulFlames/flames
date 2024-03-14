@@ -91,7 +91,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
                 Today.quote[2] = event.getAuthor().getId();
             }
             Logger.getGlobal().log(Level.FINE, "Quote of the day is now " + Arrays.toString(Today.quote));
-            flamesUser.setScore(flamesUser.getScore() + 864);
+            flamesUser.setScore(flamesUser.getScore() + 8064);
         }
 //        if (event.getMessage().getContentRaw().toUpperCase(Locale.ROOT).startsWith("FLAMES,")) {
 //            DialogSession session = new DialogSession();

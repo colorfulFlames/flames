@@ -14,7 +14,7 @@
 @rem limitations under the License.
 @rem
 
-@if "%DEBUG%" == "" @echo off
+@if "%DEBUG%"=="" @echo off
 @rem ##########################################################################
 @rem
 @rem  Flames startup script for Windows
@@ -25,7 +25,8 @@
 if "%OS%"=="Windows_NT" setlocal
 
 set DIRNAME=%~dp0
-if "%DIRNAME%" == "" set DIRNAME=.
+if "%DIRNAME%"=="" set DIRNAME=.
+@rem This is normally unused
 set APP_BASE_NAME=%~n0
 set APP_HOME=%DIRNAME%..
 
@@ -40,7 +41,7 @@ if defined JAVA_HOME goto findJavaFromJavaHome
 
 set JAVA_EXE=java.exe
 %JAVA_EXE% -version >NUL 2>&1
-if "%ERRORLEVEL%" == "0" goto execute
+if %ERRORLEVEL% equ 0 goto execute
 
 echo.
 echo ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
@@ -67,7 +68,7 @@ goto fail
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\Flames-7.0.1.jar;%APP_HOME%\lib\JDA-5.0.0-beta.3.jar;%APP_HOME%\lib\google-cloud-dialogflow-4.5.0.jar;%APP_HOME%\lib\google-cloud-language-2.1.6.jar;%APP_HOME%\lib\bugsnag-3.6.2.jar;%APP_HOME%\lib\protobuf-java-3.19.3.jar;%APP_HOME%\lib\protobuf-java-util-3.19.3.jar;%APP_HOME%\lib\proto-google-cloud-dialogflow-v2-4.5.0.jar;%APP_HOME%\lib\proto-google-cloud-dialogflow-v2beta1-0.103.0.jar;%APP_HOME%\lib\auto-value-annotations-1.9.jar;%APP_HOME%\lib\proto-google-cloud-language-v1-2.1.6.jar;%APP_HOME%\lib\proto-google-cloud-language-v1beta2-0.88.6.jar;%APP_HOME%\lib\google-auth-library-credentials-1.4.0.jar;%APP_HOME%\lib\google-auth-library-oauth2-http-1.4.0.jar;%APP_HOME%\lib\guava-31.0.1-jre.jar;%APP_HOME%\lib\google-http-client-1.41.2.jar;%APP_HOME%\lib\google-http-client-gson-1.41.2.jar;%APP_HOME%\lib\grpc-alts-1.44.0.jar;%APP_HOME%\lib\grpc-api-1.44.0.jar;%APP_HOME%\lib\grpc-auth-1.44.0.jar;%APP_HOME%\lib\grpc-context-1.44.0.jar;%APP_HOME%\lib\grpc-core-1.44.0.jar;%APP_HOME%\lib\grpc-grpclb-1.44.0.jar;%APP_HOME%\lib\grpc-netty-shaded-1.44.0.jar;%APP_HOME%\lib\grpc-protobuf-1.44.0.jar;%APP_HOME%\lib\grpc-protobuf-lite-1.44.0.jar;%APP_HOME%\lib\grpc-services-1.44.0.jar;%APP_HOME%\lib\grpc-stub-1.44.0.jar;%APP_HOME%\lib\api-common-2.1.3.jar;%APP_HOME%\lib\gax-2.11.0.jar;%APP_HOME%\lib\gax-grpc-2.11.0.jar;%APP_HOME%\lib\proto-google-common-protos-2.7.2.jar;%APP_HOME%\lib\trove4j-3.0.3.jar;%APP_HOME%\lib\jackson-annotations-2.14.1.jar;%APP_HOME%\lib\jackson-databind-2.14.1.jar;%APP_HOME%\lib\jackson-core-2.14.1.jar;%APP_HOME%\lib\slf4j-api-1.7.36.jar;%APP_HOME%\lib\nv-websocket-client-2.14.jar;%APP_HOME%\lib\okhttp-4.10.0.jar;%APP_HOME%\lib\opus-java-1.1.1.jar;%APP_HOME%\lib\commons-collections4-4.4.jar;%APP_HOME%\lib\jsr305-3.0.2.jar;%APP_HOME%\lib\javax.annotation-api-1.3.2.jar;%APP_HOME%\lib\failureaccess-1.0.1.jar;%APP_HOME%\lib\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;%APP_HOME%\lib\checker-qual-3.21.1.jar;%APP_HOME%\lib\error_prone_annotations-2.11.0.jar;%APP_HOME%\lib\j2objc-annotations-1.3.jar;%APP_HOME%\lib\httpclient-4.5.13.jar;%APP_HOME%\lib\commons-logging-1.2.jar;%APP_HOME%\lib\commons-codec-1.15.jar;%APP_HOME%\lib\httpcore-4.4.15.jar;%APP_HOME%\lib\opencensus-contrib-http-util-0.31.0.jar;%APP_HOME%\lib\opencensus-api-0.31.0.jar;%APP_HOME%\lib\conscrypt-openjdk-uber-2.5.1.jar;%APP_HOME%\lib\perfmark-api-0.23.0.jar;%APP_HOME%\lib\annotations-4.1.1.4.jar;%APP_HOME%\lib\animal-sniffer-annotations-1.20.jar;%APP_HOME%\lib\grpc-xds-1.44.0.jar;%APP_HOME%\lib\gson-2.8.9.jar;%APP_HOME%\lib\re2j-1.5.jar;%APP_HOME%\lib\bcpkix-jdk15on-1.67.jar;%APP_HOME%\lib\bcprov-jdk15on-1.67.jar;%APP_HOME%\lib\opencensus-proto-0.2.0.jar;%APP_HOME%\lib\threetenbp-1.5.2.jar;%APP_HOME%\lib\okio-jvm-3.0.0.jar;%APP_HOME%\lib\kotlin-stdlib-jdk8-1.5.31.jar;%APP_HOME%\lib\kotlin-stdlib-jdk7-1.5.31.jar;%APP_HOME%\lib\kotlin-stdlib-1.6.20.jar;%APP_HOME%\lib\opus-java-api-1.1.1.jar;%APP_HOME%\lib\opus-java-natives-1.1.1.jar;%APP_HOME%\lib\kotlin-stdlib-common-1.6.20.jar;%APP_HOME%\lib\annotations-13.0.jar;%APP_HOME%\lib\jna-4.4.0.jar
+set CLASSPATH=%APP_HOME%\lib\Flames-7.1.jar;%APP_HOME%\lib\JDA-5.0.0-beta.3.jar;%APP_HOME%\lib\google-cloud-dialogflow-4.5.0.jar;%APP_HOME%\lib\google-cloud-language-2.1.6.jar;%APP_HOME%\lib\bugsnag-3.6.2.jar;%APP_HOME%\lib\protobuf-java-3.19.3.jar;%APP_HOME%\lib\protobuf-java-util-3.19.3.jar;%APP_HOME%\lib\proto-google-cloud-dialogflow-v2-4.5.0.jar;%APP_HOME%\lib\proto-google-cloud-dialogflow-v2beta1-0.103.0.jar;%APP_HOME%\lib\auto-value-annotations-1.9.jar;%APP_HOME%\lib\proto-google-cloud-language-v1-2.1.6.jar;%APP_HOME%\lib\proto-google-cloud-language-v1beta2-0.88.6.jar;%APP_HOME%\lib\google-auth-library-credentials-1.4.0.jar;%APP_HOME%\lib\google-auth-library-oauth2-http-1.4.0.jar;%APP_HOME%\lib\guava-31.0.1-jre.jar;%APP_HOME%\lib\google-http-client-1.41.2.jar;%APP_HOME%\lib\google-http-client-gson-1.41.2.jar;%APP_HOME%\lib\grpc-alts-1.44.0.jar;%APP_HOME%\lib\grpc-api-1.44.0.jar;%APP_HOME%\lib\grpc-auth-1.44.0.jar;%APP_HOME%\lib\grpc-context-1.44.0.jar;%APP_HOME%\lib\grpc-core-1.44.0.jar;%APP_HOME%\lib\grpc-grpclb-1.44.0.jar;%APP_HOME%\lib\grpc-netty-shaded-1.44.0.jar;%APP_HOME%\lib\grpc-protobuf-1.44.0.jar;%APP_HOME%\lib\grpc-protobuf-lite-1.44.0.jar;%APP_HOME%\lib\grpc-services-1.44.0.jar;%APP_HOME%\lib\grpc-stub-1.44.0.jar;%APP_HOME%\lib\api-common-2.1.3.jar;%APP_HOME%\lib\gax-2.11.0.jar;%APP_HOME%\lib\gax-grpc-2.11.0.jar;%APP_HOME%\lib\proto-google-common-protos-2.7.2.jar;%APP_HOME%\lib\trove4j-3.0.3.jar;%APP_HOME%\lib\jackson-annotations-2.14.1.jar;%APP_HOME%\lib\jackson-databind-2.14.1.jar;%APP_HOME%\lib\jackson-core-2.14.1.jar;%APP_HOME%\lib\slf4j-api-1.7.36.jar;%APP_HOME%\lib\nv-websocket-client-2.14.jar;%APP_HOME%\lib\okhttp-4.10.0.jar;%APP_HOME%\lib\opus-java-1.1.1.jar;%APP_HOME%\lib\commons-collections4-4.4.jar;%APP_HOME%\lib\jsr305-3.0.2.jar;%APP_HOME%\lib\javax.annotation-api-1.3.2.jar;%APP_HOME%\lib\failureaccess-1.0.1.jar;%APP_HOME%\lib\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;%APP_HOME%\lib\checker-qual-3.21.1.jar;%APP_HOME%\lib\error_prone_annotations-2.11.0.jar;%APP_HOME%\lib\j2objc-annotations-1.3.jar;%APP_HOME%\lib\httpclient-4.5.13.jar;%APP_HOME%\lib\commons-logging-1.2.jar;%APP_HOME%\lib\commons-codec-1.15.jar;%APP_HOME%\lib\httpcore-4.4.15.jar;%APP_HOME%\lib\opencensus-contrib-http-util-0.31.0.jar;%APP_HOME%\lib\opencensus-api-0.31.0.jar;%APP_HOME%\lib\conscrypt-openjdk-uber-2.5.1.jar;%APP_HOME%\lib\perfmark-api-0.23.0.jar;%APP_HOME%\lib\annotations-4.1.1.4.jar;%APP_HOME%\lib\animal-sniffer-annotations-1.20.jar;%APP_HOME%\lib\grpc-xds-1.44.0.jar;%APP_HOME%\lib\gson-2.8.9.jar;%APP_HOME%\lib\re2j-1.5.jar;%APP_HOME%\lib\bcpkix-jdk15on-1.67.jar;%APP_HOME%\lib\bcprov-jdk15on-1.67.jar;%APP_HOME%\lib\opencensus-proto-0.2.0.jar;%APP_HOME%\lib\threetenbp-1.5.2.jar;%APP_HOME%\lib\okio-jvm-3.0.0.jar;%APP_HOME%\lib\kotlin-stdlib-jdk8-1.5.31.jar;%APP_HOME%\lib\kotlin-stdlib-jdk7-1.5.31.jar;%APP_HOME%\lib\kotlin-stdlib-1.6.20.jar;%APP_HOME%\lib\opus-java-api-1.1.1.jar;%APP_HOME%\lib\opus-java-natives-1.1.1.jar;%APP_HOME%\lib\kotlin-stdlib-common-1.6.20.jar;%APP_HOME%\lib\annotations-13.0.jar;%APP_HOME%\lib\jna-4.4.0.jar
 
 
 @rem Execute Flames
@@ -75,13 +76,15 @@ set CLASSPATH=%APP_HOME%\lib\Flames-7.0.1.jar;%APP_HOME%\lib\JDA-5.0.0-beta.3.ja
 
 :end
 @rem End local scope for the variables with windows NT shell
-if "%ERRORLEVEL%"=="0" goto mainEnd
+if %ERRORLEVEL% equ 0 goto mainEnd
 
 :fail
 rem Set variable FLAMES_EXIT_CONSOLE if you need the _script_ return code instead of
 rem the _cmd.exe /c_ return code!
-if  not "" == "%FLAMES_EXIT_CONSOLE%" exit 1
-exit /b 1
+set EXIT_CODE=%ERRORLEVEL%
+if %EXIT_CODE% equ 0 set EXIT_CODE=1
+if not ""=="%FLAMES_EXIT_CONSOLE%" exit %EXIT_CODE%
+exit /b %EXIT_CODE%
 
 :mainEnd
 if "%OS%"=="Windows_NT" endlocal

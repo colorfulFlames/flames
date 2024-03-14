@@ -9,6 +9,8 @@ import com.severalcircles.flames.data.user.*;
 import com.severalcircles.flames.exception.ConsentException;
 import com.severalcircles.flames.util.Rank;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.channel.Channel;
+import net.dv8tion.jda.api.entities.channel.middleman.GuildChannel;
 
 import java.io.*;
 import java.time.Instant;
@@ -249,5 +251,38 @@ public class FlamesDataManager {
         if (fluser.getConsent() != 1 && !skipConsent) throw new ConsentException(fluser.getConsent(), user);
         return fluser;
     }
-
+    public static String[] getChannelWords(Channel channel) {
+        File channelFile = new File(guildDirectory.getAbsolutePath() + "/" + ((GuildChannel) channel).getGuild().getId() + "/channels/" + channel.getId() + ".flx");
+        try {
+            if (channelFile.createNewFile()) return new String[0];
+            if (channelFile.getParentFile().mkdirs()) return new String[0];
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            FileInputStream inputStream = new FileInputStream(channelFile);
+            Properties data = new Properties();
+            data.load(inputStream);
+            return data.get("words").toString().split(" ");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static void addChannelWord(String word, Channel channel) {
+        File channelFile = new File(guildDirectory.getAbsolutePath() + "/" + ((GuildChannel) channel).getGuild().getId() + "/channels/" + channel.getId() + ".flx");
+        String[] channelWords = getChannelWords(channel);
+        String[] newChannelWords = new String[channelWords.length + 1];
+        newChannelWords[channelWords.length] = word;
+        try {
+            FileWriter writer = new FileWriter(channelFile);
+        for (String channelWord : channelWords) {
+                writer.write(channelWord + " ");
+            }
+        writer.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
