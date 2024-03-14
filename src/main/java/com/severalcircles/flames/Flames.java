@@ -6,6 +6,7 @@
 package com.severalcircles.flames;
 
 import com.bugsnag.Bugsnag;
+import com.severalcircles.flames.conversations.Conversation;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.events.*;
@@ -13,7 +14,8 @@ import com.severalcircles.flames.exception.FlamesException;
 import com.severalcircles.flames.external.spotify.ReconnectRunnable;
 import com.severalcircles.flames.external.spotify.SpotifyConnection;
 import com.severalcircles.flames.frontend.FlamesCommand;
-import com.severalcircles.flames.frontend.data.ConversationCommand;
+import com.severalcircles.flames.frontend.conversations.ConversationCommand;
+import com.severalcircles.flames.frontend.conversations.SparkCommand;
 import com.severalcircles.flames.frontend.data.other.GlobalDataCommand;
 import com.severalcircles.flames.frontend.data.user.GetAlongCommand;
 import com.severalcircles.flames.frontend.data.user.HiCommand;
@@ -29,6 +31,7 @@ import com.severalcircles.flames.frontend.today.TodayCommand;
 import com.severalcircles.flames.util.RankUpdateRunnable;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.interactions.commands.Command;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
@@ -94,6 +97,7 @@ public class Flames {
     public static void main(String[] args) throws IOException {
         // --- Initial Preparations ---
         InputStream is = Flames.class.getClassLoader().getResourceAsStream("version.properties");
+//        Locale.setDefault(Locale.ENGLISH);
         properties.load(is);
         version = properties.getProperty("version");
         if (args.length > 0) runningDebug = args[0].equals("--debug");
@@ -146,6 +150,13 @@ public class Flames {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        // --- Events ---
+        new CommandEvent().register(api);
+        new MessageEvent().register(api);
+        new ButtonEvent().register(api);
+        new SelectMenuEvent().register(api);
+        new MessageContextEvent().register(api);
+        api.addEventListener(new MessageContextEvent());
         // --- Commands ---
         Logger.getGlobal().log(Level.INFO, "Registering Commands");
 
@@ -155,8 +166,8 @@ public class Flames {
         commandDataList.add(Commands.slash("mydata", "Displays your User Data"));
         commandMap.put("globaldata", new GlobalDataCommand());
         commandDataList.add(Commands.slash("globaldata", "Displays the current Global Data"));
-        commandMap.put("artist", new ArtistCommand());
-        commandDataList.add(Commands.slash("artist", "Displays information for a Spotify artist").addOption(OptionType.STRING, "artist", "The name of the artist", true));
+//        commandMap.put("artist", new ArtistCommand());
+//        commandDataList.add(Commands.slash("artist", "Displays information for a Spotify artist").addOption(OptionType.STRING, "artist", "The name of the artist", true));
         commandMap.put("hi", new HiCommand());
         commandDataList.add(Commands.slash("hi", "Collect your Daily Bonus"));
         commandMap.put("help", new HelpCommand());
@@ -174,15 +185,13 @@ public class Flames {
         commandDataList.add(Commands.slash("about", "The funny legal stuff"));
         commandMap.put("getalong", new GetAlongCommand());
         commandDataList.add(Commands.slash("getalong", "See how well you Get Along with another user"));
-        if (new File(version + ".flamesfile").createNewFile()) api.updateCommands()
-                .addCommands(commandDataList)
-            .complete();
-
-        // --- Events ---
-        new CommandEvent().register(api);
-        new MessageEvent().register(api);
-        new ButtonEvent().register(api);
-        new SelectMenuEvent().register(api);
+        commandMap.put("spark", new SparkCommand());
+        commandDataList.add(Commands.slash("spark", "Start a Spark conversation").addOption(OptionType.STRING, "question", "The question you want to ask", true).addOption(OptionType.INTEGER, "minutes", "Time limit for the conversation in minutes.", true));
+//        Commands.context(Command.Type.MESSAGE, "SparkVote");
+        api.updateCommands()
+                .addCommands(commandDataList).
+            complete();
+        Conversation.entityList.add("Flames");
 //        new IntentEvent().register();
         Logger.getGlobal().info("Done loading. Enjoy!");
     }

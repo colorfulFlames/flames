@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2022 Several Circles.
+ * Copyright (c) 2022-2024 Several Circles.
  */
 
-package com.severalcircles.flames.frontend.data;
+package com.severalcircles.flames.frontend.conversations;
 
 import com.severalcircles.flames.conversations.ConversationsController;
 import com.severalcircles.flames.data.FlamesDataManager;

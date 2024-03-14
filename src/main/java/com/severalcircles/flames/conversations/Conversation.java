@@ -27,6 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Conversation {
+    public static List<String> entityList = new LinkedList<>();
     private final Map<String, Integer> entities;
     private final GuildMessageChannel channel;
     private final List<User> userList;
@@ -44,7 +45,7 @@ public class Conversation {
         this.quoteScore = 0;
         this.conversationCache = new HashMap<>();
     }
-
+    protected boolean expired = false;
     public Map<String, Integer> getEntities() {
         return entities;
     }
@@ -64,7 +65,10 @@ public class Conversation {
     public void processMessage(Message message, FinishedAnalysis finishedAnalysis) throws ExpiredConversationException {
         boolean newFavorite = false;
         Logger.getGlobal().log(Level.INFO, "Processing Message");
-        if (expires.compareTo(Instant.now()) < 0) throw new ExpiredConversationException();
+        if (expires.compareTo(Instant.now()) < 0) {
+            expired = true;
+            throw new ExpiredConversationException();
+        }
         expires = Instant.now().plus(5, ChronoUnit.MINUTES);
         emotion += finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude();
         if (finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude() > quoteScore) {
@@ -76,6 +80,7 @@ public class Conversation {
         finishedAnalysis.getEntityList().forEach((element) -> {
             if (!entities.containsKey(element.getName())) entities.put(element.getName(), 1);
             else entities.put(element.getName(), entities.get(element.getName()) + 1);
+            entityList.add(element.getName());
         });
         boolean finalNewFavorite = newFavorite;
         userList.forEach((element) -> {
@@ -130,4 +135,8 @@ public class Conversation {
         });
         conversationCache.clear();
     });
-}}
+}
+//    public SparkConversation toSpark() {
+//        return new SparkConversation(channel);
+//    }
+}

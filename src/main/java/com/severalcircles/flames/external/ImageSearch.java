@@ -19,21 +19,26 @@ public class ImageSearch {
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("Authorization", "Authorization: Client-ID 5BgyDJn2wiCT7SNM8kVyKeFFCWsnBvXM8F1jCEti-t8");
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(con.getInputStream()));
-        String inputLine;
         StringBuffer content = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            content.append(inputLine);
-        }
-        in.close();
-        int status = con.getResponseCode();
-        con.disconnect();
-        System.out.println(content);
         try {
-            return new JSONObject(content.toString()).getJSONArray("results").getJSONObject(0).getJSONObject("urls").getString("raw");
-        } catch (JSONException e) {
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            content = new StringBuffer();
+            while ((inputLine = in.readLine()) != null) {
+                content.append(inputLine);
+            }
+            in.close();
+            int status = con.getResponseCode();
+            con.disconnect();
+//        System.out.println(content);
+        } catch (IOException e) {
             return "https://preview.redd.it/nappqljautm51.jpg?auto=webp&s=72f0c7468ef69127c1e945b160e0b9807d066de5";
         }
+            try {
+                return new JSONObject(content.toString()).getJSONArray("results").getJSONObject(0).getJSONObject("urls").getString("raw");
+            } catch (JSONException e2) {
+                return "https://preview.redd.it/nappqljautm51.jpg?auto=webp&s=72f0c7468ef69127c1e945b160e0b9807d066de5";
+            }
+        }
     }
-}
