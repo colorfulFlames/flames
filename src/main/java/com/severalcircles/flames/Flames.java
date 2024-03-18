@@ -97,7 +97,7 @@ public class Flames {
     public static void main(String[] args) throws IOException {
         // --- Initial Preparations ---
         InputStream is = Flames.class.getClassLoader().getResourceAsStream("version.properties");
-//        Locale.setDefault(Locale.ENGLISH);
+        Locale.setDefault(Locale.ENGLISH);
         properties.load(is);
         version = properties.getProperty("version");
         if (args.length > 0) runningDebug = args[0].equals("--debug");

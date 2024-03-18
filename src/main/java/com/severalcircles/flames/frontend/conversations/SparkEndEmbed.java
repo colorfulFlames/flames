@@ -29,10 +29,10 @@ public SparkEndEmbed(String question, String answer, int votes) {
         MessageEmbed embed = null;
         try {
             embed = new EmbedBuilder()
-                    .setTitle(local.getString("title"))
+                    .setTitle(question)
                     .setDescription("# " + answer)
                     .setImage(ImageSearch.searchImage(answer))
-                    .addField(question, String.format(local.getString("votes"), votes), false)
+                    .addField(local.getString("title"), String.format(local.getString("votes"), votes), false)
                     .setColor(Color.CYAN)
                     .setFooter(Flames.api.getSelfUser().getName(), Flames.api.getSelfUser().getAvatarUrl())
                     .build();

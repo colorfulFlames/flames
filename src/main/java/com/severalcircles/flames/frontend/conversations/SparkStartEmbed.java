@@ -43,7 +43,7 @@ public class SparkStartEmbed implements FlamesEmbed {
             embed = new EmbedBuilder()
                     .setColor(Color.CYAN)
                     .setAuthor(String.format(local.getString("author"), user.getGlobalName()), null, user.getAvatarUrl())
-                    .setDescription(String.format(local.getString("description"), question))
+                    .setDescription("# " + String.format(local.getString("description"), question))
                     .setImage(ImageSearch.searchImage(question))
                     .addField(local.getString("toVote"), "", true)
                     .addField(local.getString("voteFast"), eS, true)
