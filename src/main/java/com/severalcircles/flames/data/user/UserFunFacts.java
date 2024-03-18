@@ -53,7 +53,7 @@ public class UserFunFacts implements FlamesData {
         this.lowestFlamesScore = 0;
         this.bestRank = Rank.UNRANKED;
         this.frenchToastMentioned = 0;
-        this.favoriteQuote = "I haven't said anything epic yet.";
+        this.favoriteQuote = "This is me.";
     }
     public Instant getSadDay() {
         return sadDay;

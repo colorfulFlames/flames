@@ -7,6 +7,7 @@ package com.severalcircles.flames.frontend.data.user.embed;
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.data.user.UserFunFacts;
 import com.severalcircles.flames.external.FlamesAssets;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import com.severalcircles.flames.util.Emotion;
@@ -35,17 +36,17 @@ public class UserDataEmbed implements FlamesEmbed {
         String tonext;
         if (Ranking.toNext(flamesUser.getScore()) <= 0) tonext = "?";
         else tonext = StringUtil.formatScore(Ranking.toNext(flamesUser.getScore()));
+        User.Profile profile = user.retrieveProfile().complete();
+        UserFunFacts funFacts = flamesUser.getFunFacts();
         return new EmbedBuilder()
-                .setAuthor(resources.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
-                .setTitle(String.format(resources.getString("title"), StringUtil.getFormattedName(user)))
+                .setAuthor(funFacts.getFavoriteQuote(), null, user.getAvatarUrl())
+                .setTitle(String.format(resources.getString("title"), user.getGlobalName()))
                 .addField(resources.getString("score"), StringUtil.formatScore(flamesUser.getScore()), true)
                 .addField(resources.getString("rank"), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(Ranking.getRank(flamesUser.getScore()).toString()), true)
                 .addField(resources.getString("toNext"), tonext, true)
                 .addField(resources.getString("emotion"), Emotion.getEmotionString(flamesUser.getEmotion(), flamesUser.getConfig().getLocale()), true)
                 .addField(resources.getString("globalContribution"), Math.round(((float) flamesUser.getScore() / GlobalData.globalScore) * 100) + "%", true)
-                .setDescription(String.format(resources.getString("level")))
-                .setColor(Color.decode("#F4231F"))
-                .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("scoreFormat"), flamesUser.getScore()), user.getAvatarUrl())
+                .setColor(profile.getAccentColor())
                 .setThumbnail(FlamesAssets.getRankIcon(Ranking.getRank(flamesUser.getScore())))
                 .build();
     }

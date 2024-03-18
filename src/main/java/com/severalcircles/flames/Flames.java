@@ -162,8 +162,8 @@ public class Flames {
 
         commandMap.put("based", new TestCommand());
         commandDataList.add(Commands.slash("based", "based"));
-        commandMap.put("mydata", new MyDataCommand());
-        commandDataList.add(Commands.slash("mydata", "Displays your User Data"));
+        commandMap.put("me", new MyDataCommand());
+        commandDataList.add(Commands.slash("me", "Today, we're talking about you"));
         commandMap.put("globaldata", new GlobalDataCommand());
         commandDataList.add(Commands.slash("globaldata", "Displays the current Global Data"));
 //        commandMap.put("artist", new ArtistCommand());
@@ -182,7 +182,7 @@ public class Flames {
         new UserContextEvent().register(api);
         commandDataList.add(Commands.slash("conversation", "Shows information about the current conversation"));
         commandMap.put("about", new AboutCommand());
-        commandDataList.add(Commands.slash("about", "The funny legal stuff"));
+        commandDataList.add(Commands.slash("about", "Who cooked here?"));
         commandMap.put("getalong", new GetAlongCommand());
         commandDataList.add(Commands.slash("getalong", "See how well you Get Along with another user"));
         commandMap.put("spark", new SparkCommand());
@@ -224,7 +224,7 @@ public class Flames {
                 System.exit(3);
             }
             String log = reportHeader + "\n" +
-                    "Flames has detected a recurring fatal issue. Similar issues are known to cause damage to Flames and it's data, so in the interest of protecting itself, Flames has been shut down.\n" +
+                    "Flames has detected a recurring fatal issue. Similar issues are known to cause damage to Flames, so Flames has been shut down.\n" +
                     "Please report this issue to the developers at https://github.com/colorfulFlames/flames/issues/new?assignees=SeveralCircles&labels=bug&template=bug_report.md&title=Flames Protect Exception\n" +
                     "Thank you for your cooperation.";
             FileWriter writer;
