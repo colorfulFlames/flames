@@ -5,14 +5,10 @@
 
 package com.severalcircles.flames;
 
-import com.bugsnag.Bugsnag;
 import com.severalcircles.flames.conversations.Conversation;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.events.*;
-import com.severalcircles.flames.exception.FlamesException;
-import com.severalcircles.flames.external.spotify.ReconnectRunnable;
-import com.severalcircles.flames.external.spotify.SpotifyConnection;
 import com.severalcircles.flames.frontend.FlamesCommand;
 import com.severalcircles.flames.frontend.conversations.ConversationCommand;
 import com.severalcircles.flames.frontend.conversations.SparkCommand;
@@ -22,7 +18,6 @@ import com.severalcircles.flames.frontend.data.user.HiCommand;
 import com.severalcircles.flames.frontend.data.user.LocaleCommand;
 import com.severalcircles.flames.frontend.data.user.MyDataCommand;
 import com.severalcircles.flames.frontend.info.AboutCommand;
-import com.severalcircles.flames.frontend.info.ArtistCommand;
 import com.severalcircles.flames.frontend.info.HelpCommand;
 import com.severalcircles.flames.frontend.info.TestCommand;
 import com.severalcircles.flames.frontend.thanks.ThanksCommand;
@@ -31,7 +26,6 @@ import com.severalcircles.flames.frontend.today.TodayCommand;
 import com.severalcircles.flames.util.RankUpdateRunnable;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.interactions.commands.Command;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
@@ -66,14 +60,6 @@ public class Flames {
     public static final Map<String, FlamesCommand> commandMap = new HashMap<>();
     public static JDA api;
     public static final List<CommandData> commandDataList = new LinkedList<>();
-    /**
-     * Global Spotify Connection referenced throughout Flames
-     */
-    public static SpotifyConnection spotifyConnection;
-    /**
-     * Bugsnag instance used to report bugs
-     */
-    public static Bugsnag bugsnag;
     static int fatalErrorCounter;
     public static boolean runningDebug = false;
     public static ResourceBundle getCommonRsc(Locale locale) {
@@ -117,14 +103,7 @@ public class Flames {
         Logger.getGlobal().log(Level.INFO, "Flames");
         Logger.getGlobal().info(reportHeader + Instant.now());
         if (version.contains("-beta") | version.contains("-alpha") | version.contains("-SNAPSHOT")) {
-            Logger.getGlobal().log(Level.WARNING, "You are running a development snapshot version of Flames. That means this version represents a \"snapshot\" of what the next release looks like at the time it was developed.\n" +
-                    "There is absolutely ZERO promises with this build. You get what you get, please do not throw a fit.\n" +
-                    "Do not use this version for anything other than testing. If you are even thinking about using this in any kind of production setting, think again. Wait until this version is officially released.");
-        }
-        try {
-            spotifyConnection = new SpotifyConnection();
-        } catch (IOException e) {
-            Logger.getGlobal().log(Level.SEVERE, "Failed to connect to Spotify.");
+            Logger.getGlobal().log(Level.WARNING, "This is a development version of Flames. It may be too based for you to handle.");
         }
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("America/New_York"));
         ZonedDateTime nextRun = now.withHour(0).withMinute(0).withSecond(0);
@@ -132,11 +111,9 @@ public class Flames {
             nextRun = nextRun.plusDays(1);
         Duration duration = Duration.between(now, nextRun);
         long initalDelay = duration.getSeconds();
-        Logger.getGlobal().log(Level.INFO, "Connecting to Bugsnag");
-        bugsnag = new Bugsnag("4db7c7d93598a437149f27b877cc6a93");
         GlobalData.read();
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(new ReconnectRunnable(), 1, 1, TimeUnit.HOURS);
+//        scheduler.scheduleAtFixedRate(new ReconnectRunnable(), 1, 1, TimeUnit.HOURS);
         scheduler.scheduleAtFixedRate(new RankUpdateRunnable(), 0, 1, TimeUnit.HOURS);
 //        scheduler.scheduleAtFixedRate(new FlushHistoricalData(), 1, 1, TimeUnit.HOURS);
         scheduler.scheduleAtFixedRate(new ResetTodayRunnable(), initalDelay, TimeUnit.DAYS.toSeconds(1), TimeUnit.SECONDS);
@@ -203,17 +180,6 @@ public class Flames {
         fatalErrorCounter++;
         if (fatalErrorCounter > 10) {
             Logger.getGlobal().log(Level.SEVERE, "Flames has detected a recurring fatal problem. To protect Flames' data, it will now exit. There may be stack traces above with more information.");
-            bugsnag.notify(new FlamesException("Fatal error counter went over 5") {
-                @Override
-                public String getCode() {
-                    return null;
-                }
-
-                @Override
-                public ResourceBundle getRsc(Locale locale) {
-                    return null;
-                }
-            });
             File file = new File(FlamesDataManager.flamesDirectory.getAbsolutePath() + "/logs/Flames FatalReport:" + Instant.now().toString() + ".log");
             try {
                 //noinspection ResultOfMethodCallIgnored
