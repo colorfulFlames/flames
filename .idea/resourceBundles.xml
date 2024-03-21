@@ -4,6 +4,9 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/Common.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/Common_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/Common_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/thanks/ThanksEmbed.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/thanks/ThanksEmbed_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/thanks/ThanksEmbed_es.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/error/NotFlamesUserMessage.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/error/NotFlamesUserMessage_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/error/NotFlamesUserMessage_es.properties" />
@@ -33,9 +36,6 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/features/Ranking.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/Ranking_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/Ranking_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/features/ThanksEmbed.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/features/ThanksEmbed_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/features/ThanksEmbed_es.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/TodayEmbed_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/TodayEmbed_es.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/ConversationEmbed.properties" />
@@ -51,7 +51,6 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/GlobalDataEmbed.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/GlobalDataEmbed_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/GlobalDataEmbed_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/features/data/Spark.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/SparkResultsEmbed.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/SparkResultsEmbed_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/SparkResultsEmbed_es.properties" />
@@ -59,9 +58,6 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/SparkStartEmbed.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/SparkStartEmbed_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/SparkStartEmbed_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/features/data/Spark_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/features/data/Spark_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/features/data/Spark_tra.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/UserDataDropdown.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/UserDataDropdown_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/UserDataDropdown_es.properties" />
@@ -138,10 +134,10 @@
       <base-name>Ranking</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/ThanksEmbed.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/ThanksEmbed_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/ThanksEmbed_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/ThanksEmbed_tra.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/thanks/ThanksEmbed.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/thanks/ThanksEmbed_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/thanks/ThanksEmbed_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/thanks/ThanksEmbed_tra.properties" />
       <base-name>ThanksEmbed</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
@@ -205,13 +201,6 @@
       <file value="file://$PROJECT_DIR$/src/main/resources/exceptions/ConsentException_es.properties" />
       <file value="file://$PROJECT_DIR$/src/main/resources/exceptions/ConsentException_tra.properties" />
       <base-name>ConsentException</base-name>
-    </custom-resource-bundle>
-    <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/data/Spark.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/data/Spark_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/data/Spark_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/data/Spark_tra.properties" />
-      <base-name>Spark</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
       <file value="file://$PROJECT_DIR$/src/main/resources/features/data/SparkStartEmbed.properties" />

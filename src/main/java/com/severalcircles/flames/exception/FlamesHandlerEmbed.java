@@ -56,10 +56,9 @@ public class FlamesHandlerEmbed implements FlamesEmbed {
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         e.printStackTrace(pw);
-        if (Flames.runningDebug) this.causedBy = "```\n" + sw.toString().substring(0, 1000) + "\n```";
-        else {
-            this.causedBy = Flames.api.getSelfUser().getName();
-        }
+        StackTraceElement[] st = Thread.currentThread().getStackTrace();
+        String className = st[2].getClassName();
+        this.causedBy = className.substring(className.lastIndexOf('.') + 1);
         e.printStackTrace();
         this.causedByImage = "https://media.tenor.com/PkbRg6xWSuAAAAAC/shit-snake.gif";
         this.message = e.getMessage();

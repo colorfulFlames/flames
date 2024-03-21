@@ -30,6 +30,8 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import sun.security.util.Resources;
+
 
 import java.io.File;
 import java.io.FileWriter;
@@ -112,6 +114,7 @@ public class Flames {
         Duration duration = Duration.between(now, nextRun);
         long initalDelay = duration.getSeconds();
         GlobalData.read();
+        Logger.getGlobal().fine("Scheduling tasks");
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 //        scheduler.scheduleAtFixedRate(new ReconnectRunnable(), 1, 1, TimeUnit.HOURS);
         scheduler.scheduleAtFixedRate(new RankUpdateRunnable(), 0, 1, TimeUnit.HOURS);
@@ -204,5 +207,17 @@ public class Flames {
             }
             System.exit(2);
         }
+    }
+    public static ResourceBundle local() {
+        StackTraceElement[] st = Thread.currentThread().getStackTrace();
+        String className = st[2].getClassName();
+        className = className.replace(".", "/");    // This is a hack to make the ResourceBundle work
+        return ResourceBundle.getBundle(className);
+    }
+    public static ResourceBundle local(Locale locale) {
+        StackTraceElement[] st = Thread.currentThread().getStackTrace();
+        String className = st[2].getClassName();
+        className = className.replace(".", "/");    // This is a hack to make the ResourceBundle work
+        return ResourceBundle.getBundle(className, locale);
     }
 }

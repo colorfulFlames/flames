@@ -4,6 +4,7 @@
 
 package com.severalcircles.flames.frontend.thanks;
 
+import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.exception.FlamesMetaException;
@@ -35,7 +36,7 @@ public class ThanksEmbed implements FlamesEmbed {
         this.sender = sender;
         this.flamesUserThanked = flamesUserThanked;
         this.msg = msg;
-        resources = ResourceBundle.getBundle("features/ThanksEmbed", flamesUserThanked.getConfig().getLocale());
+        resources = Flames.local(flamesUserThanked.getConfig().getLocale());
         if (this.msg.isEmpty()) this.msg = resources.getString("description");
 
     }

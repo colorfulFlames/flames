@@ -9,7 +9,7 @@ import com.severalcircles.flames.frontend.FlamesCommand;
 import com.severalcircles.flames.frontend.data.user.embed.UserDataEmbed;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-//import net.dv8tion.jda.api.interactions.components.Button;
+
 
 public class MyDataCommand implements FlamesCommand {
     @Override
@@ -17,6 +17,6 @@ public class MyDataCommand implements FlamesCommand {
 //        ResourceBundle resourceBundle = ResourceBundle.getBundle("features/UserDataEmbed", flamesUser.getConfig().getLocale()));
         MessageEmbed embed = new UserDataEmbed(event.getUser(), sender).get();
 //        event.replyEmbeds(new ExceptionHandler(new Exception()).handleThenGetFrontend()).complete();
-        event.replyEmbeds(embed).addActionRow(new UserDataDropdown().getDropdown(sender)).queue();
+        event.replyEmbeds(embed).queue();
 
 }}
