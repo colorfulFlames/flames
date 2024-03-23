@@ -55,7 +55,7 @@ public class TodayEmbed implements FlamesEmbed {
                     .addBlankField(false)
                     .addField(resources.getString("allAbout"), resources.getString("tomorrowBring"), false)
                     .setThumbnail(ImageSearch.searchImage(trendingEntity))
-                    .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("scoreFormat"), flamesUser.getScore()), user.getAvatarUrl())
+                    .setFooter(Flames.api.getSelfUser().getGlobalName(), Flames.api.getSelfUser().getAvatarUrl())
                     .setColor(Color.decode("#F1D302"))
                     .build();
         } catch (IOException e) {

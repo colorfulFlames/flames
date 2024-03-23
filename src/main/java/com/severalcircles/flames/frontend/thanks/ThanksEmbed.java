@@ -45,7 +45,7 @@ public class ThanksEmbed implements FlamesEmbed {
         if (thanked.getId().equals(sender.getId())) return new FlamesRuntimeExceptionHandler(new FlamesMetaException("You cannot thank yourself."), this.getClass()).handleThenGetFrontend();
         if (!Today.thanksgivingThanks.containsKey(sender.getId())) Today.thanksgivingThanks.put(sender.getId(), new LinkedList<>());
         if ((!Today.isThanksgiving && Today.thanks.contains(sender.getId())) | (Today.isThanksgiving && Today.thanksgivingThanks.get(sender.getId()).contains(thanked.getId()))) {
-            return new EmbedBuilder().setTitle(String.format(resources.getString("alreadyThanked"), sender.getName())).setColor(Color.red).build();
+            return new EmbedBuilder().setTitle(String.format(resources.getString("alreadyThanked"), sender.getGlobalName())).setColor(Color.red).build();
         }
 
         flamesUserThanked.setScore(flamesUserThanked.getScore() + 2500);
@@ -69,13 +69,13 @@ public class ThanksEmbed implements FlamesEmbed {
         }
         success.add(sender.getId());
         return new EmbedBuilder()
-                .setAuthor(String.format(resources.getString("author"), sender.getName()), null, sender.getAvatarUrl())
-                .setTitle(String.format(resources.getString("title"), thanked.getName()))
+                .setAuthor(String.format(resources.getString("author"), sender.getGlobalName()), null, sender.getAvatarUrl())
+                .setTitle(String.format(resources.getString("title"), thanked.getGlobalName()))
                 .setDescription(msg)
                 .addField(resources.getString("bonus"), StringUtil.formatScore(2500), true)
                 .setImage(resources.getString("image"))
                 .setColor(Color.yellow)
-                .setFooter(String.format(resources.getString("footer"), thanked.getName()), thanked.getAvatarUrl())
+                .setFooter(String.format(resources.getString("footer"), thanked.getGlobalName()), thanked.getAvatarUrl())
                 .build();
     }
 }

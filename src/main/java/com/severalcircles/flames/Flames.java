@@ -13,7 +13,6 @@ import com.severalcircles.flames.frontend.FlamesCommand;
 import com.severalcircles.flames.frontend.conversations.ConversationCommand;
 import com.severalcircles.flames.frontend.conversations.SparkCommand;
 import com.severalcircles.flames.frontend.data.other.GlobalDataCommand;
-import com.severalcircles.flames.frontend.data.user.GetAlongCommand;
 import com.severalcircles.flames.frontend.data.user.HiCommand;
 import com.severalcircles.flames.frontend.data.user.LocaleCommand;
 import com.severalcircles.flames.frontend.data.user.MyDataCommand;
@@ -30,8 +29,6 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-import sun.security.util.Resources;
-
 
 import java.io.File;
 import java.io.FileWriter;
@@ -163,8 +160,8 @@ public class Flames {
         commandDataList.add(Commands.slash("conversation", "Shows information about the current conversation"));
         commandMap.put("about", new AboutCommand());
         commandDataList.add(Commands.slash("about", "Who cooked here?"));
-        commandMap.put("getalong", new GetAlongCommand());
-        commandDataList.add(Commands.slash("getalong", "See how well you Get Along with another user"));
+//        commandMap.put("getalong", new GetAlongCommand());
+//        commandDataList.add(Commands.slash("getalong", "See how well you Get Along with another user"));
         commandMap.put("spark", new SparkCommand());
         commandDataList.add(Commands.slash("spark", "Start a Spark conversation").addOption(OptionType.STRING, "question", "The question you want to ask", true).addOption(OptionType.INTEGER, "minutes", "Time limit for the conversation in minutes.", true));
 //        Commands.context(Command.Type.MESSAGE, "SparkVote");

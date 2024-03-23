@@ -10,6 +10,7 @@ import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.exception.ConsentException;
 import com.severalcircles.flames.exception.handle.ExceptionHandler;
+import com.severalcircles.flames.external.analysis.Analysis;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
 import com.severalcircles.flames.frontend.today.Today;
 import net.dv8tion.jda.api.entities.Message;
@@ -27,7 +28,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Conversation {
-    public static List<String> entityList = new LinkedList<>();
+    public static final List<String> entityList = new LinkedList<>();
     private final Map<String, Integer> entities;
     private final GuildMessageChannel channel;
     private final List<User> userList;
@@ -63,80 +64,81 @@ public class Conversation {
     }
 
     public void processMessage(Message message, FinishedAnalysis finishedAnalysis) throws ExpiredConversationException {
-        boolean newFavorite = false;
-        Logger.getGlobal().log(Level.INFO, "Processing Message");
-        if (expires.compareTo(Instant.now()) < 0) {
-            expired = true;
-            throw new ExpiredConversationException();
-        }
+            boolean newFavorite = false;
+            Logger.getGlobal().log(Level.INFO, "Processing Message");
+            if (expires.compareTo(Instant.now()) < 0) {
+                expired = true;
+                throw new ExpiredConversationException();
+            }
+
         expires = Instant.now().plus(5, ChronoUnit.MINUTES);
-        emotion += finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude();
-        if (finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude() > quoteScore) {
-            this.quote = new String[]{message.getContentRaw(), message.getAuthor().getName()};
-            this.quoteScore = finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude();
-            if (Math.round(Math.random() * 10) == 6) newFavorite = true;
-        }
-        if (!userList.contains(message.getAuthor())) userList.add(message.getAuthor());
-        finishedAnalysis.getEntityList().forEach((element) -> {
-            if (!entities.containsKey(element.getName())) entities.put(element.getName(), 1);
-            else entities.put(element.getName(), entities.get(element.getName()) + 1);
-            entityList.add(element.getName());
-        });
-        boolean finalNewFavorite = newFavorite;
-        userList.forEach((element) -> {
-            if (!conversationCache.containsKey(element.getId())) {
-                try {
-                    conversationCache.put(element.getId(), FlamesDataManager.readUser(element));
-            } catch (ConsentException ignored) {return;}
-                catch (Exception e) {
-                    new ExceptionHandler(e).handle();
-                }
-            FlamesUser user = conversationCache.get(element.getId());
-            userList.forEach((member) -> user.getRelationships().addRelationship(member.getId(), 1));
-            if (user.getDiscordId().equals(message.getAuthor().getId())) {
-                if ((finalNewFavorite | user.getFunFacts().getFavoriteQuote().equals("I haven't said anything epic yet.")) && user.getConfig().isFavQuoteAllowed()) user.getFunFacts().setFavoriteQuote(message.getContentRaw());
-                double score = Math.round(finishedAnalysis.getEmotion() * 10);
-                System.out.println(emotion);
-                if (score < 0) score *= 2.5;
-                user.setScore(user.getScore() + (int) score);
-                System.out.println(score);
-                System.out.println((int) score);
-                System.out.println(user.getScore());
-                user.setEmotion(user.getEmotion() + (float) emotion);
-                if (user.getEmotion() > user.getFunFacts().getHighestEmotion()) {
-                    user.getFunFacts().setHighestEmotion(user.getEmotion());
-                    user.getFunFacts().setHappyDay(Instant.now());
-                }
-                if (user.getEmotion() < user.getFunFacts().getLowestEmotion()) {
-                    user.getFunFacts().setLowestEmotion(user.getEmotion());
-                    user.getFunFacts().setSadDay(Instant.now());
-                }
-                if (user.getScore() > user.getFunFacts().getHighestFlamesScore()) user.getFunFacts().setHighestFlamesScore(user.getScore());
-                GlobalData.globalScore += score;
-                GlobalData.averageScore = GlobalData.globalScore / GlobalData.participants;
-                if (user.getScore() > Today.highScore) {
-                    Today.highUser = message.getAuthor().getName() + " (" + user.getScore() + ")";
-                }
+            emotion += finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude();
+            if (finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude() > quoteScore | Math.round(Math.random() * 10) == 6) {
+                this.quote = new String[]{message.getContentRaw(), message.getAuthor().getName()};
+                this.quoteScore = finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude();
+                if (Math.round(Math.random() * 10) == 6) newFavorite = true;
             }
-            conversationCache.put(element.getId(), user);
-            try {
-                FlamesDataManager.save(user);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        conversationCache.forEach((key, value) -> {
-            try {
-                FlamesDataManager.save(value);
-            } catch (IOException e) {
-                Flames.incrementErrorCount();
-                e.printStackTrace();
-            }
-        });
-        conversationCache.clear();
-    });
-}
-//    public SparkConversation toSpark() {
-//        return new SparkConversation(channel);
-//    }
+            if (!userList.contains(message.getAuthor())) userList.add(message.getAuthor());
+            finishedAnalysis.getEntityList().forEach((element) -> {
+                if (!entities.containsKey(element.getName())) entities.put(element.getName(), 1);
+                else entities.put(element.getName(), entities.get(element.getName()) + 1);
+                entityList.add(element.getName());
+            });
+            boolean finalNewFavorite = newFavorite;
+            userList.forEach((element) -> {
+                if (!conversationCache.containsKey(element.getId())) {
+                    try {
+                        conversationCache.put(element.getId(), FlamesDataManager.readUser(element));
+                    } catch (ConsentException ignored) {
+                        return;
+                    } catch (Exception e) {
+                        new ExceptionHandler(e).handle();
+                    }
+                    FlamesUser user = conversationCache.get(element.getId());
+                    userList.forEach((member) -> user.getRelationships().addRelationship(member.getId(), 1));
+                    if (user.getDiscordId().equals(message.getAuthor().getId())) {
+                        if ((finalNewFavorite | user.getFunFacts().getFavoriteQuote().equals("This is me.")) && user.getConfig().isFavQuoteAllowed())
+                            user.getFunFacts().setFavoriteQuote(message.getContentRaw());
+                        double score = Math.round(finishedAnalysis.getEmotion() * 10);
+                        System.out.println(emotion);
+                        if (score < 0) score *= 2.5;
+                        user.setScore(user.getScore() + (int) score);
+                        System.out.println(score);
+                        System.out.println((int) score);
+                        System.out.println(user.getScore());
+                        user.setEmotion(user.getEmotion() + (float) emotion);
+                        if (user.getEmotion() > user.getFunFacts().getHighestEmotion()) {
+                            user.getFunFacts().setHighestEmotion(user.getEmotion());
+                            user.getFunFacts().setHappyDay(Instant.now());
+                        }
+                        if (user.getEmotion() < user.getFunFacts().getLowestEmotion()) {
+                            user.getFunFacts().setLowestEmotion(user.getEmotion());
+                            user.getFunFacts().setSadDay(Instant.now());
+                        }
+                        if (user.getScore() > user.getFunFacts().getHighestFlamesScore())
+                            user.getFunFacts().setHighestFlamesScore(user.getScore());
+                        GlobalData.globalScore += score;
+                        GlobalData.averageScore = GlobalData.globalScore / GlobalData.participants;
+                        if (user.getScore() > Today.highScore) {
+                            Today.highUser = message.getAuthor().getName() + " (" + user.getScore() + ")";
+                        }
+                    }
+                    conversationCache.put(element.getId(), user);
+                    try {
+                        FlamesDataManager.save(user);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                conversationCache.forEach((key, value) -> {
+                    try {
+                        FlamesDataManager.save(value);
+                    } catch (IOException e) {
+                        Flames.incrementErrorCount();
+                        e.printStackTrace();
+                    }
+                });
+                conversationCache.clear();
+            });
+    }
 }

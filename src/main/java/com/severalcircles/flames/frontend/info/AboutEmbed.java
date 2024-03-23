@@ -20,13 +20,13 @@ public class AboutEmbed implements FlamesEmbed {
     private final ResourceBundle local;
 
     public AboutEmbed(FlamesUser user) {
-        this.local = ResourceBundle.getBundle("features/AboutEmbed", user.getConfig().getLocale());
+        this.local = Flames.local(user.getConfig().getLocale());
     }
     public MessageEmbed get() {
         return new EmbedBuilder()
                 .setTitle(Flames.api.getSelfUser().getName())
                 .setAuthor(local.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
-                .setDescription(local.getString("description"))
+                .setDescription(String.format(local.getString("description"), Flames.version))
                 .setImage(FlamesAssets.getVersionIcon())
                 .addField(local.getString("created"), StringUtil.prettifyDate(Flames.api.getSelfUser().getTimeCreated().toInstant()), true)
                 .addField(local.getString("users"), String.valueOf(GlobalData.participants), true)

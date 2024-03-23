@@ -44,7 +44,7 @@ public class UserDataEmbed implements FlamesEmbed {
                 .addField(resources.getString("score"), StringUtil.formatScore(flamesUser.getScore()), true)
                 .addField(resources.getString("rank"), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(Ranking.getRank(flamesUser.getScore()).toString()), true)
                 .addField(resources.getString("toNext"), tonext, true)
-                .addField(resources.getString("emotion"), Emotion.getEmotionString(flamesUser.getEmotion(), flamesUser.getConfig().getLocale()), true)
+//                .addField(resources.getString("emotion"), Emotion.getEmotionString(flamesUser.getEmotion(), flamesUser.getConfig().getLocale()), true)
                 .addField(resources.getString("globalContribution"), Math.round(((float) flamesUser.getScore() / GlobalData.globalScore) * 100) + "%", true)
                 .setColor(profile.getAccentColor())
                 .setThumbnail(FlamesAssets.getRankIcon(Ranking.getRank(flamesUser.getScore())))

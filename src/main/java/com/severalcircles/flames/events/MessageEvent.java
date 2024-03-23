@@ -75,7 +75,9 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             Logger.getGlobal().log(Level.FINE, "New Conversation");
             Conversation conversation = new Conversation(event.getChannel().asTextChannel());
             try {
-                conversation.processMessage(event.getMessage(), finishedAnalysis);
+                Thread thread = new Thread(() -> {
+                    conversation.processMessage(event.getMessage(), finishedAnalysis);
+                });
             } catch (ExpiredConversationException e) {
                 // What the fuck
                 e.printStackTrace();

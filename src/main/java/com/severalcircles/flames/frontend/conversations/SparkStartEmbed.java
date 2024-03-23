@@ -25,7 +25,7 @@ public class SparkStartEmbed implements FlamesEmbed {
     String question;
     int minutes;
     public SparkStartEmbed(FlamesUser fluser, User user, String question, int minutes) {
-        local = ResourceBundle.getBundle("features/data/SparkStartEmbed", fluser.getConfig().getLocale());
+        local = Flames.local();
         this.fluser = fluser;
         this.user = user;
         this.question = question;

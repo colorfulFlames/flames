@@ -28,6 +28,7 @@ public class CommandEvent extends ListenerAdapter implements FlamesDiscordEvent 
 
     @Override
     public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
+        new Thread(() ->{
         System.out.println("Slash command detected");
         //noinspection ResultOfMethodCallIgnored
         event.deferReply(true);
@@ -48,4 +49,4 @@ public class CommandEvent extends ListenerAdapter implements FlamesDiscordEvent 
                 }
             }
         }
-    }}
+    }).start();}}

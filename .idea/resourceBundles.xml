@@ -4,6 +4,20 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/Common.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/Common_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/Common_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/ConversationEmbed.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/ConversationEmbed_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/ConversationEmbed_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkResultsEmbed.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkResultsEmbed_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkResultsEmbed_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkResultsEmbed_tra.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkStartEmbed.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkStartEmbed_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkStartEmbed_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/WhatsThisEmbed.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/WhatsThisEmbed_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/WhatsThisEmbed_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/WhatsThisEmbed_tra.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/thanks/ThanksEmbed.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/thanks/ThanksEmbed_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/thanks/ThanksEmbed_es.properties" />
@@ -38,9 +52,6 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/features/Ranking_es.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/TodayEmbed_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/TodayEmbed_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/features/data/ConversationEmbed.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/features/data/ConversationEmbed_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/features/data/ConversationEmbed_es.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/FunFactsEmbed.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/FunFactsEmbed_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/FunFactsEmbed_es.properties" />
@@ -51,13 +62,6 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/GlobalDataEmbed.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/GlobalDataEmbed_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/GlobalDataEmbed_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/features/data/SparkResultsEmbed.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/features/data/SparkResultsEmbed_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/features/data/SparkResultsEmbed_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/features/data/SparkResultsEmbed_tra.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/features/data/SparkStartEmbed.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/features/data/SparkStartEmbed_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/features/data/SparkStartEmbed_es.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/UserDataDropdown.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/UserDataDropdown_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/features/data/UserDataDropdown_es.properties" />
@@ -71,10 +75,10 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/message/UpdatedSettingsEmbed_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/message/UpdatedSettingsEmbed_es.properties" />
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/data/ConversationEmbed.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/data/ConversationEmbed_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/data/ConversationEmbed_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/data/ConversationEmbed_tra.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/ConversationEmbed.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/ConversationEmbed_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/ConversationEmbed_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/ConversationEmbed_tra.properties" />
       <base-name>ConversationEmbed</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
@@ -203,18 +207,25 @@
       <base-name>ConsentException</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/data/SparkStartEmbed.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/data/SparkStartEmbed_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/data/SparkStartEmbed_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/data/SparkStartEmbed_tra.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkStartEmbed.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkStartEmbed_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkStartEmbed_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkStartEmbed_tra.properties" />
       <base-name>SparkStartEmbed</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/data/SparkResultsEmbed.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/data/SparkResultsEmbed_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/data/SparkResultsEmbed_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/features/data/SparkResultsEmbed_tra.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkResultsEmbed.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkResultsEmbed_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkResultsEmbed_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkResultsEmbed_tra.properties" />
       <base-name>SparkResultsEmbed</base-name>
+    </custom-resource-bundle>
+    <custom-resource-bundle>
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/WhatsThisEmbed.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/WhatsThisEmbed_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/WhatsThisEmbed_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/WhatsThisEmbed_tra.properties" />
+      <base-name>WhatsThisEmbed</base-name>
     </custom-resource-bundle>
   </component>
 </project>

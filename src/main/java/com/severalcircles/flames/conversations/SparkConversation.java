@@ -6,7 +6,7 @@ package com.severalcircles.flames.conversations;
 
 import com.severalcircles.flames.exception.AlreadyVotedException;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
-import com.severalcircles.flames.frontend.conversations.SparkEndEmbed;
+import com.severalcircles.flames.frontend.conversations.SparkResultsEmbed;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.middleman.GuildMessageChannel;
@@ -25,8 +25,10 @@ public class SparkConversation extends Conversation {
     Timer t = new Timer();
     Timer t2 = new Timer();
     int votes = 0;
+    MessageChannelUnion channel;
     public SparkConversation(MessageChannelUnion channel, String question, int minutes) {
         super((GuildMessageChannel) channel);
+        this.channel = channel;
         this.question = question;
         if (minutes < 1) {
              minutes = 1;
@@ -47,7 +49,7 @@ public class SparkConversation extends Conversation {
                 finish();
             }
         }, minutes * 60000L);
-//        channel.asTextChannel().getManager().setSlowmode(minutes / 60).complete();
+        channel.asTextChannel().getManager().setSlowmode(minutes * 60).complete();
     }
     void finish() {
         AtomicReference<String> answer = new AtomicReference<>("");
@@ -58,8 +60,9 @@ public class SparkConversation extends Conversation {
                 answer.set(message.getContentRaw());
             }
         });
-        getChannel().sendMessageEmbeds(new SparkEndEmbed(question, answer.get(), votes).get()).queue();
+        getChannel().sendMessageEmbeds(new SparkResultsEmbed(question, answer.get(), votes).get()).queue();
         sparkConversations.remove(getChannel().getId());
+        channel.asTextChannel().getManager().setSlowmode(0).complete();
         Logger.getGlobal().info("Spark conversation ended.");
     }
     @Override

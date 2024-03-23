@@ -46,9 +46,11 @@ test {
 }
 dependencies {
     implementation("net.dv8tion:JDA:$jdaVersion")
-    implementation platform('com.google.cloud:libraries-bom:24.3.0')
+    implementation platform('com.google.cloud:libraries-bom:26.34.0')
     implementation 'com.google.cloud:google-cloud-dialogflow'
     implementation 'com.google.cloud:google-cloud-language:2.1.4'
+    implementation 'com.google.cloud:google-cloud-aiplatform:3.35.0'
+    implementation 'com.google.cloud:google-cloud-vertexai'
     implementation 'com.bugsnag:bugsnag:3.6.2'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
 }

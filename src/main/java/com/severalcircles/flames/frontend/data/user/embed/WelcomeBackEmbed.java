@@ -62,15 +62,15 @@ public class WelcomeBackEmbed implements FlamesEmbed {
                 timeMessage = resources.getString("author.night");
                 img += "NIGHT.png";
             }
-        return new EmbedBuilder()
+        EmbedBuilder embed = new EmbedBuilder()
                 .setAuthor(String.format(timeMessage, user.getName()), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setTitle(resources.getString("title"))
                 .addField(resources.getString("dailyBonus"), StringUtil.formatScore(dailyBonus), true)
                 .addField(resources.getString("score"), StringUtil.formatScore(flamesUser.getScore()), true)
                 .setDescription(resources.getString("description"))
                 .setImage(img)
-                .setColor(Color.decode("#D9581C"))
-                .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("scoreFormat"), flamesUser.getScore()), user.getAvatarUrl())
-                .build();
+                .setFooter(Flames.api.getSelfUser().getGlobalName(), Flames.api.getSelfUser().getAvatarUrl())
+                .setColor(Color.decode("#D9581C"));
+        return embed.build();
     }
 }

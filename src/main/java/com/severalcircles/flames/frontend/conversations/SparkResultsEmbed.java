@@ -14,16 +14,16 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
-public class SparkEndEmbed implements FlamesEmbed {
+public class SparkResultsEmbed implements FlamesEmbed {
     String question;
     String answer;
     int votes;
-public SparkEndEmbed(String question, String answer, int votes) {
+public SparkResultsEmbed(String question, String answer, int votes) {
         this.question = question;
         this.answer = answer;
         this.votes = votes;
     }
-    ResourceBundle local = ResourceBundle.getBundle("features/data/SparkResultsEmbed");
+    ResourceBundle local = Flames.local();
     @Override
     public MessageEmbed get() {
         MessageEmbed embed = null;
