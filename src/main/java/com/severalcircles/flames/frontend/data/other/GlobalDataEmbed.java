@@ -25,7 +25,7 @@ public class GlobalDataEmbed implements FlamesEmbed {
     public GlobalDataEmbed(User user, FlamesUser flamesUser) {
         this.user = user;
         this.flamesUser = flamesUser;
-        resources = ResourceBundle.getBundle("features/data/GlobalDataEmbed", flamesUser.getConfig().getLocale());
+        resources = Flames.local(flamesUser.getConfig().getLocale());
     }
 
 

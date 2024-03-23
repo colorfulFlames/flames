@@ -28,7 +28,7 @@ public class UserDataEmbed implements FlamesEmbed {
     public UserDataEmbed(User user, FlamesUser flamesUser) {
         this.user = user;
         this.flamesUser = flamesUser;
-        resources = ResourceBundle.getBundle("features/data/UserDataEmbed", flamesUser.getConfig().getLocale());
+        resources = Flames.local(flamesUser.getConfig().getLocale());
     }
 
 
