@@ -28,7 +28,7 @@ public class WelcomeBackEmbed implements FlamesEmbed {
         this.dailyBonus = dailyBonus;
         this.user = user;
         this.flamesUser = flamesUser;
-        resources = ResourceBundle.getBundle("features/data/WelcomeBackEmbed", flamesUser.getConfig().getLocale());
+        resources = Flames.local(flamesUser.getConfig().getLocale());
     }
     public MessageEmbed get() {
         Date now = Date.from(Instant.now());
