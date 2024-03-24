@@ -26,8 +26,10 @@ public class FlamesHandlerEmbed implements FlamesEmbed {
     final String causedBy;
     Color color;
     public FlamesHandlerEmbed(FlamesException e) {
+        StackTraceElement[] st = Thread.currentThread().getStackTrace();
+        String className = st[3].getClassName();
         code = e.getCode();
-        this.causedBy = Flames.api.getSelfUser().getName();
+        this.causedBy = className.substring(className.lastIndexOf('.') + 1);
         this.message = e.getMessage();
         this.rsc = e.getRsc(Locale.ENGLISH);
         this.causedByImage = Flames.api.getSelfUser().getAvatarUrl();

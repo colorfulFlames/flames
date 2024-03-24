@@ -67,7 +67,7 @@ public class Conversation {
 
     public void processMessage(Message message, FinishedAnalysis finishedAnalysis) throws ExpiredConversationException {
             boolean newFavorite = false;
-            Logger.getGlobal().log(Level.INFO, "Processing Message");
+            Logger.getGlobal().log(Level.FINE, "Processing Message");
             if (expires.compareTo(Instant.now()) < 0) {
                 expired = true;
                 throw new ExpiredConversationException();
@@ -99,9 +99,7 @@ public class Conversation {
                     userEntities.addEntity(key, finishedAnalysis.getSentiment().getScore() > 0);
                 });
                 user.setEntities(userEntities);
-                System.out.println("Entities:");
                 user.getEntities().getEntities().forEach((key, value) -> {
-                    System.out.println(key + " " + value);
                 });
                 try {
                     user.getEntities().getEntities().forEach((key, value) -> {
@@ -111,9 +109,6 @@ public class Conversation {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                entities.forEach((key, value) -> {
-                    System.out.println(key + " " + value);
-                });
             });
             boolean finalNewFavorite = newFavorite;
             userList.forEach((element) -> {
@@ -132,12 +127,8 @@ public class Conversation {
                         if ((finalNewFavorite | user.getFunFacts().getFavoriteQuote().equals("This is me.")) && user.getConfig().isFavQuoteAllowed())
                             user.getFunFacts().setFavoriteQuote(message.getContentRaw());
                         double score = Math.round(finishedAnalysis.getEmotion() * 15);
-                        System.out.println(emotion);
                         if (score < 0) score *= 5;
                         user.setScore(user.getScore() + (int) score);
-                        System.out.println(score);
-                        System.out.println((int) score);
-                        System.out.println(user.getScore());
                         user.setEmotion(user.getEmotion() + (float) emotion);
                         if (user.getEmotion() > user.getFunFacts().getHighestEmotion()) {
                             user.getFunFacts().setHighestEmotion(user.getEmotion());

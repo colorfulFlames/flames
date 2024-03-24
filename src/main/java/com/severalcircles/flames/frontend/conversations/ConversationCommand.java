@@ -20,7 +20,6 @@ public class ConversationCommand implements FlamesCommand {
         event.deferReply(true);
         if (ConversationsController.activeConversations.containsKey(event.getChannel().getId())) {
             event.replyEmbeds(new ConversationEmbed(event.getUser(), FlamesDataManager.readUser(event.getUser()), ConversationsController.activeConversations.get(event.getChannel().getId())).get()).queue();
-        }
-        event.reply("There isn't a conversation in this channel yet. Why not start one?").queue();
+        } else event.reply("There isn't a conversation in this channel yet. Why not start one?").queue();
     }
 }

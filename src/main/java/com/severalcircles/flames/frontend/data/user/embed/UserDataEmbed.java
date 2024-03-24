@@ -55,8 +55,8 @@ public class UserDataEmbed implements FlamesEmbed {
                 +"\n* " + topAndBottom.get(1).getName()
                 +"\n* " + topAndBottom.get(2).getName(), true)
                 .addField(resources.getString("dislikes"), "* " + topAndBottom.get(3).getName()
-                +"\n* " + topAndBottom.get(3).getName()
-                +"\n* " + topAndBottom.get(4).getName(), true)
+                +"\n* " + topAndBottom.get(4).getName()
+                +"\n* " + topAndBottom.get(5).getName(), true)
                 .setColor(profile.getAccentColor())
                 .setThumbnail(FlamesAssets.getRankIcon(Ranking.getRank(flamesUser.getScore())))
                 .build();

@@ -23,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,7 +39,13 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         // Bots don't get processed by Flames, simply because it's easier on everyone.
         if (user.isBot()) return;
         if (user.getName().toUpperCase(Locale.ROOT).contains("GOLDLEWIS")) event.getMessage().reply("https://media.discordapp.net/attachments/543162982536970240/943936840015159336/SpottedGoldlewis.gif").complete();
-        Logger.getGlobal().log(Level.FINE, event.getAuthor().getName() + " is not a bot");
+        String nick = "";
+        try {
+            nick = Objects.requireNonNull(event.getGuild().getMemberById(Flames.api.getSelfUser().getId())).getNickname();
+        } catch (NullPointerException e) {nick = "";}
+        if (nick != null && nick.toLowerCase().contains("water")) {
+            Objects.requireNonNull(event.getGuild().getMemberById(Flames.api.getSelfUser().getId())).modifyNickname(Flames.api.getSelfUser().getGlobalName()).complete();
+        }
         FlamesUser flamesUser;
         // Read Flames User
         try {
