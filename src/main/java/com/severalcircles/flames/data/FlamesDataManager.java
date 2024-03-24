@@ -231,6 +231,10 @@ public class FlamesDataManager {
         fluser.setRelationships(userRelationships);
         fluser.setEntities(userEntities);
         if (fluser.getConsent() != 1) throw new ConsentException(fluser.getConsent(), user);
+        if (Objects.equals(fluser.getFunFacts().getFavoriteQuote(), "I haven't said anything epic yet.")) {
+            fluser.getFunFacts().setFavoriteQuote("This is me.");
+            save(fluser);
+        }
         return fluser;
     }
 

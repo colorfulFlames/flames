@@ -131,9 +131,9 @@ public class Conversation {
                     if (user.getDiscordId().equals(message.getAuthor().getId())) {
                         if ((finalNewFavorite | user.getFunFacts().getFavoriteQuote().equals("This is me.")) && user.getConfig().isFavQuoteAllowed())
                             user.getFunFacts().setFavoriteQuote(message.getContentRaw());
-                        double score = Math.round(finishedAnalysis.getEmotion() * 10);
+                        double score = Math.round(finishedAnalysis.getEmotion() * 15);
                         System.out.println(emotion);
-                        if (score < 0) score *= 2.5;
+                        if (score < 0) score *= 5;
                         user.setScore(user.getScore() + (int) score);
                         System.out.println(score);
                         System.out.println((int) score);

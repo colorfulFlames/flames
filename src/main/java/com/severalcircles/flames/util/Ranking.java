@@ -7,6 +7,7 @@ package com.severalcircles.flames.util;
 import com.severalcircles.flames.data.global.GlobalData;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -14,34 +15,11 @@ import java.util.ResourceBundle;
  * Determines thresholds for each rank and allows getting the rank for a given score.
  */
 public class Ranking {
-    public static final int[] thresholds = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    public static final int[] thresholds = {5000, 11750, 21875, 35544, 56048, 83728, 125247, 187526, 280945};
     public static int baseValue = 0;
 
     public static ResourceBundle getResources(Locale locale) {
         return ResourceBundle.getBundle("features/Ranking", locale);
-    }
-    public static void updateThresholds() throws IOException {
-        GlobalData.read();
-        // The base value used to calculate ranks is 10 times the average score, minus the number of participants
-        baseValue = 10 * GlobalData.averageScore - GlobalData.participants;
-        // Bronze is the base value divided by 10
-        thresholds[1] = Math.abs(baseValue / 10);
-        // Approaching Bronze is 75% of bronze
-        thresholds[0] = (int) Math.abs(thresholds[1] * 0.75);
-        // Silver is double Bronze
-        thresholds[2] = Math.abs(thresholds[1] * 2);
-        // Shining Silver is double Silver
-        thresholds[3] = Math.abs(2 * thresholds[2]);
-        // Gold is the base value
-        thresholds[4] = Math.abs(baseValue);
-        // Beyond Gold is double Gold
-        thresholds[5] = Math.abs(2 * thresholds[4]);
-        // Platinum is 5 times Gold
-        thresholds[6] = Math.abs(5 * thresholds[4]);
-        // Sparkling Platinum is 2 times Platinum
-        thresholds[7] = Math.abs(thresholds[6] * 2);
-        // Platinum Summit is 5 times Platinum
-        thresholds[8] = Math.abs(5 * thresholds[6]);
     }
 
     /**
