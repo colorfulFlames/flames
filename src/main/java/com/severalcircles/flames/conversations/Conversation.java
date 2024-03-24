@@ -8,6 +8,8 @@ import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.data.user.UserEntities;
+import com.severalcircles.flames.data.user.UserEntity;
 import com.severalcircles.flames.exception.ConsentException;
 import com.severalcircles.flames.exception.handle.ExceptionHandler;
 import com.severalcircles.flames.external.analysis.Analysis;
@@ -83,6 +85,35 @@ public class Conversation {
                 if (!entities.containsKey(element.getName())) entities.put(element.getName(), 1);
                 else entities.put(element.getName(), entities.get(element.getName()) + 1);
                 entityList.add(element.getName());
+                FlamesUser user;
+                try {
+                    user = FlamesDataManager.readUser(message.getAuthor());
+                } catch (ConsentException e) {
+                    return;
+                } catch (Exception e) {
+                    new ExceptionHandler(e).handle();
+                    return;
+                }
+                UserEntities userEntities = user.getEntities();
+                entities.forEach((key, value) -> {
+                    userEntities.addEntity(key, finishedAnalysis.getSentiment().getScore() > 0);
+                });
+                user.setEntities(userEntities);
+                System.out.println("Entities:");
+                user.getEntities().getEntities().forEach((key, value) -> {
+                    System.out.println(key + " " + value);
+                });
+                try {
+                    user.getEntities().getEntities().forEach((key, value) -> {
+                        System.out.println(key + " / " + value);
+                    });
+                    FlamesDataManager.save(user);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                entities.forEach((key, value) -> {
+                    System.out.println(key + " " + value);
+                });
             });
             boolean finalNewFavorite = newFavorite;
             userList.forEach((element) -> {
@@ -95,6 +126,7 @@ public class Conversation {
                         new ExceptionHandler(e).handle();
                     }
                     FlamesUser user = conversationCache.get(element.getId());
+                    if (user == null) return;
                     userList.forEach((member) -> user.getRelationships().addRelationship(member.getId(), 1));
                     if (user.getDiscordId().equals(message.getAuthor().getId())) {
                         if ((finalNewFavorite | user.getFunFacts().getFavoriteQuote().equals("This is me.")) && user.getConfig().isFavQuoteAllowed())
