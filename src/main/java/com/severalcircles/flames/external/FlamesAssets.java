@@ -52,6 +52,7 @@ public class FlamesAssets {
     public static String getVersionIcon() {
         if (Flames.version.startsWith("6.")) return "https://www.severalcircles.com/flames/assets/versions/6.png";
         if (Flames.version.startsWith("7")) return "https://www.severalcircles.com/flames/assets/versions/7.png";
+        if (Flames.version.startsWith("8")) return "https://www.severalcircles.com/flames/assets/versions/8.png";
         return "https://www.severalcircles.com/flames/assets/versions/" + Flames.version + ".png";
     }
 

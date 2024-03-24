@@ -7,6 +7,7 @@ package com.severalcircles.flames.frontend.thanks;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.exception.ConsentException;
+import com.severalcircles.flames.exception.FlamesMetaException;
 import com.severalcircles.flames.exception.handle.ExceptionHandler;
 import com.severalcircles.flames.frontend.FlamesUserContext;
 import net.dv8tion.jda.api.entities.User;
@@ -36,6 +37,9 @@ public class ThanksContext implements FlamesUserContext {
             return;
         } catch (ConsentException e) {
             event.replyEmbeds(e.getHandler().handleThenGetFrontend()).complete();
+            return;
+        } catch (FlamesMetaException e) {
+            event.replyEmbeds(new ExceptionHandler(e).handleThenGetFrontend()).complete();
             return;
         }
         event.replyEmbeds(new ThanksEmbed(thanked, event.getUser(), flt, msg).get()).complete();

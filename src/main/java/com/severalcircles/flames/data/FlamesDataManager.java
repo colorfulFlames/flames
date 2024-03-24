@@ -7,6 +7,7 @@ package com.severalcircles.flames.data;
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.user.*;
 import com.severalcircles.flames.exception.ConsentException;
+import com.severalcircles.flames.exception.FlamesMetaException;
 import com.severalcircles.flames.util.Rank;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.Channel;
@@ -137,13 +138,14 @@ public class FlamesDataManager {
      * @return A FlamesUser created from the data file
      * @throws ConsentException If the user hasn't consented yet won't return data
      */
-    public static FlamesUser readUser(User user) throws IOException, ConsentException, UnsupportedOperationException {
+    public static FlamesUser readUser(User user) throws IOException, ConsentException, UnsupportedOperationException, FlamesMetaException {
         FlamesUser fluser = new FlamesUser();
 //        UserStats stats = new UserStats();
         UserFunFacts funFacts = new UserFunFacts();
         UserConfig config = new UserConfig();
         UserRelationships userRelationships = new UserRelationships();
         UserEntities userEntities = new UserEntities();
+        if (user.isBot()) throw new FlamesMetaException("Bots can't use Flames.");
         if (newUser(user) | user.isBot()) {
             throw new ConsentException(0, user);
         }

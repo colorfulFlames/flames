@@ -24,7 +24,7 @@ public class AboutEmbed implements FlamesEmbed {
     }
     public MessageEmbed get() {
         return new EmbedBuilder()
-                .setTitle(Flames.api.getSelfUser().getName())
+                .setTitle(Flames.api.getSelfUser().getName() + " " + Flames.version)
                 .setAuthor(local.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setDescription(String.format(local.getString("description"), Flames.version))
                 .setImage(FlamesAssets.getVersionIcon())
