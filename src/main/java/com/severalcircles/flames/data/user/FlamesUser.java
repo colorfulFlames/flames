@@ -24,6 +24,7 @@ public class FlamesUser implements FlamesData {
     private UserFunFacts funFacts;
     private double dataVersion;
     private UserRelationships relationships;
+    private UserEntities entities;
     public UserRelationships getRelationships() {
         return relationships;
     }
@@ -40,6 +41,14 @@ public class FlamesUser implements FlamesData {
         this.config = config;
     }
 
+    public UserEntities getEntities() {
+        return entities;
+    }
+
+    public void setEntities(UserEntities entities) {
+        this.entities = entities;
+    }
+
     private UserConfig config;
 
     public UserFunFacts getFunFacts() {
@@ -48,7 +57,7 @@ public class FlamesUser implements FlamesData {
 
     /**
      *
-     * @return Properties data that can then be written to a file or returned by the Flams API
+     * @return Properties data that can then be written to a file
      */
     public Properties createData() {
         Properties data = new Properties();
@@ -89,6 +98,7 @@ public class FlamesUser implements FlamesData {
         this.config = new UserConfig();
         this.relationships = new UserRelationships();
         this.dataVersion = 2.2;
+        this.entities = new UserEntities();
     }
 
     public void addScore(int amount) {
