@@ -157,7 +157,6 @@ public class XMLTokener extends JSONTokener {
     /**
      * Unescape an XML entity encoding;
      * @param e entity (only the actual entity value, not the preceding & or ending ;
-     * @return
      */
     static String unescapeEntity(String e) {
         // validate
