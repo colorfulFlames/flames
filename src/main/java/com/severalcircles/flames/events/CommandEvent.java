@@ -34,8 +34,6 @@ public class CommandEvent extends ListenerAdapter implements FlamesDiscordEvent 
         event.deferReply(true);
         System.out.println(event.getName());
         for (Map.Entry<String, FlamesCommand> entry : Flames.commandMap.entrySet()) {
-//            System.out.println(entry.getKey());
-//            System.out.println(entry.getKey().contains(event.getName()));
             if (entry.getKey().contains(event.getName())) {
                 try {
 //                    System.out.println(Flames.commandMap.get(entry.getKey()));

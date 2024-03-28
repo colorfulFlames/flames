@@ -112,9 +112,6 @@ public class Flames {
         GlobalData.read();
         Logger.getGlobal().fine("Scheduling tasks");
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-//        scheduler.scheduleAtFixedRate(new ReconnectRunnable(), 1, 1, TimeUnit.HOURS);
-//        scheduler.scheduleAtFixedRate(new RankUpdateRunnable(), 0, 1, TimeUnit.HOURS);
-//        scheduler.scheduleAtFixedRate(new FlushHistoricalData(), 1, 1, TimeUnit.HOURS);
         scheduler.scheduleAtFixedRate(new ResetTodayRunnable(), initalDelay, TimeUnit.DAYS.toSeconds(1), TimeUnit.SECONDS);
         new ResetTodayRunnable().run();
         Runtime.getRuntime().addShutdownHook(new ExitFlames());
@@ -142,8 +139,6 @@ public class Flames {
         commandDataList.add(Commands.slash("me", "Today, we're talking about you"));
         commandMap.put("globaldata", new GlobalDataCommand());
         commandDataList.add(Commands.slash("globaldata", "Displays the current Global Data"));
-//        commandMap.put("artist", new ArtistCommand());
-//        commandDataList.add(Commands.slash("artist", "Displays information for a Spotify artist").addOption(OptionType.STRING, "artist", "The name of the artist", true));
         commandMap.put("hi", new HiCommand());
         commandDataList.add(Commands.slash("hi", "Collect your Daily Bonus"));
         commandMap.put("help", new HelpCommand());
@@ -159,8 +154,6 @@ public class Flames {
         commandDataList.add(Commands.slash("conversation", "Shows information about the current conversation"));
         commandMap.put("about", new AboutCommand());
         commandDataList.add(Commands.slash("about", "Who cooked here?"));
-//        commandMap.put("getalong", new GetAlongCommand());
-//        commandDataList.add(Commands.slash("getalong", "See how well you Get Along with another user"));
         commandMap.put("spark", new SparkCommand());
         commandDataList.add(Commands.slash("spark", "Start a Spark conversation").addOption(OptionType.STRING, "question", "The question you want to ask", true).addOption(OptionType.INTEGER, "minutes", "Time limit for the conversation in minutes.", true));
 //        Commands.context(Command.Type.MESSAGE, "SparkVote");

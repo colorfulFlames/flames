@@ -251,7 +251,6 @@ public class XML {
      * @param name
      *            The tag name.
      * @return true if the close tag is processed.
-     * @throws JSONException
      */
     private static boolean parse(XMLTokener x, JSONObject context, String name, XMLParserConfiguration config)
             throws JSONException {
