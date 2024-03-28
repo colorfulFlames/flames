@@ -6,8 +6,10 @@ on:
     branches: # Specify your branches here
       - main # The 'main' branch
       - 'release/*' # The release branches
-
+    
 jobs:
+
+            
   qodana:
     runs-on: ubuntu-latest
     permissions:
@@ -15,6 +17,8 @@ jobs:
       pull-requests: write
       checks: write
     steps:
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4.2.1  
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.sha }}  # to check out the actual pull request commit, not the merge commit
