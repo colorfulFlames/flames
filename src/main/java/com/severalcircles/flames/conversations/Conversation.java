@@ -138,7 +138,7 @@ public class Conversation {
                         }
                         if (user.getScore() > user.getFunFacts().getHighestFlamesScore())
                             user.getFunFacts().setHighestFlamesScore(user.getScore());
-                        GlobalData.globalScore += score;
+                        GlobalData.globalScore += (int) score;
                         GlobalData.averageScore = GlobalData.globalScore / GlobalData.participants;
                         if (user.getScore() > Today.highScore) {
                             Today.highUser = message.getAuthor().getName() + " (" + user.getScore() + ")";
