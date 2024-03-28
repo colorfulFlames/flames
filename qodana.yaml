@@ -6,3 +6,5 @@ include:
   - name: DanglingJavadoc
   - name: JavadocDeclaration
   - name: RegExpRedundantEscape
+  - name: FieldCanBeLocal
+  - name: CommentedOutCode
