@@ -8,4 +8,4 @@ include:
   - name: RegExpRedundantEscape
   - name: FieldCanBeLocal
   - name: CommentedOutCode
-fixesStrategy: cleanup/apply
+fixesStrategy: apply
