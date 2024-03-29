@@ -251,7 +251,6 @@ public class XML {
      * @param name
      *            The tag name.
      * @return true if the close tag is processed.
-     * @throws JSONException
      */
     private static boolean parse(XMLTokener x, JSONObject context, String name, XMLParserConfiguration config)
             throws JSONException {
@@ -290,7 +289,7 @@ public class XML {
                 if ("CDATA".equals(token)) {
                     if (x.next() == '[') {
                         string = x.nextCDATA();
-                        if (string.length() > 0) {
+                        if (!string.isEmpty()) {
                             context.accumulate(config.getcDataTagName(), string);
                         }
                         return false;
@@ -382,7 +381,7 @@ public class XML {
                     }
                     if (nilAttributeFound) {
                         context.accumulate(tagName, JSONObject.NULL);
-                    } else if (jsonObject.length() > 0) {
+                    } else if (!jsonObject.isEmpty()) {
                         context.accumulate(tagName, jsonObject);
                     } else {
                         context.accumulate(tagName, "");
@@ -400,7 +399,7 @@ public class XML {
                             return false;
                         } else if (token instanceof String) {
                             string = (String) token;
-                            if (string.length() > 0) {
+                            if (!string.isEmpty()) {
                                 if(xmlXsiTypeConverter != null) {
                                     jsonObject.accumulate(config.getcDataTagName(),
                                             stringToValue(string, xmlXsiTypeConverter));
@@ -413,7 +412,7 @@ public class XML {
                         } else if (token == LT) {
                             // Nested element
                             if (parse(x, jsonObject, tagName, config)) {
-                                if (jsonObject.length() == 0) {
+                                if (jsonObject.isEmpty()) {
                                     context.accumulate(tagName, "");
                                 } else if (jsonObject.length() == 1
                                         && jsonObject.opt(config.getcDataTagName()) != null) {
@@ -853,7 +852,7 @@ public class XML {
 
         string = (object == null) ? "null" : escape(object.toString());
         return (tagName == null) ? "\"" + string + "\""
-                : (string.length() == 0) ? "<" + tagName + "/>" : "<" + tagName
+                : (string.isEmpty()) ? "<" + tagName + "/>" : "<" + tagName
                         + ">" + string + "</" + tagName + ">";
 
     }

@@ -18,13 +18,9 @@ import java.awt.*;
 import java.util.ResourceBundle;
 
 public class GlobalDataEmbed implements FlamesEmbed {
-    private final User user;
-    private final FlamesUser flamesUser;
     // I'll fix this later lmao
     private final ResourceBundle resources;
     public GlobalDataEmbed(User user, FlamesUser flamesUser) {
-        this.user = user;
-        this.flamesUser = flamesUser;
         resources = Flames.local(flamesUser.getConfig().getLocale());
     }
 

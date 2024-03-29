@@ -69,9 +69,6 @@ public class UserEntities implements FlamesData {
     }
     public Properties createData() {
         Properties properties = new Properties();
-//        if (entities.size() == 0) {
-//            entities.put("0", new UserEntity("0", "0", 0, 0));
-//        }
         entities.forEach((key, value) -> {
             properties.put(key + ".name", value.getName());
             properties.put(key + ".count", String.valueOf(value.getCount()));

@@ -209,7 +209,7 @@ public class FlamesDataManager {
         config = new UserConfig(Locale.forLanguageTag(String.valueOf(configdata.get("locale"))), Boolean.parseBoolean(configdata.get("qotdAllowed").toString()), Boolean.parseBoolean(configdata.get("favQuoteAllowed").toString()));
         relationshipData.forEach((key, value) -> userRelationships.addRelationship(key.toString(), Integer.parseInt(value.toString())));
         Map<String, UserEntity> e = new HashMap<>();
-        if (entitiesData.size() == 0) {
+        if (entitiesData.isEmpty()) {
             entitiesData.put("0.name", "0");
             entitiesData.put("0.count", "0");
             entitiesData.put("0.happyCount", "0");
