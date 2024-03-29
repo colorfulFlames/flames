@@ -14,7 +14,7 @@ public class UserRelationships implements FlamesData {
     private final Map<String, Integer> relationships;
     public Properties createData() {
         Properties properties = new Properties();
-        if (relationships.size() == 0) {
+        if (relationships.isEmpty()) {
             relationships.put("0", 0);
         }
         relationships.forEach((key, value) -> properties.put(key, String.valueOf(value)));
