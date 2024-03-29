@@ -30,8 +30,6 @@ public class SparkStartEmbed implements FlamesEmbed {
         this.user = user;
         this.question = question;
         this.minutes = minutes;
-        if (minutes > 5) {
-        }
     }
 
     @Override
