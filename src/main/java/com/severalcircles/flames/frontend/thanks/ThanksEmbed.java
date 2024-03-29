@@ -36,7 +36,7 @@ public class ThanksEmbed implements FlamesEmbed {
         this.sender = sender;
         this.flamesUserThanked = flamesUserThanked;
         this.msg = msg;
-        resources = Flames.local(flamesUserThanked.getConfig().getLocale());
+        resources = Flames.local(getClass(), flamesUserThanked.getConfig().getLocale());
         if (this.msg.isEmpty()) this.msg = resources.getString("description");
 
     }

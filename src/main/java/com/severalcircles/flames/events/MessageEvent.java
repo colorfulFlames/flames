@@ -28,7 +28,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent {
-
+    /**
+     * This method is called when a message is received in the Discord server. It processes the message, analyzes its content, and performs various actions based on the analysis.
+     *
+     * @param event The event containing the received message.
+     */
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
         Logger.getGlobal().log(Level.FINE,event.getAuthor().getId() + " Triggered Message Event");
@@ -38,6 +42,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         // Check to make sure it's worth processing the message
         // Bots don't get processed by Flames, simply because it's easier on everyone.
         if (user.isBot()) return;
+
         if (user.getName().toUpperCase(Locale.ROOT).contains("GOLDLEWIS")) event.getMessage().reply("https://media.discordapp.net/attachments/543162982536970240/943936840015159336/SpottedGoldlewis.gif").complete();
         String nick = "";
         try {

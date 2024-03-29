@@ -27,7 +27,7 @@ public class TodayEmbed implements FlamesEmbed {
     private static ResourceBundle resources;
     public TodayEmbed(User user, FlamesUser flamesUser) {
         this.flamesUser = flamesUser;
-        resources = Flames.local(flamesUser.getConfig().getLocale());
+        resources = Flames.local(getClass(), flamesUser.getConfig().getLocale());
     }
     public MessageEmbed get() {
         String trendingEntity = "";

@@ -21,7 +21,7 @@ public class GlobalDataEmbed implements FlamesEmbed {
     // I'll fix this later lmao
     private final ResourceBundle resources;
     public GlobalDataEmbed(User user, FlamesUser flamesUser) {
-        resources = Flames.local(flamesUser.getConfig().getLocale());
+        resources = Flames.local(getClass(), flamesUser.getConfig().getLocale());
     }
 
 

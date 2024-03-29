@@ -30,7 +30,7 @@ public class ConversationEmbed implements FlamesEmbed {
         this.user = user;
         this.flamesUser = flamesUser;
         this.conversation = conversation;
-        resources = Flames.local(flamesUser.getConfig().getLocale());
+        resources = Flames.local(getClass(),flamesUser.getConfig().getLocale());
     }
     public MessageEmbed get() {
         String trendingEntity = "";

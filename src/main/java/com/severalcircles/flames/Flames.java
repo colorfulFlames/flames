@@ -197,16 +197,26 @@ public class Flames {
             System.exit(2);
         }
     }
-    public static ResourceBundle local() {
-        StackTraceElement[] st = Thread.currentThread().getStackTrace();
-        String className = st[2].getClassName();
-        className = className.replace(".", "/");    // This is a hack to make the ResourceBundle work
-        return ResourceBundle.getBundle(className);
+    public static ResourceBundle local(Class<?> cls) {
+        String className = cls.getName().replace(".", "/");
+        try {
+            return ResourceBundle.getBundle(className);
+        } catch (MissingResourceException e) {
+            // Add an appropriate error handler here.
+            // For instance: return a default ResourceBundle or log an error message
+            Logger.getLogger("Main").log(Level.WARNING, "Failed to get resource bundle for " + className, e);
+            throw e;
+        }
     }
-    public static ResourceBundle local(Locale locale) {
-        StackTraceElement[] st = Thread.currentThread().getStackTrace();
-        String className = st[2].getClassName();
-        className = className.replace(".", "/");    // This is a hack to make the ResourceBundle work
-        return ResourceBundle.getBundle(className, locale);
+    public static ResourceBundle local(Class<?> cls, Locale locale) {
+        String className = cls.getName().replace(".", "/");
+        try {
+            return ResourceBundle.getBundle(className, locale);
+        } catch (MissingResourceException e) {
+            // Add an appropriate error handler here.
+            // For instance: return a default ResourceBundle or log an error message
+            Logger.getLogger("Main").log(Level.WARNING, "Failed to get resource bundle for " + className, e);
+            throw e;
+        }
     }
 }

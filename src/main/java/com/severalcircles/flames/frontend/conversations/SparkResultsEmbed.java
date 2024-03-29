@@ -23,7 +23,7 @@ public SparkResultsEmbed(String question, String answer, int votes) {
         this.answer = answer;
         this.votes = votes;
     }
-    ResourceBundle local = Flames.local();
+    ResourceBundle local = Flames.local(SparkStartEmbed.class);
     @Override
     public MessageEmbed get() {
         MessageEmbed embed = null;

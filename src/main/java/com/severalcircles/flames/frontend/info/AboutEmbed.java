@@ -20,7 +20,7 @@ public class AboutEmbed implements FlamesEmbed {
     private final ResourceBundle local;
 
     public AboutEmbed(FlamesUser user) {
-        this.local = Flames.local(user.getConfig().getLocale());
+        this.local = Flames.local(getClass(), user.getConfig().getLocale());
     }
     public MessageEmbed get() {
         return new EmbedBuilder()
