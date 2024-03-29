@@ -96,7 +96,7 @@ public class Cookie {
         
         name = unescape(x.nextTo('=').trim());
         //per RFC6265, if the name is blank, the cookie should be ignored.
-        if("".equals(name)) {
+        if(name.isEmpty()) {
             throw new JSONException("Cookies must have a 'name'");
         }
         jo.put("name", name);
@@ -124,7 +124,7 @@ public class Cookie {
                 x.next();
             }
             // only store non-blank attributes
-            if(!"".equals(name) && !"".equals(value)) {
+            if(!name.isEmpty() && !"".equals(value)) {
                 jo.put(name, value);
             }
         }
@@ -160,7 +160,7 @@ public class Cookie {
             }
         }
         
-        if(name == null || "".equals(name.trim())) {
+        if(name == null || name.trim().isEmpty()) {
             throw new JSONException("Cookie does not have a name");
         }
         if(value == null) {

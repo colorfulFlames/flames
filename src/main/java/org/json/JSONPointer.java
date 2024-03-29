@@ -160,7 +160,7 @@ public class JSONPointer {
         }
         this.refTokens = new ArrayList<String>();
         int slashIdx = -1;
-        int prevSlashIdx = 0;
+        int prevSlashIdx;
         do {
             prevSlashIdx = slashIdx + 1;
             slashIdx = refs.indexOf('/', prevSlashIdx);

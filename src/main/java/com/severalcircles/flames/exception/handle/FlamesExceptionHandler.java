@@ -9,7 +9,7 @@ import com.severalcircles.flames.exception.FlamesHandlerEmbed;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 
 public class FlamesExceptionHandler extends ThrowableHandler {
-    FlamesException e;
+    final FlamesException e;
     public FlamesExceptionHandler(FlamesException e) {
         this.e = e;
     }

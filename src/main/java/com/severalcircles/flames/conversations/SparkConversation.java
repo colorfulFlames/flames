@@ -22,10 +22,10 @@ public class SparkConversation extends Conversation {
     private final List<String> alreadyVoted = new LinkedList<>();
     private final Map<Message, Integer> messageList;
     private final String question;
-    Timer t = new Timer();
-    Timer t2 = new Timer();
+    final Timer t = new Timer();
+    final Timer t2 = new Timer();
     int votes = 0;
-    MessageChannelUnion channel;
+    final MessageChannelUnion channel;
     public SparkConversation(MessageChannelUnion channel, String question, int minutes) {
         super((GuildMessageChannel) channel);
         this.channel = channel;

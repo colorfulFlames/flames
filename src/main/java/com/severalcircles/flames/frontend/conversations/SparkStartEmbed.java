@@ -19,18 +19,19 @@ import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 
 public class SparkStartEmbed implements FlamesEmbed {
-    ResourceBundle local;
-    FlamesUser fluser;
-    User user;
-    String question;
-    int minutes;
+    final ResourceBundle local;
+    final FlamesUser fluser;
+    final User user;
+    final String question;
+    final int minutes;
     public SparkStartEmbed(FlamesUser fluser, User user, String question, int minutes) {
         local = Flames.local();
         this.fluser = fluser;
         this.user = user;
         this.question = question;
         this.minutes = minutes;
-        if (minutes > 5) minutes = 5;
+        if (minutes > 5) {
+        }
     }
 
     @Override
@@ -38,7 +39,7 @@ public class SparkStartEmbed implements FlamesEmbed {
         String eS = "<t:" + (Instant.now().plus(minutes, ChronoUnit.MINUTES).toEpochMilli() / 1000) + ":R>";
         eS = eS.replace(" ", "");
         System.out.println(eS);
-        MessageEmbed embed = null;
+        MessageEmbed embed;
         try {
             embed = new EmbedBuilder()
                     .setColor(Color.CYAN)

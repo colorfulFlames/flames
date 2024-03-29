@@ -24,7 +24,7 @@ public class FlamesHandlerEmbed implements FlamesEmbed {
     private final String causedByImage;
     final ResourceBundle rsc;
     final String causedBy;
-    Color color;
+    final Color color;
     public FlamesHandlerEmbed(FlamesException e) {
         StackTraceElement[] st = Thread.currentThread().getStackTrace();
         String className = st[3].getClassName();

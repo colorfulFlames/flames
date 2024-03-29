@@ -24,9 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.Reader;
 import java.io.StringReader;
-import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Iterator;
@@ -89,6 +90,7 @@ public class XML {
      */
     private static Iterable<Integer> codePointIterator(final String string) {
         return new Iterable<Integer>() {
+            @NotNull
             @Override
             public Iterator<Integer> iterator() {
                 return new Iterator<Integer>() {
@@ -256,7 +258,7 @@ public class XML {
             throws JSONException {
         char c;
         int i;
-        JSONObject jsonObject = null;
+        JSONObject jsonObject;
         String string;
         String tagName;
         Object token;

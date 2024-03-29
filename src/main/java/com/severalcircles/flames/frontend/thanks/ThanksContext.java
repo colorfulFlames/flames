@@ -30,7 +30,7 @@ public class ThanksContext implements FlamesUserContext {
         FlamesUser flt;
         try {
             flt = FlamesDataManager.readUser(thanked);
-            sender = FlamesDataManager.readUser(event.getUser());
+            FlamesDataManager.readUser(event.getUser());
         } catch (IOException e) {
             e.printStackTrace();
             event.replyEmbeds(new ExceptionHandler(e).handleThenGetFrontend()).complete();

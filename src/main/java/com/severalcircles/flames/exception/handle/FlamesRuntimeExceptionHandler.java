@@ -10,8 +10,8 @@ import com.severalcircles.flames.exception.FlamesRuntimeException;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 
 public class FlamesRuntimeExceptionHandler extends ThrowableHandler {
-    FlamesRuntimeException e;
-    String cause;
+    final FlamesRuntimeException e;
+    final String cause;
     public FlamesRuntimeExceptionHandler(FlamesRuntimeException e, Class cls) {
         this.e = e;
         if (Flames.runningDebug) this.cause = cls.getName() + "(" + e.getStackTrace()[0].getLineNumber() + ")";

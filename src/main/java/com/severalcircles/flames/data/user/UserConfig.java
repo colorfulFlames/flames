@@ -10,7 +10,12 @@ import java.util.Locale;
 import java.util.Properties;
 
 public class UserConfig implements FlamesData {
-    private Locale locale = Locale.getDefault();
+    private Locale locale;
+
+    {
+        Locale.getDefault();
+    }
+
     private boolean qotdAllowed;
     private boolean favQuoteAllowed;
 

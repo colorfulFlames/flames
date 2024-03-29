@@ -39,7 +39,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         // Bots don't get processed by Flames, simply because it's easier on everyone.
         if (user.isBot()) return;
         if (user.getName().toUpperCase(Locale.ROOT).contains("GOLDLEWIS")) event.getMessage().reply("https://media.discordapp.net/attachments/543162982536970240/943936840015159336/SpottedGoldlewis.gif").complete();
-        String nick = "";
+        String nick;
         try {
             nick = Objects.requireNonNull(event.getGuild().getMemberById(Flames.api.getSelfUser().getId())).getNickname();
         } catch (NullPointerException e) {nick = "";}

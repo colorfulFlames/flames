@@ -19,7 +19,7 @@ public class ImageSearch {
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("Authorization", "Authorization: Client-ID 5BgyDJn2wiCT7SNM8kVyKeFFCWsnBvXM8F1jCEti-t8");
-        StringBuffer content = new StringBuffer();
+        StringBuffer content;
         try {
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));

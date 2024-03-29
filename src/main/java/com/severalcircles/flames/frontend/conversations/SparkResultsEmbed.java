@@ -15,18 +15,18 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 
 public class SparkResultsEmbed implements FlamesEmbed {
-    String question;
-    String answer;
-    int votes;
+    final String question;
+    final String answer;
+    final int votes;
 public SparkResultsEmbed(String question, String answer, int votes) {
         this.question = question;
         this.answer = answer;
         this.votes = votes;
     }
-    ResourceBundle local = Flames.local();
+    final ResourceBundle local = Flames.local();
     @Override
     public MessageEmbed get() {
-        MessageEmbed embed = null;
+        MessageEmbed embed;
         try {
             embed = new EmbedBuilder()
                     .setTitle(question)

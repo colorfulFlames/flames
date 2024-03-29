@@ -89,7 +89,7 @@ public class JSONWriter {
     /**
      * The writer that will receive the output.
      */
-    protected Appendable writer;
+    protected final Appendable writer;
 
     /**
      * Make a fresh JSONWriter. It can be used to build one JSON text.

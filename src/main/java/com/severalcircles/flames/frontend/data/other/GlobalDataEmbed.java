@@ -7,7 +7,6 @@ package com.severalcircles.flames.frontend.data.other;
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.util.Ranking;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;

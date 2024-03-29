@@ -7,7 +7,6 @@ package com.severalcircles.flames.frontend.data.user.embed;
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.frontend.FlamesEmbed;
-import com.severalcircles.flames.frontend.today.Today;
 import com.severalcircles.flames.util.StringUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;

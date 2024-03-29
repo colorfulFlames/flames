@@ -15,7 +15,7 @@ import java.util.Objects;
 
 public class SparkCommand implements FlamesCommand {
     @Override
-    public void execute(SlashCommandInteractionEvent event, FlamesUser sender) throws ConsentException, IOException {
+    public void execute(SlashCommandInteractionEvent event, FlamesUser sender) {
         if (!SparkConversation.sparkConversations.isEmpty()) {
             event.reply("There is already a Spark conversation in progress!").setEphemeral(true).complete();
             return;

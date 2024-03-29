@@ -41,7 +41,7 @@ public class UserEntities implements FlamesData {
             topAndBottom.add(lowCandidates.get(2));
         return topAndBottom;
     }
-    private Map<String, UserEntity> entities = new HashMap<>();
+    private Map<String, UserEntity> entities;
 
     public Map<String, UserEntity> getEntities() {
         return entities;
