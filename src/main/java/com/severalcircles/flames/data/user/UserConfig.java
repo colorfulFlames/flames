@@ -12,7 +12,7 @@ import java.util.Properties;
 public class UserConfig implements FlamesData {
     private Locale locale;
 
-    {
+    static {
         Locale.getDefault();
     }
 
