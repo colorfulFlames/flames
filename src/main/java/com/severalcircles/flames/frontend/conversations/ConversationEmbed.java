@@ -22,12 +22,10 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ConversationEmbed implements FlamesEmbed {
-    private final User user;
     private final FlamesUser flamesUser;
     private final ResourceBundle resources;
     private final Conversation conversation;
     public ConversationEmbed(User user, FlamesUser flamesUser, Conversation conversation) {
-        this.user = user;
         this.flamesUser = flamesUser;
         this.conversation = conversation;
         resources = Flames.local(flamesUser.getConfig().getLocale());
