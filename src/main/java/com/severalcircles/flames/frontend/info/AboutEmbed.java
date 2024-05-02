@@ -30,6 +30,7 @@ public class AboutEmbed implements FlamesEmbed {
                 .setImage(FlamesAssets.getVersionIcon())
                 .addField(local.getString("created"), StringUtil.prettifyDate(Flames.api.getSelfUser().getTimeCreated().toInstant()), true)
                 .addField(local.getString("users"), String.valueOf(GlobalData.participants), true)
+                .setFooter(Flames.api.getSelfUser().getGlobalName(), Flames.api.getSelfUser().getAvatarUrl())
                 .setColor(Color.decode("#D9581C"))
                 .build();
     }

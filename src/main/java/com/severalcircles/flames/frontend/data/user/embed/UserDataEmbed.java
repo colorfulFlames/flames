@@ -57,6 +57,7 @@ public class UserDataEmbed implements FlamesEmbed {
                 +"\n* " + topAndBottom.get(5).getName(), true)
                 .setColor(profile.getAccentColor())
                 .setThumbnail(FlamesAssets.getRankIcon(Ranking.getRank(flamesUser.getScore())))
+                .setFooter(Flames.api.getSelfUser().getGlobalName(), Flames.api.getSelfUser().getAvatarUrl())
                 .build();
     }
 }
