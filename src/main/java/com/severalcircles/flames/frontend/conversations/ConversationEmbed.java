@@ -51,7 +51,7 @@ public class ConversationEmbed implements FlamesEmbed {
                     .addBlankField(false)
                     .addField("\"" + conversation.getQuote()[0] + "\"", " - " + conversation.getQuote()[1], false)
                     .addBlankField(false)
-                    .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("scoreFormat"), flamesUser.getScore()), user.getAvatarUrl())
+                    .setFooter(Flames.api.getSelfUser().getGlobalName(), Flames.api.getSelfUser().getAvatarUrl())
                     .build();
         } catch (IOException | JSONException e) {
             e.printStackTrace();
@@ -65,7 +65,7 @@ public class ConversationEmbed implements FlamesEmbed {
                     .addBlankField(false)
                     .addField("\"" + conversation.getQuote()[0] + "\"", " - " + conversation.getQuote()[1], false)
                     .addBlankField(false)
-                    .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("scoreFormat"), flamesUser.getScore()), user.getAvatarUrl())
+                    .setFooter(Flames.api.getSelfUser().getGlobalName(), Flames.api.getSelfUser().getAvatarUrl())
                     .build();
         }
     }
