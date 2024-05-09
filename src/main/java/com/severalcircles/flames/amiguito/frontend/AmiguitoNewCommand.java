@@ -17,15 +17,12 @@ import java.util.Objects;
 public class AmiguitoNewCommand implements FlamesCommand {
     @Override
     public void execute(SlashCommandInteractionEvent event, FlamesUser sender) throws ConsentException, IOException {
-        if (AmiguitoDataManager.load(sender.getDiscordId()) != null) {
-            event.reply("You already have an Amiguito!").queue();
-            return;
-        }
-        if (event.getOption("name") == null) {
-            event.reply("You need to provide a name for your Amiguito!").queue();
-            return;
-        }
-        AmiguitoDataManager.save(new Amiguito(sender, Objects.requireNonNull(event.getOption("name")).getAsString()));
-        event.reply("Amiguito created!").queue();
+       try {
+           AmiguitoDataManager.load(sender.getDiscordId());
+           event.reply("You already have an Amiguito!").queue();
+       } catch (IOException | ConsentException e) {
+           AmiguitoDataManager.save(new Amiguito(sender, Objects.requireNonNull(event.getOption("name")).getAsString()));
+           event.reply("Amiguito created!").queue();
+       }
     }
 }

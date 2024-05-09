@@ -7,10 +7,7 @@ package com.severalcircles.flames.amiguito;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.exception.ConsentException;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -60,6 +57,9 @@ public class AmiguitoDataManager {
     public static Amiguito load(String discordId) throws IOException, ConsentException {
         final File userDir = new File(FlamesDataManager.USER_DIRECTORY + "/" + discordId);
         final File amiguitoFile = new File(userDir + "/amiguito.fl");
+        if (!amiguitoFile.exists()) {
+            throw new FileNotFoundException("Amiguito file not found for user " + discordId);
+        }
         Properties properties = new Properties();
         properties.load(new FileReader(amiguitoFile));
         Amiguito result = Amiguito.fromProperties(properties);

@@ -96,6 +96,7 @@ public class Amiguito {
     }
     public Amiguito(FlamesUser caretaker, String name) {
         this.caretaker = caretaker;
+        if (this.caretaker == null) throw new IllegalArgumentException("Caretaker cannot be null. Why are you making me sad?");
         this.bond = INIT_BOND;
         this.mood = INIT_MOOD;
         this.energy = INIT_ENERGY;
@@ -119,14 +120,7 @@ public class Amiguito {
 
     public static Amiguito fromProperties(Properties properties) throws ConsentException, IOException {
         System.out.println(properties.toString());
-        User user;
-        try {
-            user = Flames.api.getUserById(properties.getProperty("caretaker"));
-        } catch (IllegalArgumentException e) {
-            Logger.getGlobal().warning("User " + properties.getProperty("caretaker") + " not found");
-            return null;
-        }
-        FlamesUser caretaker = FlamesDataManager.readUser(properties.getProperty("caretaker"));
+        FlamesUser caretaker = FlamesDataManager.readUser(properties.getProperty("caretaker"), false);
         double bond = Double.parseDouble(properties.getProperty("bond"));
         double mood = Double.parseDouble(properties.getProperty("mood"));
         double energy = Double.parseDouble(properties.getProperty("energy"));
@@ -285,6 +279,7 @@ public class Amiguito {
         properties.setProperty("food", String.valueOf(food));
         properties.setProperty("water", String.valueOf(water));
         properties.setProperty("deviance", String.valueOf(deviance));
+        properties.setProperty("created", String.valueOf(created.toEpochMilli()));
         entities.forEach((entity, value) -> properties.setProperty("entity." + entity, String.valueOf(value)));
         friends.forEach((friend, value) -> properties.setProperty("friend." + friend, String.valueOf(value)));
         properties.setProperty("name", name);

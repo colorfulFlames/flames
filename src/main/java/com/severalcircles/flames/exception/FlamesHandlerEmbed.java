@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 
 public class FlamesHandlerEmbed implements FlamesEmbed {
     private String code;
-    private final String message;
+    private String message;
     private Locale locale = Locale.ENGLISH;
     private final String causedByImage;
     final ResourceBundle rsc;
@@ -64,10 +64,11 @@ public class FlamesHandlerEmbed implements FlamesEmbed {
         e.printStackTrace();
         this.causedByImage = "https://media.tenor.com/PkbRg6xWSuAAAAAC/shit-snake.gif";
         this.message = e.getMessage();
-        color = Color.BLUE;
+        color = Color.RED;
     }
 
     public MessageEmbed get() {
+        if (message == null) message = "Please kill me";
         return new EmbedBuilder()
                 .setAuthor(code)
                 .setThumbnail(causedByImage)
