@@ -4,13 +4,11 @@
 
 package com.severalcircles.flames.data.user;
 
-import com.severalcircles.flames.data.FlamesData;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-public class UserRelationships implements FlamesData {
+public class UserRelationships {
     private final Map<String, Integer> relationships;
     public Properties createData() {
         Properties properties = new Properties();

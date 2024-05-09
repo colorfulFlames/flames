@@ -26,10 +26,10 @@ public class FlamesDataManager {
     /**
      * Data directory
      */
-    public static final File flamesDirectory = new File(System.getProperty("user.dir") + "/Flames");
-    static final File userDirectory = new File(flamesDirectory.getAbsolutePath() + "/user");
-    static final File guildDirectory = new File(flamesDirectory.getAbsolutePath() + "/guild");
-    public static final File wildfireFile = new File(flamesDirectory.getAbsolutePath() + "/wildfire.fl");
+    public static final File FLAMES_DIRECTORY = new File(System.getProperty("user.dir") + "/Flames");
+    public static final File USER_DIRECTORY = new File(FLAMES_DIRECTORY.getAbsolutePath() + "/user");
+    public static final File GUILD_DIRECTORY = new File(FLAMES_DIRECTORY.getAbsolutePath() + "/guild");
+    public static final File WILDFIRE_FILE = new File(FLAMES_DIRECTORY.getAbsolutePath() + "/wildfire.fl");
     //    static List<File> openFiles = new LinkedList<>();
 
     /**
@@ -38,14 +38,14 @@ public class FlamesDataManager {
     public static void prepare() {
         Logger.getGlobal().log(Level.INFO, "Preparing Data...");
         //noinspection ResultOfMethodCallIgnored
-        flamesDirectory.mkdir();
+        FLAMES_DIRECTORY.mkdir();
         //noinspection ResultOfMethodCallIgnored
-        userDirectory.mkdir();
+        USER_DIRECTORY.mkdir();
         //noinspection ResultOfMethodCallIgnored
-        guildDirectory.mkdir();
+        GUILD_DIRECTORY.mkdir();
         try {
             //noinspection ResultOfMethodCallIgnored
-            wildfireFile.createNewFile();
+            WILDFIRE_FILE.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
             Flames.incrementErrorCount();
@@ -59,7 +59,7 @@ public class FlamesDataManager {
 //        String name = Flames.api.getUserById(discordId).getName();
         String name = user.getName();
         String discordId = user.getId();
-        File udir = new File(userDirectory.getAbsolutePath() + "/" + discordId);
+        File udir = new File(USER_DIRECTORY.getAbsolutePath() + "/" + discordId);
         File userl = new File(udir.getAbsolutePath() + "/user.fl");
         File stats = new File(udir.getAbsolutePath() + "/stats.fl");
         File funfacts = new File(udir.getAbsolutePath() + "/funfacts.fl");
@@ -102,7 +102,7 @@ public class FlamesDataManager {
         String name;
         try {name = Objects.requireNonNull(Flames.api.getUserById(discordId)).getName(); } catch (NullPointerException | IllegalArgumentException e) {name = "An Unknown Flames User";}
 //        OutputStream outputStream;
-        File udir = new File(userDirectory.getAbsolutePath() + "/" + discordId);
+        File udir = new File(USER_DIRECTORY.getAbsolutePath() + "/" + discordId);
         File user = new File(udir.getAbsolutePath() + "/user.fl");
         File stats = new File(udir.getAbsolutePath() + "/stats.fl");
         File funfacts = new File(udir.getAbsolutePath() + "/funfacts.fl");
@@ -149,7 +149,7 @@ public class FlamesDataManager {
         if (newUser(user) | user.isBot()) {
             throw new ConsentException(0, user);
         }
-        File udir = new File(userDirectory.getAbsolutePath() + "/" + user.getId());
+        File udir = new File(USER_DIRECTORY.getAbsolutePath() + "/" + user.getId());
         File userfl = new File(udir.getAbsolutePath() + "/user.fl");
         File stats2 = new File(udir.getAbsolutePath() + "/stats.fl");
         File funfacts = new File(udir.getAbsolutePath() + "/funfacts.fl");
@@ -254,7 +254,7 @@ public class FlamesDataManager {
         if (newUser(user)) {
             throw new ConsentException(0, user);
         }
-        File udir = new File(userDirectory.getAbsolutePath() + "/" + user.getId());
+        File udir = new File(USER_DIRECTORY.getAbsolutePath() + "/" + user.getId());
         File userfl = new File(udir.getAbsolutePath() + "/user.fl");
 //        File stats2 = new File(udir.getAbsolutePath() + "/stats.fl");
         File funfacts = new File(udir.getAbsolutePath() + "/funfacts.fl");
@@ -290,7 +290,7 @@ public class FlamesDataManager {
         return fluser;
     }
     public static String[] getChannelWords(Channel channel) {
-        File channelFile = new File(guildDirectory.getAbsolutePath() + "/" + ((GuildChannel) channel).getGuild().getId() + "/channels/" + channel.getId() + ".flx");
+        File channelFile = new File(GUILD_DIRECTORY.getAbsolutePath() + "/" + ((GuildChannel) channel).getGuild().getId() + "/channels/" + channel.getId() + ".flx");
         try {
             if (channelFile.createNewFile()) return new String[0];
             if (channelFile.getParentFile().mkdirs()) return new String[0];
@@ -307,7 +307,7 @@ public class FlamesDataManager {
         }
     }
     public static void addChannelWord(String word, Channel channel) {
-        File channelFile = new File(guildDirectory.getAbsolutePath() + "/" + ((GuildChannel) channel).getGuild().getId() + "/channels/" + channel.getId() + ".flx");
+        File channelFile = new File(GUILD_DIRECTORY.getAbsolutePath() + "/" + ((GuildChannel) channel).getGuild().getId() + "/channels/" + channel.getId() + ".flx");
         String[] channelWords = getChannelWords(channel);
         String[] newChannelWords = new String[channelWords.length + 1];
         newChannelWords[channelWords.length] = word;
@@ -323,4 +323,5 @@ public class FlamesDataManager {
             throw new RuntimeException(e);
         }
     }
+
 }

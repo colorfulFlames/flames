@@ -4,7 +4,6 @@
 
 package com.severalcircles.flames.data.user;
 
-import com.severalcircles.flames.data.FlamesData;
 import com.severalcircles.flames.util.Rank;
 
 import java.time.Instant;
@@ -13,7 +12,7 @@ import java.util.Properties;
 /**
  * Represents Fun Facts data for a FlamesUser
  */
-public class UserFunFacts implements FlamesData {
+public class UserFunFacts {
     private Instant sadDay;
     private float lowestEmotion;
     private Instant happyDay;

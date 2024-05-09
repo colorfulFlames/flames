@@ -4,11 +4,9 @@
 
 package com.severalcircles.flames.data.user;
 
-import com.severalcircles.flames.data.FlamesData;
-
 import java.util.*;
 
-public class UserEntities implements FlamesData {
+public class UserEntities {
     public UserEntities() {
         entities = new HashMap<>();
 //        entities.put("Flames", new UserEntity("Flames", "1", 1, 0));
