@@ -5,6 +5,8 @@
 
 package com.severalcircles.flames;
 
+import com.severalcircles.flames.amiguito.AmiguitoDataManager;
+import com.severalcircles.flames.amiguito.frontend.AmiguitoNewCommand;
 import com.severalcircles.flames.conversations.Conversation;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.global.GlobalData;
@@ -27,6 +29,7 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
+import net.dv8tion.jda.api.interactions.commands.build.SubcommandData;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
 import java.io.File;
@@ -84,12 +87,10 @@ public class Flames {
         Locale.setDefault(Locale.ENGLISH);
         properties.load(is);
         version = properties.getProperty("version");
-        if (args.length > 0) runningDebug = args[0].equals("--debug");
-        if (runningDebug) Logger.getGlobal().info("Running in debugging mode.");
         FlamesDataManager.prepare();
         reportHeader = String.format(reportHeader, version);
         String logName = "Flames " + version + "@" + InetAddress.getLocalHost().getHostName() + " " + Instant.now().truncatedTo(ChronoUnit.SECONDS).toString().replace(":", " ").replace("T", " T") + ".log";
-        File logDir = new File(FlamesDataManager.flamesDirectory.getAbsolutePath() + "/logs");
+        File logDir = new File(FlamesDataManager.FLAMES_DIRECTORY.getAbsolutePath() + "/logs");
         //noinspection ResultOfMethodCallIgnored
         logDir.mkdir();
         File logFile = new File(logDir.getAbsolutePath() + "/" + logName);
@@ -123,6 +124,7 @@ public class Flames {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        AmiguitoDataManager.prepare();
         // --- Events ---
         new CommandEvent().register(api);
         new MessageEvent().register(api);
@@ -156,6 +158,9 @@ public class Flames {
         commandDataList.add(Commands.slash("about", "Who cooked here?"));
         commandMap.put("spark", new SparkCommand());
         commandDataList.add(Commands.slash("spark", "Start a Spark conversation").addOption(OptionType.STRING, "question", "The question you want to ask", true).addOption(OptionType.INTEGER, "minutes", "Time limit for the conversation in minutes.", true));
+        commandMap.put("amiguito", new AmiguitoNewCommand());
+        commandDataList.add(Commands.slash("amiguito", "Interact with your Amiguito character").addOption(OptionType.STRING, "name", "The name of your Amiguito", true));
+
 //        Commands.context(Command.Type.MESSAGE, "SparkVote");
         api.updateCommands()
                 .addCommands(commandDataList).
@@ -172,7 +177,7 @@ public class Flames {
         fatalErrorCounter++;
         if (fatalErrorCounter > 10) {
             Logger.getGlobal().log(Level.SEVERE, "Flames has detected a recurring fatal problem. To protect Flames' data, it will now exit. There may be stack traces above with more information.");
-            File file = new File(FlamesDataManager.flamesDirectory.getAbsolutePath() + "/logs/Flames FatalReport:" + Instant.now().toString() + ".log");
+            File file = new File(FlamesDataManager.FLAMES_DIRECTORY.getAbsolutePath() + "/logs/Flames FatalReport:" + Instant.now().toString() + ".log");
             try {
                 //noinspection ResultOfMethodCallIgnored
                 file.createNewFile();

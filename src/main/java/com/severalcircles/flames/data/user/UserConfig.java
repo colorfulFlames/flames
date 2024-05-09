@@ -4,12 +4,10 @@
 
 package com.severalcircles.flames.data.user;
 
-import com.severalcircles.flames.data.FlamesData;
-
 import java.util.Locale;
 import java.util.Properties;
 
-public class UserConfig implements FlamesData {
+public class UserConfig {
     private Locale locale;
 
     static {

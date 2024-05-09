@@ -5,6 +5,8 @@
 package com.severalcircles.flames.events;
 
 import com.severalcircles.flames.Flames;
+import com.severalcircles.flames.amiguito.Amiguito;
+import com.severalcircles.flames.amiguito.AmiguitoDataManager;
 import com.severalcircles.flames.conversations.Conversation;
 import com.severalcircles.flames.conversations.ConversationsController;
 import com.severalcircles.flames.conversations.ExpiredConversationException;
@@ -20,6 +22,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Locale;
@@ -67,6 +70,11 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         } catch (Exception e) {
             e.printStackTrace();
             return;
+        }
+        try {
+            AmiguitoDataManager.loadedAmiguitos.get(user.getId()).processMessage(finishedAnalysis);
+        } catch (NullPointerException e) {
+            AmiguitoDataManager.loadedAmiguitos.put(user.getId(), new Amiguito(flamesUser, "Amiguito"));
         }
         // Process conversation
         if (ConversationsController.activeConversations.containsKey(event.getChannel().getId())) {

@@ -87,7 +87,7 @@ public class FlamesUser implements FlamesData {
         this.consent = consent;
     }
 
-    public FlamesUser() {
+    public FlamesUser(String discordId) {
         this.score = 0;
         this.emotion = 0;
         this.lastSeen = Instant.now();
@@ -99,6 +99,7 @@ public class FlamesUser implements FlamesData {
         this.relationships = new UserRelationships();
         this.dataVersion = 2.2;
         this.entities = new UserEntities();
+        this.discordId = discordId;
     }
 
     public void addScore(int amount) {
