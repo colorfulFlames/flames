@@ -40,11 +40,5 @@ public class SelectMenuEvent extends ListenerAdapter implements FlamesDiscordEve
         for (String inputDatum : menuInputData) {
             System.out.println(inputDatum);
         }
-        System.out.println("all done :)");
-        if (menuInputData[0].equals("DataDropdown")) {
-            if (!event.getUser().getId().equals(menuInputData[1])) //noinspection ResultOfMethodCallIgnored
-                event.reply(" ");
-            else new UserDataDropdown().execute(event, menuInputData, flamesUser);
-        }
     }
 }
