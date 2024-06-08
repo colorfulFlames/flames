@@ -7,7 +7,6 @@ package com.severalcircles.flames.events;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.exception.ConsentException;
-import com.severalcircles.flames.frontend.data.user.UserDataDropdown;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.interaction.component.GenericSelectMenuInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;

@@ -8,6 +8,10 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoInfoEmbed_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoInfoEmbed_es.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoInfoEmbed_tra.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoSelectMenu.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoSelectMenu_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoSelectMenu_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoSelectMenu_tra.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/Thoughts.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/Thoughts_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/Thoughts_es.properties" />
@@ -210,6 +214,13 @@
       <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/Thoughts_es.properties" />
       <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/Thoughts_tra.properties" />
       <base-name>Thoughts</base-name>
+    </custom-resource-bundle>
+    <custom-resource-bundle>
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoSelectMenu.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoSelectMenu_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoSelectMenu_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoSelectMenu_tra.properties" />
+      <base-name>AmiguitoSelectMenu</base-name>
     </custom-resource-bundle>
   </component>
 </project>
