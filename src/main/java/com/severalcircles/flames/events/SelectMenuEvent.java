@@ -7,7 +7,6 @@ package com.severalcircles.flames.events;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.exception.ConsentException;
-import com.severalcircles.flames.frontend.data.user.UserDataDropdown;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.interaction.component.GenericSelectMenuInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -40,12 +39,6 @@ public class SelectMenuEvent extends ListenerAdapter implements FlamesDiscordEve
         String[] menuInputData = event.getValues().toString().replace("[", "").replace("]", "").split(":");
         for (String inputDatum : menuInputData) {
             System.out.println(inputDatum);
-        }
-        System.out.println("all done :)");
-        if (menuInputData[0].equals("DataDropdown")) {
-            if (!event.getUser().getId().equals(menuInputData[1])) //noinspection ResultOfMethodCallIgnored
-                event.reply(" ");
-            else new UserDataDropdown().execute(event, menuInputData, flamesUser);
         }
     }
 }

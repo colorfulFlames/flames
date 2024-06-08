@@ -4,18 +4,15 @@
 
 package com.severalcircles.flames.amiguito;
 
-import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.amiguito.thoughts.Thought;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.exception.ConsentException;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
-import net.dv8tion.jda.api.entities.User;
 
 import java.io.IOException;
 import java.time.Instant;
 import java.util.*;
-import java.util.logging.Logger;
 
 public class Amiguito {
     // MAX = highest a value can go
