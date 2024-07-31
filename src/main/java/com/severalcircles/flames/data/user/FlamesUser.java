@@ -19,7 +19,6 @@ public class FlamesUser implements FlamesData {
     private Instant lastSeen;
     private int streak;
     private String discordId;
-//    private UserStats stats;
     private int consent;
     private UserFunFacts funFacts;
     private double dataVersion;

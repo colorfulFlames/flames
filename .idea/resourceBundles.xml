@@ -30,6 +30,10 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/WhatsThisEmbed_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/WhatsThisEmbed_es.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/WhatsThisEmbed_tra.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/ServerDataEmbed.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/ServerDataEmbed_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/ServerDataEmbed_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/ServerDataEmbed_tra.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/thanks/ThanksEmbed.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/thanks/ThanksEmbed_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/thanks/ThanksEmbed_es.properties" />
@@ -221,6 +225,13 @@
       <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoSelectMenu_es.properties" />
       <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoSelectMenu_tra.properties" />
       <base-name>AmiguitoSelectMenu</base-name>
+    </custom-resource-bundle>
+    <custom-resource-bundle>
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/ServerDataEmbed.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/ServerDataEmbed_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/ServerDataEmbed_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/ServerDataEmbed_tra.properties" />
+      <base-name>ServerDataEmbed</base-name>
     </custom-resource-bundle>
   </component>
 </project>

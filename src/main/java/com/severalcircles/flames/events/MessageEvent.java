@@ -93,6 +93,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
                 Thread thread = new Thread(() -> {
                     conversation.processMessage(event.getMessage(), finishedAnalysis);
                 });
+                thread.start();
             } catch (ExpiredConversationException e) {
                 // What the fuck
                 e.printStackTrace();

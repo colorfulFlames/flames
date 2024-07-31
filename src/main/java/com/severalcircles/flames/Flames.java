@@ -14,6 +14,7 @@ import com.severalcircles.flames.frontend.FlamesCommand;
 import com.severalcircles.flames.frontend.conversations.ConversationCommand;
 import com.severalcircles.flames.frontend.conversations.SparkCommand;
 import com.severalcircles.flames.frontend.data.other.GlobalDataCommand;
+import com.severalcircles.flames.frontend.data.other.ServerDataCommand;
 import com.severalcircles.flames.frontend.data.user.HiCommand;
 import com.severalcircles.flames.frontend.data.user.LocaleCommand;
 import com.severalcircles.flames.frontend.data.user.MyDataCommand;
@@ -64,16 +65,6 @@ public class Flames {
     public static ResourceBundle getCommonRsc(Locale locale) {
         return ResourceBundle.getBundle("Common", locale);
     }
-    public static String reportHeader;
-
-    static {
-        try {
-            reportHeader = "OP:" + System.getProperty("user.name") + " HN:" + InetAddress.getLocalHost().getHostName() + " OS:" + System.getProperty("os.name") + " JRE:" + System.getProperty("java.vendor") + " FV:%s" + " IN:";
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-    }
 
     /**
      * Bootloader function
@@ -86,7 +77,6 @@ public class Flames {
         properties.load(is);
         version = properties.getProperty("version");
         FlamesDataManager.prepare();
-        reportHeader = String.format(reportHeader, version);
         String logName = "Flames " + version + "@" + InetAddress.getLocalHost().getHostName() + " " + Instant.now().truncatedTo(ChronoUnit.SECONDS).toString().replace(":", " ").replace("T", " T") + ".log";
         File logDir = new File(FlamesDataManager.FLAMES_DIRECTORY.getAbsolutePath() + "/logs");
         //noinspection ResultOfMethodCallIgnored
@@ -97,8 +87,7 @@ public class Flames {
         FileHandler handler = new FileHandler(logFile.getAbsolutePath());
         handler.setFormatter(new SimpleFormatter());
         Logger.getGlobal().addHandler(handler);
-        Logger.getGlobal().log(Level.INFO, "Flames");
-        Logger.getGlobal().info(reportHeader + Instant.now());
+        Logger.getGlobal().log(Level.INFO, "Flames " + version);
         if (version.contains("-beta") | version.contains("-alpha") | version.contains("-SNAPSHOT")) {
             Logger.getGlobal().log(Level.WARNING, "This is a development version of Flames. It may be too based for you to handle.");
         }
@@ -122,7 +111,7 @@ public class Flames {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        AmiguitoDataManager.prepare();
+//        AmiguitoDataManager.prepare();    <---- Don't worry about that
         // --- Events ---
         new CommandEvent().register(api);
         new MessageEvent().register(api);
@@ -156,7 +145,9 @@ public class Flames {
         commandDataList.add(Commands.slash("about", "Who cooked here?"));
         commandMap.put("spark", new SparkCommand());
         commandDataList.add(Commands.slash("spark", "Start a Spark conversation").addOption(OptionType.STRING, "question", "The question you want to ask", true).addOption(OptionType.INTEGER, "minutes", "Time limit for the conversation in minutes.", true));
-        commandDataList.add(Commands.slash("amiguito", "Interact with your Amiguito character").addOption(OptionType.STRING, "name", "The name of your Amiguito", true));
+        commandMap.put("server", new ServerDataCommand());
+        commandDataList.add(Commands.slash("server", "Catch up on this server's stats"));
+//        commandDataList.add(Commands.slash("amiguito", "Interact with your Amiguito character").addOption(OptionType.STRING, "name", "The name of your Amiguito", true));
 
 //        Commands.context(Command.Type.MESSAGE, "SparkVote");
         api.updateCommands()
@@ -183,9 +174,9 @@ public class Flames {
                 e.printStackTrace();
                 System.exit(3);
             }
-            String log = reportHeader + "\n" +
+            String log =
                     "Flames has detected a recurring fatal issue. Similar issues are known to cause damage to Flames, so Flames has been shut down.\n" +
-                    "Please report this issue to the developers at https://github.com/colorfulFlames/flames/issues/new?assignees=SeveralCircles&labels=bug&template=bug_report.md&title=Flames Protect Exception\n" +
+                    "Please report this issue to the developers at severalcircles.youtrack.cloud\n" +
                     "Thank you for your cooperation.";
             FileWriter writer;
             try {

@@ -7,6 +7,7 @@ package com.severalcircles.flames.conversations;
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.global.GlobalData;
+import com.severalcircles.flames.data.server.FlamesServer;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.UserEntities;
 import com.severalcircles.flames.exception.ConsentException;
@@ -20,14 +21,12 @@ import net.dv8tion.jda.api.entities.channel.middleman.GuildMessageChannel;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Conversation {
+    public static final int HOOTANANNY_BONUS = 2;
     public static final List<String> entityList = new LinkedList<>();
     private final Map<String, Integer> entities;
     private final GuildMessageChannel channel;
@@ -70,7 +69,7 @@ public class Conversation {
                 expired = true;
                 throw new ExpiredConversationException();
             }
-
+        FlamesServer server = FlamesDataManager.getServer(message.getGuildId());
         expires = Instant.now().plus(5, ChronoUnit.MINUTES);
             emotion += finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude();
             if (finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude() > quoteScore | Math.round(Math.random() * 10) == 6) {
@@ -97,12 +96,11 @@ public class Conversation {
                     userEntities.addEntity(key, finishedAnalysis.getSentiment().getScore() > 0);
                 });
                 user.setEntities(userEntities);
-                user.getEntities().getEntities().forEach((key, value) -> {
-                });
+//                user.getEntities().getEntities().forEach((key, value) -> {});
                 try {
-                    user.getEntities().getEntities().forEach((key, value) -> {
-                        System.out.println(key + " / " + value);
-                    });
+//                    user.getEntities().getEntities().forEach((key, value) -> {
+//                        System.out.println(key + " / " + value);
+//                    });
                     FlamesDataManager.save(user);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -118,6 +116,7 @@ public class Conversation {
                     } catch (Exception e) {
                         new ExceptionHandler(e).handle();
                     }
+                }
                     FlamesUser user = conversationCache.get(element.getId());
                     if (user == null) return;
                     userList.forEach((member) -> user.getRelationships().addRelationship(member.getId(), 1));
@@ -125,8 +124,8 @@ public class Conversation {
                         if ((finalNewFavorite | user.getFunFacts().getFavoriteQuote().equals("This is me.")) && user.getConfig().isFavQuoteAllowed())
                             user.getFunFacts().setFavoriteQuote(message.getContentRaw());
                         double score = Math.round(finishedAnalysis.getEmotion() * 15);
+                        if (new Date().getDate() == server.getHootanannyDay()) score *= HOOTANANNY_BONUS;
                         if (score < 0) score *= 5;
-                        user.setScore(user.getScore() + (int) score);
                         user.setEmotion(user.getEmotion() + (float) emotion);
                         if (user.getEmotion() > user.getFunFacts().getHighestEmotion()) {
                             user.getFunFacts().setHighestEmotion(user.getEmotion());
@@ -138,6 +137,10 @@ public class Conversation {
                         }
                         if (user.getScore() > user.getFunFacts().getHighestFlamesScore())
                             user.getFunFacts().setHighestFlamesScore(user.getScore());
+                        server.addScore((int) score);
+                        user.addScore((int) score);
+                        System.out.println("Score: " + score);
+                        FlamesDataManager.saveServer(server);
                         GlobalData.globalScore += (int) score;
                         GlobalData.averageScore = GlobalData.globalScore / GlobalData.participants;
                         if (user.getScore() > Today.highScore) {
@@ -150,7 +153,6 @@ public class Conversation {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                }
                 conversationCache.forEach((key, value) -> {
                     try {
                         FlamesDataManager.save(value);
