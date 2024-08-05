@@ -35,6 +35,8 @@ public class ConsentButtonAction implements FlamesButtonAction {
             GlobalData.participants++;
             GlobalData.write();
             user.setConsent(1);
+            user.getConfig().setQotdAllowed(true);
+            user.getConfig().setFavQuoteAllowed(true);
         } else if (event.getComponentId().equals("consentn't")) {
             event.editMessage("Alright. Let me know if you change your mind.").queue();
 //        FlamesUser user;

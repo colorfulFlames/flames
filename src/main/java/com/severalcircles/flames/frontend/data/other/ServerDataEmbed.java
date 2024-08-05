@@ -28,23 +28,23 @@ public class ServerDataEmbed implements FlamesEmbed {
     }
     @Override
     public MessageEmbed get() {
-        StringBuilder hootanannyDay = new StringBuilder() ;
-        hootanannyDay.append(server.getHootanannyDay());
+        StringBuilder hootenannyDay = new StringBuilder() ;
+        hootenannyDay.append(server.getHootenannyDay());
         String rd = "3";
         String nd = "2";
         String st = "1";
-        String end = hootanannyDay.toString().toCharArray()[hootanannyDay.toString().length()-1] + "";
-        if (rd.equals(end)) hootanannyDay.append("rd");
-        else if (nd.equals(end)) hootanannyDay.append("nd");
-        else if (st.equals(end)) hootanannyDay.append("st");
-        else hootanannyDay.append("th");
+        String end = hootenannyDay.toString().toCharArray()[hootenannyDay.toString().length()-1] + "";
+        if (rd.equals(end)) hootenannyDay.append("rd");
+        else if (nd.equals(end)) hootenannyDay.append("nd");
+        else if (st.equals(end)) hootenannyDay.append("st");
+        else hootenannyDay.append("th");
         Color color = Color.GRAY;
-        String description = String.format(local.getString("hootananny"), hootanannyDay.toString());
+        String description = String.format(local.getString("hootenanny"), hootenannyDay.toString());
         String title = origin.getGuild().getName();
-        if (new Date().getDate() == server.getHootanannyDay()) {
+        if (new Date().getDate() == server.getHootenannyDay()) {
             color = Color.RED;
             title = "Well howdy!";
-            description = String.format(local.getString("hootanannyToday"), origin.getGuild().getName());
+            description = String.format(local.getString("hootenannyToday"), origin.getGuild().getName());
         }
         MessageEmbed embed = new EmbedBuilder()
                 .setAuthor(local.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())

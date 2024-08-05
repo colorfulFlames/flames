@@ -51,7 +51,7 @@ public class Analysis {
 
             AnalyzeEntitiesResponse response = language.analyzeEntities(request);
             // Print the response
-        List<Entity> finalList = response.getEntitiesList();
+        List<Entity> finalList = new ArrayList<>(response.getEntitiesList());
         finalList.removeIf(entity -> entity.getName().matches("\\d+"));
         finalList.forEach((element) -> {
             if (!entityCache.containsKey(element.getName())) entityCache.put(element.getName(), 1);

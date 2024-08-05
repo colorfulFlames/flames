@@ -26,7 +26,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Conversation {
-    public static final int HOOTANANNY_BONUS = 2;
+    public static final int hootenanny_BONUS = 2;
     public static final List<String> entityList = new LinkedList<>();
     private final Map<String, Integer> entities;
     private final GuildMessageChannel channel;
@@ -75,7 +75,7 @@ public class Conversation {
             if (finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude() > quoteScore | Math.round(Math.random() * 10) == 6) {
                 this.quote = new String[]{message.getContentRaw(), message.getAuthor().getName()};
                 this.quoteScore = finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude();
-                if (Math.round(Math.random() * 10) == 6) newFavorite = true;
+                if (Math.round(Math.random() * 5) <= 2) newFavorite = true;
             }
             if (!userList.contains(message.getAuthor())) userList.add(message.getAuthor());
             finishedAnalysis.getEntityList().forEach((element) -> {
@@ -121,10 +121,15 @@ public class Conversation {
                     if (user == null) return;
                     userList.forEach((member) -> user.getRelationships().addRelationship(member.getId(), 1));
                     if (user.getDiscordId().equals(message.getAuthor().getId())) {
-                        if ((finalNewFavorite | user.getFunFacts().getFavoriteQuote().equals("This is me.")) && user.getConfig().isFavQuoteAllowed())
-                            user.getFunFacts().setFavoriteQuote(message.getContentRaw());
+                        Logger.getGlobal().info(String.valueOf(finalNewFavorite | user.getFunFacts().getFavoriteQuote().equals("This is me.")));
+                        if (finalNewFavorite | user.getFunFacts().getFavoriteQuote().equals("This is me."))
+                            Logger.getGlobal().info(user.getConfig().isFavQuoteAllowed() + "");
+                            if (user.getConfig().isFavQuoteAllowed()) {
+                                user.getFunFacts().setFavoriteQuote(message.getContentRaw());
+                                Logger.getGlobal().info("Set favorite quote to " + message.getContentRaw());
+                            }
                         double score = Math.round(finishedAnalysis.getEmotion() * 15);
-                        if (new Date().getDate() == server.getHootanannyDay()) score *= HOOTANANNY_BONUS;
+                        if (new Date().getDate() == server.getHootenannyDay()) score *= hootenanny_BONUS;
                         if (score < 0) score *= 5;
                         user.setEmotion(user.getEmotion() + (float) emotion);
                         if (user.getEmotion() > user.getFunFacts().getHighestEmotion()) {

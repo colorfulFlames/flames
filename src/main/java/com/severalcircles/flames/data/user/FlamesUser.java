@@ -4,15 +4,13 @@
 
 package com.severalcircles.flames.data.user;
 
-import com.severalcircles.flames.data.FlamesData;
-
 import java.time.Instant;
 import java.util.Properties;
 
 /**
  * Object used to represent a user in reference to their Flames Data
  */
-public class FlamesUser implements FlamesData {
+public class FlamesUser  {
 
     private int score;
     private float emotion;

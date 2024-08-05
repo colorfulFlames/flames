@@ -63,17 +63,22 @@ public class FlamesDataManager {
         File userl = new File(udir.getAbsolutePath() + "/user.fl");
         File config = new File(udir.getAbsolutePath() + "/config.fl");
         File entities = new File(udir.getAbsolutePath() + "/entities.fl");
+        File stats = new File(udir.getAbsolutePath() + "/stats.fl");
+        File funfacts = new File(udir.getAbsolutePath() + "/funfacts.fl");
         // If any of the user data files don't exist, we're just going to assume that the data either doesn't exist or is corrupted and start from scratch because it shouldn't ever happen normally.
         if (udir.mkdir() | userl.createNewFile()) {
             FlamesUser flamesUser = new FlamesUser(user.getId());
             Logger.getGlobal().log(Level.INFO, "User Data for " + discordId + " does not exist. Creating it now.");
             FileOutputStream os1 = new FileOutputStream(userl);
+            FileOutputStream os2 = new FileOutputStream(stats);
+            FileOutputStream os3 = new FileOutputStream(funfacts);
             FileOutputStream os4 = new FileOutputStream(config);
             FileOutputStream os5 = new FileOutputStream(entities);
             flamesUser.setDiscordId(discordId);
             flamesUser.createData().store(os1, "User Data for " + name);
             flamesUser.getConfig().createData().store(os4, "Configuration for " + name);
             flamesUser.getEntities().createData().store(os5, "Entities for " + name);
+            flamesUser.getFunFacts().createData().store(os3, "Fun Facts for " + name);
 //            Consent.getConsent(user);
             return true;
         } else if (config.createNewFile()) {
@@ -100,17 +105,22 @@ public class FlamesDataManager {
         File user = new File(udir.getAbsolutePath() + "/user.fl");
         File config = new File(udir.getAbsolutePath() + "/config.fl");
         File entities = new File(udir.getAbsolutePath() + "/entities.fl");
+        File stats = new File(udir.getAbsolutePath() + "/stats.fl");
+        File funfacts = new File(udir.getAbsolutePath() + "/funfacts.fl");
         // If any of the user data files don't exist, we're just going to assume that the data either doesn't exist or is corrupted and start from scratch because it shouldn't ever happen normally.
         if (udir.mkdir() | user.createNewFile() | config.createNewFile() | entities.createNewFile()) {
             Logger.getGlobal().log(Level.INFO, "User Data for " + discordId + " does not exist. Creating it now.");
         }
         flamesUser.setDiscordId(discordId);
         FileOutputStream os1 = new FileOutputStream(user);
+        FileOutputStream os3 = new FileOutputStream(funfacts);
         FileOutputStream os4 = new FileOutputStream(config);
         FileOutputStream os6 = new FileOutputStream(entities);
         flamesUser.createData().store(os1, "User Data for " + name);
         flamesUser.getConfig().createData().store(os4, "Configuration for " + name);
+        flamesUser.getFunFacts().createData().store(os3, "Fun Facts for " + name);
         flamesUser.getEntities().getEntities().forEach((key, value) -> {
+
             System.out.println(key + " | " + value);
         });
         System.out.println(flamesUser.getEntities().createData());
@@ -137,6 +147,7 @@ public class FlamesDataManager {
      */
     public static FlamesUser readUser(String id, boolean skipConsent) throws IOException, ConsentException {
         FlamesUser fluser = new FlamesUser(id);
+        UserFunFacts funFacts = new UserFunFacts();
         File udir = new File(USER_DIRECTORY.getAbsolutePath() + "/" + id);
         if (id == null) throw new IllegalArgumentException("User ID cannot be null. Did you really think you were going to get away with that?");
         if (udir.mkdir() && !skipConsent) {
@@ -144,18 +155,21 @@ public class FlamesDataManager {
         }
         File userfl = new File(udir.getAbsolutePath() + "/user.fl");
         File config = new File(udir.getAbsolutePath() + "/config.fl");
+        File funfacts = new File(udir.getAbsolutePath() + "/funfacts.fl");
         File entities = new File(udir.getAbsolutePath() + "/entities.fl");
-        if (userfl.createNewFile() | config.createNewFile() | entities.createNewFile()) {
+        if (userfl.createNewFile() | config.createNewFile() | entities.createNewFile() | funfacts.createNewFile()) {
             Logger.getGlobal().log(Level.INFO, "User Data for " + id + " something something doesn't exist. Creating it now.");
         }
         FileInputStream inputStream1 = new FileInputStream(userfl);
         FileInputStream inputStream4 = new FileInputStream(config);
         FileInputStream inputStream6 = new FileInputStream(entities);
+        FileInputStream inputStream7 = new FileInputStream(funfacts);
 
         // Prepare Properties() objects
         Properties data = new Properties();
         Properties configdata = new Properties();
         Properties entitiesData = new Properties();
+        Properties funfactsdata = new Properties();
         // Load data from properties files
         data.load(inputStream1);
         if (data.isEmpty()) data = new FlamesUser(id).createData();
@@ -164,6 +178,8 @@ public class FlamesDataManager {
         entitiesData.load(inputStream6);
         if (entitiesData.isEmpty()) entitiesData = new UserEntities().createData();
             // Set data from properties files for FlamesUser
+        funfactsdata.load(inputStream7);
+        if (funfactsdata.isEmpty()) funfactsdata = new UserFunFacts().createData();
         fluser.setScore(Integer.parseInt(String.valueOf(data.get("score"))));
         fluser.setEmotion(Float.parseFloat(String.valueOf(data.get("emotion"))));
         fluser.setDiscordId(id);
@@ -171,6 +187,14 @@ public class FlamesDataManager {
         fluser.setConsent(Integer.parseInt(String.valueOf(data.get("consent"))));
         fluser.setStreak(Integer.parseInt(String.valueOf(data.get("streak"))));
         fluser.setLastSeen(Instant.parse(String.valueOf(data.get("lastSeen"))));
+        // Set data from properties files for UserFunFacts
+        funFacts.setLowestFlamesScore(Integer.parseInt(String.valueOf(funfactsdata.get("lowScore"))));
+        funFacts.setHighestFlamesScore(Integer.parseInt(String.valueOf(funfactsdata.get("highScore"))));
+        funFacts.setSadDay(Instant.parse(String.valueOf(funfactsdata.get("sadDay"))));
+        funFacts.setHappyDay(Instant.parse(String.valueOf(funfactsdata.get("happyDay"))));
+        funFacts.setHighestEmotion(Float.parseFloat(String.valueOf(funfactsdata.get("highestEmotion"))));
+        funFacts.setLowestEmotion(Float.parseFloat(String.valueOf(funfactsdata.get("lowestEmotion"))));
+        funFacts.setFavoriteQuote(String.valueOf(funfactsdata.get("favoriteQuote")));
         // Set data from properties files for UserConfig
         UserConfig config1;
         try {
@@ -195,6 +219,7 @@ public class FlamesDataManager {
         });
         userEntities.setEntities(e);
         fluser.setEntities(userEntities);
+        fluser.setFunFacts(funFacts);
         if (fluser.getConsent() != 1 && !skipConsent) throw new ConsentException(fluser.getConsent(), Flames.api.getUserById(id));
         return fluser;
     }
@@ -249,9 +274,9 @@ public class FlamesDataManager {
             Properties data = new Properties();
             data.load(inputStream);
             int score = Integer.parseInt(data.get("score").toString());
-            int hootanannyDay = Integer.parseInt(data.get("hootanannyDay").toString());
+            int hootenannyDay = Integer.parseInt(data.get("hootenannyDay").toString());
             String id2 = data.get("id").toString();
-            return new FlamesServer(score, id2, hootanannyDay);
+            return new FlamesServer(score, id2, hootenannyDay);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -49,7 +49,7 @@ public class SparkConversation extends Conversation {
                 finish();
             }
         }, minutes * 60000L);
-        channel.asTextChannel().getManager().setSlowmode(minutes * 60).complete();
+//        channel.asTextChannel().getManager().setSlowmode(minutes * 60).complete();
     }
     void finish() {
         AtomicReference<String> answer = new AtomicReference<>("");

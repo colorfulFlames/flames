@@ -41,6 +41,8 @@ public class UserConfig {
 
     public UserConfig() {
         this.locale = Locale.getDefault();
+        this.qotdAllowed = true;
+        this.favQuoteAllowed = true;
     }
 
     public Locale getLocale() {

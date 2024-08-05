@@ -4,38 +4,34 @@
 
 package com.severalcircles.flames.data.server;
 
-import java.time.Instant;
-import java.time.temporal.ChronoField;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
 
 public class FlamesServer {
     private int score;
     private String id;
-    private int hootanannyDay;
+    private int hootenannyDay;
 
-    public FlamesServer(int score, String id, int hootananyDay) {
+    public FlamesServer(int score, String id, int hootenannyDay) {
         this.score = score;
         this.id = id;
-        this.hootanannyDay = hootananyDay;
+        this.hootenannyDay = hootenannyDay;
 
     }
     public FlamesServer(String id) {
         this.id = id;
         this.score = 0;
-        this.hootanannyDay = new Random().nextInt(28) + 1; // Randomly select a day of the month for Hootanany Day
+        this.hootenannyDay = new Random().nextInt(28) + 1; // Randomly select a day of the month for Hootanany Day
     }
     public Properties createData() {
         Properties data = new Properties();
         data.put("score", String.valueOf(score));
         data.put("id", id);
-        data.put("hootanannyDay", String.valueOf(hootanannyDay));
+        data.put("hootenannyDay", String.valueOf(hootenannyDay));
         return data;
     }
-    public int getHootanannyDay() {
-     return hootanannyDay;
+    public int getHootenannyDay() {
+     return hootenannyDay;
     }
     public int getScore() {
         return score;

@@ -15,7 +15,7 @@ public class ConsentException extends FlamesException {
     public final int consentLevel;
 
     public ConsentException(int consentLevel, User user) throws InsufficientPermissionException {
-        super("That user hasn't started using Flames yet.");
+        super("Operation not allowed.");
         this.consentLevel = consentLevel;
         if (consentLevel == 0) {
                 Consent.getConsent(user);
