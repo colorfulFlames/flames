@@ -259,6 +259,12 @@ public class FlamesDataManager {
     }
     public static FlamesServer getServer(String id) {
         File serverFile = new File(SERVER_DIRECTORY.getAbsolutePath() + "/" + id + ".fl");
+        File serverHootenannyDataFile = new File(SERVER_DIRECTORY.getAbsolutePath() + "/" + id + "-hootenannyData.fl");
+        try {
+            serverHootenannyDataFile.createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         FlamesServer server;
         try {
             if (serverFile.createNewFile()) {

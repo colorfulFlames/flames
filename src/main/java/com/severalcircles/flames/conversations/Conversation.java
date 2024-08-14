@@ -8,6 +8,7 @@ import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.global.GlobalData;
 import com.severalcircles.flames.data.server.FlamesServer;
+import com.severalcircles.flames.data.server.HootenannyDataManager;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.UserEntities;
 import com.severalcircles.flames.exception.ConsentException;
@@ -146,8 +147,17 @@ public class Conversation {
                         user.addScore((int) score);
                         System.out.println("Score: " + score);
                         FlamesDataManager.saveServer(server);
+
                         GlobalData.globalScore += (int) score;
                         GlobalData.averageScore = GlobalData.globalScore / GlobalData.participants;
+                        if (server.todayIsHootenannyDay()) {
+                            server.getHootenannyData().addScore(user.getDiscordId(), (int) score);
+                        }
+                        try {
+                            HootenannyDataManager.saveData(server.getHootenannyData(), message.getGuildId());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                         if (user.getScore() > Today.highScore) {
                             Today.highUser = message.getAuthor().getName() + " (" + user.getScore() + ")";
                         }

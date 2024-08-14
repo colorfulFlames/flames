@@ -4,6 +4,7 @@
 
 package com.severalcircles.flames.data.server;
 
+import java.io.IOException;
 import java.util.Properties;
 import java.util.Random;
 
@@ -11,12 +12,17 @@ public class FlamesServer {
     private int score;
     private String id;
     private int hootenannyDay;
-
+    ServerHootenannyData hootenannyData;
     public FlamesServer(int score, String id, int hootenannyDay) {
         this.score = score;
         this.id = id;
         this.hootenannyDay = hootenannyDay;
-
+        try {
+            hootenannyData = HootenannyDataManager.getData(id);
+        } catch (IOException e) {
+            e.printStackTrace();
+            hootenannyData = new ServerHootenannyData();
+        }
     }
     public FlamesServer(String id) {
         this.id = id;
@@ -30,6 +36,10 @@ public class FlamesServer {
         data.put("hootenannyDay", String.valueOf(hootenannyDay));
         return data;
     }
+    public boolean todayIsHootenannyDay() {
+        return hootenannyDay == new java.util.Date().getDate();
+    }
+
     public int getHootenannyDay() {
      return hootenannyDay;
     }
@@ -47,6 +57,10 @@ public class FlamesServer {
 
     public String getId() {
         return id;
+    }
+
+    public ServerHootenannyData getHootenannyData() {
+        return hootenannyData;
     }
 
     public void setId(String id) {
