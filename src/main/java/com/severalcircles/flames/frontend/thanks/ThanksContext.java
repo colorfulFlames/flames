@@ -4,9 +4,9 @@
 
 package com.severalcircles.flames.frontend.thanks;
 
-import com.severalcircles.flames.data.FlamesDataManager;
-import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.exception.ConsentException;
+import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
+import com.severalcircles.flames.data.ConsentException;
 import com.severalcircles.flames.exception.FlamesMetaException;
 import com.severalcircles.flames.exception.handle.ExceptionHandler;
 import com.severalcircles.flames.frontend.FlamesUserContext;
@@ -20,17 +20,17 @@ public class ThanksContext implements FlamesUserContext {
     @Override
     public void execute(UserContextInteractionEvent event) {
         User thanked = event.getTarget();
-        FlamesUser sender;
+        LegacyFlamesUser sender;
         String msg;
         try {
             msg = Objects.requireNonNull(event.getOption("msg")).getAsString();
         } catch (NullPointerException e) {
             msg = "";
         }
-        FlamesUser flt;
+        LegacyFlamesUser flt;
         try {
-            flt = FlamesDataManager.readUser(thanked);
-            FlamesDataManager.readUser(event.getUser());
+            flt = LegacyFlamesDataManager.readUser(thanked);
+            LegacyFlamesDataManager.readUser(event.getUser());
         } catch (IOException e) {
             e.printStackTrace();
             event.replyEmbeds(new ExceptionHandler(e).handleThenGetFrontend()).complete();

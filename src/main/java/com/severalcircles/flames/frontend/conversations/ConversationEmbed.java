@@ -6,7 +6,7 @@ package com.severalcircles.flames.frontend.conversations;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.conversations.Conversation;
-import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 import com.severalcircles.flames.external.ImageSearch;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import com.severalcircles.flames.util.Emotion;
@@ -23,14 +23,14 @@ import java.util.ResourceBundle;
 
 public class ConversationEmbed implements FlamesEmbed {
     private final User user;
-    private final FlamesUser flamesUser;
+    private final LegacyFlamesUser legacyFlamesUser;
     private final ResourceBundle resources;
     private final Conversation conversation;
-    public ConversationEmbed(User user, FlamesUser flamesUser, Conversation conversation) {
+    public ConversationEmbed(User user, LegacyFlamesUser legacyFlamesUser, Conversation conversation) {
         this.user = user;
-        this.flamesUser = flamesUser;
+        this.legacyFlamesUser = legacyFlamesUser;
         this.conversation = conversation;
-        resources = Flames.local(flamesUser.getConfig().getLocale());
+        resources = Flames.local(legacyFlamesUser.getConfig().getLocale());
     }
     public MessageEmbed get() {
         String trendingEntity = "";
@@ -47,7 +47,7 @@ public class ConversationEmbed implements FlamesEmbed {
                     .setTitle(String.format(resources.getString("title"), trendingEntity))
                     .setThumbnail(ImageSearch.searchImage(trendingEntity))
                     .setDescription(String.format(resources.getString("description"), conversation.getChannel().getName()))
-                    .addField(resources.getString("emotion"), Emotion.getEmotionString((float) conversation.getEmotion(), flamesUser.getConfig().getLocale()), false)
+                    .addField(resources.getString("emotion"), Emotion.getEmotionString((float) conversation.getEmotion(), legacyFlamesUser.getConfig().getLocale()), false)
                     .addBlankField(false)
                     .addField("\"" + conversation.getQuote()[0] + "\"", " - " + conversation.getQuote()[1], false)
                     .addBlankField(false)
@@ -61,7 +61,7 @@ public class ConversationEmbed implements FlamesEmbed {
                     .setTitle(String.format(resources.getString("title"), trendingEntity))
                     .setThumbnail("https://preview.redd.it/nappqljautm51.jpg?auto=webp&s=72f0c7468ef69127c1e945b160e0b9807d066de5")
                     .setDescription(String.format(resources.getString("description"), conversation.getChannel().getName()))
-                    .addField(resources.getString("emotion"), Emotion.getEmotionString((float) conversation.getEmotion(), flamesUser.getConfig().getLocale()), false)
+                    .addField(resources.getString("emotion"), Emotion.getEmotionString((float) conversation.getEmotion(), legacyFlamesUser.getConfig().getLocale()), false)
                     .addBlankField(false)
                     .addField("\"" + conversation.getQuote()[0] + "\"", " - " + conversation.getQuote()[1], false)
                     .addBlankField(false)

@@ -5,8 +5,8 @@
 package com.severalcircles.flames.events;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.data.FlamesDataManager;
-import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 import com.severalcircles.flames.exception.FlamesException;
 import com.severalcircles.flames.exception.handle.ExceptionHandler;
 import com.severalcircles.flames.frontend.FlamesCommand;
@@ -37,7 +37,7 @@ public class CommandEvent extends ListenerAdapter implements FlamesDiscordEvent 
             if (entry.getKey().contains(event.getName())) {
                 try {
 //                    System.out.println(Flames.commandMap.get(entry.getKey()));
-                    FlamesUser fl = FlamesDataManager.readUser(event.getUser());
+                    LegacyFlamesUser fl = LegacyFlamesDataManager.readUser(event.getUser());
 //                    throw new BadArgumentsException(fl, "This is a shitpost");
                     Flames.commandMap.get(entry.getKey()).execute(event, fl);
                 } catch (FlamesException e) {

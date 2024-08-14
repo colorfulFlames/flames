@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Several Circles.
  */
 
-package com.severalcircles.flames.data.user;
+package com.severalcircles.flames.data.legacy.user;
 
 import java.util.Locale;
 import java.util.Properties;

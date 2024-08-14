@@ -4,9 +4,9 @@
 
 package com.severalcircles.flames.frontend.data.user;
 
-import com.severalcircles.flames.data.FlamesDataManager;
-import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.exception.ConsentException;
+import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
+import com.severalcircles.flames.data.ConsentException;
 import com.severalcircles.flames.exception.FlamesMetaException;
 import com.severalcircles.flames.exception.handle.ExceptionHandler;
 import com.severalcircles.flames.exception.handle.FlamesRuntimeExceptionHandler;
@@ -23,9 +23,9 @@ public class UserContextData implements FlamesUserContext {
     @Override
     public void execute(UserContextInteractionEvent event) {
         Logger.getGlobal().log(Level.INFO, "Executing UDATA");
-        FlamesUser target;
+        LegacyFlamesUser target;
         try {
-            target = FlamesDataManager.readUser(event.getTarget());
+            target = LegacyFlamesDataManager.readUser(event.getTarget());
         } catch (IOException e) {
             event.replyEmbeds(new ExceptionHandler(e).handleThenGetFrontend()).complete();
             return;

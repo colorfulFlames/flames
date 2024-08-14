@@ -1,13 +1,15 @@
 /*
- * Copyright (c) 2021-2021 Several Circles.
+ * Copyright (c) 2021-2024 Several Circles.
  */
 
-package com.severalcircles.flames.data;
+package com.severalcircles.flames.data.legacy;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.data.server.FlamesServer;
-import com.severalcircles.flames.data.user.*;
-import com.severalcircles.flames.exception.ConsentException;
+import com.severalcircles.flames.data.user.UserEntities;
+import com.severalcircles.flames.data.user.UserEntity;
+import com.severalcircles.flames.data.legacy.server.FlamesServer;
+import com.severalcircles.flames.data.legacy.user.*;
+import com.severalcircles.flames.data.ConsentException;
 import com.severalcircles.flames.exception.FlamesMetaException;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.Channel;
@@ -21,8 +23,10 @@ import java.util.logging.Logger;
 
 /**
  * Class for managing Flames data, such as user and guild data.
+ * @deprecated since Flames 8
  */
-public class FlamesDataManager {
+@Deprecated
+public class LegacyFlamesDataManager {
     /**
      * Data directory
      */
@@ -34,8 +38,10 @@ public class FlamesDataManager {
 
     /**
      * Checks if data directories exists and creates them if not.
+     * @deprecated
      */
-    public static void prepare() {
+    @Deprecated
+        public static void prepare() {
         Logger.getGlobal().log(Level.INFO, "Preparing Data...");
         //noinspection ResultOfMethodCallIgnored
         FLAMES_DIRECTORY.mkdir();
@@ -54,7 +60,9 @@ public class FlamesDataManager {
 
     /**
      * Checks if a given user exists. If they do, simply returns false. If not, it'll create user data for that user, then return true.
+     * @deprecated
      */
+    @Deprecated
     public static boolean newUser(User user) throws IOException {
 //        String name = Flames.api.getUserById(discordId).getName();
         String name = user.getName();
@@ -67,24 +75,24 @@ public class FlamesDataManager {
         File funfacts = new File(udir.getAbsolutePath() + "/funfacts.fl");
         // If any of the user data files don't exist, we're just going to assume that the data either doesn't exist or is corrupted and start from scratch because it shouldn't ever happen normally.
         if (udir.mkdir() | userl.createNewFile()) {
-            FlamesUser flamesUser = new FlamesUser(user.getId());
+            LegacyFlamesUser legacyFlamesUser = new LegacyFlamesUser(user.getId());
             Logger.getGlobal().log(Level.INFO, "User Data for " + discordId + " does not exist. Creating it now.");
             FileOutputStream os1 = new FileOutputStream(userl);
             FileOutputStream os2 = new FileOutputStream(stats);
             FileOutputStream os3 = new FileOutputStream(funfacts);
             FileOutputStream os4 = new FileOutputStream(config);
             FileOutputStream os5 = new FileOutputStream(entities);
-            flamesUser.setDiscordId(discordId);
-            flamesUser.createData().store(os1, "User Data for " + name);
-            flamesUser.getConfig().createData().store(os4, "Configuration for " + name);
-            flamesUser.getEntities().createData().store(os5, "Entities for " + name);
-            flamesUser.getFunFacts().createData().store(os3, "Fun Facts for " + name);
+            legacyFlamesUser.setDiscordId(discordId);
+            legacyFlamesUser.createData().store(os1, "User Data for " + name);
+            legacyFlamesUser.getConfig().createData().store(os4, "Configuration for " + name);
+            legacyFlamesUser.getEntities().createData().store(os5, "Entities for " + name);
+            legacyFlamesUser.getFunFacts().createData().store(os3, "Fun Facts for " + name);
 //            Consent.getConsent(user);
             return true;
         } else if (config.createNewFile()) {
             FileOutputStream os4 = new FileOutputStream(config);
-            FlamesUser flamesUser = new FlamesUser(user.getId());
-            flamesUser.getConfig().createData().store(os4, "Configuration for " + name);
+            LegacyFlamesUser legacyFlamesUser = new LegacyFlamesUser(user.getId());
+            legacyFlamesUser.getConfig().createData().store(os4, "Configuration for " + name);
             return false;
         }
         else {
@@ -93,11 +101,13 @@ public class FlamesDataManager {
     }
 
     /**
-     * Saves data for a FlamesUser to a file in the user directory
+     * Saves data for a LegacyFlamesUser to a file in the user directory
      * @throws IOException If Flames can't write files for whatever reason.
+     * @deprecated
      */
-    public static void save(FlamesUser flamesUser) throws IOException {
-        String discordId = flamesUser.getDiscordId();
+    @Deprecated
+    public static void save(LegacyFlamesUser legacyFlamesUser) throws IOException {
+        String discordId = legacyFlamesUser.getDiscordId();
         String name;
         try {name = Objects.requireNonNull(Flames.api.getUserById(discordId)).getName(); } catch (NullPointerException | IllegalArgumentException e) {name = "An Unknown Flames User";}
 //        OutputStream outputStream;
@@ -111,42 +121,46 @@ public class FlamesDataManager {
         if (udir.mkdir() | user.createNewFile() | config.createNewFile() | entities.createNewFile()) {
             Logger.getGlobal().log(Level.INFO, "User Data for " + discordId + " does not exist. Creating it now.");
         }
-        flamesUser.setDiscordId(discordId);
+        legacyFlamesUser.setDiscordId(discordId);
         FileOutputStream os1 = new FileOutputStream(user);
         FileOutputStream os3 = new FileOutputStream(funfacts);
         FileOutputStream os4 = new FileOutputStream(config);
         FileOutputStream os6 = new FileOutputStream(entities);
-        flamesUser.createData().store(os1, "User Data for " + name);
-        flamesUser.getConfig().createData().store(os4, "Configuration for " + name);
-        flamesUser.getFunFacts().createData().store(os3, "Fun Facts for " + name);
-        flamesUser.getEntities().getEntities().forEach((key, value) -> {
+        legacyFlamesUser.createData().store(os1, "User Data for " + name);
+        legacyFlamesUser.getConfig().createData().store(os4, "Configuration for " + name);
+        legacyFlamesUser.getFunFacts().createData().store(os3, "Fun Facts for " + name);
+        legacyFlamesUser.getEntities().getEntities().forEach((key, value) -> {
 
             System.out.println(key + " | " + value);
         });
-        System.out.println(flamesUser.getEntities().createData());
-        flamesUser.getEntities().createData().store(os6, "Entities for " + name);
+        System.out.println(legacyFlamesUser.getEntities().createData());
+        legacyFlamesUser.getEntities().createData().store(os6, "Entities for " + name);
     }
 
     /**
      * Reads data for a user from the data directory
      * @param user Discord User to get data for
-     * @return A FlamesUser created from the data file
+     * @return A LegacyFlamesUser created from the data file
      * @throws ConsentException If the user hasn't consented yet won't return data
+     * @deprecated
      */
-    public static FlamesUser readUser(User user) throws IOException, ConsentException, UnsupportedOperationException, FlamesMetaException {
+    @Deprecated
+    public static LegacyFlamesUser readUser(User user) throws IOException, ConsentException, UnsupportedOperationException, FlamesMetaException {
         return readUser(user.getId(), false);
     }
-    public static FlamesUser readUser(User user, boolean skipConsent) throws IOException, ConsentException, UnsupportedOperationException, FlamesMetaException {
+    public static LegacyFlamesUser readUser(User user, boolean skipConsent) throws IOException, ConsentException, UnsupportedOperationException, FlamesMetaException {
         return readUser(user.getId(), skipConsent);
     }
     /**
      * Reads data for a user from the data directory
      * @param skipConsent If true, won't throw an exception if the user hasn't consented. For most cases, leave this false or null.
-     * @return A FlamesUser created from the data file
+     * @return A LegacyFlamesUser created from the data file
      * @throws ConsentException If the user hasn't consented yet won't return data, unless you ask nicely
+     * @deprecated
      */
-    public static FlamesUser readUser(String id, boolean skipConsent) throws IOException, ConsentException {
-        FlamesUser fluser = new FlamesUser(id);
+    @Deprecated
+    public static LegacyFlamesUser readUser(String id, boolean skipConsent) throws IOException, ConsentException {
+        LegacyFlamesUser fluser = new LegacyFlamesUser(id);
         UserFunFacts funFacts = new UserFunFacts();
         File udir = new File(USER_DIRECTORY.getAbsolutePath() + "/" + id);
         if (id == null) throw new IllegalArgumentException("User ID cannot be null. Did you really think you were going to get away with that?");
@@ -172,12 +186,12 @@ public class FlamesDataManager {
         Properties funfactsdata = new Properties();
         // Load data from properties files
         data.load(inputStream1);
-        if (data.isEmpty()) data = new FlamesUser(id).createData();
+        if (data.isEmpty()) data = new LegacyFlamesUser(id).createData();
         configdata.load(inputStream4);
         if (configdata.isEmpty()) configdata = new UserConfig().createData();
         entitiesData.load(inputStream6);
         if (entitiesData.isEmpty()) entitiesData = new UserEntities().createData();
-            // Set data from properties files for FlamesUser
+            // Set data from properties files for LegacyFlamesUser
         funfactsdata.load(inputStream7);
         if (funfactsdata.isEmpty()) funfactsdata = new UserFunFacts().createData();
         fluser.setScore(Integer.parseInt(String.valueOf(data.get("score"))));
@@ -240,6 +254,7 @@ public class FlamesDataManager {
             throw new RuntimeException(e);
         }
     }
+    @Deprecated
     public static void addChannelWord(String word, Channel channel) {
         File channelFile = new File(SERVER_DIRECTORY.getAbsolutePath() + "/" + ((GuildChannel) channel).getGuild().getId() + "/channels/" + channel.getId() + ".flx");
         String[] channelWords = getChannelWords(channel);
@@ -257,6 +272,7 @@ public class FlamesDataManager {
             throw new RuntimeException(e);
         }
     }
+    @Deprecated
     public static FlamesServer getServer(String id) {
         File serverFile = new File(SERVER_DIRECTORY.getAbsolutePath() + "/" + id + ".fl");
         File serverHootenannyDataFile = new File(SERVER_DIRECTORY.getAbsolutePath() + "/" + id + "-hootenannyData.fl");
@@ -287,7 +303,9 @@ public class FlamesDataManager {
             throw new RuntimeException(e);
         }
     }
+    @Deprecated
     public static void saveServer(FlamesServer server) {
+
         File serverFile = new File(SERVER_DIRECTORY.getAbsolutePath() + "/" + server.getId() + ".fl");
         try {
             if (serverFile.createNewFile()) return;

@@ -2,9 +2,8 @@
  * Copyright (c) 2024 Several Circles.
  */
 
-package com.severalcircles.flames.data.server;
+package com.severalcircles.flames.data.legacy.server;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;

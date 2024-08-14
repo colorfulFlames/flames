@@ -5,13 +5,13 @@
 package com.severalcircles.flames.conversations;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.data.FlamesDataManager;
-import com.severalcircles.flames.data.global.GlobalData;
-import com.severalcircles.flames.data.server.FlamesServer;
-import com.severalcircles.flames.data.server.HootenannyDataManager;
-import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
+import com.severalcircles.flames.data.legacy.global.GlobalData;
+import com.severalcircles.flames.data.legacy.server.FlamesServer;
+import com.severalcircles.flames.data.legacy.server.HootenannyDataManager;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 import com.severalcircles.flames.data.user.UserEntities;
-import com.severalcircles.flames.exception.ConsentException;
+import com.severalcircles.flames.data.ConsentException;
 import com.severalcircles.flames.exception.handle.ExceptionHandler;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
 import com.severalcircles.flames.frontend.today.Today;
@@ -36,7 +36,7 @@ public class Conversation {
     private double emotion;
     private String[] quote = {"This isn't epic yet", "Flames"};
     private double quoteScore;
-    private final Map<String, FlamesUser> conversationCache;
+    private final Map<String, LegacyFlamesUser> conversationCache;
     public Conversation (GuildMessageChannel channel) {
         this.channel = channel;
         this.entities = new HashMap<>();
@@ -70,7 +70,7 @@ public class Conversation {
                 expired = true;
                 throw new ExpiredConversationException();
             }
-        FlamesServer server = FlamesDataManager.getServer(message.getGuildId());
+        FlamesServer server = LegacyFlamesDataManager.getServer(message.getGuildId());
         expires = Instant.now().plus(5, ChronoUnit.MINUTES);
             emotion += finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude();
             if (finishedAnalysis.getSentiment().getScore() + finishedAnalysis.getSentiment().getMagnitude() > quoteScore | Math.round(Math.random() * 10) == 6) {
@@ -83,9 +83,9 @@ public class Conversation {
                 if (!entities.containsKey(element.getName())) entities.put(element.getName(), 1);
                 else entities.put(element.getName(), entities.get(element.getName()) + 1);
                 entityList.add(element.getName());
-                FlamesUser user;
+                LegacyFlamesUser user;
                 try {
-                    user = FlamesDataManager.readUser(message.getAuthor());
+                    user = LegacyFlamesDataManager.readUser(message.getAuthor());
                 } catch (ConsentException e) {
                     return;
                 } catch (Exception e) {
@@ -102,7 +102,7 @@ public class Conversation {
 //                    user.getEntities().getEntities().forEach((key, value) -> {
 //                        System.out.println(key + " / " + value);
 //                    });
-                    FlamesDataManager.save(user);
+                    LegacyFlamesDataManager.save(user);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -111,14 +111,14 @@ public class Conversation {
             userList.forEach((element) -> {
                 if (!conversationCache.containsKey(element.getId())) {
                     try {
-                        conversationCache.put(element.getId(), FlamesDataManager.readUser(element));
+                        conversationCache.put(element.getId(), LegacyFlamesDataManager.readUser(element));
                     } catch (ConsentException ignored) {
                         return;
                     } catch (Exception e) {
                         new ExceptionHandler(e).handle();
                     }
                 }
-                    FlamesUser user = conversationCache.get(element.getId());
+                    LegacyFlamesUser user = conversationCache.get(element.getId());
                     if (user == null) return;
                     userList.forEach((member) -> user.getRelationships().addRelationship(member.getId(), 1));
                     if (user.getDiscordId().equals(message.getAuthor().getId())) {
@@ -146,7 +146,7 @@ public class Conversation {
                         server.addScore((int) score);
                         user.addScore((int) score);
                         System.out.println("Score: " + score);
-                        FlamesDataManager.saveServer(server);
+                        LegacyFlamesDataManager.saveServer(server);
 
                         GlobalData.globalScore += (int) score;
                         GlobalData.averageScore = GlobalData.globalScore / GlobalData.participants;
@@ -164,13 +164,13 @@ public class Conversation {
                     }
                     conversationCache.put(element.getId(), user);
                     try {
-                        FlamesDataManager.save(user);
+                        LegacyFlamesDataManager.save(user);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
                 conversationCache.forEach((key, value) -> {
                     try {
-                        FlamesDataManager.save(value);
+                        LegacyFlamesDataManager.save(value);
                     } catch (IOException e) {
                         Flames.incrementErrorCount();
                         e.printStackTrace();

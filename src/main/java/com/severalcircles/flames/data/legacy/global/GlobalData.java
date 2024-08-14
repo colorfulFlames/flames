@@ -2,9 +2,9 @@
  * Copyright (c) 2021 Several Circles.
  */
 
-package com.severalcircles.flames.data.global;
+package com.severalcircles.flames.data.legacy.global;
 
-import com.severalcircles.flames.data.FlamesDataManager;
+import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -32,7 +32,7 @@ public class GlobalData {
 //        properties.put("averageScore", averageScore + "");
         properties.put("globalScore", String.valueOf(globalScore));
         properties.put("participants", String.valueOf(participants));
-        File file = new File(FlamesDataManager.FLAMES_DIRECTORY.getAbsolutePath() + "/global.properties");
+        File file = new File(LegacyFlamesDataManager.FLAMES_DIRECTORY.getAbsolutePath() + "/global.properties");
         file.createNewFile();
         OutputStream outputStream = Files.newOutputStream(file.toPath());
         properties.store(outputStream, "Flames Global Data File");
@@ -44,7 +44,7 @@ public class GlobalData {
      */
     @SuppressWarnings("deprecation")
     public static void read() throws IOException {
-        File file = new File(FlamesDataManager.FLAMES_DIRECTORY.getAbsolutePath() + "/global.properties");
+        File file = new File(LegacyFlamesDataManager.FLAMES_DIRECTORY.getAbsolutePath() + "/global.properties");
         //noinspection ResultOfMethodCallIgnored
         file.createNewFile();
         @SuppressWarnings("deprecation") InputStream inputStream = file.toURL().openStream();

@@ -4,9 +4,9 @@
 
 package com.severalcircles.flames.frontend.data.user;
 
-import com.severalcircles.flames.data.FlamesDataManager;
-import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.exception.ConsentException;
+import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
+import com.severalcircles.flames.data.ConsentException;
 import com.severalcircles.flames.frontend.FlamesCommand;
 import com.severalcircles.flames.frontend.data.user.embed.GetAlongEmbed;
 import net.dv8tion.jda.api.entities.User;
@@ -18,10 +18,10 @@ import java.util.Objects;
 public class GetAlongCommand implements FlamesCommand {
 
     @Override
-    public void execute(SlashCommandInteractionEvent event, FlamesUser sender) {
+    public void execute(SlashCommandInteractionEvent event, LegacyFlamesUser sender) {
         User victim = Objects.requireNonNull(event.getOption("user")).getAsUser();
         try {
-            FlamesUser flvictim = FlamesDataManager.readUser(victim);
+            LegacyFlamesUser flvictim = LegacyFlamesDataManager.readUser(victim);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ConsentException e) {

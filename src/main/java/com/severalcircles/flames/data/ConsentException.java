@@ -1,10 +1,11 @@
 /*
- * Copyright (c) 2021-2023 Several Circles.
+ * Copyright (c) 2021-2024 Several Circles.
  */
 
-package com.severalcircles.flames.exception;
+package com.severalcircles.flames.data;
 
-import com.severalcircles.flames.data.user.consent.Consent;
+import com.severalcircles.flames.data.legacy.user.consent.Consent;
+import com.severalcircles.flames.exception.FlamesException;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.exceptions.InsufficientPermissionException;
 

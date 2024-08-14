@@ -4,7 +4,7 @@
 
 package com.severalcircles.flames.events;
 
-import com.severalcircles.flames.data.FlamesDataManager;
+import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
 import com.severalcircles.flames.exception.FlamesException;
 import com.severalcircles.flames.exception.handle.ExceptionHandler;
 import com.severalcircles.flames.exception.handle.FlamesExceptionHandler;
@@ -40,7 +40,7 @@ public class ButtonEvent extends ListenerAdapter implements FlamesDiscordEvent {
         System.out.println(event.getComponentId());
         if (event.getComponentId().equals("consent") | event.getComponentId().equals("consentn't")) {
             try {
-                new ConsentButtonAction().execute(event, FlamesDataManager.readUser(event.getUser(), true));
+                new ConsentButtonAction().execute(event, LegacyFlamesDataManager.readUser(event.getUser(), true));
             } catch (FlamesException e) {
                 event.replyEmbeds(new FlamesExceptionHandler(e).handleThenGetFrontend()).complete();
             } catch (Exception e) {
@@ -53,7 +53,7 @@ public class ButtonEvent extends ListenerAdapter implements FlamesDiscordEvent {
             if (entry.getKey().equals(event.getComponentId())) {
                 try {
                     System.out.println(1);
-                    buttonActionMap.get(event.getComponentId()).execute(event, FlamesDataManager.readUser(event.getUser()));
+                    buttonActionMap.get(event.getComponentId()).execute(event, LegacyFlamesDataManager.readUser(event.getUser()));
                 } catch (FlamesException e) {
                     event.replyEmbeds(e.getHandler().handleThenGetFrontend()).complete();
                 } catch (IOException e) {

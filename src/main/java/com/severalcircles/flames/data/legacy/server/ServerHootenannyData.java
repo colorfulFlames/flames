@@ -2,7 +2,7 @@
  * Copyright (c) 2024 Several Circles.
  */
 
-package com.severalcircles.flames.data.server;
+package com.severalcircles.flames.data.legacy.server;
 
 import java.util.HashMap;
 import java.util.Map;

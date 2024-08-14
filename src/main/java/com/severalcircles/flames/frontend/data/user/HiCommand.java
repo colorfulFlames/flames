@@ -5,9 +5,9 @@
 package com.severalcircles.flames.frontend.data.user;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.data.FlamesDataManager;
-import com.severalcircles.flames.data.global.GlobalData;
-import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
+import com.severalcircles.flames.data.legacy.global.GlobalData;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 import com.severalcircles.flames.frontend.data.user.embed.WelcomeBackEmbed;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -28,25 +28,25 @@ public class HiCommand implements FlamesCommand {
     final static int randomBonus = Integer.parseInt(values.getString("randomBonus"));
 
     @Override
-    public void execute(SlashCommandInteractionEvent event, FlamesUser flamesUser) {
+    public void execute(SlashCommandInteractionEvent event, LegacyFlamesUser legacyFlamesUser) {
         Date now = Date.from(Instant.now());
         User discordUser = event.getUser();
         int dailyBonus;
-        if (Instant.now().truncatedTo(ChronoUnit.DAYS).isAfter(flamesUser.getLastSeen().truncatedTo(ChronoUnit.DAYS))) {
-            if (Instant.now().truncatedTo(ChronoUnit.DAYS).compareTo(flamesUser.getLastSeen().truncatedTo(ChronoUnit.DAYS)) > 0) flamesUser.setStreak(flamesUser.getStreak() + 1); else flamesUser.setStreak(0);
+        if (Instant.now().truncatedTo(ChronoUnit.DAYS).isAfter(legacyFlamesUser.getLastSeen().truncatedTo(ChronoUnit.DAYS))) {
+            if (Instant.now().truncatedTo(ChronoUnit.DAYS).compareTo(legacyFlamesUser.getLastSeen().truncatedTo(ChronoUnit.DAYS)) > 0) legacyFlamesUser.setStreak(legacyFlamesUser.getStreak() + 1); else legacyFlamesUser.setStreak(0);
             //noinspection deprecation
-            dailyBonus = baseBonus + (riseBonus * now.getDay() + 1) + (streakBonus * flamesUser.getStreak()) + (int) Math.round(Math.random() * randomBonus);
-            flamesUser.addScore(dailyBonus);
+            dailyBonus = baseBonus + (riseBonus * now.getDay() + 1) + (streakBonus * legacyFlamesUser.getStreak()) + (int) Math.round(Math.random() * randomBonus);
+            legacyFlamesUser.addScore(dailyBonus);
             GlobalData.globalScore += dailyBonus;
             try {
                 GlobalData.write();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            event.replyEmbeds(new WelcomeBackEmbed(dailyBonus, discordUser, flamesUser).get()).queue();
-            flamesUser.setLastSeen(Instant.now());
+            event.replyEmbeds(new WelcomeBackEmbed(dailyBonus, discordUser, legacyFlamesUser).get()).queue();
+            legacyFlamesUser.setLastSeen(Instant.now());
             try {
-                FlamesDataManager.save(flamesUser);
+                LegacyFlamesDataManager.save(legacyFlamesUser);
             } catch (IOException e) {
                 e.printStackTrace();
                 Flames.incrementErrorCount();

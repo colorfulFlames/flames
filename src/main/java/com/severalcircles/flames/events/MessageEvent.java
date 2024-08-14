@@ -5,14 +5,12 @@
 package com.severalcircles.flames.events;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.amiguito.Amiguito;
-import com.severalcircles.flames.amiguito.AmiguitoDataManager;
 import com.severalcircles.flames.conversations.Conversation;
 import com.severalcircles.flames.conversations.ConversationsController;
 import com.severalcircles.flames.conversations.ExpiredConversationException;
-import com.severalcircles.flames.data.FlamesDataManager;
-import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.exception.ConsentException;
+import com.severalcircles.flames.data.ConsentException;
+import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 import com.severalcircles.flames.external.analysis.Analysis;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
 import com.severalcircles.flames.frontend.today.Today;
@@ -22,7 +20,6 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Locale;
@@ -50,10 +47,10 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         if (nick != null && nick.toLowerCase().contains("water")) {
             Objects.requireNonNull(event.getGuild().getMemberById(Flames.api.getSelfUser().getId())).modifyNickname(Flames.api.getSelfUser().getGlobalName()).complete();
         }
-        FlamesUser flamesUser;
+        LegacyFlamesUser legacyFlamesUser;
         // Read Flames User
         try {
-            flamesUser = FlamesDataManager.readUser(user);
+            legacyFlamesUser = LegacyFlamesDataManager.readUser(user);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Can't read user data for " + user.getId() + ".");
             logger.log(Level.SEVERE, Arrays.toString(e.getStackTrace()));
@@ -71,11 +68,6 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         } catch (Exception e) {
             e.printStackTrace();
             return;
-        }
-        try {
-            AmiguitoDataManager.loadedAmiguitos.get(user.getId()).processMessage(finishedAnalysis);
-        } catch (NullPointerException e) {
-            AmiguitoDataManager.loadedAmiguitos.put(user.getId(), new Amiguito(flamesUser, "Amiguito"));
         }
         // Process conversation
         if (ConversationsController.activeConversations.containsKey(event.getChannel().getId())) {
@@ -103,14 +95,14 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             ConversationsController.activeConversations.forEach((element, index) -> System.out.println(element));
         }
         // Check quote of the day
-        if (!Today.quote[2].equals(event.getAuthor().getId()) && flamesUser.getConfig().isQotdAllowed()) {
+        if (!Today.quote[2].equals(event.getAuthor().getId()) && legacyFlamesUser.getConfig().isQotdAllowed()) {
             if (finishedAnalysis.getEmotion() > Today.quoteEmotion) {
                 Today.quote[0] = event.getMessage().getContentRaw();
                 Today.quote[1] = event.getAuthor().getName();
                 Today.quote[2] = event.getAuthor().getId();
             }
             Logger.getGlobal().log(Level.FINE, "Quote of the day is now " + Arrays.toString(Today.quote));
-            flamesUser.setScore(flamesUser.getScore() + 8064);
+            legacyFlamesUser.setScore(legacyFlamesUser.getScore() + 8064);
         }
 //        if (event.getMessage().getContentRaw().toUpperCase(Locale.ROOT).startsWith("FLAMES,")) {
 //            DialogSession session = new DialogSession();

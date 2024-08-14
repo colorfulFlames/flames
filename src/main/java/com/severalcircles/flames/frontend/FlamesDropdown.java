@@ -7,11 +7,11 @@ package com.severalcircles.flames.frontend;
 //import net.dv8tion.jda.api.events.interaction.component.SelectMenuInteractionEvent;
 
 
-import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 import net.dv8tion.jda.api.events.interaction.component.GenericSelectMenuInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu;
 
 public interface FlamesDropdown {
-    void execute(GenericSelectMenuInteractionEvent event, FlamesUser sender);
-    StringSelectMenu get(FlamesUser user);
+    void execute(GenericSelectMenuInteractionEvent event, LegacyFlamesUser sender);
+    StringSelectMenu get(LegacyFlamesUser user);
 }

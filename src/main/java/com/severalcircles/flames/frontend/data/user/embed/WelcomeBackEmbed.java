@@ -5,7 +5,7 @@
 package com.severalcircles.flames.frontend.data.user.embed;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import com.severalcircles.flames.util.StringUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -21,13 +21,13 @@ public class WelcomeBackEmbed implements FlamesEmbed {
     private static ResourceBundle resources;
     private final int dailyBonus;
     private final User user;
-    private final FlamesUser flamesUser;
+    private final LegacyFlamesUser legacyFlamesUser;
 
-    public WelcomeBackEmbed(int dailyBonus, User user, FlamesUser flamesUser) {
+    public WelcomeBackEmbed(int dailyBonus, User user, LegacyFlamesUser legacyFlamesUser) {
         this.dailyBonus = dailyBonus;
         this.user = user;
-        this.flamesUser = flamesUser;
-        resources = Flames.local(flamesUser.getConfig().getLocale());
+        this.legacyFlamesUser = legacyFlamesUser;
+        resources = Flames.local(legacyFlamesUser.getConfig().getLocale());
     }
     public MessageEmbed get() {
         Date now = Date.from(Instant.now());
@@ -65,7 +65,7 @@ public class WelcomeBackEmbed implements FlamesEmbed {
                 .setAuthor(String.format(timeMessage, user.getName()), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setTitle(resources.getString("title"))
                 .addField(resources.getString("dailyBonus"), StringUtil.formatScore(dailyBonus), true)
-                .addField(resources.getString("score"), StringUtil.formatScore(flamesUser.getScore()), true)
+                .addField(resources.getString("score"), StringUtil.formatScore(legacyFlamesUser.getScore()), true)
                 .setDescription(resources.getString("description"))
                 .setImage(img)
                 .setFooter(Flames.api.getSelfUser().getGlobalName(), Flames.api.getSelfUser().getAvatarUrl())

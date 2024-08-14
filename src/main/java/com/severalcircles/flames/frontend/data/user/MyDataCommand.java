@@ -4,7 +4,7 @@
 
 package com.severalcircles.flames.frontend.data.user;
 
-import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 import com.severalcircles.flames.frontend.FlamesCommand;
 import com.severalcircles.flames.frontend.data.user.embed.UserDataEmbed;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -13,7 +13,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 
 public class MyDataCommand implements FlamesCommand {
     @Override
-    public void execute(SlashCommandInteractionEvent event, FlamesUser sender) {
+    public void execute(SlashCommandInteractionEvent event, LegacyFlamesUser sender) {
 //        ResourceBundle resourceBundle = ResourceBundle.getBundle("features/UserDataEmbed", flamesUser.getConfig().getLocale()));
         MessageEmbed embed = new UserDataEmbed(event.getUser(), sender).get();
 //        event.replyEmbeds(new ExceptionHandler(new Exception()).handleThenGetFrontend()).complete();

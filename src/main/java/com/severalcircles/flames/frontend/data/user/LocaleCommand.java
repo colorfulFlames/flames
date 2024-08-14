@@ -4,9 +4,9 @@
 
 package com.severalcircles.flames.frontend.data.user;
 
-import com.severalcircles.flames.data.FlamesDataManager;
-import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.data.user.UserSetting;
+import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
+import com.severalcircles.flames.data.legacy.user.UserSetting;
 import com.severalcircles.flames.exception.FlamesHandlerEmbed;
 import com.severalcircles.flames.exception.user.BadArgumentsException;
 import com.severalcircles.flames.frontend.FlamesCommand;
@@ -20,7 +20,7 @@ import java.util.Objects;
 public class LocaleCommand implements FlamesCommand {
 
     @Override
-    public void execute(SlashCommandInteractionEvent event, FlamesUser sender) {
+    public void execute(SlashCommandInteractionEvent event, LegacyFlamesUser sender) {
         String setTo = Objects.requireNonNull(event.getOption("new_locale")).getAsString();
         System.out.println(setTo);
         Locale newLocale;
@@ -40,7 +40,7 @@ public class LocaleCommand implements FlamesCommand {
         }
         sender.getConfig().setLocale(newLocale);
         try {
-            FlamesDataManager.save(sender);
+            LegacyFlamesDataManager.save(sender);
         } catch (IOException e) {
             e.printStackTrace();
         }
