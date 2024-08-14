@@ -4,6 +4,7 @@
 
 package com.severalcircles.flames.events;
 
+import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
 import com.severalcircles.flames.exception.FlamesException;
 import com.severalcircles.flames.exception.handle.ExceptionHandler;
@@ -53,9 +54,7 @@ public class ButtonEvent extends ListenerAdapter implements FlamesDiscordEvent {
             if (entry.getKey().equals(event.getComponentId())) {
                 try {
                     System.out.println(1);
-                    buttonActionMap.get(event.getComponentId()).execute(event, LegacyFlamesDataManager.readUser(event.getUser()));
-                } catch (FlamesException e) {
-                    event.replyEmbeds(e.getHandler().handleThenGetFrontend()).complete();
+                    buttonActionMap.get(event.getComponentId()).execute(event, FlamesDataManager.getUser(event.getUser().getId()));
                 } catch (IOException e) {
                     event.replyEmbeds(new ExceptionHandler(e).handleThenGetFrontend()).complete();
                 }
