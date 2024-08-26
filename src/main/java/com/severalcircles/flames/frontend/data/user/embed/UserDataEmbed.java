@@ -5,11 +5,10 @@
 package com.severalcircles.flames.frontend.data.user.embed;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.data.global.GlobalData;
+import com.severalcircles.flames.data.legacy.global.GlobalData;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.UserEntities;
 import com.severalcircles.flames.data.user.UserEntity;
-import com.severalcircles.flames.data.user.UserFunFacts;
 import com.severalcircles.flames.external.FlamesAssets;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import com.severalcircles.flames.util.Ranking;
@@ -19,6 +18,7 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class UserDataEmbed implements FlamesEmbed {
@@ -29,7 +29,7 @@ public class UserDataEmbed implements FlamesEmbed {
     public UserDataEmbed(User user, FlamesUser flamesUser) {
         this.user = user;
         this.flamesUser = flamesUser;
-        resources = Flames.local(flamesUser.getConfig().getLocale());
+        resources = Flames.local(Locale.forLanguageTag(flamesUser.getLang()));
     }
 
 
@@ -38,16 +38,15 @@ public class UserDataEmbed implements FlamesEmbed {
         if (Ranking.toNext(flamesUser.getScore()) <= 0) tonext = "?";
         else tonext = StringUtil.formatScore(Ranking.toNext(flamesUser.getScore()));
         User.Profile profile = user.retrieveProfile().complete();
-        UserFunFacts funFacts = flamesUser.getFunFacts();
         UserEntities entities = flamesUser.getEntities();
         List<UserEntity> topAndBottom = entities.getTopAndBottom();
         return new EmbedBuilder()
-                .setAuthor(funFacts.getFavoriteQuote(), null, user.getAvatarUrl())
+                .setAuthor(flamesUser.getFavoriteQuote(), null, user.getAvatarUrl())
                 .setTitle(String.format(resources.getString("title"), user.getGlobalName()))
                 .addField(resources.getString("score"), StringUtil.formatScore(flamesUser.getScore()), true)
-                .addField(resources.getString("rank"), Ranking.getResources(flamesUser.getConfig().getLocale()).getString(Ranking.getRank(flamesUser.getScore()).toString()), true)
+                .addField(resources.getString("rank"), Ranking.getResources(Locale.forLanguageTag(flamesUser.getLang())).getString(Ranking.getRank(flamesUser.getScore()).toString()), true)
                 .addField(resources.getString("toNext"), tonext, true)
-//                .addField(resources.getString("emotion"), Emotion.getEmotionString(flamesUser.getEmotion(), flamesUser.getConfig().getLocale()), true)
+//                .addField(resources.getString("emotion"), Emotion.getEmotionString(legacyFlamesUser.getEmotion(), legacyFlamesUser.getConfig().getLocale()), true)
                 .addField(resources.getString("globalContribution"), Math.round(((float) flamesUser.getScore() / GlobalData.globalScore) * 100) + "%", true)
                 .addField(resources.getString("likes"), "* " + topAndBottom.get(0).getName()
                 +"\n* " + topAndBottom.get(1).getName()

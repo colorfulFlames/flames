@@ -4,4 +4,4 @@
 /**
  * Utilities relating to safety (i.e. Consent)
  */
-package com.severalcircles.flames.data.user.consent;
+package com.severalcircles.flames.data.legacy.user.consent;

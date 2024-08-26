@@ -4,6 +4,7 @@
 
 package com.severalcircles.flames.frontend.data.user;
 
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.frontend.FlamesCommand;
 import com.severalcircles.flames.frontend.data.user.embed.UserDataEmbed;

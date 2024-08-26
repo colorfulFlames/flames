@@ -5,7 +5,9 @@
 package com.severalcircles.flames.events;
 
 import com.severalcircles.flames.Flames;
+import com.severalcircles.flames.data.ConsentException;
 import com.severalcircles.flames.data.FlamesDataManager;
+import com.severalcircles.flames.data.legacy.user.consent.Consent;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.exception.FlamesException;
 import com.severalcircles.flames.exception.handle.ExceptionHandler;
@@ -29,18 +31,17 @@ public class CommandEvent extends ListenerAdapter implements FlamesDiscordEvent 
     @Override
     public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
         new Thread(() ->{
-        System.out.println("Slash command detected");
         //noinspection ResultOfMethodCallIgnored
         event.deferReply(true);
-        System.out.println(event.getName());
         for (Map.Entry<String, FlamesCommand> entry : Flames.commandMap.entrySet()) {
             if (entry.getKey().contains(event.getName())) {
                 try {
 //                    System.out.println(Flames.commandMap.get(entry.getKey()));
-                    FlamesUser fl = FlamesDataManager.readUser(event.getUser());
+                    FlamesUser fl = FlamesDataManager.getUser(event.getUser().getId());
 //                    throw new BadArgumentsException(fl, "This is a shitpost");
                     Flames.commandMap.get(entry.getKey()).execute(event, fl);
-                } catch (FlamesException e) {
+                } catch (ConsentException e) {
+                    if (e.consentLevel == 0) Consent.getConsent(event.getUser());
                     event.replyEmbeds(e.getHandler().handleThenGetFrontend()).complete();
                 } catch (Exception e) {
                     event.replyEmbeds(new ExceptionHandler(e).handleThenGetFrontend()).complete();

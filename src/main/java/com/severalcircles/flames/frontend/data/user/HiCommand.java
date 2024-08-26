@@ -6,7 +6,9 @@ package com.severalcircles.flames.frontend.data.user;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.FlamesDataManager;
-import com.severalcircles.flames.data.global.GlobalData;
+import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
+import com.severalcircles.flames.data.legacy.global.GlobalData;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.frontend.data.user.embed.WelcomeBackEmbed;
 import net.dv8tion.jda.api.entities.User;
@@ -32,8 +34,8 @@ public class HiCommand implements FlamesCommand {
         Date now = Date.from(Instant.now());
         User discordUser = event.getUser();
         int dailyBonus;
-        if (Instant.now().truncatedTo(ChronoUnit.DAYS).isAfter(flamesUser.getLastSeen().truncatedTo(ChronoUnit.DAYS))) {
-            if (Instant.now().truncatedTo(ChronoUnit.DAYS).compareTo(flamesUser.getLastSeen().truncatedTo(ChronoUnit.DAYS)) > 0) flamesUser.setStreak(flamesUser.getStreak() + 1); else flamesUser.setStreak(0);
+        if (Instant.now().truncatedTo(ChronoUnit.DAYS).isAfter(flamesUser.getLastSeen().toInstant().truncatedTo(ChronoUnit.DAYS))) {
+            if (Instant.now().truncatedTo(ChronoUnit.DAYS).compareTo(flamesUser.getLastSeen().toInstant().truncatedTo(ChronoUnit.DAYS)) > 0) flamesUser.setStreak(flamesUser.getStreak() + 1); else flamesUser.setStreak(0);
             //noinspection deprecation
             dailyBonus = baseBonus + (riseBonus * now.getDay() + 1) + (streakBonus * flamesUser.getStreak()) + (int) Math.round(Math.random() * randomBonus);
             flamesUser.addScore(dailyBonus);
@@ -44,12 +46,11 @@ public class HiCommand implements FlamesCommand {
                 e.printStackTrace();
             }
             event.replyEmbeds(new WelcomeBackEmbed(dailyBonus, discordUser, flamesUser).get()).queue();
-            flamesUser.setLastSeen(Instant.now());
+            flamesUser.setLastSeen(new Date());
             try {
-                FlamesDataManager.save(flamesUser);
+                FlamesDataManager.saveUser(flamesUser);
             } catch (IOException e) {
-                e.printStackTrace();
-                Flames.incrementErrorCount();
+                throw new RuntimeException(e);
             }
         } else {
             event.reply("You've already collected your bonus for today. See you tomorrow!").queue();

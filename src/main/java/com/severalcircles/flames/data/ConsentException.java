@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2021-2023 Several Circles.
+ * Copyright (c) 2021-2024 Several Circles.
  */
 
-package com.severalcircles.flames.exception;
+package com.severalcircles.flames.data;
 
-import com.severalcircles.flames.data.user.consent.Consent;
-import net.dv8tion.jda.api.entities.User;
+import com.severalcircles.flames.data.legacy.user.consent.Consent;
+import com.severalcircles.flames.exception.FlamesException;
 import net.dv8tion.jda.api.exceptions.InsufficientPermissionException;
 
 import java.util.Locale;
@@ -14,12 +14,9 @@ import java.util.ResourceBundle;
 public class ConsentException extends FlamesException {
     public final int consentLevel;
 
-    public ConsentException(int consentLevel, User user) throws InsufficientPermissionException {
+    public ConsentException(int consentLevel) throws InsufficientPermissionException {
         super("Operation not allowed.");
         this.consentLevel = consentLevel;
-        if (consentLevel == 0) {
-                Consent.getConsent(user);
-        }
     }
 
     @Override

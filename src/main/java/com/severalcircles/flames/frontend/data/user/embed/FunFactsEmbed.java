@@ -5,8 +5,8 @@
 package com.severalcircles.flames.frontend.data.user.embed;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.data.user.UserFunFacts;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
+import com.severalcircles.flames.data.legacy.user.UserFunFacts;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import com.severalcircles.flames.util.StringUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -19,15 +19,15 @@ import java.util.ResourceBundle;
 
 public class FunFactsEmbed implements FlamesEmbed {
     final ResourceBundle resources;
-    final FlamesUser flamesUser;
+    final LegacyFlamesUser legacyFlamesUser;
     final User user;
-    public FunFactsEmbed(User user, FlamesUser flamesUser) {
-        this.flamesUser = flamesUser;
+    public FunFactsEmbed(User user, LegacyFlamesUser legacyFlamesUser) {
+        this.legacyFlamesUser = legacyFlamesUser;
         this.user = user;
-        this.resources = ResourceBundle.getBundle("features/data/FunFactsEmbed", flamesUser.getConfig().getLocale());
+        this.resources = ResourceBundle.getBundle("features/data/FunFactsEmbed", legacyFlamesUser.getConfig().getLocale());
     }
     public MessageEmbed get() {
-        UserFunFacts funFacts = flamesUser.getFunFacts();
+        UserFunFacts funFacts = legacyFlamesUser.getFunFacts();
         return new EmbedBuilder()
                 .setAuthor(resources.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setColor(new Color(153, 85,187))
@@ -38,7 +38,7 @@ public class FunFactsEmbed implements FlamesEmbed {
                 .addField(resources.getString("highScore"), StringUtil.formatScore(funFacts.getHighestFlamesScore()), true)
                 .addField(resources.getString("lowScore"), StringUtil.formatScore(funFacts.getLowestFlamesScore()), true)
                 .setTimestamp(Instant.now())
-                .setFooter(String.format(Flames.getCommonRsc(flamesUser.getConfig().getLocale()).getString("scoreFormat"), flamesUser.getScore()), user.getAvatarUrl())
+                .setFooter(String.format(Flames.getCommonRsc(legacyFlamesUser.getConfig().getLocale()).getString("scoreFormat"), legacyFlamesUser.getScore()), user.getAvatarUrl())
                 .build();
     }
 }

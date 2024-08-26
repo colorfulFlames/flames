@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Several Circles.
  */
 
-package com.severalcircles.flames.data.user;
+package com.severalcircles.flames.data.legacy.user;
 
 import com.severalcircles.flames.util.Rank;
 
@@ -10,7 +10,7 @@ import java.time.Instant;
 import java.util.Properties;
 
 /**
- * Represents Fun Facts data for a FlamesUser
+ * Represents Fun Facts data for a LegacyFlamesUser
  */
 public class UserFunFacts {
     private Instant sadDay;

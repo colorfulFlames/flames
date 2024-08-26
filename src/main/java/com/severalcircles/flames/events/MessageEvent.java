@@ -4,15 +4,16 @@
 
 package com.severalcircles.flames.events;
 
+import com.google.cloud.language.v1.Entity;
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.amiguito.Amiguito;
-import com.severalcircles.flames.amiguito.AmiguitoDataManager;
 import com.severalcircles.flames.conversations.Conversation;
 import com.severalcircles.flames.conversations.ConversationsController;
 import com.severalcircles.flames.conversations.ExpiredConversationException;
+import com.severalcircles.flames.data.ConsentException;
 import com.severalcircles.flames.data.FlamesDataManager;
+import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.exception.ConsentException;
 import com.severalcircles.flames.external.analysis.Analysis;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
 import com.severalcircles.flames.frontend.today.Today;
@@ -22,7 +23,6 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Locale;
@@ -35,7 +35,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
         Logger.getGlobal().log(Level.FINE,event.getAuthor().getId() + " Triggered Message Event");
-        if (event.getMessage().getContentRaw().matches("[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)")) return; // Don't process URLs
+//        if (event.getMessage().getContentRaw().matches("[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)")) return; // Don't process URLs
         super.onMessageReceived(event);
         User user = event.getAuthor();
         Logger logger = Logger.getGlobal();
@@ -53,7 +53,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         FlamesUser flamesUser;
         // Read Flames User
         try {
-            flamesUser = FlamesDataManager.readUser(user);
+            flamesUser = FlamesDataManager.getUser(user.getId());
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Can't read user data for " + user.getId() + ".");
             logger.log(Level.SEVERE, Arrays.toString(e.getStackTrace()));
@@ -72,27 +72,30 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             e.printStackTrace();
             return;
         }
-        try {
-            AmiguitoDataManager.loadedAmiguitos.get(user.getId()).processMessage(finishedAnalysis);
-        } catch (NullPointerException e) {
-            AmiguitoDataManager.loadedAmiguitos.put(user.getId(), new Amiguito(flamesUser, "Amiguito"));
+        for (Entity entity : finishedAnalysis.getEntityList()) {
+            flamesUser.getEntities().addEntity(entity.getName(), finishedAnalysis.getEmotion() >= 0);
+            try {
+                FlamesDataManager.saveUser(flamesUser);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
         // Process conversation
         if (ConversationsController.activeConversations.containsKey(event.getChannel().getId())) {
-            Logger.getGlobal().log(Level.FINE, "Already in conversation");
+            Logger.getGlobal().log(Level.INFO, "Already in conversation");
             try {
                 System.out.println(finishedAnalysis);
-                ConversationsController.activeConversations.get(event.getChannel().getId()).processMessage(event.getMessage(), finishedAnalysis);
+                ConversationsController.activeConversations.get(event.getChannel().getId()).processMessage(event.getAuthor(), finishedAnalysis);
             } catch (ExpiredConversationException e) {
-                logger.log(Level.FINE, "Conversation at " + event.getChannel().getId() + " is expired, removing it from the conversations list.");
+                logger.log(Level.INFO, "Conversation at " + event.getChannel().getId() + " is expired, removing it from the conversations list.");
                 ConversationsController.activeConversations.remove(event.getChannel().getId());
             }
         } else {
-            Logger.getGlobal().log(Level.FINE, "New Conversation");
+            Logger.getGlobal().log(Level.INFO, "New Conversation");
             Conversation conversation = new Conversation(event.getChannel().asTextChannel());
             try {
                 Thread thread = new Thread(() -> {
-                    conversation.processMessage(event.getMessage(), finishedAnalysis);
+                    conversation.processMessage(event.getAuthor(), finishedAnalysis);
                 });
                 thread.start();
             } catch (ExpiredConversationException e) {
@@ -103,7 +106,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             ConversationsController.activeConversations.forEach((element, index) -> System.out.println(element));
         }
         // Check quote of the day
-        if (!Today.quote[2].equals(event.getAuthor().getId()) && flamesUser.getConfig().isQotdAllowed()) {
+        if (!Today.quote[2].equals(event.getAuthor().getId()) && flamesUser.isQuoteConsent()) {
             if (finishedAnalysis.getEmotion() > Today.quoteEmotion) {
                 Today.quote[0] = event.getMessage().getContentRaw();
                 Today.quote[1] = event.getAuthor().getName();

@@ -4,6 +4,7 @@
 
 package com.severalcircles.flames.exception.user;
 
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.exception.FlamesException;
 import net.dv8tion.jda.api.entities.User;

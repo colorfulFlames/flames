@@ -4,8 +4,8 @@
 
 package com.severalcircles.flames.util;
 
-import com.severalcircles.flames.data.FlamesDataManager;
-import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 import net.dv8tion.jda.api.entities.User;
 
 import java.text.DecimalFormat;
@@ -67,16 +67,16 @@ public class StringUtil {
         return df.format(score).replace(".", " ") + " FP";
     }
     public static String getFormattedName(User user) {
-        FlamesUser flamesUser;
+        LegacyFlamesUser legacyFlamesUser;
         try {
-            flamesUser = FlamesDataManager.readUser(user);
+            legacyFlamesUser = LegacyFlamesDataManager.readUser(user);
         } catch (Exception e) {
             e.printStackTrace();
             return user.getName();
         }
         String name = user.getName();
-        if (flamesUser.getScore() >= highestScore) {
-            highestScore = flamesUser.getScore();
+        if (legacyFlamesUser.getScore() >= highestScore) {
+            highestScore = legacyFlamesUser.getScore();
             name += " ?";
         }
         return name;

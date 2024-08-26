@@ -2,7 +2,7 @@
  * Copyright (c) 2024 Several Circles.
  */
 
-package com.severalcircles.flames.data.server;
+package com.severalcircles.flames.data.legacy.server;
 
 public enum HootenannyTitle {
     SERVER_FAN(0), SERVER_ENJOYER(100), SERVER_FIEND(500),

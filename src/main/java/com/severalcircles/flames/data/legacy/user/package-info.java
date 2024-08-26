@@ -4,4 +4,4 @@
 /**
  * User Data Structure
  */
-package com.severalcircles.flames.data.user;
+package com.severalcircles.flames.data.legacy.user;

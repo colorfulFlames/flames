@@ -5,10 +5,11 @@
 
 package com.severalcircles.flames;
 
-import com.severalcircles.flames.amiguito.AmiguitoDataManager;
 import com.severalcircles.flames.conversations.Conversation;
+import com.severalcircles.flames.data.DataUpgradeUtil;
 import com.severalcircles.flames.data.FlamesDataManager;
-import com.severalcircles.flames.data.global.GlobalData;
+import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
+import com.severalcircles.flames.data.legacy.global.GlobalData;
 import com.severalcircles.flames.events.*;
 import com.severalcircles.flames.frontend.FlamesCommand;
 import com.severalcircles.flames.frontend.conversations.ConversationCommand;
@@ -36,7 +37,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -76,6 +76,8 @@ public class Flames {
         Locale.setDefault(Locale.ENGLISH);
         properties.load(is);
         version = properties.getProperty("version");
+        try {new DataUpgradeUtil().upgradeData();}
+        catch (RuntimeException ignored) {}
         FlamesDataManager.prepare();
         String logName = "Flames " + version + "@" + InetAddress.getLocalHost().getHostName() + " " + Instant.now().truncatedTo(ChronoUnit.SECONDS).toString().replace(":", " ").replace("T", " T") + ".log";
         File logDir = new File(FlamesDataManager.FLAMES_DIRECTORY.getAbsolutePath() + "/logs");

@@ -5,7 +5,9 @@
 package com.severalcircles.flames.frontend.data.user;
 
 import com.severalcircles.flames.data.FlamesDataManager;
-import com.severalcircles.flames.data.global.GlobalData;
+import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
+import com.severalcircles.flames.data.legacy.global.GlobalData;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.frontend.FlamesButtonAction;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -35,18 +37,16 @@ public class ConsentButtonAction implements FlamesButtonAction {
             GlobalData.participants++;
             GlobalData.write();
             user.setConsent(1);
-            user.getConfig().setQotdAllowed(true);
-            user.getConfig().setFavQuoteAllowed(true);
+            user.setQuoteConsent(true);
         } else if (event.getComponentId().equals("consentn't")) {
             event.editMessage("Alright. Let me know if you change your mind.").queue();
-//        FlamesUser user;
+//        LegacyFlamesUser user;
         user.setConsent(2);
         } else if (event.getComponentId().equals("noQotd")) {
             event.editMessage("Alright, I won't use your messages as Quote of the Day.").complete();
-            user.getConfig().setFavQuoteAllowed(false);
-            user.getConfig().setQotdAllowed(false);
+            user.setQuoteConsent(false);
         }
-        FlamesDataManager.save(user);
+        FlamesDataManager.saveUser(user);
     }
 
 }

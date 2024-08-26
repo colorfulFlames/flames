@@ -4,4 +4,4 @@
 /**
  * Global Data Structure
  */
-package com.severalcircles.flames.data.global;
+package com.severalcircles.flames.data.legacy.global;

@@ -5,6 +5,7 @@
 package com.severalcircles.flames.frontend.data.user.embed;
 
 import com.severalcircles.flames.Flames;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import com.severalcircles.flames.util.StringUtil;
@@ -15,6 +16,7 @@ import net.dv8tion.jda.api.entities.User;
 import java.awt.*;
 import java.time.Instant;
 import java.util.Date;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class WelcomeBackEmbed implements FlamesEmbed {
@@ -27,7 +29,7 @@ public class WelcomeBackEmbed implements FlamesEmbed {
         this.dailyBonus = dailyBonus;
         this.user = user;
         this.flamesUser = flamesUser;
-        resources = Flames.local(flamesUser.getConfig().getLocale());
+        resources = Flames.local(Locale.forLanguageTag(flamesUser.getLang()));
     }
     public MessageEmbed get() {
         Date now = Date.from(Instant.now());

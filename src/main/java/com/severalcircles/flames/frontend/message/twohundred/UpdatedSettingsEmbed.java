@@ -5,9 +5,9 @@
 package com.severalcircles.flames.frontend.message.twohundred;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.data.FlamesDataManager;
-import com.severalcircles.flames.data.user.UserSetting;
-import com.severalcircles.flames.exception.ConsentException;
+import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
+import com.severalcircles.flames.data.legacy.user.UserSetting;
+import com.severalcircles.flames.data.ConsentException;
 import com.severalcircles.flames.exception.handle.ExceptionHandler;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -28,7 +28,7 @@ public class UpdatedSettingsEmbed implements FlamesEmbed {
         this.updatedSetting = updatedSetting;
         this.user = user;
         try {
-            this.resources = ResourceBundle.getBundle("message/UpdatedSettingsEmbed", FlamesDataManager.readUser(user).getConfig().getLocale());
+            this.resources = ResourceBundle.getBundle("message/UpdatedSettingsEmbed", LegacyFlamesDataManager.readUser(user).getConfig().getLocale());
         } catch (IOException e) {
             // Weird DataVersionException but go off
             em = new ExceptionHandler(e).handleThenGetFrontend();

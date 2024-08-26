@@ -5,8 +5,10 @@
 package com.severalcircles.flames.frontend.thanks;
 
 import com.severalcircles.flames.data.FlamesDataManager;
+import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
+import com.severalcircles.flames.data.ConsentException;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.exception.ConsentException;
 import com.severalcircles.flames.exception.handle.ExceptionHandler;
 import com.severalcircles.flames.frontend.FlamesCommand;
 import net.dv8tion.jda.api.entities.User;
@@ -27,13 +29,12 @@ public class ThanksCommand implements FlamesCommand {
         }
         FlamesUser flt;
         try {
-            flt = FlamesDataManager.readUser(thanked);
-        } catch (IOException e) {
-            e.printStackTrace();
-            new ExceptionHandler(e).handleThenGetFrontend();
-            return;
+            flt = FlamesDataManager.getUser(thanked.getId());
         } catch (ConsentException e) {
             event.replyEmbeds(e.getHandler().handleThenGetFrontend()).complete();
+            return;
+        } catch (IOException e) {
+            event.replyEmbeds(new ExceptionHandler(e).handleThenGetFrontend()).complete();
             return;
         }
         event.replyEmbeds(new ThanksEmbed(thanked, event.getUser(), flt, msg).get()).complete();

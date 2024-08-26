@@ -2,18 +2,18 @@
  * Copyright (c) 2024 Several Circles.
  */
 
-package com.severalcircles.flames.data.server;
+package com.severalcircles.flames.data.legacy.server;
 
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Random;
 
-public class FlamesServer {
+public class LegacyFlamesServer {
     private int score;
     private String id;
-    private int hootenannyDay;
+    private final int hootenannyDay;
     ServerHootenannyData hootenannyData;
-    public FlamesServer(int score, String id, int hootenannyDay) {
+    public LegacyFlamesServer(int score, String id, int hootenannyDay) {
         this.score = score;
         this.id = id;
         this.hootenannyDay = hootenannyDay;
@@ -24,7 +24,7 @@ public class FlamesServer {
             hootenannyData = new ServerHootenannyData();
         }
     }
-    public FlamesServer(String id) {
+    public LegacyFlamesServer(String id) {
         this.id = id;
         this.score = 0;
         this.hootenannyDay = new Random().nextInt(28) + 1; // Randomly select a day of the month for Hootanany Day

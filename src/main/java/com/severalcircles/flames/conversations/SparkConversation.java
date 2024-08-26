@@ -4,6 +4,7 @@
 
 package com.severalcircles.flames.conversations;
 
+import com.severalcircles.flames.data.ConsentException;
 import com.severalcircles.flames.exception.AlreadyVotedException;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
 import com.severalcircles.flames.frontend.conversations.SparkResultsEmbed;
@@ -12,12 +13,13 @@ import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.middleman.GuildMessageChannel;
 import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Logger;
 
-public class SparkConversation extends Conversation {
+public class SparkConversation {
     public static final Map<String, SparkConversation> sparkConversations = new HashMap<>();
     private final List<String> alreadyVoted = new LinkedList<>();
     private final Map<Message, Integer> messageList;
@@ -26,8 +28,10 @@ public class SparkConversation extends Conversation {
     final Timer t2 = new Timer();
     int votes = 0;
     final MessageChannelUnion channel;
+    public MessageChannelUnion getChannel() {
+        return channel;
+    }
     public SparkConversation(MessageChannelUnion channel, String question, int minutes) {
-        super((GuildMessageChannel) channel);
         this.channel = channel;
         this.question = question;
         if (minutes < 1) {
@@ -64,11 +68,6 @@ public class SparkConversation extends Conversation {
         sparkConversations.remove(getChannel().getId());
         channel.asTextChannel().getManager().setSlowmode(0).complete();
         Logger.getGlobal().info("Spark conversation ended.");
-    }
-    @Override
-    public void processMessage(Message message, FinishedAnalysis finishedAnalysis) throws ExpiredConversationException {
-        super.processMessage(message, finishedAnalysis);
-
     }
 
     public void addMessageVote(Message message, User user) throws AlreadyVotedException {

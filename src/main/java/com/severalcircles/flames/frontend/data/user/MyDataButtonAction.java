@@ -8,7 +8,6 @@ import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.frontend.FlamesButtonAction;
 import com.severalcircles.flames.frontend.data.user.embed.UserDataEmbed;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
-//import net.dv8tion.jda.api.events.interaction.ButtonInteractionEvent;
 
 public class MyDataButtonAction implements FlamesButtonAction {
     @Override
