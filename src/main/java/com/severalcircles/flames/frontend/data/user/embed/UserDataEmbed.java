@@ -6,10 +6,9 @@ package com.severalcircles.flames.frontend.data.user.embed;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.legacy.global.GlobalData;
-import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
+import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.UserEntities;
 import com.severalcircles.flames.data.user.UserEntity;
-import com.severalcircles.flames.data.legacy.user.UserFunFacts;
 import com.severalcircles.flames.external.FlamesAssets;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import com.severalcircles.flames.util.Ranking;
@@ -19,36 +18,36 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class UserDataEmbed implements FlamesEmbed {
     private final User user;
-    private final LegacyFlamesUser legacyFlamesUser;
+    private final FlamesUser flamesUser;
     // I'll fix this later lmao
     private final ResourceBundle resources;
-    public UserDataEmbed(User user, LegacyFlamesUser legacyFlamesUser) {
+    public UserDataEmbed(User user, FlamesUser flamesUser) {
         this.user = user;
-        this.legacyFlamesUser = legacyFlamesUser;
-        resources = Flames.local(legacyFlamesUser.getConfig().getLocale());
+        this.flamesUser = flamesUser;
+        resources = Flames.local(Locale.forLanguageTag(flamesUser.getLang()));
     }
 
 
     public MessageEmbed get() {
         String tonext;
-        if (Ranking.toNext(legacyFlamesUser.getScore()) <= 0) tonext = "?";
-        else tonext = StringUtil.formatScore(Ranking.toNext(legacyFlamesUser.getScore()));
+        if (Ranking.toNext(flamesUser.getScore()) <= 0) tonext = "?";
+        else tonext = StringUtil.formatScore(Ranking.toNext(flamesUser.getScore()));
         User.Profile profile = user.retrieveProfile().complete();
-        UserFunFacts funFacts = legacyFlamesUser.getFunFacts();
-        UserEntities entities = legacyFlamesUser.getEntities();
+        UserEntities entities = flamesUser.getEntities();
         List<UserEntity> topAndBottom = entities.getTopAndBottom();
         return new EmbedBuilder()
-                .setAuthor(funFacts.getFavoriteQuote(), null, user.getAvatarUrl())
+                .setAuthor(flamesUser.getFavoriteQuote(), null, user.getAvatarUrl())
                 .setTitle(String.format(resources.getString("title"), user.getGlobalName()))
-                .addField(resources.getString("score"), StringUtil.formatScore(legacyFlamesUser.getScore()), true)
-                .addField(resources.getString("rank"), Ranking.getResources(legacyFlamesUser.getConfig().getLocale()).getString(Ranking.getRank(legacyFlamesUser.getScore()).toString()), true)
+                .addField(resources.getString("score"), StringUtil.formatScore(flamesUser.getScore()), true)
+                .addField(resources.getString("rank"), Ranking.getResources(Locale.forLanguageTag(flamesUser.getLang())).getString(Ranking.getRank(flamesUser.getScore()).toString()), true)
                 .addField(resources.getString("toNext"), tonext, true)
 //                .addField(resources.getString("emotion"), Emotion.getEmotionString(legacyFlamesUser.getEmotion(), legacyFlamesUser.getConfig().getLocale()), true)
-                .addField(resources.getString("globalContribution"), Math.round(((float) legacyFlamesUser.getScore() / GlobalData.globalScore) * 100) + "%", true)
+                .addField(resources.getString("globalContribution"), Math.round(((float) flamesUser.getScore() / GlobalData.globalScore) * 100) + "%", true)
                 .addField(resources.getString("likes"), "* " + topAndBottom.get(0).getName()
                 +"\n* " + topAndBottom.get(1).getName()
                 +"\n* " + topAndBottom.get(2).getName(), true)
@@ -56,7 +55,7 @@ public class UserDataEmbed implements FlamesEmbed {
                 +"\n* " + topAndBottom.get(4).getName()
                 +"\n* " + topAndBottom.get(5).getName(), true)
                 .setColor(profile.getAccentColor())
-                .setThumbnail(FlamesAssets.getRankIcon(Ranking.getRank(legacyFlamesUser.getScore())))
+                .setThumbnail(FlamesAssets.getRankIcon(Ranking.getRank(flamesUser.getScore())))
                 .setFooter(Flames.api.getSelfUser().getGlobalName(), Flames.api.getSelfUser().getAvatarUrl())
                 .build();
     }

@@ -7,7 +7,7 @@ package com.severalcircles.flames.data.legacy;
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.user.UserEntities;
 import com.severalcircles.flames.data.user.UserEntity;
-import com.severalcircles.flames.data.legacy.server.FlamesServer;
+import com.severalcircles.flames.data.legacy.server.LegacyFlamesServer;
 import com.severalcircles.flames.data.legacy.user.*;
 import com.severalcircles.flames.data.ConsentException;
 import com.severalcircles.flames.exception.FlamesMetaException;
@@ -64,6 +64,7 @@ public class LegacyFlamesDataManager {
      */
     @Deprecated
     public static boolean newUser(User user) throws IOException {
+
 //        String name = Flames.api.getUserById(discordId).getName();
         String name = user.getName();
         String discordId = user.getId();
@@ -96,8 +97,10 @@ public class LegacyFlamesDataManager {
             return false;
         }
         else {
+            
             return false;
         }
+
     }
 
     /**
@@ -165,7 +168,7 @@ public class LegacyFlamesDataManager {
         File udir = new File(USER_DIRECTORY.getAbsolutePath() + "/" + id);
         if (id == null) throw new IllegalArgumentException("User ID cannot be null. Did you really think you were going to get away with that?");
         if (udir.mkdir() && !skipConsent) {
-            throw new ConsentException(0, Flames.api.retrieveUserById(id).complete());
+            throw new ConsentException(0);
         }
         File userfl = new File(udir.getAbsolutePath() + "/user.fl");
         File config = new File(udir.getAbsolutePath() + "/config.fl");
@@ -234,7 +237,7 @@ public class LegacyFlamesDataManager {
         userEntities.setEntities(e);
         fluser.setEntities(userEntities);
         fluser.setFunFacts(funFacts);
-        if (fluser.getConsent() != 1 && !skipConsent) throw new ConsentException(fluser.getConsent(), Flames.api.getUserById(id));
+        if (fluser.getConsent() != 1 && !skipConsent) throw new ConsentException(fluser.getConsent());
         return fluser;
     }
     public static String[] getChannelWords(Channel channel) {
@@ -273,7 +276,7 @@ public class LegacyFlamesDataManager {
         }
     }
     @Deprecated
-    public static FlamesServer getServer(String id) {
+    public static LegacyFlamesServer getServer(String id) {
         File serverFile = new File(SERVER_DIRECTORY.getAbsolutePath() + "/" + id + ".fl");
         File serverHootenannyDataFile = new File(SERVER_DIRECTORY.getAbsolutePath() + "/" + id + "-hootenannyData.fl");
         try {
@@ -281,10 +284,10 @@ public class LegacyFlamesDataManager {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        FlamesServer server;
+        LegacyFlamesServer server;
         try {
             if (serverFile.createNewFile()) {
-                server = new FlamesServer(id);
+                server = new LegacyFlamesServer(id);
                 saveServer(server);
                 return server;
             }
@@ -298,13 +301,13 @@ public class LegacyFlamesDataManager {
             int score = Integer.parseInt(data.get("score").toString());
             int hootenannyDay = Integer.parseInt(data.get("hootenannyDay").toString());
             String id2 = data.get("id").toString();
-            return new FlamesServer(score, id2, hootenannyDay);
+            return new LegacyFlamesServer(score, id2, hootenannyDay);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @Deprecated
-    public static void saveServer(FlamesServer server) {
+    public static void saveServer(LegacyFlamesServer server) {
 
         File serverFile = new File(SERVER_DIRECTORY.getAbsolutePath() + "/" + server.getId() + ".fl");
         try {

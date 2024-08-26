@@ -6,7 +6,7 @@ package com.severalcircles.flames.frontend.info;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.legacy.global.GlobalData;
-import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
+import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.external.FlamesAssets;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import com.severalcircles.flames.util.StringUtil;
@@ -14,13 +14,14 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 
 import java.awt.*;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class AboutEmbed implements FlamesEmbed {
     private final ResourceBundle local;
 
-    public AboutEmbed(LegacyFlamesUser user) {
-        this.local = Flames.local(user.getConfig().getLocale());
+    public AboutEmbed(FlamesUser user) {
+        this.local = Flames.local(Locale.forLanguageTag(user.getLang()));
     }
     public MessageEmbed get() {
         return new EmbedBuilder()

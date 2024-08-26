@@ -5,6 +5,7 @@
 package com.severalcircles.flames.exception.user;
 
 import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
+import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.exception.FlamesException;
 import net.dv8tion.jda.api.entities.User;
 
@@ -12,7 +13,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class FlamesUserException extends FlamesException {
-    final LegacyFlamesUser legacyFlamesUser;
+    final FlamesUser flamesUser;
     final User user;
     @Override
     public String getCode() {
@@ -24,13 +25,13 @@ public class FlamesUserException extends FlamesException {
         return null;
     }
 
-    public FlamesUserException(LegacyFlamesUser legacyFlamesUser, String message, User user) {
+    public FlamesUserException(FlamesUser flamesUser, String message, User user) {
         super(message);
-        this.legacyFlamesUser = legacyFlamesUser;
+        this.flamesUser = flamesUser;
         this.user = user;
     }
-    public LegacyFlamesUser getFlamesUser() {
-        return legacyFlamesUser;
+    public FlamesUser getFlamesUser() {
+        return flamesUser;
     }
 
     public User getUser() {

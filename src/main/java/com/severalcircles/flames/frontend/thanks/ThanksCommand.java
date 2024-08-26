@@ -4,9 +4,11 @@
 
 package com.severalcircles.flames.frontend.thanks;
 
+import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
 import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 import com.severalcircles.flames.data.ConsentException;
+import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.exception.handle.ExceptionHandler;
 import com.severalcircles.flames.frontend.FlamesCommand;
 import net.dv8tion.jda.api.entities.User;
@@ -17,7 +19,7 @@ import java.util.Objects;
 
 public class ThanksCommand implements FlamesCommand {
     @Override
-    public void execute(SlashCommandInteractionEvent event, LegacyFlamesUser sender) {
+    public void execute(SlashCommandInteractionEvent event, FlamesUser sender) {
         User thanked = Objects.requireNonNull(event.getOption("who")).getAsUser();
         String msg;
         try {
@@ -25,15 +27,14 @@ public class ThanksCommand implements FlamesCommand {
         } catch (NullPointerException e) {
             msg = "";
         }
-        LegacyFlamesUser flt;
+        FlamesUser flt;
         try {
-            flt = LegacyFlamesDataManager.readUser(thanked);
-        } catch (IOException e) {
-            e.printStackTrace();
-            new ExceptionHandler(e).handleThenGetFrontend();
-            return;
+            flt = FlamesDataManager.getUser(thanked.getId());
         } catch (ConsentException e) {
             event.replyEmbeds(e.getHandler().handleThenGetFrontend()).complete();
+            return;
+        } catch (IOException e) {
+            event.replyEmbeds(new ExceptionHandler(e).handleThenGetFrontend()).complete();
             return;
         }
         event.replyEmbeds(new ThanksEmbed(thanked, event.getUser(), flt, msg).get()).complete();

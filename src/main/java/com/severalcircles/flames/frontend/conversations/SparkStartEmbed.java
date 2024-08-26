@@ -6,6 +6,7 @@ package com.severalcircles.flames.frontend.conversations;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
+import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.external.ImageSearch;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -16,16 +17,17 @@ import java.awt.*;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class SparkStartEmbed implements FlamesEmbed {
     final ResourceBundle local;
-    final LegacyFlamesUser fluser;
+    final FlamesUser fluser;
     final User user;
     final String question;
     final int minutes;
-    public SparkStartEmbed(LegacyFlamesUser fluser, User user, String question, int minutes) {
-        local = Flames.local(fluser.getConfig().getLocale());
+    public SparkStartEmbed(FlamesUser fluser, User user, String question, int minutes) {
+        local = Flames.local(Locale.forLanguageTag(fluser.getLang()));
         this.fluser = fluser;
         this.user = user;
         this.question = question;

@@ -5,8 +5,8 @@
 package com.severalcircles.flames.frontend.data.other;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.data.legacy.server.FlamesServer;
-import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
+import com.severalcircles.flames.data.legacy.server.LegacyFlamesServer;
+import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -16,15 +16,15 @@ import java.awt.*;
 import java.util.*;
 
 public class ServerDataEmbed implements FlamesEmbed {
-    private FlamesServer server;
-    private LegacyFlamesUser user;
+    private final LegacyFlamesServer server;
+    private final FlamesUser user;
     ResourceBundle local;
     GuildChannel origin;
-    public ServerDataEmbed(FlamesServer server, LegacyFlamesUser user, GuildChannel origin) {
+    public ServerDataEmbed(LegacyFlamesServer server, FlamesUser user, GuildChannel origin) {
         this.server = server;
         this.user = user;
         this.origin = origin;
-        local = Flames.local(user.getConfig().getLocale());
+        local = Flames.local(Locale.forLanguageTag(user.getLang()));
     }
     @Override
     public MessageEmbed get() {
@@ -39,7 +39,7 @@ public class ServerDataEmbed implements FlamesEmbed {
         else if (st.equals(end)) hootenannyDay.append("st");
         else hootenannyDay.append("th");
         Color color = Color.GRAY;
-        String description = String.format(local.getString("hootenanny"), hootenannyDay.toString());
+        String description = String.format(local.getString("hootenanny"), hootenannyDay);
         String title = origin.getGuild().getName();
         if (new Date().getDate() == server.getHootenannyDay()) {
             color = Color.RED;

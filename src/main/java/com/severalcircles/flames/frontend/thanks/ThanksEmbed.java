@@ -5,8 +5,9 @@
 package com.severalcircles.flames.frontend.thanks;
 
 import com.severalcircles.flames.Flames;
+import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
-import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
+import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.exception.FlamesMetaException;
 import com.severalcircles.flames.exception.handle.ExceptionHandler;
 import com.severalcircles.flames.exception.handle.FlamesRuntimeExceptionHandler;
@@ -21,22 +22,23 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 
 public class ThanksEmbed implements FlamesEmbed {
     private final User thanked;
     private final User sender;
-    private final LegacyFlamesUser legacyFlamesUserThanked;
+    private final FlamesUser flamesUser;
     private final ResourceBundle resources;
     private String msg;
     static final List<String> success = new LinkedList<>();
-    public ThanksEmbed(User thanked, User sender, LegacyFlamesUser legacyFlamesUserThanked, String msg) {
+    public ThanksEmbed(User thanked, User sender, FlamesUser flamesUserThanked, String msg) {
         this.thanked = thanked;
         this.sender = sender;
-        this.legacyFlamesUserThanked = legacyFlamesUserThanked;
+        this.flamesUser = flamesUserThanked;
         this.msg = msg;
-        resources = Flames.local(legacyFlamesUserThanked.getConfig().getLocale());
+        resources = Flames.local(Locale.forLanguageTag(flamesUser.getLang()));
         if (this.msg.isEmpty()) this.msg = resources.getString("description");
 
     }
@@ -48,9 +50,9 @@ public class ThanksEmbed implements FlamesEmbed {
             return new EmbedBuilder().setTitle(String.format(resources.getString("alreadyThanked"), sender.getGlobalName())).setColor(Color.red).build();
         }
 
-        legacyFlamesUserThanked.setScore(legacyFlamesUserThanked.getScore() + 2500);
+        flamesUser.setScore(flamesUser.getScore() + 2500);
         try {
-            LegacyFlamesDataManager.save(legacyFlamesUserThanked);
+            FlamesDataManager.saveUser(flamesUser);
         } catch (IOException e) {
             e.printStackTrace();
             return new ExceptionHandler(e).handleThenGetFrontend();

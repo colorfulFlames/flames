@@ -4,9 +4,11 @@
 
 package com.severalcircles.flames.frontend.data.user;
 
+import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
 import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 import com.severalcircles.flames.data.legacy.user.UserSetting;
+import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.exception.FlamesHandlerEmbed;
 import com.severalcircles.flames.exception.user.BadArgumentsException;
 import com.severalcircles.flames.frontend.FlamesCommand;
@@ -20,7 +22,7 @@ import java.util.Objects;
 public class LocaleCommand implements FlamesCommand {
 
     @Override
-    public void execute(SlashCommandInteractionEvent event, LegacyFlamesUser sender) {
+    public void execute(SlashCommandInteractionEvent event, FlamesUser sender) {
         String setTo = Objects.requireNonNull(event.getOption("new_locale")).getAsString();
         System.out.println(setTo);
         Locale newLocale;
@@ -38,11 +40,11 @@ public class LocaleCommand implements FlamesCommand {
                 event.replyEmbeds(new FlamesHandlerEmbed(new BadArgumentsException(sender,"Locale must be en, es, or tra.", event.getUser())).get()).complete();
                 return;
         }
-        sender.getConfig().setLocale(newLocale);
+        sender.setLang(newLocale.toLanguageTag());
         try {
-            LegacyFlamesDataManager.save(sender);
+            FlamesDataManager.saveUser(sender);
         } catch (IOException e) {
-            e.printStackTrace();
+            event.replyEmbeds(new FlamesHandlerEmbed(e).get()).complete();
         }
         event.replyEmbeds(new UpdatedSettingsEmbed(UserSetting.LOCALE, event.getUser()).get()).complete();
 

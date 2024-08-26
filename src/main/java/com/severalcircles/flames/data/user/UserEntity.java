@@ -16,7 +16,7 @@ public class UserEntity {
         this.happyCount = happyCount;
         this.sadCount = sadCount;
     }
-
+    public UserEntity() {}
     public String getName() {
         return name;
     }

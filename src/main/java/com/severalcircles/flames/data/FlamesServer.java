@@ -17,8 +17,7 @@ public class FlamesServer extends FlamesDatatype {
     public void setId(String id) {
         this.id = id;
     }
-
-    public int getScore() {
+        public int getScore() {
         return score;
     }
 
@@ -50,5 +49,23 @@ public class FlamesServer extends FlamesDatatype {
         this.score = 0;
         this.hootenannyDay = 1;
         this.hootenannyScores = new HashMap<>();
+    }
+    public FlamesServer() {
+        this.id = null;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public Map<String, Integer> getHootenannyScores() {
+        return hootenannyScores;
+    }
+
+    public void setHootenannyScores(Map<String, Integer> hootenannyScores) {
+        this.hootenannyScores = hootenannyScores;
+    }
+    public boolean todayIsHootenannyDay() {
+        return hootenannyDay == new java.util.Date().getDate();
     }
 }

@@ -4,7 +4,7 @@
 
 package com.severalcircles.flames.data;
 
-import com.severalcircles.flames.data.legacy.server.FlamesServer;
+import com.severalcircles.flames.data.legacy.server.LegacyFlamesServer;
 import com.severalcircles.flames.data.user.FlamesUser;
 import org.yaml.snakeyaml.Yaml;
 
@@ -30,9 +30,11 @@ public class FlamesDataManager {
         if (USER_DIRECTORY.mkdir()) LOGGER.info("Created Users directory");
         if (SERVER_DIRECTORY.mkdir()) LOGGER.info("Created Servers directory");
     }
+    public static FlamesUser getUser(String id) throws ConsentException, IOException {
+        return getUser(id, false);
+    }
 
-    public static FlamesUser getUser(String id) {
-        try {
+    public static FlamesUser getUser(String id, boolean skipConsent) throws ConsentException, IOException {
             File userFile = new File(USER_DIRECTORY.getAbsolutePath() + "/" + id + ".yml");
             Yaml yaml = new Yaml();
 
@@ -41,32 +43,18 @@ public class FlamesDataManager {
                 Files.write(userFile.toPath(), yaml.dump(newUser).getBytes());
                 return newUser;
             }
-
             String contents = new String(Files.readAllBytes(userFile.toPath()));
-            return yaml.loadAs(contents, FlamesUser.class);
-        } catch (IOException e) {
-            LOGGER.severe("Failed to get user - " + e.getMessage());
-            return null;
-        }
+            FlamesUser user = yaml.loadAs(contents, FlamesUser.class);
+            if (user.getId().equals("797283404654575657")) Logger.getGlobal().warning("An operation attempted to save user 797283404654575657");
+            if (user.getConsent() != 1 && !skipConsent) throw new ConsentException(user.getConsent());
+            else return user;
     }
 
-    public static void saveUser(FlamesUser flamesUser) {
-        try {
-            File userFile = new File(USER_DIRECTORY.getAbsolutePath() + "/" + flamesUser.getID() + ".yml");
-            Yaml yaml = new Yaml();
-            Files.write(userFile.toPath(), yaml.dump(flamesUser).getBytes());
-        } catch (IOException e) {
-            LOGGER.severe("Failed to save user - " + e.getMessage());
-        }
+    public static void saveUser(FlamesUser flamesUser) throws IOException {
+        File userFile = new File(USER_DIRECTORY.getAbsolutePath() + "/" + flamesUser.getID() + ".yml");
+        Yaml yaml = new Yaml();
+        Files.write(userFile.toPath(), yaml.dump(flamesUser).getBytes());
     }
-
-    public static void main(String args[]) {
-        prepare();
-        FlamesUser user = getUser("test");
-        LOGGER.info(user.getID());
-        saveUser(user);
-    }
-
     public static FlamesServer getServer(String id) {
         try {
             File serverFile = new File(SERVER_DIRECTORY.getAbsolutePath() + "/" + id + ".yml");
@@ -86,11 +74,11 @@ public class FlamesDataManager {
         }
     }
 
-    public static void saveServer(FlamesServer flamesServer) {
+    public static void saveServer(LegacyFlamesServer legacyFlamesServer) {
         try {
-            File serverFile = new File(SERVER_DIRECTORY.getAbsolutePath() + "/" + flamesServer.getId() + ".yml");
+            File serverFile = new File(SERVER_DIRECTORY.getAbsolutePath() + "/" + legacyFlamesServer.getId() + ".yml");
             Yaml yaml = new Yaml();
-            Files.write(serverFile.toPath(), yaml.dump(flamesServer).getBytes());
+            Files.write(serverFile.toPath(), yaml.dump(legacyFlamesServer).getBytes());
         } catch (IOException e) {
             LOGGER.severe("Failed to save server - " + e.getMessage());
         }

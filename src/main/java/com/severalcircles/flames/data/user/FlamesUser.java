@@ -79,129 +79,129 @@ public class FlamesUser extends FlamesDatatype {
     }
 
     public String getId() {
-        checkId();
+        //checkId();
         return id;
     }
     public void setId(String id) {
         this.id = id;
     }
     public int getScore() {
-        checkId();
+        //checkId();
         return score;
     }
 
     public int getConsent() {
-        checkId();
+        //checkId();
         return consent;
     }
 
     public int getStreak() {
-        checkId();
+        //checkId();
         return streak;
     }
 
     public float getEmotion() {
-        checkId();
+        //checkId();
         return emotion;
     }
 
     public Date getLastSeen() {
-        checkId();
+        //checkId();
         return lastSeen;
     }
 
     public Date getSadDay() {
-        checkId();
+        //checkId();
         return sadDay;
     }
 
     public float getLowestEmotion() {
-        checkId();
+        //checkId();
         return lowestEmotion;
     }
 
     public Date getHappyDay() {
-        checkId();
+        //checkId();
         return happyDay;
     }
 
     public float getHighestEmotion() {
-        checkId();
+        //checkId();
         return highestEmotion;
     }
 
     public String getFavoriteQuote() {
-        checkId();
+        //checkId();
         return favoriteQuote;
     }
 
     public boolean isQuoteConsent() {
-        checkId();
+        //checkId();
         return quoteConsent;
     }
 
     public UserEntities getEntities() {
-        checkId();
+        //checkId();
         return entities;
     }
 
     public void setScore(int score) {
-        checkId();
+        //checkId();
         this.score = score;
     }
 
     public void setConsent(int consent) {
-        checkId();
+//        //checkId();
         this.consent = consent;
     }
 
     public void setStreak(int streak) {
-        checkId();
+        //checkId();
         this.streak = streak;
     }
 
     public void setEmotion(float emotion) {
-        checkId();
+        //checkId();
         this.emotion = emotion;
     }
 
     public void setLastSeen(Date lastSeen) {
-        checkId();
+        //checkId();
         this.lastSeen = lastSeen;
     }
 
     public void setSadDay(Date sadDay) {
-        checkId();
+        //checkId();
         this.sadDay = sadDay;
     }
 
     public void setLowestEmotion(float lowestEmotion) {
-        checkId();
+        //checkId();
         this.lowestEmotion = lowestEmotion;
     }
 
     public void setHappyDay(Date happyDay) {
-        checkId();
+        //checkId();
         this.happyDay = happyDay;
     }
 
     public void setHighestEmotion(float highestEmotion) {
-        checkId();
+        //checkId();
         this.highestEmotion = highestEmotion;
     }
 
     public void setFavoriteQuote(String favoriteQuote) {
-        checkId();
+        //checkId();
         this.favoriteQuote = favoriteQuote;
     }
 
     public void setQuoteConsent(boolean quoteConsent) {
-        checkId();
+        //checkId();
         this.quoteConsent = quoteConsent;
     }
 
     public void setEntities(UserEntities entities) {
-        checkId();
+        //checkId();
         this.entities = entities;
     }
 
@@ -214,5 +214,9 @@ public class FlamesUser extends FlamesDatatype {
     @Override
     public String getID() {
         return getId();
+    }
+
+    public void addScore(int score) {
+        this.score += score;
     }
 }

@@ -4,15 +4,15 @@
 
 package com.severalcircles.flames.exception.user;
 
-import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
+import com.severalcircles.flames.data.user.FlamesUser;
 import net.dv8tion.jda.api.entities.User;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class BadArgumentsException extends FlamesUserException {
-    public BadArgumentsException(LegacyFlamesUser legacyFlamesUser, String message, User user) {
-        super(legacyFlamesUser, message, user);
+    public BadArgumentsException(FlamesUser flamesUser, String message, User user) {
+        super(flamesUser, message, user);
     }
 
     @Override

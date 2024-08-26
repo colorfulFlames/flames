@@ -5,7 +5,7 @@
 package com.severalcircles.flames.frontend.today;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
+import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.external.ImageSearch;
 import com.severalcircles.flames.external.analysis.Analysis;
 import com.severalcircles.flames.frontend.FlamesEmbed;
@@ -18,16 +18,17 @@ import net.dv8tion.jda.api.entities.User;
 import java.awt.*;
 import java.io.IOException;
 import java.time.Instant;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class TodayEmbed implements FlamesEmbed {
-    private final LegacyFlamesUser legacyFlamesUser;
+    private final FlamesUser flamesUser;
     private static ResourceBundle resources;
-    public TodayEmbed(User user, LegacyFlamesUser legacyFlamesUser) {
-        this.legacyFlamesUser = legacyFlamesUser;
-        resources = Flames.local(legacyFlamesUser.getConfig().getLocale());
+    public TodayEmbed(User user, FlamesUser flamesUser) {
+        this.flamesUser = flamesUser;
+        resources = Flames.local(Locale.forLanguageTag(flamesUser.getLang()));
     }
     public MessageEmbed get() {
         String trendingEntity = "";
@@ -46,7 +47,7 @@ public class TodayEmbed implements FlamesEmbed {
                     .setAuthor(String.format(resources.getString("author"), StringUtil.prettifyDate(Instant.now())), null, Flames.api.getSelfUser().getAvatarUrl())
                     .setTitle(title)
                     .addField(resources.getString("talkingAbout"), trendingEntity, true)
-                    .addField(resources.getString("feeling"), Emotion.getEmotionString(Today.emotion, legacyFlamesUser.getConfig().getLocale()), true)
+                    .addField(resources.getString("feeling"), Emotion.getEmotionString(Today.emotion, Locale.forLanguageTag(flamesUser.getLang())), true)
                     .addField(resources.getString("highUser"), Today.highUser, true)
                     .addBlankField(false)
                     .addField("\"" + Today.quote[0] + "\"", "- " + Today.quote[1] + ", " + StringUtil.prettifyDate(Instant.now()), false)

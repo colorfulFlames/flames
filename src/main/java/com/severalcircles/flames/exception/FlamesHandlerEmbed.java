@@ -6,6 +6,7 @@ package com.severalcircles.flames.exception;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
+import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.exception.user.FlamesUserException;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -37,7 +38,7 @@ public class FlamesHandlerEmbed implements FlamesEmbed {
     }
     public FlamesHandlerEmbed(FlamesUserException flamesExceptionByUser) {
         this.setUser(flamesExceptionByUser.getFlamesUser());
-        this.locale = flamesExceptionByUser.getFlamesUser().getConfig().getLocale();
+        this.locale = Locale.forLanguageTag(flamesExceptionByUser.getFlamesUser().getLang());
         this.rsc = flamesExceptionByUser.getRsc(this.locale);
         this.causedBy = flamesExceptionByUser.getUser().getName();
         this.causedByImage = flamesExceptionByUser.getUser().getAvatarUrl();
@@ -78,8 +79,8 @@ public class FlamesHandlerEmbed implements FlamesEmbed {
                 .setColor(color)
                 .build();
     }
-    public FlamesHandlerEmbed setUser(LegacyFlamesUser user) {
-        this.locale = user.getConfig().getLocale();
+    public FlamesHandlerEmbed setUser(FlamesUser user) {
+        this.locale = Locale.forLanguageTag(user.getLang());
         return this;
     }
 }
