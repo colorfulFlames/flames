@@ -5,6 +5,7 @@
 package com.severalcircles.flames.data.user;
 
 import com.severalcircles.flames.data.FlamesDatatype;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 
 import java.time.Instant;
 import java.util.Date;
@@ -51,6 +52,23 @@ public class FlamesUser extends FlamesDatatype {
         this.lang = Locale.ENGLISH.toLanguageTag();
         this.quoteConsent = false;
         this.entities = new UserEntities();
+    }
+
+    public FlamesUser(LegacyFlamesUser legacyFlamesUser) {
+        this.id = legacyFlamesUser.getDiscordId();
+        this.score = legacyFlamesUser.getScore();
+        this.consent = legacyFlamesUser.getConsent();
+        this.streak = legacyFlamesUser.getStreak();
+        this.emotion = legacyFlamesUser.getEmotion();
+        this.lastSeen = Date.from(legacyFlamesUser.getLastSeen());
+        this.sadDay = Date.from(legacyFlamesUser.getFunFacts().getSadDay());
+        this.lowestEmotion = legacyFlamesUser.getFunFacts().getLowestEmotion();
+        this.happyDay = Date.from(legacyFlamesUser.getFunFacts().getHappyDay());
+        this.highestEmotion = legacyFlamesUser.getFunFacts().getHighestEmotion();
+        this.favoriteQuote = legacyFlamesUser.getFunFacts().getFavoriteQuote();
+        this.lang = legacyFlamesUser.getConfig().getLocale().toLanguageTag();
+        this.quoteConsent = legacyFlamesUser.getConfig().isQotdAllowed();
+        this.entities = legacyFlamesUser.getEntities();
     }
 
     public String getLang() {

@@ -74,11 +74,11 @@ public class FlamesDataManager {
         }
     }
 
-    public static void saveServer(LegacyFlamesServer legacyFlamesServer) {
+    public static void saveServer(FlamesServer flamesServer) {
         try {
-            File serverFile = new File(SERVER_DIRECTORY.getAbsolutePath() + "/" + legacyFlamesServer.getId() + ".yml");
+            File serverFile = new File(SERVER_DIRECTORY.getAbsolutePath() + "/" + flamesServer.getId() + ".yml");
             Yaml yaml = new Yaml();
-            Files.write(serverFile.toPath(), yaml.dump(legacyFlamesServer).getBytes());
+            Files.write(serverFile.toPath(), yaml.dump(flamesServer).getBytes());
         } catch (IOException e) {
             LOGGER.severe("Failed to save server - " + e.getMessage());
         }

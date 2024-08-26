@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 public class Conversation {
 public static final int SCORE_BASE_MULTIPLIER = 7;
     public static final int HOOTENANNY_BONUS = 2;
-    public static final int NEGATIVE_MULTIPLIER = 2;
+    public static final int NEGATIVE_MULTIPLIER = 5;
     public static final List<String> entityList = new LinkedList<>();
     private final Map<String, Integer> entities;
     private final GuildMessageChannel channel;
@@ -35,6 +35,11 @@ public static final int SCORE_BASE_MULTIPLIER = 7;
     private String[] quote = {"This isn't epic yet", "Flames"};
     private double quoteScore;
     private final Map<String, FlamesUser> conversationCache;
+    /**
+     * Represents a conversation between users in a guild message channel.
+     *
+     * @param channel The guild message channel where the conversation is taking place.
+     */
     public Conversation(GuildMessageChannel channel) {
         this.channel = channel;
         this.entities = new HashMap<>();
@@ -45,60 +50,146 @@ public static final int SCORE_BASE_MULTIPLIER = 7;
         this.conversationCache = new HashMap<>();
     }
 
+    /**
+     * Represents whether the conversation is expired or not.
+     *
+     * <p>
+     * The {@code expired} variable is a boolean variable that indicates whether the conversation
+     * has expired or not. If the value is {@code true}, it means the conversation has expired.
+     * Otherwise, if the value is {@code false}, it means the conversation is still active.
+     * </p>
+     *
+     * <p>
+     * This variable is used in the {@code Conversation} class to track the expiration status of a conversation.
+     * It is protected, which means it can be accessed by subclasses within the same package or in other packages
+     * that extend the {@code Conversation} class.
+     * </p>
+     *
+     * @see Conversation
+     */
     protected boolean expired = false;
 
+    /**
+     * Returns the entities map.
+     * The map contains the entities and their corresponding count.
+     *
+     * @return the entities map
+     */
     public Map<String, Integer> getEntities() {
         return entities;
     }
 
+    /**
+     *
+     */
     public GuildMessageChannel getChannel() {
         return channel;
     }
 
+    /**
+     * Retrieves the list of users associated with this conversation.
+     *
+     * @return The list of users.
+     */
     public List<User> getUserList() {
         return userList;
     }
 
+    /**
+     * Returns the expiration date and time of the conversation.
+     *
+     * @return The expiration date and time as an Instant object.
+     */
     public Instant getExpires() {
         return expires;
     }
 
+    /**
+     * Sets the expiration time for the conversation.
+     *
+     * @param expires The new expiration time for the conversation.
+     */
     public void setExpires(Instant expires) {
         this.expires = expires;
     }
 
+    /**
+     * Returns the emotion value of the conversation.
+     *
+     * @return The emotion value as a double.
+     */
     public double getEmotion() {
         return emotion;
     }
 
+    /**
+     * Sets the emotion value of the Conversation.
+     *
+     * @param emotion the emotion value to set
+     */
     public void setEmotion(double emotion) {
         this.emotion = emotion;
     }
 
+    /**
+     * Retrieves the quote stored in the conversation.
+     *
+     * @return an array containing the quote. The first element is the quote text and the second element is the attribution.
+     */
     public String[] getQuote() {
         return quote;
     }
 
+    /**
+     * Sets the quote for the Conversation object.
+     *
+     * @param quote an array of strings representing the quote to be set
+     */
     public void setQuote(String[] quote) {
         this.quote = quote;
     }
 
+    /**
+     * Retrieves the score of the quote.
+     *
+     * @return The score of the quote.
+     */
     public double getQuoteScore() {
         return quoteScore;
     }
 
+    /**
+     * Set the score of the quote.
+     *
+     * @param quoteScore the score of the quote to be set
+     */
     public void setQuoteScore(double quoteScore) {
         this.quoteScore = quoteScore;
     }
 
+    /**
+     * Retrieves the conversation cache.
+     *
+     * @return The conversation cache, represented as a map with keys of type String and values of type FlamesUser.
+     */
     public Map<String, FlamesUser> getConversationCache() {
         return conversationCache;
     }
 
+    /**
+     * Checks if the conversation is expired.
+     *
+     * @return true if the conversation is expired, false otherwise
+     */
     public boolean isExpired() {
         return expired;
     }
 
+    /**
+     * Sets the expiration status of the conversation.
+     *
+     * @param expired the new expiration status
+     */
     public void setExpired(boolean expired) {
         this.expired = expired;
     }

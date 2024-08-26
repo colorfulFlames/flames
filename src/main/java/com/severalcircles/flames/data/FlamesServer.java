@@ -4,6 +4,7 @@
 
 package com.severalcircles.flames.data;
 
+import com.severalcircles.flames.data.legacy.server.LegacyFlamesServer;
 import org.yaml.snakeyaml.Yaml;
 
 import java.util.HashMap;
@@ -14,6 +15,13 @@ public class FlamesServer extends FlamesDatatype {
     int score;
     int hootenannyDay;
     Map<String, Integer> hootenannyScores;
+
+    public FlamesServer(LegacyFlamesServer legacyFlamesServer) {
+        this.id = legacyFlamesServer.getId();
+        this.score = legacyFlamesServer.getScore();
+        this.hootenannyDay = legacyFlamesServer.getHootenannyDay();;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
