@@ -28,18 +28,8 @@ public class ServerDataEmbed implements FlamesEmbed {
     }
     @Override
     public MessageEmbed get() {
-        StringBuilder hootenannyDay = new StringBuilder() ;
-        hootenannyDay.append(server.getHootenannyDay());
-        String rd = "3";
-        String nd = "2";
-        String st = "1";
-        String end = hootenannyDay.toString().toCharArray()[hootenannyDay.toString().length()-1] + "";
-        if (rd.equals(end)) hootenannyDay.append("rd");
-        else if (nd.equals(end)) hootenannyDay.append("nd");
-        else if (st.equals(end)) hootenannyDay.append("st");
-        else hootenannyDay.append("th");
         Color color = Color.GRAY;
-        String description = String.format(local.getString("hootenanny"), hootenannyDay);
+        String description = String.format(local.getString("hootenanny"), ordinal(server.getHootenannyDay()));
         String title = origin.getGuild().getName();
         if (new Date().getDate() == server.getHootenannyDay()) {
             color = Color.RED;
@@ -58,5 +48,17 @@ public class ServerDataEmbed implements FlamesEmbed {
                 .setFooter(Flames.api.getSelfUser().getGlobalName(), Flames.api.getSelfUser().getAvatarUrl())
                 .build();
         return embed;
+    }
+    public static String ordinal(int i) {
+        String[] suffixes = new String[] { "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th" };
+        switch (i % 100) {
+            case 11:
+            case 12:
+            case 13:
+                return i + "th";
+            default:
+                return i + suffixes[i % 10];
+
+        }
     }
 }

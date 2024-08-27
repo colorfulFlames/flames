@@ -4,7 +4,6 @@
 
 package com.severalcircles.flames.data;
 
-import com.severalcircles.flames.data.legacy.server.LegacyFlamesServer;
 import com.severalcircles.flames.data.user.FlamesUser;
 import org.yaml.snakeyaml.Yaml;
 
@@ -14,8 +13,20 @@ import java.nio.file.Files;
 import java.util.logging.Logger;
 
 /**
- * The FlamesDataManager class is responsible for managing the data of FlamesUser and FlamesServer objects.
- * It is capable of saving, retrieving and preparing necessary directories
+ * The FlamesDataManager class is responsible for managing Flames data such as users and servers.
+ * It provides methods to prepare the Flames data, retrieve and save user information, and retrieve and save server information.
+ *
+ * <p>Usage:</p>
+ * <pre>
+ * FlamesDataManager.prepare();
+ * FlamesUser user = FlamesDataManager.getUser("123456789");
+ * FlamesDataManager.saveUser(user);
+ * FlamesServer server = FlamesDataManager.getServer("987654321");
+ * FlamesDataManager.saveServer(server);
+ * </pre>
+ *
+ * @see FlamesUser
+ * @see FlamesServer
  */
 public class FlamesDataManager {
     private static final Logger LOGGER = Logger.getLogger(FlamesDataManager.class.getName());
@@ -24,16 +35,44 @@ public class FlamesDataManager {
     public static final File USER_DIRECTORY = new File(FLAMES_DIRECTORY.getAbsolutePath() + "/users");
     public static final File SERVER_DIRECTORY = new File(FLAMES_DIRECTORY.getAbsolutePath() + "/servers");
 
+    /**
+     * Prepares the Flames data by creating necessary directories.
+     * It creates the Flames directory, Users directory, and Servers directory.
+     * This method is typically called before performing any data operations.
+     *
+     * Example usage:
+     *
+     * DataUpgradeUtil.upgradeData();
+     *
+     * This method does not return any value.
+     */
     public static void prepare() {
         LOGGER.info("Preparing Flames Data");
         if (FLAMES_DIRECTORY.mkdir()) LOGGER.info("Created Flames directory");
         if (USER_DIRECTORY.mkdir()) LOGGER.info("Created Users directory");
         if (SERVER_DIRECTORY.mkdir()) LOGGER.info("Created Servers directory");
     }
+    /**
+     * Retrieves the FlamesUser object associated with the given ID.
+     *
+     * @param id           The ID of the user.
+     * @return The FlamesUser object for the given ID.
+     * @throws ConsentException If the user's consent level is not sufficient.
+     * @throws IOException      If an I/O error occurs while accessing the user file.
+     */
     public static FlamesUser getUser(String id) throws ConsentException, IOException {
         return getUser(id, false);
     }
 
+    /**
+     * Retrieves a FlamesUser object based on the given ID.
+     *
+     * @param id            The ID of the user.
+     * @param skipConsent   If true, skips the consent check.
+     * @return The FlamesUser object corresponding to the given ID.
+     * @throws ConsentException If the user's consent level is not sufficient and skipConsent is false.
+     * @throws IOException      If there is an error reading the user file.
+     */
     public static FlamesUser getUser(String id, boolean skipConsent) throws ConsentException, IOException {
             File userFile = new File(USER_DIRECTORY.getAbsolutePath() + "/" + id + ".yml");
             Yaml yaml = new Yaml();
@@ -50,16 +89,27 @@ public class FlamesDataManager {
             else return user;
     }
 
+    /**
+     * Saves the FlamesUser object to a YAML file.
+     *
+     * @param flamesUser the FlamesUser object to be saved
+     * @throws IOException if an I/O error occurs while writing the file
+     */
     public static void saveUser(FlamesUser flamesUser) throws IOException {
         File userFile = new File(USER_DIRECTORY.getAbsolutePath() + "/" + flamesUser.getID() + ".yml");
         Yaml yaml = new Yaml();
         Files.write(userFile.toPath(), yaml.dump(flamesUser).getBytes());
     }
+    /**
+     * Retrieves a FlamesServer object based on the given ID.
+     *
+     * @param id The ID of the server.
+     * @return The FlamesServer object for the specified ID, or null if there was an error.
+     */
     public static FlamesServer getServer(String id) {
         try {
             File serverFile = new File(SERVER_DIRECTORY.getAbsolutePath() + "/" + id + ".yml");
             Yaml yaml = new Yaml();
-
             if (!serverFile.exists()) {
                 FlamesServer newServer = new FlamesServer(id);
                 Files.write(serverFile.toPath(), yaml.dump(newServer).getBytes());
@@ -74,6 +124,11 @@ public class FlamesDataManager {
         }
     }
 
+    /**
+     * Saves a FlamesServer object to a YAML file.
+     *
+     * @param flamesServer the FlamesServer object to be saved
+     */
     public static void saveServer(FlamesServer flamesServer) {
         try {
             File serverFile = new File(SERVER_DIRECTORY.getAbsolutePath() + "/" + flamesServer.getId() + ".yml");

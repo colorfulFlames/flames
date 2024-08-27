@@ -19,7 +19,7 @@ public class FlamesServer extends FlamesDatatype {
     public FlamesServer(LegacyFlamesServer legacyFlamesServer) {
         this.id = legacyFlamesServer.getId();
         this.score = legacyFlamesServer.getScore();
-        this.hootenannyDay = legacyFlamesServer.getHootenannyDay();;
+        this.hootenannyDay = legacyFlamesServer.getHootenannyDay();
     }
 
     public void setId(String id) {
