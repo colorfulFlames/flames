@@ -76,8 +76,10 @@ public class Flames {
         Locale.setDefault(Locale.ENGLISH);
         properties.load(is);
         version = properties.getProperty("version");
-        try {new DataUpgradeUtil().upgradeData();}
-        catch (RuntimeException ignored) {}
+        if (args.length > 0 && args[0].equals("RunUpgrade")) {
+            new DataUpgradeUtil().upgradeData();
+            System.exit(0);
+        }
         FlamesDataManager.prepare();
         String logName = "Flames " + version + "@" + InetAddress.getLocalHost().getHostName() + " " + Instant.now().truncatedTo(ChronoUnit.SECONDS).toString().replace(":", " ").replace("T", " T") + ".log";
         File logDir = new File(FlamesDataManager.FLAMES_DIRECTORY.getAbsolutePath() + "/logs");

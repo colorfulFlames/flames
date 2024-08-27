@@ -8,11 +8,9 @@ import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
 import com.severalcircles.flames.data.legacy.server.LegacyFlamesServer;
 import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 import com.severalcircles.flames.data.user.FlamesUser;
-import jdk.jpackage.internal.Log;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -23,9 +21,6 @@ public class DataUpgradeUtil {
     private final List<FlamesUser> flamesUsers = new LinkedList<>();
     private final List<FlamesServer> flamesServers = new LinkedList<>();
     public void upgradeData() {
-        if (new File("donotupgrade").exists()) {
-            throw new RuntimeException("Data has already been upgraded");
-        }
         LegacyFlamesDataManager.prepare();
         FlamesDataManager.prepare();
         File userDirectory = LegacyFlamesDataManager.USER_DIRECTORY;
@@ -62,11 +57,6 @@ public class DataUpgradeUtil {
         });
         Logger.getGlobal().info("Saving servers");
         flamesServers.forEach(FlamesDataManager::saveServer);
-        try {
-            new File("donotupgrade").createNewFile();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
     public static void main(String[] args) {
         new DataUpgradeUtil().upgradeData();

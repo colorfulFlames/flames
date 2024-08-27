@@ -80,11 +80,11 @@ public class FlamesDataManager {
             if (!userFile.exists()) {
                 FlamesUser newUser = new FlamesUser(id);
                 Files.write(userFile.toPath(), yaml.dump(newUser).getBytes());
-                return newUser;
+                if (!skipConsent) throw new ConsentException(0);
+                else return newUser;
             }
             String contents = new String(Files.readAllBytes(userFile.toPath()));
             FlamesUser user = yaml.loadAs(contents, FlamesUser.class);
-            if (user.getId().equals("797283404654575657")) Logger.getGlobal().warning("An operation attempted to save user 797283404654575657");
             if (user.getConsent() != 1 && !skipConsent) throw new ConsentException(user.getConsent());
             else return user;
     }
