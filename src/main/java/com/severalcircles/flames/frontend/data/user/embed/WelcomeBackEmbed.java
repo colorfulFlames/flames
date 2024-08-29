@@ -34,34 +34,43 @@ public class WelcomeBackEmbed implements FlamesEmbed {
     public MessageEmbed get() {
         Date now = Date.from(Instant.now());
         String timeMessage;
+        Color color = Color.decode("#D9581C");
         String img = "https://severalcircles.com/flames/assets/welcome/";
             if (now.getHours() < 6) {
                 timeMessage = resources.getString("author.earlymorning");
                 img += "EARLY_MORNING.png";
+                color = Color.decode("#000050");
             }
         else //noinspection deprecation
             if (now.getHours() < 12) {
                 timeMessage = resources.getString("author.morning");
                 img += "MORNING.png";
+                color = Color.decode("#FA6800");
             }
         else //noinspection deprecation
             if (now.getHours() < 15) {
                 timeMessage = resources.getString("author.earlyafternoon");
                 img += "AFTERNOON.png";
+                color = Color.CYAN;
+
             }
         else //noinspection deprecation
                 if (now.getHours() < 18) {
                     timeMessage = resources.getString("author.lateafternoon");
                     img += "AFTERNOON.png";
+                    color = Color.CYAN;
                 }
         else //noinspection deprecation
             if (now.getHours() < 21) {
                 timeMessage = resources.getString("author.evening");
                 img += "EVENING.png";
+                color = Color.MAGENTA;
+
             }
         else {
                 timeMessage = resources.getString("author.night");
                 img += "NIGHT.png";
+                color = Color.BLACK;
             }
         EmbedBuilder embed = new EmbedBuilder()
                 .setAuthor(String.format(timeMessage, user.getName()), null, Flames.api.getSelfUser().getAvatarUrl())
@@ -71,7 +80,7 @@ public class WelcomeBackEmbed implements FlamesEmbed {
                 .setDescription(resources.getString("description"))
                 .setImage(img)
                 .setFooter(Flames.api.getSelfUser().getGlobalName(), Flames.api.getSelfUser().getAvatarUrl())
-                .setColor(Color.decode("#D9581C"));
+                .setColor(color);
         return embed.build();
     }
 }

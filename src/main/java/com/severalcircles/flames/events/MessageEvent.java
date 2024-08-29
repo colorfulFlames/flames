@@ -35,6 +35,9 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
         Logger.getGlobal().log(Level.FINE,event.getAuthor().getId() + " Triggered Message Event");
+        if (event.getMessage().getContentRaw().contains("https://") || event.getMessage().getContentRaw().contains("http://")) return; // Don't process URLs
+        if (event.getMessage().getContentRaw().matches(("([0-9])\\w+"))) return; // Don't process numbers
+        if (event.getMessage().getContentRaw().contains(".gif")) return; // Don't process GIFs
         if (event.getMessage().getContentRaw().matches("[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)")) return; // Don't process URLs
         super.onMessageReceived(event);
         User user = event.getAuthor();

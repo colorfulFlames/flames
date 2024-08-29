@@ -5,6 +5,7 @@
 package com.severalcircles.flames.frontend.data.other;
 
 import com.severalcircles.flames.Flames;
+import com.severalcircles.flames.data.FlamesServer;
 import com.severalcircles.flames.data.legacy.server.LegacyFlamesServer;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.frontend.FlamesEmbed;
@@ -16,11 +17,11 @@ import java.awt.*;
 import java.util.*;
 
 public class ServerDataEmbed implements FlamesEmbed {
-    private final LegacyFlamesServer server;
+    private final FlamesServer server;
     private final FlamesUser user;
     ResourceBundle local;
     GuildChannel origin;
-    public ServerDataEmbed(LegacyFlamesServer server, FlamesUser user, GuildChannel origin) {
+    public ServerDataEmbed(FlamesServer server, FlamesUser user, GuildChannel origin) {
         this.server = server;
         this.user = user;
         this.origin = origin;

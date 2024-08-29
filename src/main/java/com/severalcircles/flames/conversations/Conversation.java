@@ -5,6 +5,7 @@
 package com.severalcircles.flames.conversations;
 
 import com.severalcircles.flames.data.FlamesDataManager;
+import com.severalcircles.flames.data.FlamesServer;
 import com.severalcircles.flames.data.legacy.user.consent.Consent;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.user.UserEntities;
@@ -23,9 +24,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Conversation {
-public static final int SCORE_BASE_MULTIPLIER = 7;
+    public static final int SCORE_BASE_MULTIPLIER = 7;
     public static final int HOOTENANNY_BONUS = 2;
-    public static final int NEGATIVE_MULTIPLIER = 5;
+    public static final int NEGATIVE_MULTIPLIER = 1;
     public static final List<String> entityList = new LinkedList<>();
     private final Map<String, Integer> entities;
     private final GuildMessageChannel channel;
@@ -253,7 +254,6 @@ public static final int SCORE_BASE_MULTIPLIER = 7;
             Logger.getGlobal().log(Level.SEVERE, "Failed to get Flames Data");
             return;
         }
-        UserEntities userEntities = flamesUser.getEntities();
         if (Instant.now().isAfter(expires)) {
             expired = true;
             throw new ExpiredConversationException();
@@ -274,8 +274,13 @@ public static final int SCORE_BASE_MULTIPLIER = 7;
                 entities.put(element.getName(), 1);
             }
         });
+        FlamesServer flamesServer = FlamesDataManager.getServer(channel.getGuild().getId());
+        assert flamesServer != null;
+        flamesServer.addScore(score(finishedAnalysis, flamesServer.todayIsHootenannyDay()));
         try {
             FlamesDataManager.saveUser(flamesUser);
+            System.out.println(flamesServer.getScore());
+            FlamesDataManager.saveServer(flamesServer);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

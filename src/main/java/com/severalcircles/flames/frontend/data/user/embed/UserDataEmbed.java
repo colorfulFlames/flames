@@ -17,6 +17,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -40,6 +41,8 @@ public class UserDataEmbed implements FlamesEmbed {
         User.Profile profile = user.retrieveProfile().complete();
         UserEntities entities = flamesUser.getEntities();
         List<UserEntity> topAndBottom = entities.getTopAndBottom();
+        Color color = profile.getAccentColor();
+        if (color == null) color = Color.MAGENTA;
         return new EmbedBuilder()
                 .setAuthor(flamesUser.getFavoriteQuote(), null, user.getAvatarUrl())
                 .setTitle(String.format(resources.getString("title"), user.getGlobalName()))
@@ -54,7 +57,7 @@ public class UserDataEmbed implements FlamesEmbed {
                 .addField(resources.getString("dislikes"), "* " + topAndBottom.get(3).getName()
                 +"\n* " + topAndBottom.get(4).getName()
                 +"\n* " + topAndBottom.get(5).getName(), true)
-                .setColor(profile.getAccentColor())
+                .setColor(color)
                 .setThumbnail(FlamesAssets.getRankIcon(Ranking.getRank(flamesUser.getScore())))
                 .setFooter(Flames.api.getSelfUser().getGlobalName(), Flames.api.getSelfUser().getAvatarUrl())
                 .build();

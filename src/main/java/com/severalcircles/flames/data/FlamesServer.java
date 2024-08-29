@@ -194,4 +194,8 @@ public class FlamesServer extends FlamesDatatype {
     public boolean todayIsHootenannyDay() {
         return hootenannyDay == new java.util.Date().getDate();
     }
+
+    public void addScore(int score) {
+        this.score += score;
+    }
 }

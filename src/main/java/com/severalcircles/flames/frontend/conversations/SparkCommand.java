@@ -19,6 +19,10 @@ public class SparkCommand implements FlamesCommand {
             event.reply("There is already a Spark conversation in progress!").setEphemeral(true).complete();
             return;
         }
+        if (Objects.requireNonNull(event.getOption("question")).getAsString().length() > 255) {
+            event.reply("The question must be less than 255 characters.").setEphemeral(true).complete();
+            return;
+        }
         SparkConversation.sparkConversations.put(event.getChannel().getId(), new SparkConversation(event.getChannel(), Objects.requireNonNull(event.getOption("question")).getAsString(), Objects.requireNonNull(event.getOption("minutes")).getAsInt()));
         event.replyEmbeds(new SparkStartEmbed(sender, event.getUser(), Objects.requireNonNull(event.getOption("question")).getAsString(), Objects.requireNonNull(event.getOption("minutes")).getAsInt()).get()).complete();
     }
