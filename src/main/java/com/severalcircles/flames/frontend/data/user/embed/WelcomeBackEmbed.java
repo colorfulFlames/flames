@@ -73,7 +73,7 @@ public class WelcomeBackEmbed implements FlamesEmbed {
                 color = Color.BLACK;
             }
         EmbedBuilder embed = new EmbedBuilder()
-                .setAuthor(String.format(timeMessage, user.getName()), null, Flames.api.getSelfUser().getAvatarUrl())
+                .setAuthor(String.format(timeMessage, user.getGlobalName()), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setTitle(resources.getString("title"))
                 .addField(resources.getString("dailyBonus"), StringUtil.formatScore(dailyBonus), true)
                 .addField(resources.getString("score"), StringUtil.formatScore(flamesUser.getScore()), true)

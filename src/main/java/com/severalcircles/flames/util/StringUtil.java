@@ -72,9 +72,9 @@ public class StringUtil {
             legacyFlamesUser = LegacyFlamesDataManager.readUser(user);
         } catch (Exception e) {
             e.printStackTrace();
-            return user.getName();
+            return user.getGlobalName();
         }
-        String name = user.getName();
+        String name = user.getGlobalName();
         if (legacyFlamesUser.getScore() >= highestScore) {
             highestScore = legacyFlamesUser.getScore();
             name += " ?";
