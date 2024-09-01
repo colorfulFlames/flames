@@ -66,7 +66,7 @@ public class LegacyFlamesDataManager {
     public static boolean newUser(User user) throws IOException {
 
 //        String name = Flames.api.getUserById(discordId).getName();
-        String name = user.getName();
+        String name = user.getGlobalName();
         String discordId = user.getId();
         File udir = new File(USER_DIRECTORY.getAbsolutePath() + "/" + discordId);
         File userl = new File(udir.getAbsolutePath() + "/user.fl");
