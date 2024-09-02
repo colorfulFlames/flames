@@ -52,9 +52,10 @@ public class TodayEmbed implements FlamesEmbed {
                     .addBlankField(false)
                     .addField("\"" + Today.quote[0] + "\"", "- " + Today.quote[1] + ", " + StringUtil.prettifyDate(Instant.now()), false)
                     .addBlankField(false)
-                    .addField(resources.getString("allAbout"), resources.getString("tomorrowBring"), false)
+//                    .addField(resources.getString("allAbout"), resources.getString("tomorrowBring"), false)
                     .setThumbnail(ImageSearch.searchImage(trendingEntity))
                     .setFooter(Flames.api.getSelfUser().getGlobalName(), Flames.api.getSelfUser().getAvatarUrl())
+                    .setImage("https://severalcircles.com/flames/assets/apps/today_footer.png")
                     .setColor(Color.decode("#F1D302"))
                     .build();
         } catch (IOException e) {

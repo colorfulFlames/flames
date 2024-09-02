@@ -43,6 +43,18 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/embed/WelcomeBackEmbed.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/embed/WelcomeBackEmbed_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/embed/WelcomeBackEmbed_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DeleteAllConfirmationModal.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DeleteAllConfirmationModal_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DeleteAllConfirmationModal_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DeleteAllConfirmationModal_tra.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DestructiveDropdown.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DestructiveDropdown_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DestructiveDropdown_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DestructiveDropdown_tra.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/UserManagementDropdown.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/UserManagementDropdown_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/UserManagementDropdown_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/UserManagementDropdown_tra.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/info/AboutEmbed.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/info/AboutEmbed_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/info/AboutEmbed_es.properties" />
@@ -272,6 +284,27 @@
       <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/GlobalDataEmbed_es.properties" />
       <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/GlobalDataEmbed_tra.properties" />
       <base-name>GlobalDataEmbed</base-name>
+    </custom-resource-bundle>
+    <custom-resource-bundle>
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/UserManagementDropdown.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/UserManagementDropdown_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/UserManagementDropdown_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/UserManagementDropdown_tra.properties" />
+      <base-name>UserManagementDropdown</base-name>
+    </custom-resource-bundle>
+    <custom-resource-bundle>
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DestructiveDropdown.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DestructiveDropdown_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DestructiveDropdown_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DestructiveDropdown_tra.properties" />
+      <base-name>DestructiveDropdown</base-name>
+    </custom-resource-bundle>
+    <custom-resource-bundle>
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DeleteAllConfirmationModal.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DeleteAllConfirmationModal_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DeleteAllConfirmationModal_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DeleteAllConfirmationModal_tra.properties" />
+      <base-name>DeleteAllConfirmationModal</base-name>
     </custom-resource-bundle>
   </component>
 </project>

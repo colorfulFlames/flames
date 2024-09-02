@@ -60,6 +60,7 @@ public class UserDataEmbed implements FlamesEmbed {
                 .setColor(color)
                 .setThumbnail(FlamesAssets.getRankIcon(Ranking.getRank(flamesUser.getScore())))
                 .setFooter(Flames.api.getSelfUser().getGlobalName(), Flames.api.getSelfUser().getAvatarUrl())
+//                .setImage("https://severalcircles.com/flames/assets/apps/footer.png")
                 .build();
     }
 }
