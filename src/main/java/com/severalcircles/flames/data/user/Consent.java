@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2021 Several Circles.
+ * Copyright (c) 2021-2025 Several Circles.
  */
 
-package com.severalcircles.flames.data.legacy.user.consent;
+package com.severalcircles.flames.data.user;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;

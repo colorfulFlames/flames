@@ -17,6 +17,7 @@ import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.external.analysis.Analysis;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
 import com.severalcircles.flames.frontend.today.Today;
+import jdk.jpackage.internal.Log;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -56,6 +57,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         FlamesUser flamesUser;
         // Read Flames User
         try {
+            Logger.getGlobal().info("Reading user data");
             flamesUser = FlamesDataManager.getUser(user.getId());
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Can't read user data for " + user.getId() + ".");
@@ -63,7 +65,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             Flames.incrementErrorCount();
             return;
         } catch (ConsentException e) {
-            logger.log(Level.FINE, "Not processing " + user.getName() + "'s message because they haven't consented yet.");
+            logger.log(Level.INFO, "Not processing " + user.getName() + "'s message because they haven't consented yet.");
             return;
         }
 //        Wildfire.processMessage(event.getMessage());

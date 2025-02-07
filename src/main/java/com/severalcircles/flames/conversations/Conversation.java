@@ -6,13 +6,10 @@ package com.severalcircles.flames.conversations;
 
 import com.severalcircles.flames.data.FlamesDataManager;
 import com.severalcircles.flames.data.FlamesServer;
-import com.severalcircles.flames.data.legacy.user.consent.Consent;
+import com.severalcircles.flames.data.user.Consent;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.data.user.UserEntities;
 import com.severalcircles.flames.data.ConsentException;
-import com.severalcircles.flames.external.analysis.Analysis;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.middleman.GuildMessageChannel;
 
