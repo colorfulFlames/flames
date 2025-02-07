@@ -17,6 +17,7 @@ import com.severalcircles.flames.frontend.data.user.embed.UserDataEmbed;
 import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,7 +27,7 @@ public class UserContextData implements FlamesUserContext {
     public void execute(UserContextInteractionEvent event) {
         FlamesUser target;
         try {
-            target = FlamesDataManager.getUser(event.getUser().getId());
+            target = FlamesDataManager.getUser(Objects.requireNonNull(event.getOption("user")).getAsUser().getId());
         } catch (ConsentException e) {
             e.printStackTrace();
             event.reply("That user isn't using Flames yet.").queue();

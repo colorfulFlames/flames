@@ -19,6 +19,7 @@ import com.severalcircles.flames.frontend.data.other.ServerDataCommand;
 import com.severalcircles.flames.frontend.data.user.HiCommand;
 import com.severalcircles.flames.frontend.data.user.LocaleCommand;
 import com.severalcircles.flames.frontend.data.user.MyDataCommand;
+import com.severalcircles.flames.frontend.data.user.mgmt.SettingsCommand;
 import com.severalcircles.flames.frontend.info.AboutCommand;
 import com.severalcircles.flames.frontend.info.HelpCommand;
 import com.severalcircles.flames.frontend.info.TestCommand;
@@ -32,10 +33,7 @@ import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.InetAddress;
 import java.time.Duration;
 import java.time.Instant;
@@ -73,7 +71,11 @@ public class Flames {
     public static void main(String[] args) throws IOException {
         // --- Initial Preparations ---
         InputStream is = Flames.class.getClassLoader().getResourceAsStream("version.properties");
+        if (is == null) {
+            throw new FileNotFoundException("version.properties not found in the classpath.");
+        }
         Locale.setDefault(Locale.ENGLISH);
+//        properties.load(is);
         properties.load(is);
         version = properties.getProperty("version");
         if (args.length > 0 && args[0].equals("RunUpgrade")) {
@@ -89,7 +91,7 @@ public class Flames {
         //noinspection ResultOfMethodCallIgnored
         logFile.createNewFile();
         FileHandler handler = new FileHandler(logFile.getAbsolutePath());
-        handler.setFormatter(new SimpleFormatter());
+        handler.setFormatter(new FlamesLoggerFormatter());
         Logger.getGlobal().addHandler(handler);
         Logger.getGlobal().log(Level.INFO, "Flames " + version);
         if (version.contains("-beta") | version.contains("-alpha") | version.contains("-SNAPSHOT")) {
@@ -122,6 +124,7 @@ public class Flames {
         new ButtonEvent().register(api);
         new SelectMenuEvent().register(api);
         new MessageContextEvent().register(api);
+        new UserContextEvent().register(api);
         api.addEventListener(new MessageContextEvent());
         // --- Commands ---
         Logger.getGlobal().log(Level.INFO, "Registering Commands");
@@ -143,7 +146,6 @@ public class Flames {
         commandMap.put("thanks", new ThanksCommand());
         commandDataList.add(Commands.slash("thanks", "Gives Thanks to a user").addOption(OptionType.USER, "who", "The user you want to thank", true).addOption(OptionType.STRING, "msg", "An optional message to attach"));
         commandMap.put("conversation", new ConversationCommand());
-        new UserContextEvent().register(api);
         commandDataList.add(Commands.slash("conversation", "Shows information about the current conversation"));
         commandMap.put("about", new AboutCommand());
         commandDataList.add(Commands.slash("about", "Who cooked here?"));
@@ -151,8 +153,9 @@ public class Flames {
         commandDataList.add(Commands.slash("spark", "Start a Spark conversation").addOption(OptionType.STRING, "question", "The question you want to ask", true).addOption(OptionType.INTEGER, "minutes", "Time limit for the conversation in minutes.", true));
         commandMap.put("server", new ServerDataCommand());
         commandDataList.add(Commands.slash("server", "Catch up on this server's stats"));
+        commandMap.put("settings", new SettingsCommand());
+        commandDataList.add(Commands.slash("settings", "Change your settings"));
 //        commandDataList.add(Commands.slash("amiguito", "Interact with your Amiguito character").addOption(OptionType.STRING, "name", "The name of your Amiguito", true));
-
 //        Commands.context(Command.Type.MESSAGE, "SparkVote");
         api.updateCommands()
                 .addCommands(commandDataList).

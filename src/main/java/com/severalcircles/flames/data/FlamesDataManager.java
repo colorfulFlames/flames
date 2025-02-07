@@ -4,7 +4,9 @@
 
 package com.severalcircles.flames.data;
 
+import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.data.user.UserEntities;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
@@ -136,6 +138,26 @@ public class FlamesDataManager {
             Files.write(serverFile.toPath(), yaml.dump(flamesServer).getBytes());
         } catch (IOException e) {
             LOGGER.severe("Failed to save server - " + e.getMessage());
+        }
+    }
+    public static void deleteUser(String id) {
+        File userFile = new File(USER_DIRECTORY.getAbsolutePath() + "/" + id + ".yml");
+        if (userFile.delete()) LOGGER.info("Deleted user " + id);
+    }
+    public static void deleteUserEntities(String id) {
+        FlamesUser user;
+        try {
+            user = getUser(id, true);
+        } catch (ConsentException ignored) {
+            throw new RuntimeException("ConsentException should not be thrown here");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        user.setEntities(new UserEntities());
+        try {
+            saveUser(user);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }
