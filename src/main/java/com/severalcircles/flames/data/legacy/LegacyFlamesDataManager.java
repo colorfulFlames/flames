@@ -168,7 +168,7 @@ public class LegacyFlamesDataManager {
         File udir = new File(USER_DIRECTORY.getAbsolutePath() + "/" + id);
         if (id == null) throw new IllegalArgumentException("User ID cannot be null. Did you really think you were going to get away with that?");
         if (udir.mkdir() && !skipConsent) {
-            throw new ConsentException(0);
+            throw new ConsentException(0, Flames.api.getUserById(id));
         }
         File userfl = new File(udir.getAbsolutePath() + "/user.fl");
         File config = new File(udir.getAbsolutePath() + "/config.fl");
@@ -237,7 +237,7 @@ public class LegacyFlamesDataManager {
         userEntities.setEntities(e);
         fluser.setEntities(userEntities);
         fluser.setFunFacts(funFacts);
-        if (fluser.getConsent() != 1 && !skipConsent) throw new ConsentException(fluser.getConsent());
+        if (fluser.getConsent() != 1 && !skipConsent) throw new ConsentException(fluser.getConsent(), Flames.api.getUserById(id));
         return fluser;
     }
     public static String[] getChannelWords(Channel channel) {

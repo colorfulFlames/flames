@@ -4,7 +4,9 @@
 
 package com.severalcircles.flames.data;
 
+import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.data.user.UserEntities;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
@@ -80,12 +82,12 @@ public class FlamesDataManager {
             if (!userFile.exists()) {
                 FlamesUser newUser = new FlamesUser(id);
                 Files.write(userFile.toPath(), yaml.dump(newUser).getBytes());
-                if (!skipConsent) throw new ConsentException(0);
+                if (!skipConsent) throw new ConsentException(0,  Flames.api.retrieveUserById(id).complete());
                 else return newUser;
             }
             String contents = new String(Files.readAllBytes(userFile.toPath()));
             FlamesUser user = yaml.loadAs(contents, FlamesUser.class);
-            if (user.getConsent() != 1 && !skipConsent) throw new ConsentException(user.getConsent());
+            if (user.getConsent() != 1 && !skipConsent) throw new ConsentException(user.getConsent(), Flames.api.retrieveUserById(id).complete());
             else return user;
     }
 
@@ -136,6 +138,26 @@ public class FlamesDataManager {
             Files.write(serverFile.toPath(), yaml.dump(flamesServer).getBytes());
         } catch (IOException e) {
             LOGGER.severe("Failed to save server - " + e.getMessage());
+        }
+    }
+    public static void deleteUser(String id) {
+        File userFile = new File(USER_DIRECTORY.getAbsolutePath() + "/" + id + ".yml");
+        if (userFile.delete()) LOGGER.info("Deleted user " + id);
+    }
+    public static void deleteUserEntities(String id) {
+        FlamesUser user;
+        try {
+            user = getUser(id, true);
+        } catch (ConsentException ignored) {
+            throw new RuntimeException("ConsentException should not be thrown here");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        user.setEntities(new UserEntities());
+        try {
+            saveUser(user);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

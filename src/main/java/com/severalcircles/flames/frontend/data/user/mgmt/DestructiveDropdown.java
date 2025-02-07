@@ -9,6 +9,7 @@ import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.frontend.FlamesDropdown;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
 import net.dv8tion.jda.api.events.interaction.component.GenericSelectMenuInteractionEvent;
+import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu;
 
 import java.util.Locale;
@@ -17,7 +18,7 @@ import java.util.ResourceBundle;
 public class DestructiveDropdown implements FlamesDropdown {
     @Override
     public void execute(GenericSelectMenuInteractionEvent event, FlamesUser sender) {
-
+        event.replyComponents(ActionRow.of(get(sender))).queue(); // Refers to the local get method
     }
 
     @Override

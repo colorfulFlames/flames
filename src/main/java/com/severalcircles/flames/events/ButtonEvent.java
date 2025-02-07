@@ -13,6 +13,7 @@ import com.severalcircles.flames.exception.handle.FlamesExceptionHandler;
 import com.severalcircles.flames.frontend.FlamesButtonAction;
 import com.severalcircles.flames.frontend.data.user.ConsentButtonAction;
 import com.severalcircles.flames.frontend.data.user.MyDataButtonAction;
+import com.severalcircles.flames.frontend.data.user.mgmt.DeleteAllConfirmButtons;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -33,6 +34,8 @@ public class ButtonEvent extends ListenerAdapter implements FlamesDiscordEvent {
         buttonActionMap.put("consent", new ConsentButtonAction());
         buttonActionMap.put("noQotd", new ConsentButtonAction());
         buttonActionMap.put("mydata", new MyDataButtonAction());
+        buttonActionMap.put("delete-all-yes", new DeleteAllConfirmButtons()); // TODO
+        buttonActionMap.put("delete-all-no", new DeleteAllConfirmButtons()); // TODO
         Logger.getGlobal().log(Level.FINE, "Registering " + MessageEvent.class.getName());
     }
 
