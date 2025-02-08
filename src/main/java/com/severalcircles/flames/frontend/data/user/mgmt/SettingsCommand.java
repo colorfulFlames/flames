@@ -8,12 +8,8 @@ import com.severalcircles.flames.data.ConsentException;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.frontend.FlamesCommand;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.interactions.components.ActionRow;
-import net.dv8tion.jda.api.interactions.components.ItemComponent;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
 
 public class SettingsCommand implements FlamesCommand {
     @Override

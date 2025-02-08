@@ -75,7 +75,6 @@ public class Flames {
             throw new FileNotFoundException("version.properties not found in the classpath.");
         }
         Locale.setDefault(Locale.ENGLISH);
-//        properties.load(is);
         properties.load(is);
         version = properties.getProperty("version");
         if (args.length > 0 && args[0].equals("RunUpgrade")) {
@@ -83,15 +82,17 @@ public class Flames {
             System.exit(0);
         }
         FlamesDataManager.prepare();
+        // -- Prepare logging ---
         String logName = "Flames " + version + "@" + InetAddress.getLocalHost().getHostName() + " " + Instant.now().truncatedTo(ChronoUnit.SECONDS).toString().replace(":", " ").replace("T", " T") + ".log";
         File logDir = new File(FlamesDataManager.FLAMES_DIRECTORY.getAbsolutePath() + "/logs");
         //noinspection ResultOfMethodCallIgnored
         logDir.mkdir();
+        for (File file : logDir.listFiles()) if (file.getName().endsWith(".lck")) file.delete(); // Clean up any mess left from previous run
         File logFile = new File(logDir.getAbsolutePath() + "/" + logName);
         //noinspection ResultOfMethodCallIgnored
         logFile.createNewFile();
         FileHandler handler = new FileHandler(logFile.getAbsolutePath());
-        handler.setFormatter(new FlamesLoggerFormatter());
+//        handler.setFormatter(new FlamesLoggerFormatter()); // IDK its not ever what i think it is
         Logger.getGlobal().addHandler(handler);
         Logger.getGlobal().log(Level.INFO, "Flames " + version);
         if (version.contains("-beta") | version.contains("-alpha") | version.contains("-SNAPSHOT")) {
