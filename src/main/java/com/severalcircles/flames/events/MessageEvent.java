@@ -116,7 +116,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
                 Today.quote[0] = event.getMessage().getContentRaw();
                 Today.quote[1] = event.getAuthor().getName();
                 Today.quote[2] = event.getAuthor().getId();
-            }
+                if (Today.quote[0].length() > 255) Today.quote[0] = Today.quote[0].substring(0, 248) + "[...]";            }
             Logger.getGlobal().log(Level.FINE, "Quote of the day is now " + Arrays.toString(Today.quote));
             flamesUser.setScore(flamesUser.getScore() + 8064);
         }
