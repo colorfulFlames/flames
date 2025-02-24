@@ -53,7 +53,8 @@ public class HiCommand implements FlamesCommand {
                 throw new RuntimeException(e);
             }
         } else {
-            event.reply("You've already collected your bonus for today. See you tomorrow!").queue();
+            event.reply("You've already collected your bonus for today. See you tomorrow!").setEphemeral(true).queue();
+
         }
     }
 }

@@ -46,7 +46,7 @@ public class LocaleCommand implements FlamesCommand {
         } catch (IOException e) {
             event.replyEmbeds(new FlamesHandlerEmbed(e).get()).complete();
         }
-        event.replyEmbeds(new UpdatedSettingsEmbed(UserSetting.LOCALE, event.getUser()).get()).complete();
+        event.replyEmbeds(new UpdatedSettingsEmbed(UserSetting.LOCALE, event.getUser()).get()).setEphemeral(true).complete();
 
     }
 }
