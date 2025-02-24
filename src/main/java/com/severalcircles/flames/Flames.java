@@ -154,8 +154,8 @@ public class Flames {
         commandDataList.add(Commands.slash("spark", "Start a Spark conversation").addOption(OptionType.STRING, "question", "The question you want to ask", true).addOption(OptionType.INTEGER, "minutes", "Time limit for the conversation in minutes.", true));
         commandMap.put("server", new ServerDataCommand());
         commandDataList.add(Commands.slash("server", "Catch up on this server's stats"));
-        commandMap.put("settings", new SettingsCommand());
-        commandDataList.add(Commands.slash("settings", "Change your settings"));
+//        commandMap.put("settings", new SettingsCommand());
+//        commandDataList.add(Commands.slash("settings", "Change your settings"));
 //        commandDataList.add(Commands.slash("amiguito", "Interact with your Amiguito character").addOption(OptionType.STRING, "name", "The name of your Amiguito", true));
 //        Commands.context(Command.Type.MESSAGE, "SparkVote");
         api.updateCommands()
