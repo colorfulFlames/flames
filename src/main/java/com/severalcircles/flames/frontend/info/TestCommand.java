@@ -4,8 +4,9 @@
 
 package com.severalcircles.flames.frontend.info;
 
-import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 //import discord4j.core.event.domain.message.MessageCreateEvent;
+import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.frontend.FlamesCommand;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 

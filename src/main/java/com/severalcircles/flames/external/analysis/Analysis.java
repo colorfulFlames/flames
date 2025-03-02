@@ -51,13 +51,13 @@ public class Analysis {
 
             AnalyzeEntitiesResponse response = language.analyzeEntities(request);
             // Print the response
-        response.getEntitiesList().forEach((element) -> {
+        List<Entity> finalList = new ArrayList<>(response.getEntitiesList());
+        finalList.removeIf(entity -> entity.getName().matches("\\d+"));
+        finalList.forEach((element) -> {
             if (!entityCache.containsKey(element.getName())) entityCache.put(element.getName(), 1);
             else entityCache.put(element.getName(), entityCache.get(element.getName()) + 1);
-        });
+         });
         language.shutdownNow();
-        //noinspection StatementWithEmptyBody
-        while (!language.isShutdown()) {}
-        return response.getEntitiesList();
+        return finalList;
     }
 }

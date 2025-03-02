@@ -5,6 +5,7 @@
 package com.severalcircles.flames.exception;
 
 import com.severalcircles.flames.Flames;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.exception.user.FlamesUserException;
 import com.severalcircles.flames.frontend.FlamesEmbed;
@@ -19,12 +20,12 @@ import java.util.ResourceBundle;
 
 public class FlamesHandlerEmbed implements FlamesEmbed {
     private String code;
-    private final String message;
+    private String message;
     private Locale locale = Locale.ENGLISH;
     private final String causedByImage;
     final ResourceBundle rsc;
     final String causedBy;
-    Color color;
+    final Color color;
     public FlamesHandlerEmbed(FlamesException e) {
         StackTraceElement[] st = Thread.currentThread().getStackTrace();
         String className = st[3].getClassName();
@@ -37,7 +38,7 @@ public class FlamesHandlerEmbed implements FlamesEmbed {
     }
     public FlamesHandlerEmbed(FlamesUserException flamesExceptionByUser) {
         this.setUser(flamesExceptionByUser.getFlamesUser());
-        this.locale = flamesExceptionByUser.getFlamesUser().getConfig().getLocale();
+        this.locale = Locale.forLanguageTag(flamesExceptionByUser.getFlamesUser().getLang());
         this.rsc = flamesExceptionByUser.getRsc(this.locale);
         this.causedBy = flamesExceptionByUser.getUser().getName();
         this.causedByImage = flamesExceptionByUser.getUser().getAvatarUrl();
@@ -64,10 +65,11 @@ public class FlamesHandlerEmbed implements FlamesEmbed {
         e.printStackTrace();
         this.causedByImage = "https://media.tenor.com/PkbRg6xWSuAAAAAC/shit-snake.gif";
         this.message = e.getMessage();
-        color = Color.BLUE;
+        color = Color.RED;
     }
 
     public MessageEmbed get() {
+        if (message == null) message = "Please kill me";
         return new EmbedBuilder()
                 .setAuthor(code)
                 .setThumbnail(causedByImage)
@@ -78,7 +80,7 @@ public class FlamesHandlerEmbed implements FlamesEmbed {
                 .build();
     }
     public FlamesHandlerEmbed setUser(FlamesUser user) {
-        this.locale = user.getConfig().getLocale();
+        this.locale = Locale.forLanguageTag(user.getLang());
         return this;
     }
 }

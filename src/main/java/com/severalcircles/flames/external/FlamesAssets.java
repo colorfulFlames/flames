@@ -6,7 +6,6 @@ package com.severalcircles.flames.external;
 
 import com.severalcircles.flames.Flames;
 import com.severalcircles.flames.util.Rank;
-//import old.com.severalcircles.flames.system.Flames;
 
 /**
  * Contains permalinks to assets stored at severalcircles.com.
@@ -50,7 +49,7 @@ public class FlamesAssets {
         }
     }
     public static String getVersionIcon() {
-        if (Flames.version.startsWith("6.")) return "https://www.severalcircles.com/flames/assets/versions/6.png";
+        if (Flames.version.startsWith("6")) return "https://www.severalcircles.com/flames/assets/versions/6.png";
         if (Flames.version.startsWith("7")) return "https://www.severalcircles.com/flames/assets/versions/7.png";
         if (Flames.version.startsWith("8")) return "https://www.severalcircles.com/flames/assets/versions/8.png";
         return "https://www.severalcircles.com/flames/assets/versions/" + Flames.version + ".png";

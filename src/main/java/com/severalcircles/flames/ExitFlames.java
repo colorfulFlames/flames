@@ -12,8 +12,8 @@ public class ExitFlames extends Thread {
     @Override
     public void run() {
         Logger.getGlobal().log(Level.INFO, "Preparing to exit Flames");
-        Logger.getGlobal().log(Level.INFO, Flames.reportHeader + Instant.now().toString() + "\n" +
-                "Flames Exit Report\n" +
+        Logger.getGlobal().log(Level.INFO,
+                "***Flames Exit Report***\n" +
                 "Messages Processed: " + FlamesRunStats.messageCount + "\n" +
                 "Commands Used: " + FlamesRunStats.commandCount + "\n" +
                 "Buttons Pressed: " + FlamesRunStats.buttonCount + "\n\n" +

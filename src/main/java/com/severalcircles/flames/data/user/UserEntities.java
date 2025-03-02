@@ -4,11 +4,9 @@
 
 package com.severalcircles.flames.data.user;
 
-import com.severalcircles.flames.data.FlamesData;
-
 import java.util.*;
 
-public class UserEntities implements FlamesData {
+public class UserEntities {
     public UserEntities() {
         entities = new HashMap<>();
 //        entities.put("Flames", new UserEntity("Flames", "1", 1, 0));
@@ -41,7 +39,7 @@ public class UserEntities implements FlamesData {
             topAndBottom.add(lowCandidates.get(2));
         return topAndBottom;
     }
-    private Map<String, UserEntity> entities = new HashMap<>();
+    private Map<String, UserEntity> entities;
 
     public Map<String, UserEntity> getEntities() {
         return entities;

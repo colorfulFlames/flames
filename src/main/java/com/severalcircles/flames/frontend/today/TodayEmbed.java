@@ -18,6 +18,7 @@ import net.dv8tion.jda.api.entities.User;
 import java.awt.*;
 import java.io.IOException;
 import java.time.Instant;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -27,7 +28,7 @@ public class TodayEmbed implements FlamesEmbed {
     private static ResourceBundle resources;
     public TodayEmbed(User user, FlamesUser flamesUser) {
         this.flamesUser = flamesUser;
-        resources = Flames.local(getClass(), flamesUser.getConfig().getLocale());
+        resources = Flames.local(Locale.forLanguageTag(flamesUser.getLang()));
     }
     public MessageEmbed get() {
         String trendingEntity = "";
@@ -38,22 +39,25 @@ public class TodayEmbed implements FlamesEmbed {
                 times = entry.getValue();
             }
         }
-        String title;
-        if (Today.isThanksgiving) title = resources.getString("title.thanksgiving");
-        else title = resources.getString("title");
+        String title = resources.getString("title");
         try {
             return new EmbedBuilder()
                     .setAuthor(String.format(resources.getString("author"), StringUtil.prettifyDate(Instant.now())), null, Flames.api.getSelfUser().getAvatarUrl())
                     .setTitle(title)
+                    .setDescription(
+                            String.format(resources.getString("quoteTitle"), Today.quote.author()) + "\n" +
+                            String.format(resources.getString("quote"), Today.quote.message(), StringUtil.prettifyDate(Today.quote.inst())))
+                    .addBlankField(false)
                     .addField(resources.getString("talkingAbout"), trendingEntity, true)
-                    .addField(resources.getString("feeling"), Emotion.getEmotionString(Today.emotion, flamesUser.getConfig().getLocale()), true)
-                    .addField(resources.getString("highUser"), Today.highUser, true)
-                    .addBlankField(false)
-                    .addField("\"" + Today.quote[0] + "\"", "- " + Today.quote[1] + ", " + StringUtil.prettifyDate(Instant.now()), false)
-                    .addBlankField(false)
-                    .addField(resources.getString("allAbout"), resources.getString("tomorrowBring"), false)
+                    .addField(resources.getString("feeling"), Emotion.getEmotionString(Today.emotion, Locale.forLanguageTag(flamesUser.getLang())), true)
+                    .addField(resources.getString("highUser"), Today.highUser + " (" + StringUtil.formatScore(Today.highScore) + ")", true)
+//                    .addBlankField(false)
+//                    .addField(String.format(resources.getString("quoteTitle"), Today.quote.author()), String.format(resources.getString("quote"), Today.quote.message(), StringUtil.prettifyDate(Today.quote.inst())), false)
+//                    .addBlankField(false)
+//                    .addField(resources.getString("allAbout"), resources.getString("tomorrowBring"), false)
                     .setThumbnail(ImageSearch.searchImage(trendingEntity))
                     .setFooter(Flames.api.getSelfUser().getGlobalName(), Flames.api.getSelfUser().getAvatarUrl())
+                    .setImage("https://severalcircles.com/flames/assets/apps/today_footer.png")
                     .setColor(Color.decode("#F1D302"))
                     .build();
         } catch (IOException e) {

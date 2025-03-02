@@ -5,7 +5,7 @@
 package com.severalcircles.flames.frontend.data.user.embed;
 
 import com.severalcircles.flames.Flames;
-import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -22,11 +22,11 @@ public class GetAlongEmbed implements FlamesEmbed {
     String description;
     final int score;
 
-    public GetAlongEmbed(User sender, FlamesUser flamesUser, User victim, int score) {
+    public GetAlongEmbed(User sender, LegacyFlamesUser legacyFlamesUser, User victim, int score) {
         this.sender = sender;
         this.victim = victim;
         this.score = score;
-        resources = ResourceBundle.getBundle("features/data/user/embed/GetAlongEmbed", flamesUser.getConfig().getLocale());
+        resources = ResourceBundle.getBundle("features/data/user/embed/GetAlongEmbed", legacyFlamesUser.getConfig().getLocale());
         try {
             description = resources.getString("description.level" + Math.round(Math.log(score)/Math.log(2) + 16));
         } catch (Exception e) {

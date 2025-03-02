@@ -4,8 +4,9 @@
 
 package com.severalcircles.flames.frontend.today;
 
-import com.severalcircles.flames.data.user.FlamesUser;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 //import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.frontend.FlamesCommand;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 

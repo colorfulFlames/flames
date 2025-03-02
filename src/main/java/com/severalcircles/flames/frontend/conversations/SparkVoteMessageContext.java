@@ -10,7 +10,6 @@ import com.severalcircles.flames.frontend.FlamesMessageContext;
 import net.dv8tion.jda.api.interactions.commands.context.MessageContextInteraction;
 
 import java.util.Objects;
-import java.util.ResourceBundle;
 
 public class SparkVoteMessageContext implements FlamesMessageContext {
     @Override

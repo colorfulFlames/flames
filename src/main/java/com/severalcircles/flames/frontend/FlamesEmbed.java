@@ -7,5 +7,5 @@ package com.severalcircles.flames.frontend;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 
 public interface FlamesEmbed {
-    public MessageEmbed get();
+    MessageEmbed get();
 }

@@ -4,10 +4,6 @@
 
 package com.severalcircles.flames.util;
 
-import com.severalcircles.flames.data.global.GlobalData;
-
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
 

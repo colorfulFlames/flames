@@ -6,16 +6,20 @@
 package com.severalcircles.flames;
 
 import com.severalcircles.flames.conversations.Conversation;
+import com.severalcircles.flames.data.DataUpgradeUtil;
 import com.severalcircles.flames.data.FlamesDataManager;
-import com.severalcircles.flames.data.global.GlobalData;
+import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
+import com.severalcircles.flames.data.legacy.global.GlobalData;
 import com.severalcircles.flames.events.*;
 import com.severalcircles.flames.frontend.FlamesCommand;
 import com.severalcircles.flames.frontend.conversations.ConversationCommand;
 import com.severalcircles.flames.frontend.conversations.SparkCommand;
 import com.severalcircles.flames.frontend.data.other.GlobalDataCommand;
+import com.severalcircles.flames.frontend.data.other.ServerDataCommand;
 import com.severalcircles.flames.frontend.data.user.HiCommand;
 import com.severalcircles.flames.frontend.data.user.LocaleCommand;
 import com.severalcircles.flames.frontend.data.user.MyDataCommand;
+import com.severalcircles.flames.frontend.data.user.mgmt.SettingsCommand;
 import com.severalcircles.flames.frontend.info.AboutCommand;
 import com.severalcircles.flames.frontend.info.HelpCommand;
 import com.severalcircles.flames.frontend.info.TestCommand;
@@ -29,12 +33,8 @@ import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -63,16 +63,6 @@ public class Flames {
     public static ResourceBundle getCommonRsc(Locale locale) {
         return ResourceBundle.getBundle("Common", locale);
     }
-    public static String reportHeader;
-
-    static {
-        try {
-            reportHeader = "OP:" + System.getProperty("user.name") + " HN:" + InetAddress.getLocalHost().getHostName() + " OS:" + System.getProperty("os.name") + " JRE:" + System.getProperty("java.vendor") + " FV:%s" + " IN:";
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-    }
 
     /**
      * Bootloader function
@@ -81,25 +71,30 @@ public class Flames {
     public static void main(String[] args) throws IOException {
         // --- Initial Preparations ---
         InputStream is = Flames.class.getClassLoader().getResourceAsStream("version.properties");
+        if (is == null) {
+            throw new FileNotFoundException("version.properties not found in the classpath.");
+        }
         Locale.setDefault(Locale.ENGLISH);
         properties.load(is);
         version = properties.getProperty("version");
-        if (args.length > 0) runningDebug = args[0].equals("--debug");
-        if (runningDebug) Logger.getGlobal().info("Running in debugging mode.");
+        if (args.length > 0 && args[0].equals("RunUpgrade")) {
+            new DataUpgradeUtil().upgradeData();
+            System.exit(0);
+        }
         FlamesDataManager.prepare();
-        reportHeader = String.format(reportHeader, version);
+        // -- Prepare logging ---
         String logName = "Flames " + version + "@" + InetAddress.getLocalHost().getHostName() + " " + Instant.now().truncatedTo(ChronoUnit.SECONDS).toString().replace(":", " ").replace("T", " T") + ".log";
-        File logDir = new File(FlamesDataManager.flamesDirectory.getAbsolutePath() + "/logs");
+        File logDir = new File(FlamesDataManager.FLAMES_DIRECTORY.getAbsolutePath() + "/logs");
         //noinspection ResultOfMethodCallIgnored
         logDir.mkdir();
+        for (File file : logDir.listFiles()) if (file.getName().endsWith(".lck")) file.delete(); // Clean up any mess left from previous run
         File logFile = new File(logDir.getAbsolutePath() + "/" + logName);
         //noinspection ResultOfMethodCallIgnored
         logFile.createNewFile();
         FileHandler handler = new FileHandler(logFile.getAbsolutePath());
-        handler.setFormatter(new SimpleFormatter());
+//        handler.setFormatter(new FlamesLoggerFormatter()); // IDK its not ever what i think it is
         Logger.getGlobal().addHandler(handler);
-        Logger.getGlobal().log(Level.INFO, "Flames");
-        Logger.getGlobal().info(reportHeader + Instant.now());
+        Logger.getGlobal().log(Level.INFO, "Flames " + version);
         if (version.contains("-beta") | version.contains("-alpha") | version.contains("-SNAPSHOT")) {
             Logger.getGlobal().log(Level.WARNING, "This is a development version of Flames. It may be too based for you to handle.");
         }
@@ -123,12 +118,14 @@ public class Flames {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+//        AmiguitoDataManager.prepare();    <---- Don't worry about that
         // --- Events ---
         new CommandEvent().register(api);
         new MessageEvent().register(api);
         new ButtonEvent().register(api);
         new SelectMenuEvent().register(api);
         new MessageContextEvent().register(api);
+        new UserContextEvent().register(api);
         api.addEventListener(new MessageContextEvent());
         // --- Commands ---
         Logger.getGlobal().log(Level.INFO, "Registering Commands");
@@ -150,12 +147,16 @@ public class Flames {
         commandMap.put("thanks", new ThanksCommand());
         commandDataList.add(Commands.slash("thanks", "Gives Thanks to a user").addOption(OptionType.USER, "who", "The user you want to thank", true).addOption(OptionType.STRING, "msg", "An optional message to attach"));
         commandMap.put("conversation", new ConversationCommand());
-        new UserContextEvent().register(api);
         commandDataList.add(Commands.slash("conversation", "Shows information about the current conversation"));
         commandMap.put("about", new AboutCommand());
         commandDataList.add(Commands.slash("about", "Who cooked here?"));
         commandMap.put("spark", new SparkCommand());
         commandDataList.add(Commands.slash("spark", "Start a Spark conversation").addOption(OptionType.STRING, "question", "The question you want to ask", true).addOption(OptionType.INTEGER, "minutes", "Time limit for the conversation in minutes.", true));
+        commandMap.put("server", new ServerDataCommand());
+        commandDataList.add(Commands.slash("server", "Catch up on this server's stats"));
+//        commandMap.put("settings", new SettingsCommand());
+//        commandDataList.add(Commands.slash("settings", "Change your settings"));
+//        commandDataList.add(Commands.slash("amiguito", "Interact with your Amiguito character").addOption(OptionType.STRING, "name", "The name of your Amiguito", true));
 //        Commands.context(Command.Type.MESSAGE, "SparkVote");
         api.updateCommands()
                 .addCommands(commandDataList).
@@ -172,7 +173,7 @@ public class Flames {
         fatalErrorCounter++;
         if (fatalErrorCounter > 10) {
             Logger.getGlobal().log(Level.SEVERE, "Flames has detected a recurring fatal problem. To protect Flames' data, it will now exit. There may be stack traces above with more information.");
-            File file = new File(FlamesDataManager.flamesDirectory.getAbsolutePath() + "/logs/Flames FatalReport:" + Instant.now().toString() + ".log");
+            File file = new File(FlamesDataManager.FLAMES_DIRECTORY.getAbsolutePath() + "/logs/Flames FatalReport:" + Instant.now().toString() + ".log");
             try {
                 //noinspection ResultOfMethodCallIgnored
                 file.createNewFile();
@@ -181,9 +182,9 @@ public class Flames {
                 e.printStackTrace();
                 System.exit(3);
             }
-            String log = reportHeader + "\n" +
+            String log =
                     "Flames has detected a recurring fatal issue. Similar issues are known to cause damage to Flames, so Flames has been shut down.\n" +
-                    "Please report this issue to the developers at https://github.com/colorfulFlames/flames/issues/new?assignees=SeveralCircles&labels=bug&template=bug_report.md&title=Flames Protect Exception\n" +
+                    "Please report this issue to the developers at severalcircles.youtrack.cloud\n" +
                     "Thank you for your cooperation.";
             FileWriter writer;
             try {

@@ -4,6 +4,7 @@
 
 package com.severalcircles.flames.conversations;
 
+import com.severalcircles.flames.data.ConsentException;
 import com.severalcircles.flames.exception.AlreadyVotedException;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
 import com.severalcircles.flames.frontend.conversations.SparkResultsEmbed;
@@ -12,30 +13,25 @@ import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.middleman.GuildMessageChannel;
 import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Logger;
 
-public class SparkConversation extends Conversation {
+public class SparkConversation {
     public static final Map<String, SparkConversation> sparkConversations = new HashMap<>();
     private final List<String> alreadyVoted = new LinkedList<>();
     private final Map<Message, Integer> messageList;
     private final String question;
-    Timer t = new Timer();
-    Timer t2 = new Timer();
+    final Timer t = new Timer();
+    final Timer t2 = new Timer();
     int votes = 0;
-    MessageChannelUnion channel;
-
-    /**
-     * Initializes a new SparkConversation object.
-     *
-     * @param channel The message channel in which the conversation is taking place.
-     * @param question The question for the conversation.
-     * @param minutes The duration of the conversation in minutes (between 1 and 5).
-     */
+    final MessageChannelUnion channel;
+    public MessageChannelUnion getChannel() {
+        return channel;
+    }
     public SparkConversation(MessageChannelUnion channel, String question, int minutes) {
-        super((GuildMessageChannel) channel);
         this.channel = channel;
         this.question = question;
         if (minutes < 1) {
@@ -57,13 +53,8 @@ public class SparkConversation extends Conversation {
                 finish();
             }
         }, minutes * 60000L);
-        channel.asTextChannel().getManager().setSlowmode(minutes * 60).complete();
+//        channel.asTextChannel().getManager().setSlowmode(minutes * 60).complete();
     }
-
-    /**
-     * Finish the spark conversation by selecting the message with the highest votes,
-     * sending the results as an embed, and performing necessary cleanup tasks.
-     */
     void finish() {
         AtomicReference<String> answer = new AtomicReference<>("");
         AtomicInteger highest = new AtomicInteger();
@@ -79,26 +70,6 @@ public class SparkConversation extends Conversation {
         Logger.getGlobal().info("Spark conversation ended.");
     }
 
-    /**
-     * Process a message in the conversation.
-     *
-     * @param message           The message to be processed.
-     * @param finishedAnalysis  The analysis result of the message.
-     * @throws ExpiredConversationException  if the conversation has expired.
-     */
-    @Override
-    public void processMessage(Message message, FinishedAnalysis finishedAnalysis) throws ExpiredConversationException {
-        super.processMessage(message, finishedAnalysis);
-
-    }
-
-    /**
-     * Adds a vote to a message by a user.
-     *
-     * @param message The message to vote for.
-     * @param user    The user who is voting.
-     * @throws AlreadyVotedException if the user has already voted for the message.
-     */
     public void addMessageVote(Message message, User user) throws AlreadyVotedException {
         if (alreadyVoted.contains(user.getId())) {
             throw new AlreadyVotedException("User has already voted.");

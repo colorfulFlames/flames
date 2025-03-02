@@ -5,8 +5,10 @@
 package com.severalcircles.flames.frontend.thanks;
 
 import com.severalcircles.flames.data.FlamesDataManager;
+import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
+import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
+import com.severalcircles.flames.data.ConsentException;
 import com.severalcircles.flames.data.user.FlamesUser;
-import com.severalcircles.flames.exception.ConsentException;
 import com.severalcircles.flames.exception.FlamesMetaException;
 import com.severalcircles.flames.exception.handle.ExceptionHandler;
 import com.severalcircles.flames.frontend.FlamesUserContext;
@@ -29,16 +31,14 @@ public class ThanksContext implements FlamesUserContext {
         }
         FlamesUser flt;
         try {
-            flt = FlamesDataManager.readUser(thanked);
-            sender = FlamesDataManager.readUser(event.getUser());
-        } catch (IOException e) {
-            e.printStackTrace();
-            event.replyEmbeds(new ExceptionHandler(e).handleThenGetFrontend()).complete();
-            return;
+            flt = FlamesDataManager.getUser(thanked.getId());
         } catch (ConsentException e) {
             event.replyEmbeds(e.getHandler().handleThenGetFrontend()).complete();
             return;
         } catch (FlamesMetaException e) {
+            event.replyEmbeds(new ExceptionHandler(e).handleThenGetFrontend()).complete();
+            return;
+        } catch (IOException e) {
             event.replyEmbeds(new ExceptionHandler(e).handleThenGetFrontend()).complete();
             return;
         }
