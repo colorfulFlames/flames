@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
  * Determines thresholds for each rank and allows getting the rank for a given score.
  */
 public class Ranking {
-    public static final int[] thresholds = {5000, 11750, 21875, 35544, 56048, 83728, 125247, 187526, 280945};
+    public static final int[] thresholds = {5000, 11750, 21875, 35544, 56048, 103728, 156247, 387526, 1000000};
     public static int baseValue = 0;
 
     public static ResourceBundle getResources(Locale locale) {
