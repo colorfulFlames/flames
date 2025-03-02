@@ -4,6 +4,8 @@
 
 package com.severalcircles.flames.frontend.today;
 
+import com.severalcircles.flames.util.StringUtil;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -23,6 +25,7 @@ public class Today {
     public static boolean quoteMessage(String msg, String author, double emotion) {
         addEmotion(emotion);
         emotion = Math.abs(emotion);
+        if (StringUtil.countDigits(msg) > 2) return false; // No more than 2 digits allowed
         int seed = new Random().nextInt(10);
         System.out.println("Seed:" + seed);
         TodayQuote quote = new TodayQuote(msg, emotion, author, Instant.now(), seed);

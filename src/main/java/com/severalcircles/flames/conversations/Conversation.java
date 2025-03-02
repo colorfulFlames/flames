@@ -10,6 +10,7 @@ import com.severalcircles.flames.data.user.Consent;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.ConsentException;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
+import com.severalcircles.flames.util.StringUtil;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.middleman.GuildMessageChannel;
 
@@ -264,6 +265,7 @@ public class Conversation {
         }
         flamesUser.addScore(score(finishedAnalysis, Objects.requireNonNull(FlamesDataManager.getServer(channel.getGuild().getId())).todayIsHootenannyDay()));
         finishedAnalysis.getEntityList().forEach((element) -> {
+            if (StringUtil.countDigits(element.getName()) > 2) return;
             if (entityList.contains(element)) {
                 entities.put(element.getName(), entities.get(element) + 1);
             } else {

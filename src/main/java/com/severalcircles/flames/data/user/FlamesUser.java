@@ -37,6 +37,9 @@ public class FlamesUser extends FlamesDatatype {
         id = null;
     }
 
+    // Title
+    private String title;
+
     public FlamesUser(String id) {
         this.id = id;
         this.score = 0;
@@ -52,6 +55,7 @@ public class FlamesUser extends FlamesDatatype {
         this.lang = Locale.ENGLISH.toLanguageTag();
         this.quoteConsent = false;
         this.entities = new UserEntities();
+        this.title = "";
     }
 
     public FlamesUser(LegacyFlamesUser legacyFlamesUser) {
@@ -69,6 +73,7 @@ public class FlamesUser extends FlamesDatatype {
         this.lang = legacyFlamesUser.getConfig().getLocale().toLanguageTag();
         this.quoteConsent = legacyFlamesUser.getConfig().isQotdAllowed();
         this.entities = legacyFlamesUser.getEntities();
+        this.title = "";
     }
 
     public String getLang() {
@@ -79,7 +84,7 @@ public class FlamesUser extends FlamesDatatype {
         this.lang = lang;
     }
 
-    public FlamesUser(String id, int score, int consent, int streak, float emotion, Date lastSeen, Date sadDay, float lowestEmotion, Date happyDay, float highestEmotion, String favoriteQuote, String lang, boolean quoteConsent, UserEntities entities) {
+    public FlamesUser(String id, int score, int consent, int streak, float emotion, Date lastSeen, Date sadDay, float lowestEmotion, Date happyDay, float highestEmotion, String favoriteQuote, String lang, boolean quoteConsent, UserEntities entities, String title) {
         this.id = id;
         this.score = score;
         this.consent = consent;
@@ -94,6 +99,7 @@ public class FlamesUser extends FlamesDatatype {
         this.lang = lang;
         this.quoteConsent = quoteConsent;
         this.entities = entities;
+        this.title = title;
     }
 
     public String getId() {
@@ -227,6 +233,14 @@ public class FlamesUser extends FlamesDatatype {
         if (id == null || id.trim().isEmpty()) {
             throw new IllegalStateException("Not in my house! (Please provide an ID)");
         }
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
