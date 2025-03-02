@@ -39,19 +39,21 @@ public class TodayEmbed implements FlamesEmbed {
                 times = entry.getValue();
             }
         }
-        String title;
-        if (Today.isThanksgiving) title = resources.getString("title.thanksgiving");
-        else title = resources.getString("title");
+        String title = resources.getString("title");
         try {
             return new EmbedBuilder()
                     .setAuthor(String.format(resources.getString("author"), StringUtil.prettifyDate(Instant.now())), null, Flames.api.getSelfUser().getAvatarUrl())
                     .setTitle(title)
+                    .setDescription(
+                            String.format(resources.getString("quoteTitle"), Today.quote.author()) + "\n" +
+                            String.format(resources.getString("quote"), Today.quote.message(), StringUtil.prettifyDate(Today.quote.inst())))
+                    .addBlankField(false)
                     .addField(resources.getString("talkingAbout"), trendingEntity, true)
                     .addField(resources.getString("feeling"), Emotion.getEmotionString(Today.emotion, Locale.forLanguageTag(flamesUser.getLang())), true)
-                    .addField(resources.getString("highUser"), Today.highUser, true)
-                    .addBlankField(false)
-                    .addField("\"" + Today.quote[0] + "\"", "- " + Today.quote[1] + ", " + StringUtil.prettifyDate(Instant.now()), false)
-                    .addBlankField(false)
+                    .addField(resources.getString("highUser"), Today.highUser + " (" + StringUtil.formatScore(Today.highScore) + ")", true)
+//                    .addBlankField(false)
+//                    .addField(String.format(resources.getString("quoteTitle"), Today.quote.author()), String.format(resources.getString("quote"), Today.quote.message(), StringUtil.prettifyDate(Today.quote.inst())), false)
+//                    .addBlankField(false)
 //                    .addField(resources.getString("allAbout"), resources.getString("tomorrowBring"), false)
                     .setThumbnail(ImageSearch.searchImage(trendingEntity))
                     .setFooter(Flames.api.getSelfUser().getGlobalName(), Flames.api.getSelfUser().getAvatarUrl())
