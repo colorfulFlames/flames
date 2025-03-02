@@ -11,13 +11,10 @@ import com.severalcircles.flames.conversations.ConversationsController;
 import com.severalcircles.flames.conversations.ExpiredConversationException;
 import com.severalcircles.flames.data.ConsentException;
 import com.severalcircles.flames.data.FlamesDataManager;
-import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
-import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.external.analysis.Analysis;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
 import com.severalcircles.flames.frontend.today.Today;
-import jdk.jpackage.internal.Log;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -111,15 +108,10 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             ConversationsController.activeConversations.forEach((element, index) -> System.out.println(element));
         }
         // Check quote of the day
-        if (!Today.quote[2].equals(event.getAuthor().getId()) && flamesUser.isQuoteConsent()) {
-            if (finishedAnalysis.getEmotion() > Today.quoteEmotion) {
-                Today.quote[0] = event.getMessage().getContentRaw();
-                Today.quote[1] = event.getAuthor().getName();
-                Today.quote[2] = event.getAuthor().getId();
-                if (Today.quote[0].length() > 255) Today.quote[0] = Today.quote[0].substring(0, 248) + "[...]";            }
-            Logger.getGlobal().log(Level.FINE, "Quote of the day is now " + Arrays.toString(Today.quote));
-            flamesUser.setScore(flamesUser.getScore() + 8064);
+        if (Today.quoteMessage(event.getMessage().getContentRaw(), event.getAuthor().getGlobalName(), finishedAnalysis.getEmotion())) {
+            flamesUser.addScore(Today.QUOTE_BONUS);
         }
+        Today.highScore(user.getGlobalName(), flamesUser.getScore());
 //        if (event.getMessage().getContentRaw().toUpperCase(Locale.ROOT).startsWith("FLAMES,")) {
 //            DialogSession session = new DialogSession();
 //

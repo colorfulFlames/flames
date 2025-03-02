@@ -45,10 +45,6 @@ public class ThanksEmbed implements FlamesEmbed {
 
     public MessageEmbed get() {
         if (thanked.getId().equals(sender.getId())) return new FlamesRuntimeExceptionHandler(new FlamesMetaException("You cannot thank yourself."), this.getClass()).handleThenGetFrontend();
-        if (!Today.thanksgivingThanks.containsKey(sender.getId())) Today.thanksgivingThanks.put(sender.getId(), new LinkedList<>());
-        if ((!Today.isThanksgiving && Today.thanks.contains(sender.getId())) | (Today.isThanksgiving && Today.thanksgivingThanks.get(sender.getId()).contains(thanked.getId()))) {
-            return new EmbedBuilder().setTitle(String.format(resources.getString("alreadyThanked"), sender.getGlobalName())).setColor(Color.red).build();
-        }
 
         flamesUser.setScore(flamesUser.getScore() + 2500);
         try {
@@ -59,16 +55,6 @@ public class ThanksEmbed implements FlamesEmbed {
         }
         Today.thanks.add(sender.getId());
         List<String> thasnked;
-        if (Today.isThanksgiving) {
-            try {
-                thasnked = Today.thanksgivingThanks.get(sender.getId());
-            } catch (NullPointerException e) {
-                Today.thanksgivingThanks.put(sender.getId(), new LinkedList<>());
-                thasnked = Today.thanksgivingThanks.get(sender.getId());
-            }
-            thasnked.add(thanked.getId());
-            Today.thanksgivingThanks.put(sender.getId(), thasnked);
-        }
         success.add(sender.getId());
         return new EmbedBuilder()
                 .setAuthor(String.format(resources.getString("author"), sender.getGlobalName()), null, sender.getAvatarUrl())

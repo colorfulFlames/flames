@@ -22,14 +22,12 @@ public class ResetTodayRunnable implements Runnable {
 //        Today.topic = "";
         Today.highScore = 0;
         Analysis.entityCache = new HashMap<>();
-        Today.quote = new String[]{"We're still waiting for somebody to say something epic.", "Flames", "0"};
+        Today.quote = Today.defaultQuote;
         Today.thanks = new LinkedList<>();
         Today.highUser = "Nobody yet!";
         Date now = new Date();
-        thanksgiving.set(2021, Calendar.NOVEMBER, 25);
-        System.out.println(Calendar.getInstance().toInstant().truncatedTo(ChronoUnit.DAYS).compareTo(thanksgiving.toInstant().truncatedTo(ChronoUnit.DAYS)));
-        if (Calendar.getInstance().toInstant().truncatedTo(ChronoUnit.DAYS).compareTo(thanksgiving.toInstant().truncatedTo(ChronoUnit.DAYS)) == 0) Today.isThanksgiving = true;
-        Today.thanksgivingThanks = new HashMap<>();
+//        thanksgiving.set(2021, Calendar.NOVEMBER, 25);
+//        Today.thanksgivingThanks = new HashMap<>();
 //        QOTD.nextQuestion();
     }
 }
