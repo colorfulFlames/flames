@@ -92,7 +92,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             Logger.getGlobal().log(Level.INFO, "Already in conversation");
             try {
                 System.out.println(finishedAnalysis);
-                ConversationsController.activeConversations.get(event.getChannel().getId()).processMessage(event.getAuthor(), finishedAnalysis);
+                ConversationsController.activeConversations.get(event.getChannel().getId()).processMessage(event.getAuthor(), finishedAnalysis, event.getMessage());
             } catch (ExpiredConversationException e) {
                 logger.log(Level.INFO, "Conversation at " + event.getChannel().getId() + " is expired, removing it from the conversations list.");
                 ConversationsController.activeConversations.remove(event.getChannel().getId());
@@ -102,7 +102,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
             Conversation conversation = new Conversation(event.getChannel().asTextChannel());
             try {
                 Thread thread = new Thread(() -> {
-                    conversation.processMessage(event.getAuthor(), finishedAnalysis);
+                    conversation.processMessage(event.getAuthor(), finishedAnalysis, event.getMessage());
                 });
                 thread.start();
             } catch (ExpiredConversationException e) {
@@ -116,6 +116,7 @@ public class MessageEvent extends ListenerAdapter implements FlamesDiscordEvent 
         if (Today.quoteMessage(event.getMessage().getContentRaw(), event.getAuthor().getGlobalName(), finishedAnalysis.getEmotion())) {
             flamesUser.addScore(Today.QUOTE_BONUS);
         }
+
         Today.highScore(user.getGlobalName(), flamesUser.getScore());
 //        if (event.getMessage().getContentRaw().toUpperCase(Locale.ROOT).startsWith("FLAMES,")) {
 //            DialogSession session = new DialogSession();

@@ -10,7 +10,9 @@ import com.severalcircles.flames.data.user.Consent;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.data.ConsentException;
 import com.severalcircles.flames.external.analysis.FinishedAnalysis;
+import com.severalcircles.flames.frontend.today.TodayQuote;
 import com.severalcircles.flames.util.StringUtil;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.middleman.GuildMessageChannel;
 
@@ -238,7 +240,7 @@ public class Conversation {
 //            });
 //        });
 //    }
-    public void processMessage(User user, FinishedAnalysis finishedAnalysis) throws ExpiredConversationException {
+    public void processMessage(User user, FinishedAnalysis finishedAnalysis, Message msg) throws ExpiredConversationException {
         FlamesUser flamesUser;
         Logger.getGlobal().log(Level.INFO, "Processing Message");
         try {
@@ -273,7 +275,11 @@ public class Conversation {
                 entities.put(element.getName(), 1);
             }
         });
+        if (flamesUser.getFavoriteQuote().getEmotion() < Math.abs(emotion) || new Random().nextInt(5) % 2 == 0) {
+            flamesUser.setFavoriteQuote(new TodayQuote(msg.getContentRaw(), finishedAnalysis.getEmotion(), msg.getAuthor().getGlobalName(), new Date(), new Random().nextInt(10)));
+        }
         FlamesServer flamesServer = FlamesDataManager.getServer(channel.getGuild().getId());
+        flamesServer.checkQuote(new TodayQuote(msg.getContentRaw(), finishedAnalysis.getEmotion(), msg.getAuthor().getGlobalName(),new Date(), new Random().nextInt(10)));
         assert flamesServer != null;
         flamesServer.addScore(score(finishedAnalysis, flamesServer.todayIsHootenannyDay()));
         try {

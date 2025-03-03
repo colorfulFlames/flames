@@ -9,6 +9,8 @@ import com.severalcircles.flames.data.FlamesServer;
 import com.severalcircles.flames.data.legacy.server.LegacyFlamesServer;
 import com.severalcircles.flames.data.user.FlamesUser;
 import com.severalcircles.flames.frontend.FlamesEmbed;
+import com.severalcircles.flames.frontend.today.TodayQuote;
+import com.severalcircles.flames.util.StringUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.channel.middleman.GuildChannel;
@@ -30,13 +32,16 @@ public class ServerDataEmbed implements FlamesEmbed {
     @Override
     public MessageEmbed get() {
         Color color = Color.GRAY;
-        String description = String.format(local.getString("hootenanny"), ordinal(server.getHootenannyDay()));
+//        String description = String.format(local.getString("hootenanny"), ordinal(server.getHootenannyDay()));
         String title = origin.getGuild().getName();
-        if (new Date().getDate() == server.getHootenannyDay()) {
-            color = Color.RED;
-            title = "Well howdy!";
-            description = String.format(local.getString("hootenannyToday"), origin.getGuild().getName());
-        }
+//        if (new Date().getDate() == server.getHootenannyDay()) {
+//            color = Color.RED;
+//            title = "Well howdy!";
+//            description = String.format(local.getString("hootenannyToday"), origin.getGuild().getName());
+//        }
+        TodayQuote quote = server.getServerQuote();
+        if (server.getServerQuote().message().contains("%s")) quote = new TodayQuote(String.format(quote.message(), origin.getGuild().getName()), quote.emotion(), quote.author(), quote.getInst(), quote.seed());
+        String description = String.format(local.getString("description"), quote.message(), quote.author(), StringUtil.prettifyDate(quote.getInst().toInstant()));
         MessageEmbed embed = new EmbedBuilder()
                 .setAuthor(local.getString("author"), null, Flames.api.getSelfUser().getAvatarUrl())
                 .setTitle(title)
