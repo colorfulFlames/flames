@@ -62,6 +62,9 @@ public class TodayQuote {
         this.inst = inst;
         this.seed = seed;
     }
+    TodayQuote(String msg) {
+        this(msg, 0.0, "", new Date(), 0);
+    }
 
     public TodayQuote() {
         this(Today.defaultQuote.message(), Today.defaultQuote.emotion(), Today.defaultQuote.author(), Today.defaultQuote.inst, Today.defaultQuote.seed());
