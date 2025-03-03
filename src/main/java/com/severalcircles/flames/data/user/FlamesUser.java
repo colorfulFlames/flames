@@ -4,14 +4,17 @@
 
 package com.severalcircles.flames.data.user;
 
+import com.google.gson.internal.NonNullElementWrapperList;
 import com.severalcircles.flames.data.FlamesDatatype;
 import com.severalcircles.flames.data.legacy.user.LegacyFlamesUser;
+import com.severalcircles.flames.frontend.today.TodayQuote;
 
 import java.time.Instant;
 import java.util.Date;
 import java.util.Locale;
 
 public class FlamesUser extends FlamesDatatype {
+    public static final TodayQuote DEFAULT_QUOTE = new TodayQuote("I'm a Flames user!", 0, "nobody", new Date(), 0);
     // Core values
     private String id;
     private int score;
@@ -25,7 +28,7 @@ public class FlamesUser extends FlamesDatatype {
     private float lowestEmotion;
     private Date happyDay;
     private float highestEmotion;
-    private String favoriteQuote;
+    private TodayQuote favoriteQuote;
 
     // Config
     private String lang;
@@ -51,7 +54,7 @@ public class FlamesUser extends FlamesDatatype {
         this.lowestEmotion = 0;
         this.happyDay = Date.from(Instant.now());
         this.highestEmotion = 0;
-        this.favoriteQuote = "This is me.";
+        this.favoriteQuote = DEFAULT_QUOTE;
         this.lang = Locale.ENGLISH.toLanguageTag();
         this.quoteConsent = false;
         this.entities = new UserEntities();
@@ -69,7 +72,7 @@ public class FlamesUser extends FlamesDatatype {
         this.lowestEmotion = legacyFlamesUser.getFunFacts().getLowestEmotion();
         this.happyDay = Date.from(legacyFlamesUser.getFunFacts().getHappyDay());
         this.highestEmotion = legacyFlamesUser.getFunFacts().getHighestEmotion();
-        this.favoriteQuote = legacyFlamesUser.getFunFacts().getFavoriteQuote();
+        this.favoriteQuote = DEFAULT_QUOTE;
         this.lang = legacyFlamesUser.getConfig().getLocale().toLanguageTag();
         this.quoteConsent = legacyFlamesUser.getConfig().isQotdAllowed();
         this.entities = legacyFlamesUser.getEntities();
@@ -84,7 +87,7 @@ public class FlamesUser extends FlamesDatatype {
         this.lang = lang;
     }
 
-    public FlamesUser(String id, int score, int consent, int streak, float emotion, Date lastSeen, Date sadDay, float lowestEmotion, Date happyDay, float highestEmotion, String favoriteQuote, String lang, boolean quoteConsent, UserEntities entities, String title) {
+    public FlamesUser(String id, int score, int consent, int streak, float emotion, Date lastSeen, Date sadDay, float lowestEmotion, Date happyDay, float highestEmotion, TodayQuote favoriteQuote, String lang, boolean quoteConsent, UserEntities entities, String title) {
         this.id = id;
         this.score = score;
         this.consent = consent;
@@ -154,7 +157,7 @@ public class FlamesUser extends FlamesDatatype {
         return highestEmotion;
     }
 
-    public String getFavoriteQuote() {
+    public TodayQuote getFavoriteQuote() {
         //checkId();
         return favoriteQuote;
     }
@@ -214,7 +217,7 @@ public class FlamesUser extends FlamesDatatype {
         this.highestEmotion = highestEmotion;
     }
 
-    public void setFavoriteQuote(String favoriteQuote) {
+    public void setFavoriteQuote(TodayQuote favoriteQuote) {
         //checkId();
         this.favoriteQuote = favoriteQuote;
     }

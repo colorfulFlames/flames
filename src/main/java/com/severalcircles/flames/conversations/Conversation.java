@@ -275,6 +275,9 @@ public class Conversation {
                 entities.put(element.getName(), 1);
             }
         });
+        if (flamesUser.getFavoriteQuote().getEmotion() < Math.abs(emotion) || new Random().nextInt(5) % 2 == 0) {
+            flamesUser.setFavoriteQuote(new TodayQuote(msg.getContentRaw(), finishedAnalysis.getEmotion(), msg.getAuthor().getGlobalName(), new Date(), new Random().nextInt(10)));
+        }
         FlamesServer flamesServer = FlamesDataManager.getServer(channel.getGuild().getId());
         flamesServer.checkQuote(new TodayQuote(msg.getContentRaw(), finishedAnalysis.getEmotion(), msg.getAuthor().getGlobalName(),new Date(), new Random().nextInt(10)));
         assert flamesServer != null;
