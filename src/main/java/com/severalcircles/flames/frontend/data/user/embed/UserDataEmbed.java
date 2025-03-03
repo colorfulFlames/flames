@@ -33,10 +33,9 @@ public class UserDataEmbed implements FlamesEmbed {
         resources = Flames.local(Locale.forLanguageTag(flamesUser.getLang()));
     }
 
-
     public MessageEmbed get() {
         String tonext;
-        if (Ranking.toNext(flamesUser.getScore()) <= 0) tonext = "?";
+        if (Ranking.toNext(flamesUser.getScore()) <= 0) tonext = "---";
         else tonext = StringUtil.formatScore(Ranking.toNext(flamesUser.getScore()));
         User.Profile profile = user.retrieveProfile().complete();
         UserEntities entities = flamesUser.getEntities();
@@ -46,6 +45,7 @@ public class UserDataEmbed implements FlamesEmbed {
         return new EmbedBuilder()
                 .setAuthor(flamesUser.getFavoriteQuote(), null, user.getAvatarUrl())
                 .setTitle(String.format(resources.getString("title"), user.getGlobalName()))
+                .setDescription(flamesUser.getTitle())
                 .addField(resources.getString("score"), StringUtil.formatScore(flamesUser.getScore()), true)
                 .addField(resources.getString("rank"), Ranking.getResources(Locale.forLanguageTag(flamesUser.getLang())).getString(Ranking.getRank(flamesUser.getScore()).toString()), true)
                 .addField(resources.getString("toNext"), tonext, true)

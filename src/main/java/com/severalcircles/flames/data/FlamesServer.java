@@ -5,8 +5,10 @@
 package com.severalcircles.flames.data;
 
 import com.severalcircles.flames.data.legacy.server.LegacyFlamesServer;
-import org.yaml.snakeyaml.Yaml;
+import com.severalcircles.flames.frontend.today.TodayQuote;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +17,7 @@ import java.util.Map;
  * It extends the FlamesDatatype class.
  */
 public class FlamesServer extends FlamesDatatype {
+    public static final TodayQuote DEFAULT_QUOTE = new TodayQuote("Welcome to %s.", 0, "Flames", new Date(), 0);
     /**
      * The variable "id" is a string that represents the ID of a FlamesServer object.
      * It is used to uniquely identify a server in the Flames system.
@@ -66,10 +69,22 @@ public class FlamesServer extends FlamesDatatype {
      * @param legacyFlamesServer The legacy server object that is being used to initialize the FlamesServer object.
      *                           It contains the score, id, and hootenannyDay of the server.
      */
+    TodayQuote serverQuote;
+
+    public TodayQuote getServerQuote() {
+        if (serverQuote == null) serverQuote = DEFAULT_QUOTE;
+        return serverQuote;
+    }
+
+    public void setServerQuote(TodayQuote serverQuote) {
+        this.serverQuote = serverQuote;
+    }
+
     public FlamesServer(LegacyFlamesServer legacyFlamesServer) {
         this.id = legacyFlamesServer.getId();
         this.score = legacyFlamesServer.getScore();
         this.hootenannyDay = legacyFlamesServer.getHootenannyDay();
+        this.serverQuote = DEFAULT_QUOTE;
     }
 
     /**
@@ -198,4 +213,13 @@ public class FlamesServer extends FlamesDatatype {
     public void addScore(int score) {
         this.score += score;
     }
-}
+    public boolean checkQuote(TodayQuote todayQuote) {
+        if (this.serverQuote == null) this.serverQuote = DEFAULT_QUOTE;
+        if (todayQuote.emotion() > this.serverQuote.emotion() && todayQuote.seed() % 2 == 0) {
+            this.serverQuote = todayQuote;
+            return true;
+        }
+        else return false;
+        }
+    }
+

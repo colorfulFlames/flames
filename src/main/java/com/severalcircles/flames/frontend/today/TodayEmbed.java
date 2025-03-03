@@ -46,7 +46,7 @@ public class TodayEmbed implements FlamesEmbed {
                     .setTitle(title)
                     .setDescription(
                             String.format(resources.getString("quoteTitle"), Today.quote.author()) + "\n" +
-                            String.format(resources.getString("quote"), Today.quote.message(), StringUtil.prettifyDate(Today.quote.inst())))
+                            String.format(resources.getString("quote"), Today.quote.message(), StringUtil.prettifyDate(Today.quote.getInst().toInstant())))
                     .addBlankField(false)
                     .addField(resources.getString("talkingAbout"), trendingEntity, true)
                     .addField(resources.getString("feeling"), Emotion.getEmotionString(Today.emotion, Locale.forLanguageTag(flamesUser.getLang())), true)
