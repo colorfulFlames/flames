@@ -28,6 +28,7 @@ import com.severalcircles.flames.frontend.today.ResetTodayRunnable;
 import com.severalcircles.flames.frontend.today.TodayCommand;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.interactions.commands.Command;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
@@ -157,7 +158,7 @@ public class Flames {
 //        commandMap.put("settings", new SettingsCommand());
 //        commandDataList.add(Commands.slash("settings", "Change your settings"));
 //        commandDataList.add(Commands.slash("amiguito", "Interact with your Amiguito character").addOption(OptionType.STRING, "name", "The name of your Amiguito", true));
-//        Commands.context(Command.Type.MESSAGE, "SparkVote");
+        Commands.context(Command.Type.MESSAGE, "SparkVote");
         api.updateCommands()
                 .addCommands(commandDataList).
             complete();
