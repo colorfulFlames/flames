@@ -13,6 +13,7 @@ import com.severalcircles.flames.external.FlamesAssets;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import com.severalcircles.flames.util.Ranking;
 import com.severalcircles.flames.util.StringUtil;
+import de.androidpit.colorthief.ColorThief;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
@@ -58,7 +59,7 @@ public class UserDataEmbed implements FlamesEmbed {
                 .addField(resources.getString("dislikes"), "* " + topAndBottom.get(3).getName()
                 +"\n* " + topAndBottom.get(4).getName()
                 +"\n* " + topAndBottom.get(5).getName(), true)
-                .setColor(color)
+                .setColor(ColorThief.getColorFromURL(user.getAvatarUrl()))
                 .setThumbnail(FlamesAssets.getRankIcon(Ranking.getRank(flamesUser.getScore())))
                 .setFooter(Flames.api.getSelfUser().getGlobalName(), Flames.api.getSelfUser().getAvatarUrl())
 //                .setImage("https://severalcircles.com/flames/assets/apps/footer.png")
