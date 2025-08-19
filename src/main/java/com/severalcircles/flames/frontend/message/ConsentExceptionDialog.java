@@ -28,6 +28,7 @@ public class ConsentExceptionDialog implements FlamesEmbed {
                 .setTitle(local.getString("title"))
                 .setDescription(local.getString("description"))
                 .setColor(Color.RED)
+                .setImage("https://cdn.discordapp.com/attachments/543162982536970240/1407483441695690852/caption-24.png?ex=68a6449a&is=68a4f31a&hm=996956e5cc6f879731f946629442460653dfc8356a1bdf479c643c9a1780a10a&")
                 .build();
     }
 }
