@@ -19,12 +19,10 @@ import net.dv8tion.jda.api.entities.User;
 import java.awt.*;
 import java.io.IOException;
 import java.time.Instant;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class TodayEmbed implements FlamesEmbed {
+    public static final int SENDOFFS = 3;
     private final FlamesUser flamesUser;
     private static ResourceBundle resources;
     public TodayEmbed(User user, FlamesUser flamesUser) {
@@ -47,6 +45,8 @@ public class TodayEmbed implements FlamesEmbed {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        String allAbout = resources.getString("allAbout." + Math.max(1,new Random().nextInt(SENDOFFS)));
+        String tomorrowBring = resources.getString("tomorrowBring." + Math.max(1,new Random().nextInt(SENDOFFS)));
         Color color = ColorThief.getColorFromURL(image);
         return new EmbedBuilder()
                     .setAuthor(String.format(resources.getString("author"), StringUtil.prettifyDate(Instant.now())), null, Flames.api.getSelfUser().getAvatarUrl())
@@ -63,7 +63,7 @@ public class TodayEmbed implements FlamesEmbed {
 //                    .addBlankField(false)
 //                    .addField(resources.getString("allAbout"), resources.getString("tomorrowBring"), false)
                     .setImage(image)
-                    .addField(resources.getString("allAbout"), resources.getString("tomorrowBring"), false)
+                    .addField(allAbout, tomorrowBring, false)
                     .setFooter(Flames.api.getSelfUser().getGlobalName(), Flames.api.getSelfUser().getAvatarUrl())
 //                    .setImage("https://severalcircles.com/flames/assets/apps/today_footer.png")
                     .setColor(color)
