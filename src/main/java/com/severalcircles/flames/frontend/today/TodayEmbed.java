@@ -11,6 +11,7 @@ import com.severalcircles.flames.external.analysis.Analysis;
 import com.severalcircles.flames.frontend.FlamesEmbed;
 import com.severalcircles.flames.util.Emotion;
 import com.severalcircles.flames.util.StringUtil;
+import de.androidpit.colorthief.ColorThief;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
@@ -40,8 +41,14 @@ public class TodayEmbed implements FlamesEmbed {
             }
         }
         String title = resources.getString("title");
+        String image;
         try {
-            return new EmbedBuilder()
+            image = ImageSearch.searchImage(trendingEntity);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Color color = ColorThief.getColorFromURL(image);
+        return new EmbedBuilder()
                     .setAuthor(String.format(resources.getString("author"), StringUtil.prettifyDate(Instant.now())), null, Flames.api.getSelfUser().getAvatarUrl())
                     .setTitle(title)
                     .setDescription(
@@ -55,14 +62,11 @@ public class TodayEmbed implements FlamesEmbed {
 //                    .addField(String.format(resources.getString("quoteTitle"), Today.quote.author()), String.format(resources.getString("quote"), Today.quote.message(), StringUtil.prettifyDate(Today.quote.inst())), false)
 //                    .addBlankField(false)
 //                    .addField(resources.getString("allAbout"), resources.getString("tomorrowBring"), false)
-                    .setImage(ImageSearch.searchImage(trendingEntity))
+                    .setImage(image)
                     .addField(resources.getString("allAbout"), resources.getString("tomorrowBring"), false)
                     .setFooter(Flames.api.getSelfUser().getGlobalName(), Flames.api.getSelfUser().getAvatarUrl())
 //                    .setImage("https://severalcircles.com/flames/assets/apps/today_footer.png")
-                    .setColor(Color.decode("#F1D302"))
+                    .setColor(color)
                     .build();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
