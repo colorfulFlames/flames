@@ -39,7 +39,7 @@ public class ThanksEmbed implements FlamesEmbed {
         this.flamesUser = flamesUserThanked;
         this.msg = "# \"" + msg + "\"";
         resources = Flames.local(Locale.forLanguageTag(flamesUser.getLang()));
-        if (this.msg.isEmpty()) this.msg = resources.getString("description");
+        if (msg.isEmpty()) this.msg = resources.getString("description");
 
     }
 

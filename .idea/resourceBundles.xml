@@ -4,66 +4,70 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/Common.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/Common_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/Common_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoInfoEmbed.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoInfoEmbed_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoInfoEmbed_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoInfoEmbed_tra.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoSelectMenu.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoSelectMenu_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoSelectMenu_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoSelectMenu_tra.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/Thoughts.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/Thoughts_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/Thoughts_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/Thoughts_tra.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/ConversationEmbed.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/ConversationEmbed_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/ConversationEmbed_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkResultsEmbed.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkResultsEmbed_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkResultsEmbed_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkResultsEmbed_tra.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkStartEmbed.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkStartEmbed_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkStartEmbed_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/WhatsThisEmbed.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/WhatsThisEmbed_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/WhatsThisEmbed_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/WhatsThisEmbed_tra.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/GlobalDataEmbed.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/GlobalDataEmbed_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/GlobalDataEmbed_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/ServerDataEmbed.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/ServerDataEmbed_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/ServerDataEmbed_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/ServerDataEmbed_tra.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/embed/UserDataEmbed.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/embed/UserDataEmbed_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/embed/UserDataEmbed_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/embed/WelcomeBackEmbed.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/embed/WelcomeBackEmbed_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/embed/WelcomeBackEmbed_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DeleteAllConfirmationModal.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DeleteAllConfirmationModal_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DeleteAllConfirmationModal_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DeleteAllConfirmationModal_tra.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DestructiveDropdown.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DestructiveDropdown_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DestructiveDropdown_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DestructiveDropdown_tra.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/UserManagementDropdown.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/UserManagementDropdown_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/UserManagementDropdown_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/UserManagementDropdown_tra.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/info/AboutEmbed.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/info/AboutEmbed_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/info/AboutEmbed_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/thanks/ThanksEmbed.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/thanks/ThanksEmbed_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/thanks/ThanksEmbed_es.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/today/TodayEmbed.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/today/TodayEmbed_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/today/TodayEmbed_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/AmiguitoInfoEmbed.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/AmiguitoInfoEmbed_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/AmiguitoInfoEmbed_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/AmiguitoInfoEmbed_tra.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/AmiguitoSelectMenu.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/AmiguitoSelectMenu_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/AmiguitoSelectMenu_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/AmiguitoSelectMenu_tra.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/Thoughts.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/Thoughts_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/Thoughts_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/Thoughts_tra.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/ConversationEmbed.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/ConversationEmbed_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/ConversationEmbed_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/SparkResultsEmbed.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/SparkResultsEmbed_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/SparkResultsEmbed_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/SparkResultsEmbed_tra.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/SparkStartEmbed.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/SparkStartEmbed_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/SparkStartEmbed_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/WhatsThisEmbed.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/WhatsThisEmbed_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/WhatsThisEmbed_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/WhatsThisEmbed_tra.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/other/GlobalDataEmbed.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/other/GlobalDataEmbed_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/other/GlobalDataEmbed_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/other/ServerDataEmbed.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/other/ServerDataEmbed_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/other/ServerDataEmbed_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/other/ServerDataEmbed_tra.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/embed/UserDataEmbed.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/embed/UserDataEmbed_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/embed/UserDataEmbed_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/embed/WelcomeBackEmbed.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/embed/WelcomeBackEmbed_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/embed/WelcomeBackEmbed_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/DeleteAllConfirmationModal.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/DeleteAllConfirmationModal_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/DeleteAllConfirmationModal_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/DeleteAllConfirmationModal_tra.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/DestructiveDropdown.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/DestructiveDropdown_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/DestructiveDropdown_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/DestructiveDropdown_tra.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/UserManagementDropdown.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/UserManagementDropdown_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/UserManagementDropdown_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/UserManagementDropdown_tra.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/info/AboutEmbed.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/info/AboutEmbed_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/info/AboutEmbed_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/thanks/ThanksEmbed.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/thanks/ThanksEmbed_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/thanks/ThanksEmbed_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/today/TodayEmbed.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/today/TodayEmbed_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/today/TodayEmbed_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/message/ConsentExceptionDialog.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/message/ConsentExceptionDialog_en.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/message/ConsentExceptionDialog_es.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/message/ConsentExceptionDialog_tra.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/error/NotFlamesUserMessage.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/error/NotFlamesUserMessage_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/error/NotFlamesUserMessage_es.properties" />
@@ -107,10 +111,10 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/message/UpdatedSettingsEmbed_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/message/UpdatedSettingsEmbed_es.properties" />
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/ConversationEmbed.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/ConversationEmbed_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/ConversationEmbed_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/ConversationEmbed_tra.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/ConversationEmbed.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/ConversationEmbed_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/ConversationEmbed_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/ConversationEmbed_tra.properties" />
       <base-name>ConversationEmbed</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
@@ -149,10 +153,10 @@
       <base-name>Ranking</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/thanks/ThanksEmbed.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/thanks/ThanksEmbed_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/thanks/ThanksEmbed_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/thanks/ThanksEmbed_tra.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/thanks/ThanksEmbed.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/thanks/ThanksEmbed_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/thanks/ThanksEmbed_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/thanks/ThanksEmbed_tra.properties" />
       <base-name>ThanksEmbed</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
@@ -212,109 +216,116 @@
       <base-name>ConsentException</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkStartEmbed.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkStartEmbed_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkStartEmbed_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkStartEmbed_tra.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/SparkStartEmbed.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/SparkStartEmbed_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/SparkStartEmbed_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/SparkStartEmbed_tra.properties" />
       <base-name>SparkStartEmbed</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkResultsEmbed.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkResultsEmbed_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkResultsEmbed_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/SparkResultsEmbed_tra.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/SparkResultsEmbed.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/SparkResultsEmbed_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/SparkResultsEmbed_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/SparkResultsEmbed_tra.properties" />
       <base-name>SparkResultsEmbed</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/WhatsThisEmbed.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/WhatsThisEmbed_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/WhatsThisEmbed_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/conversations/WhatsThisEmbed_tra.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/WhatsThisEmbed.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/WhatsThisEmbed_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/WhatsThisEmbed_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/conversations/WhatsThisEmbed_tra.properties" />
       <base-name>WhatsThisEmbed</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoInfoEmbed.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoInfoEmbed_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoInfoEmbed_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoInfoEmbed_tra.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/AmiguitoInfoEmbed.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/AmiguitoInfoEmbed_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/AmiguitoInfoEmbed_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/AmiguitoInfoEmbed_tra.properties" />
       <base-name>AmiguitoInfoEmbed</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/Thoughts.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/Thoughts_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/Thoughts_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/Thoughts_tra.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/Thoughts.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/Thoughts_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/Thoughts_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/Thoughts_tra.properties" />
       <base-name>Thoughts</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoSelectMenu.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoSelectMenu_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoSelectMenu_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/amiguito/frontend/AmiguitoSelectMenu_tra.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/AmiguitoSelectMenu.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/AmiguitoSelectMenu_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/AmiguitoSelectMenu_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/amiguito/frontend/AmiguitoSelectMenu_tra.properties" />
       <base-name>AmiguitoSelectMenu</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/ServerDataEmbed.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/ServerDataEmbed_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/ServerDataEmbed_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/ServerDataEmbed_tra.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/other/ServerDataEmbed.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/other/ServerDataEmbed_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/other/ServerDataEmbed_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/other/ServerDataEmbed_tra.properties" />
       <base-name>ServerDataEmbed</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/embed/UserDataEmbed.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/embed/UserDataEmbed_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/embed/UserDataEmbed_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/embed/UserDataEmbed_tra.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/embed/UserDataEmbed.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/embed/UserDataEmbed_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/embed/UserDataEmbed_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/embed/UserDataEmbed_tra.properties" />
       <base-name>UserDataEmbed</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/embed/WelcomeBackEmbed.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/embed/WelcomeBackEmbed_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/embed/WelcomeBackEmbed_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/embed/WelcomeBackEmbed_tra.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/embed/WelcomeBackEmbed.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/embed/WelcomeBackEmbed_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/embed/WelcomeBackEmbed_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/embed/WelcomeBackEmbed_tra.properties" />
       <base-name>WelcomeBackEmbed</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/info/AboutEmbed.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/info/AboutEmbed_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/info/AboutEmbed_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/info/AboutEmbed_tra.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/info/AboutEmbed.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/info/AboutEmbed_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/info/AboutEmbed_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/info/AboutEmbed_tra.properties" />
       <base-name>AboutEmbed</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/GlobalDataEmbed.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/GlobalDataEmbed_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/GlobalDataEmbed_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/other/GlobalDataEmbed_tra.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/other/GlobalDataEmbed.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/other/GlobalDataEmbed_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/other/GlobalDataEmbed_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/other/GlobalDataEmbed_tra.properties" />
       <base-name>GlobalDataEmbed</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/UserManagementDropdown.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/UserManagementDropdown_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/UserManagementDropdown_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/UserManagementDropdown_tra.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/UserManagementDropdown.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/UserManagementDropdown_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/UserManagementDropdown_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/UserManagementDropdown_tra.properties" />
       <base-name>UserManagementDropdown</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DestructiveDropdown.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DestructiveDropdown_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DestructiveDropdown_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DestructiveDropdown_tra.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/DestructiveDropdown.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/DestructiveDropdown_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/DestructiveDropdown_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/DestructiveDropdown_tra.properties" />
       <base-name>DestructiveDropdown</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DeleteAllConfirmationModal.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DeleteAllConfirmationModal_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DeleteAllConfirmationModal_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/data/user/mgmt/DeleteAllConfirmationModal_tra.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/DeleteAllConfirmationModal.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/DeleteAllConfirmationModal_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/DeleteAllConfirmationModal_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/data/user/mgmt/DeleteAllConfirmationModal_tra.properties" />
       <base-name>DeleteAllConfirmationModal</base-name>
     </custom-resource-bundle>
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/today/TodayEmbed.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/today/TodayEmbed_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/today/TodayEmbed_es.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/today/TodayEmbed_tra.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/today/TodayEmbed.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/today/TodayEmbed_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/today/TodayEmbed_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/frontend/today/TodayEmbed_tra.properties" />
       <base-name>TodayEmbed</base-name>
+    </custom-resource-bundle>
+    <custom-resource-bundle>
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/message/ConsentExceptionDialog.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/message/ConsentExceptionDialog_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/message/ConsentExceptionDialog_es.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/com/severalcircles/flames/frontend/message/ConsentExceptionDialog_tra.properties" />
+      <base-name>ConsentExceptionDialog</base-name>
     </custom-resource-bundle>
   </component>
 </project>

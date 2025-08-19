@@ -8,7 +8,6 @@ package com.severalcircles.flames;
 import com.severalcircles.flames.conversations.Conversation;
 import com.severalcircles.flames.data.DataUpgradeUtil;
 import com.severalcircles.flames.data.FlamesDataManager;
-import com.severalcircles.flames.data.legacy.LegacyFlamesDataManager;
 import com.severalcircles.flames.data.legacy.global.GlobalData;
 import com.severalcircles.flames.events.*;
 import com.severalcircles.flames.frontend.FlamesCommand;
@@ -19,7 +18,6 @@ import com.severalcircles.flames.frontend.data.other.ServerDataCommand;
 import com.severalcircles.flames.frontend.data.user.HiCommand;
 import com.severalcircles.flames.frontend.data.user.LocaleCommand;
 import com.severalcircles.flames.frontend.data.user.MyDataCommand;
-import com.severalcircles.flames.frontend.data.user.mgmt.SettingsCommand;
 import com.severalcircles.flames.frontend.info.AboutCommand;
 import com.severalcircles.flames.frontend.info.HelpCommand;
 import com.severalcircles.flames.frontend.info.TestCommand;
@@ -48,7 +46,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 /**
  * Main class for Flames. Sets up everything you could ever hope for.
@@ -134,7 +131,7 @@ public class Flames {
         commandMap.put("based", new TestCommand());
         commandDataList.add(Commands.slash("based", "based"));
         commandMap.put("me", new MyDataCommand());
-        commandDataList.add(Commands.slash("me", "Today, we're talking about you"));
+        commandDataList.add(Commands.slash("me", "Today, we're talking about you").addOption(OptionType.USER, "target", "Check on someone else?", false));
         commandMap.put("globaldata", new GlobalDataCommand());
         commandDataList.add(Commands.slash("globaldata", "Displays the current Global Data"));
         commandMap.put("hi", new HiCommand());

@@ -27,15 +27,7 @@ public class UpdatedSettingsEmbed implements FlamesEmbed {
     public UpdatedSettingsEmbed(UserSetting updatedSetting, User user) {
         this.updatedSetting = updatedSetting;
         this.user = user;
-        try {
-            this.resources = ResourceBundle.getBundle("message/UpdatedSettingsEmbed", LegacyFlamesDataManager.readUser(user).getConfig().getLocale());
-        } catch (IOException e) {
-            // Weird DataVersionException but go off
-            em = new ExceptionHandler(e).handleThenGetFrontend();
-        } catch (ConsentException e) {
-            e.printStackTrace();
-            em = e.getHandler().handleThenGetFrontend();
-        }
+        this.resources = ResourceBundle.getBundle("message/UpdatedSettingsEmbed");
     }
     public MessageEmbed get() {
         if (em != null) return em;

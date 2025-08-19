@@ -8,8 +8,8 @@ plugins {
 }
 
 mainClassName = 'com.severalcircles.flames.Flames'
-version '8.1.1'
-def jdaVersion = '5.1.0'
+version '8.2'
+def jdaVersion = '5.6.1'
 sourceCompatibility = targetCompatibility = 1.20
 group 'com.severalcircles.flames'
 mainClassName = "com.severalcircles.flames.Flames"

@@ -35,7 +35,7 @@ public class UserContextData implements FlamesUserContext {
         } catch (UnsupportedOperationException e) {
             event.replyEmbeds(new FlamesRuntimeExceptionHandler(new FlamesMetaException("Flames does not have User Data for itself"), UserContextData.class).handleThenGetFrontend()).complete();
             return;
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             event.replyEmbeds(new ExceptionHandler(e).handleThenGetFrontend()).complete();
             return;
         }
