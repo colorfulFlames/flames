@@ -55,9 +55,10 @@ public class TodayEmbed implements FlamesEmbed {
 //                    .addField(String.format(resources.getString("quoteTitle"), Today.quote.author()), String.format(resources.getString("quote"), Today.quote.message(), StringUtil.prettifyDate(Today.quote.inst())), false)
 //                    .addBlankField(false)
 //                    .addField(resources.getString("allAbout"), resources.getString("tomorrowBring"), false)
-                    .setThumbnail(ImageSearch.searchImage(trendingEntity))
+                    .setImage(ImageSearch.searchImage(trendingEntity))
+                    .addField(resources.getString("allAbout"), resources.getString("tomorrowBring"), false)
                     .setFooter(Flames.api.getSelfUser().getGlobalName(), Flames.api.getSelfUser().getAvatarUrl())
-                    .setImage("https://severalcircles.com/flames/assets/apps/today_footer.png")
+//                    .setImage("https://severalcircles.com/flames/assets/apps/today_footer.png")
                     .setColor(Color.decode("#F1D302"))
                     .build();
         } catch (IOException e) {

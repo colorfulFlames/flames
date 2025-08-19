@@ -268,11 +268,12 @@ public class Conversation {
         flamesUser.addScore(score(finishedAnalysis, Objects.requireNonNull(FlamesDataManager.getServer(channel.getGuild().getId())).todayIsHootenannyDay()));
         finishedAnalysis.getEntityList().forEach((element) -> {
             if (StringUtil.countDigits(element.getName()) > 2) return;
+            if (element.getName().contains("@")) return;
             if (entityList.contains(element)) {
-                entities.put(element.getName(), entities.get(element) + 1);
+                entities.put(element.getName(), Integer.valueOf(entities.get(element) + 1));
             } else {
                 entityList.add(element.getName());
-                entities.put(element.getName(), 1);
+                entities.put(element.getName(), Integer.valueOf(1));
             }
         });
         if (flamesUser.getFavoriteQuote().getEmotion() < Math.abs(emotion) && new Random().nextInt(5) % 2 == 0 || new Random().nextInt(100) % 20 == 0) {
